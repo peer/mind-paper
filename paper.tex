@@ -224,7 +224,7 @@ Figure~\ref{fig:delegation-network}.
 We direct edges towards a member who is delegating, to represent how their vote is computed from delegates' votes.
 For example, member $M_1$ delegates the decision to members $M_0$ and $M_3$.
 $M_0$ and $M_3$ become $M_1$'s delegates.
-As a consequence, $M_1$'s vote ($V_{M_1}$) is computed from $M_0$'s and $M_3$'s votes ($V_{M_0}$, $V_{M_3}$).
+As a consequence, $M_1$'s vote $V_{M_1}$ is computed from $M_0$'s and $M_3$'s votes ($V_{M_0}$ and $V_{M_3}$).
 
 A delegation network can be described as a system of equations.
 
@@ -314,20 +314,20 @@ Abstentions are counted towards quorum, but they do not contribute to the result
 To address this, we define two vectors:
 
 \begin{displaymath}
-\mathrm{w} = \left[w_{i}\right] = \begin{dcases*}
+\mathbf{w} = \left[w_{i}\right] = \begin{dcases*}
  1 & if $M_i$ voted \\
  0 & otherwise \\
-\end{dcases*},\quad \mathrm{a} = \left[a_{i}\right] = \begin{dcases*}
+\end{dcases*},\quad \mathbf{a} = \left[a_{i}\right] = \begin{dcases*}
  1 & if $M_i$ abstained \\
  0 & otherwise \\
 \end{dcases*}
 \end{displaymath}
 
 Solving $\mathrm{D} \mathbf{x_w} = \mathbf{w}$ and $\mathrm{D} \mathbf{x_a} = \mathbf{a}$ gives
-us number of votes and number of abstentions, respectively, by summing together all values in the
-resulting vectors: $w = \sum \mathbf{x_w}$, $a = \sum \mathbf{x_a}$.
+us number of votes $W$ and number of abstentions $A$, respectively, by summing together all values in the
+resulting vectors: $W = \sum \mathbf{x_w}$, $A = \sum \mathbf{x_a}$.
 
-\todo[inline]{Is the result then $\frac{\sum \mathbf{x_v}}{w}$ or $\frac{\sum \mathbf{x_v}}{\textrm{number of entries
+\todo[inline]{Is the result then $\frac{\sum \mathbf{x_v}}{W}$ or $\frac{\sum \mathbf{x_v}}{\textrm{number of entries
 in}~\mathbf{x_w}~\textrm{which are non-zero}}$?}
 
 We pass computed votes and number of votes and abstentions into computation of dynamic quorum to determine
