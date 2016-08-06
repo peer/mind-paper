@@ -114,15 +114,52 @@
 
 \section{Introduction}
 
+\todo[inline]{This section is mostly notes. Organize and improve.}
+
 Terminology:
 \begin{itemize}
 \item community -- group which is making a decision using PeerMind
 \item member -- user of the app who is participating in decision making
 \end{itemize}
 
-% decision vs. vote vs. voting (how to name the step in decision making where you vote, and what is what you cast?)
+\todo[inline]{Terminology: decision vs. vote vs. voting (how to name the step in decision making where you vote, and what is what you cast?)}
+\todo[inline]{Terminology: motion? Tally? What is the sum of all votes?}
 
-% motion
+The main question is: can we increase legitimacy and decrease attention required at the same time.
+Many others are trying to increase attention (participation) because they want to increase legitimacy,
+assuming that this is the only way.
+
+A list of potential other points:
+\begin{itemize}
+\item legitimacy (quorum, involvement of more people through delegation)
+\item scaling (delegation helps, less attention helps)
+\item attention (at same or better decisions)
+\item bad assumptions for democracy - time, knowledge, it s rational to know that you do not know, common practice is to ask friends
+\item better decisions (more people consulted, attention directed where it should be)
+\end{itemize}
+
+Another question: should feedback be visible (to see how others voted before you voted)?
+People go with majority.
+Better for wisdom of crowds is an independent sample.
+Maybe we should only allow how other voted to be seen after you voted ()but you can still change the vote),
+but we could then observe that and learn from this and see if this is good or bad.
+Or we could just store information if you observed existing votes before you voted (you have to click a button to see them).
+Maybe going with majority is also good when you want more social cohesion in the community and not so much "optimal"
+wisdom of crowds result -  you would want that people relax their positions based on how other people care.
+Cohesion of the group vs. accuracy.
+Maybe display only number of votes and confidence, maybe confidence direction or graph, but not average votes.
+
+A list of potential questions:
+\begin{itemize}
+\item Delegation works?
+\item Statistical quorum works?
+\item Real-time feedback influences?
+\item Private vs. public delegation (do you know how member to whom you delegated is voting)?
+\item Knowing how much power you have vs. not knowing -- does it change how people behave? (Knowing might corrupt you, but also motivate you to do more thorough work voting because you know other depend on you.)
+\end{itemize}
+
+Performance/theory/scaling in terms in computational (how big could effectively community can be to be able to compute it).
+Some other theoretical properties?
 
 \section{Related work}
 
@@ -130,7 +167,7 @@ Terminology:
 
 \section{Features}
 
-\subsection{Dynamic quroum}
+\subsection{Dynamic quorum}
 
 \subsection{Score voting}
 
@@ -144,13 +181,13 @@ Because not every member of the community has time or knowledge to vote all the 
 decisions to one or more other members of the community.
 When a member does not vote themselves, information how those delegates voted is combined into a vote of
 the non-voting member.
-If a delegate has not voted themselves either, their vote is computed through delegation as well, recursivelly.
+If a delegate has not voted themselves either, their vote is computed through delegation as well, recursively.
 
 Each member $M$ can declare their delegates and ratios $r$ in which delegates' votes are combined. For example:
 
 \begin{itemize}
 \item Member $M_0$ decides not to delegate at all.
-\item Member $M_1$ delegates to $M_0$ and $M_3$ with ratios $0.75$ ($r_{1,0}$) and $0.25$ ($r_{1,3}$), respectivelly.
+\item Member $M_1$ delegates to $M_0$ and $M_3$ with ratios $0.75$ ($r_{1,0}$) and $0.25$ ($r_{1,3}$), respectively.
 \item Member $M_2$ delegates to $M_3$ with ratio $1.00$ ($r_{2,3}$).
 \item Member $M_3$ delegates to $M_1$ and $M_2$ with ratios $0.40$ ($r_{3,1}$) and $0.40$ ($r_{3,2}$).
 \end{itemize}
@@ -158,7 +195,7 @@ Each member $M$ can declare their delegates and ratios $r$ in which delegates' v
 Observe that member $M_3$ decided to use only $0.8$ of their vote in the case they do not vote themselves.
 The rest ($0.2$) counts towards non-voting population.
 In this way a member can decide to participate in voting through delegation, but not fully.
-Member $M_0$ deciced to not participate at all and if they do not vote they are counted towards non-voting population.
+Member $M_0$ decided to not participate at all and if they do not vote they are counted towards non-voting population.
 
 \begin{figure}
   \centering
@@ -219,7 +256,7 @@ We solve the matrix equation:
 \end{displaymath}
 
 To continue with our example, let's say that $M_0$ and $M_2$ voted for a decision with $0.7$ and against with $0.4$,
-respectivelly.
+respectively.
 We are using score voting on $[-1, 1]$ range, so those votes are represented with $V_{M_0} = 0.7$ and
 $V_{M_2} = -0.4$.
 
@@ -248,7 +285,7 @@ $V_{M_2} = -0.4$.
 
 The result (average of scores) without delegation is $\overline{v} = 0.15$ and
 with delegation is $\overline{x} = 0.22$.
-Delegation pushes decisision slightly in favor.
+Delegation pushes decision slightly in favor.
 
 There are few details we have to look into.
 Despite delegation some votes or parts of votes can still happen to be discarded and should count
@@ -287,13 +324,13 @@ To address this, we define two vectors:
 \end{displaymath}
 
 Solving $\mathrm{D} \mathbf{x_w} = \mathbf{w}$ and $\mathrm{D} \mathbf{x_a} = \mathbf{a}$ gives
-us number of votes and number of abstentions, respectivelly, by summing together all values in the
+us number of votes and number of abstentions, respectively, by summing together all values in the
 resulting vectors: $w = \sum \mathbf{x_w}$, $a = \sum \mathbf{x_a}$.
 
 \todo[inline]{Is the result then $\frac{\sum \mathbf{x_v}}{w}$ or $\frac{\sum \mathbf{x_v}}{\textrm{number of entries
 in}~\mathbf{x_w}~\textrm{which are non-zero}}$?}
 
-We pass computed votes and number of votes and abstaintions into computation of dynamic quorum to determine
+We pass computed votes and number of votes and abstentions into computation of dynamic quorum to determine
 a quorum and confidence, in the same manner as if members voted themselves.
 
 % In general, there are various ways to use this delegation scheme.
@@ -303,6 +340,13 @@ But for simplicity, PeerMind currently supports only defining delegates separate
 and those delegates are then in effect for all votes where a member does not vote themselves.
 A member is invited to define initial delegations at a registration time, and can change them later on at will,
 but independently from a particular decision being made.
+
+\subsection{Three step process}
+
+\subsection{Real-time feedback}
+
+
+% Real-time communication in general.
 
 \subsection{Integration with offline meetings}
 
