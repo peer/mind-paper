@@ -358,6 +358,10 @@ resulting vectors: $W = \sum \mathbf{x_w}$, $A = \sum \mathbf{x_a}$.
 \todo[inline]{Is the result then $\frac{\sum \mathbf{x_v}}{W}$ or $\frac{\sum \mathbf{x_v}}{\textrm{number of entries
 in}~\mathbf{x_w}~\textrm{which are non-zero}}$?}
 
+\todo[inline]{We also have to explain that with non-zero values of $\mathbf{x_w}$ we also get which zero values in
+$\mathbf{x_v}$ are real results and which are zero because delegation could not be computed. One has to use that
+to compute delegated votes as well.}
+
 We pass computed votes and number of votes and abstentions into computation of dynamic quorum to determine
 a quorum and confidence, in the same manner as if members voted themselves.
 
