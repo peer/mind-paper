@@ -114,7 +114,13 @@
 
 \section{Introduction}
 
-\todo[inline]{This section is mostly notes. Organize and improve.}
+The broad idea is that instead of just trying to move the voting process online -- something many others do -- we in
+fact add additional value by voting online.
+Specifically, we can compute results faster and more accurately, we can use sophisticated statistics to estimate
+quantities for the entire voting population, and we can promote clarity and full understanding of the voting items for all.
+
+
+\todo[inline]{This rest of the section is mostly notes. Organize and improve.}
 
 Terminology:
 \begin{itemize}
@@ -141,10 +147,10 @@ A list of potential other points:
 Another question: should feedback be visible (to see how others voted before you voted)?
 People go with majority.
 Better for wisdom of crowds is an independent sample.
-Maybe we should only allow how other voted to be seen after you voted ()but you can still change the vote),
+Maybe we should only allow how other voted to be seen after you voted (but you can still change the vote),
 but we could then observe that and learn from this and see if this is good or bad.
 Or we could just store information if you observed existing votes before you voted (you have to click a button to see them).
-Maybe going with majority is also good when you want more social cohesion in the community and not so much "optimal"
+Maybe going with majority is also good when you want more social cohesion in the community and not so much ``optimal''
 wisdom of crowds result -  you would want that people relax their positions based on how other people care.
 Cohesion of the group vs. accuracy.
 Maybe display only number of votes and confidence, maybe confidence direction or graph, but not average votes.
@@ -155,11 +161,21 @@ A list of potential questions:
 \item Statistical quorum works?
 \item Real-time feedback influences?
 \item Private vs. public delegation (do you know how member to whom you delegated is voting)?
+\item When delegating, how to assure that you cannot learn how somebody else voted, but that you can still somehow
+learn how your vote is used?
 \item Knowing how much power you have vs. not knowing -- does it change how people behave? (Knowing might corrupt you, but also motivate you to do more thorough work voting because you know other depend on you.)
 \end{itemize}
 
 Performance/theory/scaling in terms in computational (how big could effectively community can be to be able to compute it).
 Some other theoretical properties?
+
+Out of scope of this work:
+
+\begin{itemize}
+\item How to assure privacy of the delegation network (it is highly sensitive data, probably even more than votes)?
+\item How to compute delegation results in a way that it does not require access to the whole network of delegation at once?
+\item How can we make this system distributed (and still assure privacy)?
+\end{itemize}
 
 \section{Related work}
 
@@ -168,6 +184,18 @@ Some other theoretical properties?
 \section{Features}
 
 \subsection{Dynamic quorum}
+
+Using statistics to compute dynamic quorum based on how people vote using hypothesis testing.
+If population all votes for one position, then quorum can be much lower than if population is completely split on an
+issue, then in fact the whole population should vote because this is the only way we know what the population stands for.
+So we can base quorum on the confidentiality.
+The goal is to always minimize the amount of information needed from
+the population in order to confidently determine what actions the population as a whole wants to take.
+This allows faster decision making for non-contentious issues and prevents strategizing with quorum in
+referendums, where if there is a quorum a possible best action for you is not to attend.
+
+\todo[inline]{When we have multiple options?}
+\todo[inline]{Generalization so that majority and super-majority and consensus is just a parameter.}
 
 \subsection{Score voting}
 
@@ -350,7 +378,46 @@ but independently from a particular decision being made.
 
 \subsection{Integration with offline meetings}
 
+Decoupling the information presentation and voting processes from the debating process in the full decision-making
+pipeline (with the idea being that debating is best done in person, and presenting information/voting is best done online).
+
+\section{Evaluation}
+
+\subsection{Design}
+
+User study/evaluation design.
+To create a controlled evaluation of our solutions, to not depend on general usage of our system among communities,
+we can evaluate the design with the following user study:
+\begin{itemize}
+\item we find a tight community of around 100 people willing to participate in the user study
+\item they should know each other well (to know how to delegate)
+\item we offer them to pay some Amazon credits or something for participation
+\item every member of the community should define delegations
+\item we ask them to split into two groups, group A and group B
+\item group A (target size is around 20% of the community) will meet together or online and discuss various topics through our system
+\item discussed topics some can be completely random, to get people to be familiar with they system, and also have some
+easy topics to decide on, like, what ``should be the color of the sky if we could change it'', and some topics which are relevant to the community
+\item those discussions would be just for evaluation, but community can use the results in any way they find useful
+\item after this discussions and decisions were done we ask everyone from group B to evaluate the results, we present them with two results (blinded, them not knowing which was made in which way)
+\begin{itemize}
+\item results which would be obtained using traditional methods (majority voting without any our improvements)
+\item our results using our system
+\end{itemize}
+\item we ask them to evaluate which one (or both, or none) of decisions they agree with
+\item prediction is that members who have not participated in the decision making process will
+find decisions made through our system more often agreeable
+\item hypothesis here is that what a decision making system is trying to achieve is to find a decision most of the
+whole community can agree with, or like it, even when not everyone participates and not all information is available
+on their positions on a topic
+\end{itemize}
+
 \bibliographystyle{sigchi}
 \bibliography{refs}
+
+More:
+\begin{itemize}
+\item https://mason.gmu.edu/~rhanson/futarchy.html
+\item http://merkle.com/papers/DAOdemocracyDraft.pdf
+\end{itemize}
 
 \end{document}
