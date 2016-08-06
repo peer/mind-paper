@@ -27,6 +27,10 @@
 \usepackage{booktabs}
 \usepackage{ccicons}
 \usepackage{todonotes}
+\usepackage{pgf}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usepackage{mathtools}
 
 % llt: Define a global style for URLs, rather that the default one
 \makeatletter
@@ -65,7 +69,13 @@
 % create a shortcut to typeset table headings
 % \newcommand\tabhead[1]{\small\textbf{#1}}
 
-% End of preamble. Here it comes the document.
+\GraphInit[vstyle=Dijkstra]
+\tikzset{
+  EdgeStyle/.append style={->,bend left}
+}
+
+\hyphenation{PeerMind}
+
 \begin{document}
 
 \title{PeerMind}
@@ -104,6 +114,16 @@
 
 \section{Introduction}
 
+Terminology:
+\begin{itemize}
+\item community -- group which is making a decision using PeerMind
+\item member -- user of the app who is participating in decision making
+\end{itemize}
+
+% decision vs. vote vs. voting (how to name the step in decision making where you vote, and what is what you cast?)
+
+% motion
+
 \section{Related work}
 
 \cite{andersen2008trust, dirnstorfer2010voting, ford2002delegative, rodriguez2007smartocracy, yamakawa2007toward}
@@ -112,7 +132,169 @@
 
 \subsection{Dynamic quroum}
 
+\subsection{Score voting}
+
 \subsection{Delegation}
+
+Because not every member of the community has time or knowledge to vote all the time, each member can delegate
+decisions to one or more other members of the community.
+When a member does not vote themselves, information how those delegates voted is combined into a vote of
+the non-voting member.
+If a delegate has not voted themselves either, their vote is computed through delegation as well, recursivelly.
+
+Each member $M$ can declare their delegates and ratios $r$ in which delegates' votes are combined. For example:
+
+\begin{itemize}
+\item Member $M_0$ decides not to delegate at all.
+\item Member $M_1$ delegates to $M_0$ and $M_3$ with ratios $0.75$ ($r_{1,0}$) and $0.25$ ($r_{1,3}$), respectivelly.
+\item Member $M_2$ delegates to $M_3$ with ratio $1.00$ ($r_{2,3}$).
+\item Member $M_3$ delegates to $M_1$ and $M_2$ with ratios $0.40$ ($r_{3,1}$) and $0.40$ ($r_{3,2}$).
+\end{itemize}
+
+Observe that member $M_3$ decided to use only $0.8$ of their vote in the case they do not vote themselves.
+The rest ($0.2$) counts towards non-voting population.
+In this way a member can decide to participate in voting through delegation, but not fully.
+Member $M_0$ deciced to not participate at all and if they do not vote they are counted towards non-voting population.
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \SetGraphUnit{2.5}
+
+    \Vertex[Math,L=M_0]{M0}
+    \EA[Math,L=M_1](M0){M1}
+    \SO[Math,L=M_3](M1){M3}
+    \WE[Math,L=M_2](M3){M2}
+
+    \Edge[label=$0.40$](M1)(M3)
+    \Edge[label=$0.75$](M0)(M1)
+    \Edge[label=$0.25$](M3)(M1)
+
+    \tikzset{EdgeStyle/.append style={bend right}}
+    \Edge[label=$1.00$](M3)(M2)
+    \Edge[label=$0.40$](M2)(M3)
+  \end{tikzpicture}
+  \caption{Example delegation network. Edges are directed towards a member who is delegating, representing how their
+  vote is computed from delegates' votes. E.g., $V_{M_1} = 0.75 V_{M_0} + 0.25 V_{M_3}$}~\label{fig:delegation-network}
+\end{figure}
+
+We can represent these delegations as a graph we call \emph{delegation network} as seen in
+Figure~\ref{fig:delegation-network}.
+We direct edges towards a member who is delegating, to represent how their vote is computed from delegates' votes.
+For example, member $M_1$ delegates the decision to members $M_0$ and $M_3$.
+$M_0$ and $M_3$ become $M_1$'s delegates.
+As a consequence, $M_1$'s vote ($V_{M_1}$) is computed from $M_0$'s and $M_3$'s votes ($V_{M_0}$, $V_{M_3}$).
+
+A delegation network can be described as a system of equations.
+
+\begin{displaymath}
+\begin{array}{rcl}
+V_{M_0} & = & 0 \\
+V_{M_1} & = & r_{1,0} V_{M_0} + r_{1,3} V_{M_3} = 0.75 V_{M_0} + 0.25 V_{M_3} \\
+V_{M_2} & = & r_{2,3} V_{M_3} = 1.00 V_{M_3} \\
+V_{M_3} & = & r_{3,1} V_{M_1} + r_{3,2} V_{M_2} = 0.40 V_{M_1} + 0.40 V_{M_2} \\
+\end{array}
+\end{displaymath}
+
+When only some members vote ($\mathbf{v}$) we can use a delegation network to compute votes
+of all members ($\mathbf{x}$).
+We convert a delegation network to a matrix $\mathrm{D}$:
+
+\begin{displaymath}
+\mathrm{D} = \left[d_{ij}\right] = \begin{dcases*}
+ 1 & if $i = j$ \\
+ -r_{i,j} & \parbox[t]{.55\columnwidth}{if $M_i$ did not vote, but delegates to $M_j$ with ratio $r_{i,j}$} \\
+ 0 & otherwise \\
+\end{dcases*}
+\end{displaymath}
+
+We solve the matrix equation:
+
+\begin{displaymath}
+\mathrm{D} \mathbf{x_v} = \mathbf{v}
+\end{displaymath}
+
+To continue with our example, let's say that $M_0$ and $M_2$ voted for a decision with $0.7$ and against with $0.4$,
+respectivelly.
+We are using score voting on $[-1, 1]$ range, so those votes are represented with $V_{M_0} = 0.7$ and
+$V_{M_2} = -0.4$.
+
+\begin{displaymath}
+\mathrm{D} = \left[ \begin{array}{cccc}
+1 & 0 & 0 & 0 \\
+-0.75 & 1 & -0.25 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & -0.40 & -0.40 & 1 \\
+\end{array} \right]
+\end{displaymath}
+
+\begin{displaymath}
+\mathbf{v} = \left[ \begin{array}{c}
+0.7 \\
+0 \\
+-0.4 \\
+0 \\
+\end{array} \right],\quad \mathbf{x_v} = \left[ \begin{array}{c}
+0.7 \\
+0.54 \\
+-0.4 \\
+0.056 \\
+\end{array} \right]
+\end{displaymath}
+
+The result (average of scores) without delegation is $\overline{v} = 0.15$ and
+with delegation is $\overline{x} = 0.22$.
+Delegation pushes decisision slightly in favor.
+
+There are few details we have to look into.
+Despite delegation some votes or parts of votes can still happen to be discarded and should count
+towards non-voting population.
+Members might not declare their delegates, or they might declare them without using their vote fully.
+Other members can delegate to them as well, potentially propagating lack of a vote further.
+For example, if member $M_0$ would not vote, then their vote would be discarded.
+Moreover, we could not use $M_0$'s vote to compute $M_1$'s vote fully, which would influence $M_3$'s vote as well.
+
+One option is that we would normalize ratio in such case, so if $M_0$ does not vote, then $r_{1,3}$ is normalized
+from $0.25$ to $1.0$.
+We could do this automatically for all members, or we could even leave to members to configure
+what to do in such case for them.
+In current version of PeerMind we decided to not handle this situation in any special way and we leave
+discarded votes to propagate.
+
+As a consequence we have to determine how many votes have been discarded to know the size of the non-voting
+population.
+Another issue is also a question of abstentions.
+In PeerMind members can abstain from voting which is different from simply not participating.
+Abstentions are counted towards quorum, but they do not contribute to the result.
+To address this, we define two vectors:
+
+\begin{displaymath}
+\mathrm{w} = \left[w_{i}\right] = \begin{dcases*}
+ 1 & if $M_i$ voted \\
+ 0 & otherwise \\
+\end{dcases*},\quad \mathrm{a} = \left[a_{i}\right] = \begin{dcases*}
+ 1 & if $M_i$ abstained \\
+ 0 & otherwise \\
+\end{dcases*}
+\end{displaymath}
+
+Solving $\mathrm{D} \mathbf{x_w} = \mathbf{w}$ and $\mathrm{D} \mathbf{x_a} = \mathbf{a}$ gives
+us number of votes and number of abstentions, respectivelly, by summing together all values in the
+resulting vectors: $w = \sum \mathbf{x_w}$, $a = \sum \mathbf{x_a}$.
+
+\todo[inline]{Is the result then $\frac{\sum \mathbf{x_v}}{w}$ or $\frac{\sum \mathbf{x_v}}{\textrm{number of entries
+in}~\mathbf{x_w}~\textrm{which are non-zero}}$?}
+
+We pass computed votes and number of votes and abstaintions into computation of dynamic quorum to determine
+a quorum and confidence, in the same manner as if members voted themselves.
+
+% In general, there are various ways to use this delegation scheme.
+To whom to delegate could be done for each vote separately, or decisions could be categorized into various
+categories and then delegations for that category would be used.
+But for simplicity, PeerMind currently supports only defining delegates separately from a decision making process,
+and those delegates are then in effect for all votes where a member does not vote themselves.
+A member is invited to define initial delegations at a registration time, and can change them later on at will,
+but independently from a particular decision being made.
 
 \subsection{Integration with offline meetings}
 
