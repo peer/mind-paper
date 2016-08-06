@@ -261,6 +261,10 @@ what to do in such case for them.
 In current version of PeerMind we decided to not handle this situation in any special way and we leave
 discarded votes to propagate.
 
+\todo[inline]{Or should we be normalizing? In a way we should not normalize if votes are discarded because
+member explicitly delegated so ($M_3$ above), but if votes are discarded because we could not compute
+all delegations, we might want to automatically normalize.}
+
 As a consequence we have to determine how many votes have been discarded to know the size of the non-voting
 population.
 Another issue is also a question of abstentions.
