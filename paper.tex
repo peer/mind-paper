@@ -222,7 +222,7 @@ Or we could just store information if you observed existing votes before you vot
 Maybe going with majority is also good when you want more social cohesion in the community and not so much ``optimal''
 wisdom of crowds result -  you would want that people relax their positions based on how other people care.
 Cohesion of the group vs. accuracy.
-Maybe display only number of votes and confidence, maybe confidence direction or graph, but not average votes.
+Maybe display only number of votes and credibility, maybe credibility direction or graph, but not average votes.
 
 A list of potential questions:
 \begin{itemize}
@@ -232,11 +232,16 @@ A list of potential questions:
 \item Private vs. public delegation (do you know how member to whom you delegated is voting)?
 \item When delegating, how to assure that you cannot learn how somebody else voted, but that you can still somehow
 learn how your vote is used?
-\item Knowing how much power you have vs. not knowing -- does it change how people behave? (Knowing might corrupt you, but also motivate you to do more thorough work voting because you know other depend on you.)
+\item Knowing how much power you have vs. not knowing -- does it change how people behave? (Knowing might corrupt you,
+but also motivate you to do more thorough work voting because you know other depend on you.)
 \end{itemize}
 
 Performance/theory/scaling in terms in computational (how big could effectively community can be to be able to compute it).
-Some other theoretical properties?  Computing statistical quorum is an ``embarrassingly parallel'' problem, and so its use would not suffer in large populations.  Sparsity of delegation matrix also lends to using recently developed efficient matrix computation algorithms.
+Some other theoretical properties?
+Computing statistical quorum is an ``embarrassingly parallel'' problem, and so its
+use would not suffer in large populations.
+Sparsity of delegation matrix also lends to using recently developed
+efficient matrix computation algorithms.
 
 Out of scope of this work:
 
@@ -273,7 +278,13 @@ we might want to prefer a decision less than some other decision with smaller st
 also smaller (but still positive) average. Is distribution of votes influencing dynamic quorum?}
 
 \subsection{Delegation}
-\todo[inline]{Max: I think delegation graph edges should point in the direction towards the person that the vote is being given to (more intuitive).}
+\todo[inline]{Max: I think delegation graph edges should point in the direction towards the person that the vote is
+being given to (more intuitive).
+\\
+Mitar: We are not giving votes to people, we are delegating a decision to people, but votes are computed for each person
+separately based on how delegates voted themselves. The idea is that you ask a delegate how the voted and then compute
+your vote. The do not get your vote to do anything with it. This is why arrows are like that. Maybe the word
+"delegation" is confusing and we should maybe use surrogate or some other word.}
 Because not every member of the community has time or knowledge to vote all the time, each member can delegate
 decisions to one or more other members of the community.
 When a member does not vote themselves, information how those delegates voted is combined into a vote of
@@ -327,7 +338,8 @@ As a consequence, $M_1$'s vote $V_{M_1}$ is computed from $M_0$'s and $M_3$'s vo
 
 A delegation network can be described as a system of equations.
 
-\todo[inline]{Max: Double check accuracy of this method, Improve explanation here and perhaps use nicer numbers so readers can follow along certain parts in their heads easily.}
+\todo[inline]{Max: Double check accuracy of this method, Improve explanation here and perhaps use nicer numbers so
+readers can follow along certain parts in their heads easily.}
 
 \begin{displaymath}
 \begin{array}{rcl}
@@ -391,7 +403,13 @@ $V_{M_2} = -0.4$.
 0 \\
 \end{array} \right]
 \end{displaymath}
-\todo[inline]{Max: FYI, computing who to discard from the population as ``non-voting'' is a separate computation in itself.  You need to figure out what votes can be calculated partially as a consequence of delegation, and which cannot.  Use indicator vectors denoting 1 if member has voted, else 0.}
+
+\todo[inline]{Max: FYI, computing who to discard from the population as ``non-voting'' is a separate computation in itself.
+You need to figure out what votes can be calculated partially as a consequence of delegation, and which cannot.
+Use indicator vectors denoting 1 if member has voted, else 0.
+\\
+Mitar: This is exactly what $\mathbf{w}$ is later on.}
+
 There are few details we have to look into.
 Despite delegation some votes or parts of votes can still happen to be discarded.
 Members who did not vote might have not declared their delegates.
@@ -461,7 +479,7 @@ with delegation is $\overline{x} = 0.23$.
 Delegation pushes decision slightly in favor.
 
 We pass computed votes and number of abstentions into computation of dynamic quorum to determine
-a quorum and confidence, in the same manner as if members voted themselves.
+a quorum and credibility, in the same manner as if members voted themselves.
 
 % In general, there are various ways to use this delegation scheme.
 To whom to delegate could be done for each vote separately, or decisions could be categorized into various
@@ -515,11 +533,27 @@ on their positions on a topic
 
 One additional part of the experimental delegation study:
 
-Compute statistical quorum with and without delegations.  This semester, do not actually allow delegation to be used for passing statistical quorum, but collect data so that we can see how much earlier delegation reached quorum before official statistical quorum.  (Only count how much earlier at the point where delegation passed quorum and never went below thereafter, thus showing the point where the decision truly was clear.)
+Compute statistical quorum with and without delegations.
+This semester, do not actually allow delegation to be used for passing statistical quorum, but collect data so that
+we can see how much earlier delegation reached quorum before official statistical quorum.
+(Only count how much earlier at the point where delegation passed quorum and never went below thereafter, thus
+showing the point where the decision truly was clear.)
 
-Evaluation of statistical quorum (given that we don't officially decide by including delegation this semester): From email: ``Do an internal Cloyne comparison that is more mathematical, showing how many agenda items were decided using fewer actual votes than old 33\% quorum, as a result of statistical quorum.  This could be measured by average \# votes needed to pass statistical quorum vs. \% of those items that get formally passed at council via consent agenda. (If it's 100\%, then you can say that we saved X\% of votes on average by using our online voting).  Then you could also show that some items needed more than 33\% of votes, implying that a hard-line 33\% is also bad.'' 
+Evaluation of statistical quorum (given that we don't officially decide by including delegation this semester):
+From email: ``Do an internal Cloyne comparison that is more mathematical, showing how many agenda items were decided
+using fewer actual votes than old 33\% quorum, as a result of statistical quorum.
+This could be measured by average \# votes needed to pass statistical quorum vs. \% of those items that get
+formally passed at council via consent agenda.
+(If it's 100\%, then you can say that we saved X\% of votes on
+average by using our online voting).
+Then you could also show that some items needed more than 33\% of votes, implying that a hard-line 33\% is also bad.'' 
 
-Subjective evaluation of entire platform: Council Surveys comparing past two semesters to this semester for other houses vs. Cloyne.  ``use the previous 2 semesters' worth of council surveys as control, and a council survey for Cloyne at the end of this semester as results.  These results would speak to those specific subjective questions and would be one useful thing to look at.''
+Subjective evaluation of entire platform: Council Surveys comparing past two semesters to this semester for other
+houses vs. Cloyne.
+``use the previous 2 semesters' worth of council surveys as control, and a council survey for
+Cloyne at the end of this semester as results.
+These results would speak to those specific subjective questions
+and would be one useful thing to look at.''
 
 \bibliographystyle{sigchi}
 \bibliography{refs}
