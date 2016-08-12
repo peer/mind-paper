@@ -236,7 +236,7 @@ learn how your vote is used?
 \end{itemize}
 
 Performance/theory/scaling in terms in computational (how big could effectively community can be to be able to compute it).
-Some other theoretical properties?
+Some other theoretical properties?  Computing statistical quorum is an ``embarrassingly parallel'' problem, and so its use would not suffer in large populations.  Sparsity of delegation matrix also lends to using recently developed efficient matrix computation algorithms.
 
 Out of scope of this work:
 
@@ -257,7 +257,7 @@ Out of scope of this work:
 Using statistics to compute dynamic quorum based on how people vote using hypothesis testing.
 If population all votes for one position, then quorum can be much lower than if population is completely split on an
 issue, then in fact the whole population should vote because this is the only way we know what the population stands for.
-So we can base quorum on the confidentiality.
+So we can base quorum on the credibility.
 The goal is to always minimize the amount of information needed from
 the population in order to confidently determine what actions the population as a whole wants to take.
 This allows faster decision making for non-contentious issues and prevents strategizing with quorum in
@@ -273,7 +273,7 @@ we might want to prefer a decision less than some other decision with smaller st
 also smaller (but still positive) average. Is distribution of votes influencing dynamic quorum?}
 
 \subsection{Delegation}
-
+\todo[inline]{Max: I think delegation graph edges should point in the direction towards the person that the vote is being given to (more intuitive).}
 Because not every member of the community has time or knowledge to vote all the time, each member can delegate
 decisions to one or more other members of the community.
 When a member does not vote themselves, information how those delegates voted is combined into a vote of
@@ -326,6 +326,8 @@ $M_0$ and $M_3$ become $M_1$'s delegates.
 As a consequence, $M_1$'s vote $V_{M_1}$ is computed from $M_0$'s and $M_3$'s votes ($V_{M_0}$ and $V_{M_3}$).
 
 A delegation network can be described as a system of equations.
+
+\todo[inline]{Max: Double check accuracy of this method, Improve explanation here and perhaps use nicer numbers so readers can follow along certain parts in their heads easily.}
 
 \begin{displaymath}
 \begin{array}{rcl}
@@ -389,7 +391,7 @@ $V_{M_2} = -0.4$.
 0 \\
 \end{array} \right]
 \end{displaymath}
-
+\todo[inline]{Max: FYI, computing who to discard from the population as ``non-voting'' is a separate computation in itself.  You need to figure out what votes can be calculated partially as a consequence of delegation, and which cannot.  Use indicator vectors denoting 1 if member has voted, else 0.}
 There are few details we have to look into.
 Despite delegation some votes or parts of votes can still happen to be discarded.
 Members who did not vote might have not declared their delegates.
@@ -510,6 +512,14 @@ find decisions made through our system more often agreeable
 whole community can agree with, or like it, even when not everyone participates and not all information is available
 on their positions on a topic
 \end{enumerate}
+
+One additional part of the experimental delegation study:
+
+Compute statistical quorum with and without delegations.  This semester, do not actually allow delegation to be used for passing statistical quorum, but collect data so that we can see how much earlier delegation reached quorum before official statistical quorum.  (Only count how much earlier at the point where delegation passed quorum and never went below thereafter, thus showing the point where the decision truly was clear.)
+
+Evaluation of statistical quorum (given that we don't officially decide by including delegation this semester): From email: ``Do an internal Cloyne comparison that is more mathematical, showing how many agenda items were decided using fewer actual votes than old 33\% quorum, as a result of statistical quorum.  This could be measured by average \# votes needed to pass statistical quorum vs. \% of those items that get formally passed at council via consent agenda. (If it's 100\%, then you can say that we saved X\% of votes on average by using our online voting).  Then you could also show that some items needed more than 33\% of votes, implying that a hard-line 33\% is also bad.'' 
+
+Subjective evaluation of entire platform: Council Surveys comparing past two semesters to this semester for other houses vs. Cloyne.  ``use the previous 2 semesters' worth of council surveys as control, and a council survey for Cloyne at the end of this semester as results.  These results would speak to those specific subjective questions and would be one useful thing to look at.''
 
 \bibliographystyle{sigchi}
 \bibliography{refs}
