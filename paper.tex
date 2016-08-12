@@ -329,11 +329,12 @@ A delegation network can be described as a system of equations.
 
 \begin{displaymath}
 \begin{array}{rcl}
-V_{M_0} & = & 0 \\
+V_{M_0} & = & V_{M_0} \\
 V_{M_1} & = & r_{1,0} V_{M_0} + r_{1,3} V_{M_3} = 0.75 V_{M_0} + 0.25 V_{M_3} \\
 V_{M_2} & = & r_{2,3} V_{M_3} = 1.00 V_{M_3} \\
 V_{M_3} & = & r_{3,1} V_{M_1} + r_{3,2} V_{M_2} + r_{3,4} V_{M_4} = \\
 & = & 0.40 V_{M_1} + 0.40 V_{M_2} + 0.20 V_{M_4} \\
+V_{M_4} & = & V_{M_4} \\
 \end{array}
 \end{displaymath}
 
@@ -349,10 +350,13 @@ We convert a delegation network to a matrix $\mathrm{D}$:
 \end{dcases*}
 \end{displaymath}
 
-We solve the matrix equation:
+We solve the matrix equation for $\mathbf{x_v}$:
 
 \begin{displaymath}
-\mathrm{D} \mathbf{x_v} = \mathbf{v}
+\mathrm{D} \mathbf{x_v} = \mathbf{v},\quad \mathbf{v} = \left[v_{i}\right] = \begin{dcases*}
+ V_{M_i} & if $M_i$ voted \\
+ 0 & otherwise \\
+\end{dcases*}
 \end{displaymath}
 
 To continue with our example, let's say that $M_0$ and $M_2$ voted for a decision with $0.7$ and against with $0.4$,
@@ -372,36 +376,39 @@ $V_{M_2} = -0.4$.
 
 \begin{displaymath}
 \mathbf{v} = \left[ \begin{array}{c}
-0.7 \\
+0.70 \\
 0 \\
 -0.4 \\
 0 \\
 0 \\
 \end{array} \right],\quad \mathbf{x_v} = \left[ \begin{array}{c}
-0.7 \\
+0.70 \\
 0.54 \\
--0.4 \\
+-0.40 \\
 0.056 \\
-0.0 \\
+0 \\
 \end{array} \right]
 \end{displaymath}
 
 There are few details we have to look into.
-Despite delegation some votes or parts of votes can still happen to be discarded and should count
-towards non-voting population.
-Members might not declare their delegates.
-Other members can delegate to them as well, potentially propagating lack of a vote further.
+Despite delegation some votes or parts of votes can still happen to be discarded.
+Members who did not vote might have not declared their delegates.
+Other members could delegate to them as well, potentially propagating lack of a vote further.
 In our example, member $M_4$ has not voted so their vote is discarded.
 As a consequence $M_3$'s vote cannot be computed fully, which influences $M_1$'s vote as well.
 
-In such case we normalize ratios of other delegates, those who voted or for which we can
+In such case we want to normalize ratios of other delegates, those who voted or for which we can
 compute their votes recursively.
 So $r_{3,1}$ and $r_{3,2}$ are normalized from $0.40$ to $0.50$.
 
 Another issue is a question of abstentions.
 In PeerMind members can abstain from voting which is different from simply not participating.
 Abstentions are counted towards quorum, but they do not contribute to the result.
-To address this, we define two vectors:
+
+Moreover, from $\mathbf{x_v}$ alone we cannot see which elements represent vote $0$ and which
+represent that it was not possible to compute a vote for a member.
+
+To address all this, we define two vectors:
 
 \begin{displaymath}
 \mathbf{w} = \left[w_{i}\right] = \begin{dcases*}
@@ -413,38 +420,43 @@ To address this, we define two vectors:
 \end{dcases*}
 \end{displaymath}
 
-We solve $\mathrm{D} \mathbf{x_w} = \mathbf{w}$ and $\mathrm{D} \mathbf{x_a} = \mathbf{a}$.
-To normalize votes we compute $x = x_v / x_w$.
-A consequence is that those elements of $x_w$ equal to $0$ make corresponding elements of $x$ undefined.
-Those undefined elements of $x$ we count towards non-voting population.
-We just have to make sure that they are not in fact abstentions.
-We check corresponding elements of $x_a$ and if they are non-zero we count them as abstentions,
-otherwise as non-votes.
-In our example:
+We solve $\mathrm{D} \mathbf{x_w} = \mathbf{w}$ and $\mathrm{D} \mathbf{x_a} = \mathbf{a}$ for
+$\mathbf{x_w}$ and $\mathbf{x_a}$, respectively.
+Non-zero elements of $\mathbf{x_w}$ correspond to members who voted or for which we can compute
+a vote.
+We define a normalized matrix:
+
+\begin{displaymath}
+\mathrm{D'} = \left[d'_{ij}\right] = \begin{dcases*}
+ 1 & if $i = j$ \\
+ 0 & if $x_{w_j} = 0$ ($V_{M_j}$ cannot be computed) \\
+ -\frac{r_{i,j}}{R_i} & \parbox[t]{.55\columnwidth}{if $M_i$ did not vote, but delegates to $M_j$ with normalized ratio $\frac{r_{i,j}}{R_i}$, $R_i = \sum_{x_{w_k} \ne 0} r_{i,k}$} \\
+ 0 & otherwise \\
+\end{dcases*}
+\end{displaymath}
+
+To compute votes with normalized ratios for only those delegates who voted or for which we can compute votes recursively,
+we solve $\mathrm{D'} \mathbf{x} = \mathbf{v}$ for $\mathbf{x}$:
 
 \begin{displaymath}
 \mathbf{x} = \left[ \begin{array}{c}
-0.7 \\
-0.57 \\
--0.4 \\
+0.70 \\
+0.54 \\
+-0.40 \\
 0.07 \\
-\mathrm{undefined} \\
+0 \\
 \end{array} \right]
 \end{displaymath}
 
-\todo[inline]{Are we discarding abstentions too much here? If we have 5 people and each of them is computed 0.2 of abstention
-through delegation, while the rest 0.8 is a vote, then we normalize 0.8 to 1.0 for all of them and simply discard 0.2
-of abstention. But otherwise those 0.2 of abstentions would count together towards 1.0. But probably this is not a
-problem because the quorum is still the same: those 5 people have participated through delegation in voting. Only
-if somebody has not participated through delegation in voting we care if they might participated in abstentions
-through voting. To maximize delegated participation.}
+If an element of $\mathbf{x_w}$ is equal to $0$, then we could not compute a vote for that member and we count
+it towards non-voting population.
+We just have to make sure that they are not in fact abstentions.
+We check corresponding elements of $\mathbf{x_a}$ and if they are non-zero we count them as abstentions,
+otherwise as non-votes.
 
 The result (average of scores) without delegation is $\overline{v} = 0.15$ and
-with delegation is $\overline{x} = 0.24$.
+with delegation is $\overline{x} = 0.23$.
 Delegation pushes decision slightly in favor.
-
-\todo[inline]{$x = x_v / x_w$ does not really produce the same result as computing with 0.50 as ratio to begin
-with. Why?}
 
 We pass computed votes and number of abstentions into computation of dynamic quorum to determine
 a quorum and confidence, in the same manner as if members voted themselves.
