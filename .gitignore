@@ -15,3 +15,5 @@
 *.out
 mpxerr.tex
 *.gz
+*.pdf
+*.DS_Store
