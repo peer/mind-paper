@@ -31,6 +31,7 @@
 \usepackage{tikz}
 \usepackage{tkz-graph}
 \usepackage{mathtools}
+\usepackage{amsmath}
 
 % llt: Define a global style for URLs, rather that the default one
 \makeatletter
@@ -294,15 +295,15 @@ If a delegate has not voted themselves either, their vote is computed through de
 Each member $M$ can declare their delegates and ratios $r$ in which delegates' votes are combined. For example:
 
 \begin{itemize}
-\item Member $M_0$ decides not to delegate at all.
-\item Member $M_1$ delegates to $M_0$ and $M_3$ with ratios $0.75$ ($r_{1,0}$) and $0.25$ ($r_{1,3}$), respectively.
-\item Member $M_2$ delegates to $M_3$ with ratio $1.00$ ($r_{2,3}$).
-\item Member $M_3$ delegates to $M_1$, $M_2$, and $M_4$ with ratios $0.40$ ($r_{3,1}$), $0.40$ ($r_{3,2}$), and $0.20$ ($r_{3,4}$), respectively.
-\item Member $M_4$ decides not to delegate.
+\item Member $M_1$ decides not to delegate at all.
+\item Member $M_2$ delegates to $M_1$ and $M_4$ with ratios $0.75$ ($r_{1,0}$) and $0.25$ ($r_{1,3}$), respectively.
+\item Member $M_3$ delegates to $M_4$ with ratio $1.00$ ($r_{2,3}$).
+\item Member $M_4$ delegates to $M_2$, $M_3$, and $M_5$ with ratios $0.40$ ($r_{3,1}$), $0.40$ ($r_{3,2}$), and $0.20$ ($r_{3,4}$), respectively.
+\item Member $M_5$ decides not to delegate.
 \end{itemize}
 
 The sum of ratios of all delegations of a member has to be $1.0$.
-Members $M_0$ and $M_4$ decided to not participate in delegation and if they do not vote they are
+Members $M_1$ and $M_5$ decided not to participate in delegation and if they do not vote they are
 counted towards non-voting population.
 
 \begin{figure}
@@ -310,31 +311,35 @@ counted towards non-voting population.
   \begin{tikzpicture}
     \SetGraphUnit{2.5}
 
-    \Vertex[Math,L=M_0]{M0}
-    \EA[Math,L=M_1](M0){M1}
-    \SO[Math,L=M_3](M1){M3}
-    \WE[Math,L=M_2](M3){M2}
-    \EA[Math,L=M_4](M3){M4}
+    \Vertex[Math,L=M_1]{M1}
+    \EA[Math,L=M_2](M1){M2}
+    \SO[Math,L=M_4](M2){M4}
+    \WE[Math,L=M_3](M4){M3}
+    \EA[Math,L=M_5](M4){M5}
 
-    \Edge[label=$0.40$](M1)(M3)
-    \Edge[label=$0.75$](M0)(M1)
-    \Edge[label=$0.25$](M3)(M1)
-    \Edge[label=$0.20$](M4)(M3)
+    \Edge[label=$0.40$](M2)(M4)
+    \Edge[label=$0.75$](M1)(M2)
+    \Edge[label=$0.25$](M4)(M2)
+    \Edge[label=$0.20$](M5)(M4)
 
     \tikzset{EdgeStyle/.append style={bend right}}
-    \Edge[label=$1.00$](M3)(M2)
-    \Edge[label=$0.40$](M2)(M3)
+    \Edge[label=$1.00$](M4)(M3)
+    \Edge[label=$0.40$](M3)(M4)
   \end{tikzpicture}
   \caption{Example delegation network. Edges are directed towards a member who is delegating, representing how their
-  vote is computed from delegates' votes. E.g., $V_{M_1} = 0.75 V_{M_0} + 0.25 V_{M_3}$}~\label{fig:delegation-network}
+  vote is computed from delegates' votes. E.g., $V_2 = 0.75 V_1 + 0.25 V_4$}~\label{fig:delegation-network}
 \end{figure}
 
 We can represent these delegations as a graph we call \emph{delegation network} as seen in
 Figure~\ref{fig:delegation-network}.
 We direct edges towards a member who is delegating, to represent how their vote is computed from delegates' votes.
-For example, member $M_1$ delegates the decision to members $M_0$ and $M_3$.
-$M_0$ and $M_3$ become $M_1$'s delegates.
-As a consequence, $M_1$'s vote $V_{M_1}$ is computed from $M_0$'s and $M_3$'s votes ($V_{M_0}$ and $V_{M_3}$).
+For example, member $M_2$ delegates the decision to members $M_1$ and $M_4$.
+$M_1$ and $M_4$ become $M_2$'s delegates.
+As a consequence, $M_2$'s vote $V_2$ is computed from $M_1$'s and $M_4$'s computed votes ($V_1$ and $V_4$)
+if $M_2$ does not vote themselves.
+
+With $v_i$ we represent a vote of a member $M_i$ if they voted, otherwise it is $0$.
+$V_i$ represents their vote, if they have voted, or a computed vote based on their delegations.
 
 A delegation network can be described as a system of equations.
 
@@ -343,40 +348,52 @@ readers can follow along certain parts in their heads easily.}
 
 \begin{displaymath}
 \begin{array}{rcl}
-V_{M_0} & = & V_{M_0} \\
-V_{M_1} & = & r_{1,0} V_{M_0} + r_{1,3} V_{M_3} = 0.75 V_{M_0} + 0.25 V_{M_3} \\
-V_{M_2} & = & r_{2,3} V_{M_3} = 1.00 V_{M_3} \\
-V_{M_3} & = & r_{3,1} V_{M_1} + r_{3,2} V_{M_2} + r_{3,4} V_{M_4} = \\
-& = & 0.40 V_{M_1} + 0.40 V_{M_2} + 0.20 V_{M_4} \\
-V_{M_4} & = & V_{M_4} \\
+V_1 & = & \begin{dcases*}
+ v_1 & if $M_1$ votes \\
+ 0 & otherwise \\
+\end{dcases*} \\
+V_2 & = & \begin{dcases*}
+ v_2 & if $M_2$ votes \\
+ r_{1,0} V_1 + r_{1,3} V_4 = 0.75 V_1 + 0.25 V_4 & otherwise \\
+\end{dcases*} \\
+V_3 & = & \begin{dcases*}
+ v_3 & if $M_3$ votes \\
+ r_{2,3} V_4 = 1.00 V_4 & otherwise \\
+\end{dcases*} \\
+V_4 & = & \begin{dcases*}
+ v_4 & if $M_4$ votes \\
+ r_{3,1} V_2+ r_{3,2} V_3 + r_{3,4} V_5 = & otherwise \\
+ = 0.40 V_2 + 0.40 V_3 + 0.20 V_5 & \\
+\end{dcases*} \\
+V_5 & = & \begin{dcases*}
+ v_5 & if $M_5$ votes \\
+ 0 & otherwise \\
+\end{dcases*} \\
 \end{array}
 \end{displaymath}
 
-When only some members vote ($\mathbf{v}$) we can use a delegation network to compute votes
-of all members ($\mathbf{x}$).
-We convert a delegation network to a matrix $\mathrm{D}$:
+When only some members vote we can use a delegation network to compute votes
+of all members.
+We convert a delegation network to a matrix $D$:
 
 \begin{displaymath}
-\mathrm{D} = \left[d_{ij}\right] = \begin{dcases*}
+D = \left[d_{ij}\right] = \begin{dcases*}
  1 & if $i = j$ \\
  -r_{i,j} & \parbox[t]{.55\columnwidth}{if $M_i$ did not vote, but delegates to $M_j$ with ratio $r_{i,j}$} \\
  0 & otherwise \\
 \end{dcases*}
 \end{displaymath}
 
-We solve the matrix equation for $\mathbf{x_v}$:
+We solve the matrix equation for $\boldsymbol{V}$:
 
 \begin{displaymath}
-\mathrm{D} \mathbf{x_v} = \mathbf{v},\quad \mathbf{v} = \left[v_{i}\right] = \begin{dcases*}
- V_{M_i} & if $M_i$ voted \\
- 0 & otherwise \\
-\end{dcases*}
+\mathrm{D} \boldsymbol{V} = \boldsymbol{v},\quad \boldsymbol{v} = \left[v_{i}\right],\quad \boldsymbol{V} = \left[V_{i}\right]
 \end{displaymath}
 
-To continue with our example, let's say that $M_0$ and $M_2$ voted for a decision with $0.7$ and against with $0.4$,
+To continue with our example, let's say that $M_1$ and $M_3$ voted for a decision with $0.7$ and against with $0.4$,
 respectively.
-We are using score voting on $[-1, 1]$ range, so those votes are represented with $V_{M_0} = 0.7$ and
-$V_{M_2} = -0.4$.
+We are using score voting on $[-1, 1]$ range, so those votes are represented with $v_1 = V_1 = 0.7$ and
+$v_3 = V_3 = -0.4$.
 
 \begin{displaymath}
 \mathrm{D} = \left[ \begin{array}{ccccc}
@@ -389,13 +406,13 @@ $V_{M_2} = -0.4$.
 \end{displaymath}
 
 \begin{displaymath}
-\mathbf{v} = \left[ \begin{array}{c}
-0.70 \\
+\boldsymbol{v} = \left[ \begin{array}{c}
+0.7 \\
 0 \\
 -0.4 \\
 0 \\
 0 \\
-\end{array} \right],\quad \mathbf{x_v} = \left[ \begin{array}{c}
+\end{array} \right],\quad \boldsymbol{V} = \left[ \begin{array}{c}
 0.70 \\
 0.54 \\
 -0.40 \\
@@ -408,58 +425,72 @@ $V_{M_2} = -0.4$.
 You need to figure out what votes can be calculated partially as a consequence of delegation, and which cannot.
 Use indicator vectors denoting 1 if member has voted, else 0.
 \\
-Mitar: This is exactly what $\mathbf{w}$ is later on.}
+Mitar: This is exactly what $\boldsymbol{w}$ is later on.}
 
 There are few details we have to look into.
 Despite delegation some votes or parts of votes can still happen to be discarded.
 Members who did not vote might have not declared their delegates.
 Other members could delegate to them as well, potentially propagating lack of a vote further.
-In our example, member $M_4$ has not voted so their vote is discarded.
-As a consequence $M_3$'s vote cannot be computed fully, which influences $M_1$'s vote as well.
-
-In such case we want to normalize ratios of other delegates, those who voted or for which we can
-compute their votes recursively.
-So $r_{3,1}$ and $r_{3,2}$ are normalized from $0.40$ to $0.50$.
+In our example, member $M_5$ has not voted so their vote is discarded.
+As a consequence $M_4$'s vote cannot be computed fully, which influences $M_2$'s vote as well.
 
 Another issue is a question of abstentions.
 In PeerMind members can abstain from voting which is different from simply not participating.
 Abstentions are counted towards quorum, but they do not contribute to the result.
 
-Moreover, from $\mathbf{x_v}$ alone we cannot see which elements represent vote $0$ and which
+Moreover, from $\boldsymbol{V}$ alone we cannot see which elements represent vote $0$ and which
 represent that it was not possible to compute a vote for a member.
 
 To address all this, we define two vectors:
 
 \begin{displaymath}
-\mathbf{w} = \left[w_{i}\right] = \begin{dcases*}
+\boldsymbol{w} = \left[w_i\right] = \begin{dcases*}
  1 & if $M_i$ voted \\
  0 & otherwise \\
-\end{dcases*},\quad \mathbf{a} = \left[a_{i}\right] = \begin{dcases*}
+\end{dcases*},\quad \boldsymbol{a} = \left[a_i\right] = \begin{dcases*}
  1 & if $M_i$ abstained \\
  0 & otherwise \\
 \end{dcases*}
 \end{displaymath}
 
-We solve $\mathrm{D} \mathbf{x_w} = \mathbf{w}$ and $\mathrm{D} \mathbf{x_a} = \mathbf{a}$ for
-$\mathbf{x_w}$ and $\mathbf{x_a}$, respectively.
-Non-zero elements of $\mathbf{x_w}$ correspond to members who voted or for which we can compute
+We solve $D \boldsymbol{W} = \boldsymbol{w}$ and $\mathrm{D} \boldsymbol{A} = \boldsymbol{a}$ for
+$\boldsymbol{W} = \left[W_{i}\right]$ and $\boldsymbol{A} = \left[A_{i}\right]$, respectively.
+
+Non-zero elements of $\boldsymbol{W}$ correspond to members who voted or for which we can compute
 a vote.
+
+\todo[inline]{If there is a clique in delegation, without any vote inside a clique, the matrix becomes singular.
+We should find a way to detect such rows and set corresponding elements of $\boldsymbol{W}$ to $0$ (or the row
+to identity row before we try to compute $\boldsymbol{W}$).
+This is exactly what we want in fact, that those in such a clique are seen as non-computable.
+Then the rest works.}
+
 We define a normalized matrix:
 
 \begin{displaymath}
-\mathrm{D'} = \left[d'_{ij}\right] = \begin{dcases*}
+D' = \left[d'_{ij}\right] = \begin{dcases*}
  1 & if $i = j$ \\
- 0 & if $x_{w_j} = 0$ ($V_{M_j}$ cannot be computed) \\
- -\frac{r_{i,j}}{R_i} & \parbox[t]{.55\columnwidth}{if $M_i$ did not vote, but delegates to $M_j$ with normalized ratio $\frac{r_{i,j}}{R_i}$, $R_i = \sum_{x_{w_k} \ne 0} r_{i,k}$} \\
+ 0 & if $W_j = 0$ ($V_j$ cannot be computed) \\
+ -r'_{i,j} & if $M_i$ did not vote \\
  0 & otherwise \\
 \end{dcases*}
 \end{displaymath}
 
-To compute votes with normalized ratios for only those delegates who voted or for which we can compute votes recursively,
-we solve $\mathrm{D'} \mathbf{x} = \mathbf{v}$ for $\mathbf{x}$:
+Where:
 
 \begin{displaymath}
-\mathbf{x} = \left[ \begin{array}{c}
+r'_{i,j} = \frac{r_{i,j}}{R_i},\quad R_i = \sum_{W_k \ne 0} r_{i,k}
+\end{displaymath}
+
+We normalize ratios to only those delegates who voted or for which we can
+compute their votes recursively.
+So $r_{3,1}$ and $r_{3,2}$ are normalized from $0.40$ to $0.50$.
+
+To compute votes with normalized ratios for only those delegates who voted or for which we can compute votes recursively,
+we solve $D' \boldsymbol{V} = \boldsymbol{v}$ for $\boldsymbol{V}$:
+
+\begin{displaymath}
+\mathbf{V} = \left[ \begin{array}{c}
 0.70 \\
 0.54 \\
 -0.40 \\
@@ -468,18 +499,38 @@ we solve $\mathrm{D'} \mathbf{x} = \mathbf{v}$ for $\mathbf{x}$:
 \end{array} \right]
 \end{displaymath}
 
-If an element of $\mathbf{x_w}$ is equal to $0$, then we could not compute a vote for that member and we count
-it towards non-voting population.
+If an element of $\boldsymbol{W}$ is equal to $0$, then we could not compute a vote for the corresponding
+member and we count it towards the non-voting population.
 We just have to make sure that they are not in fact abstentions.
-We check corresponding elements of $\mathbf{x_a}$ and if they are non-zero we count them as abstentions,
-otherwise as non-votes.
+For elements $\boldsymbol{W} = 0$ we check their corresponding elements of $\boldsymbol{A}$ and if they are
+non-zero we count them as abstentions, otherwise as non-votes.
 
-The result (average of scores) without delegation is $\overline{v} = 0.15$ and
-with delegation is $\overline{x} = 0.23$.
-Delegation pushes decision slightly in favor.
+\begin{itemize}
+\item Number of directly voting members: $\left| v \right|$
+\item Number of voting members: $\left| V \right| = \left| W_k \ne 0 \right|$
+\item Number of abstentions: $\left| A \right| = \left| W_k = 0 \land A_k \ne 0 \right|$
+\item Number of non-voting members: $\left| W_k = 0 \land A_k = 0 \right|$
+\end{itemize}
 
-We pass computed votes and number of abstentions into computation of dynamic quorum to determine
+The result (average of scores) without delegation is:
+
+\begin{displaymath}
+\overline{v} = \frac{\sum_{M_k voted} v_k}{\left| v \right|} = 0.15
+\end{displaymath}
+
+With delegation:
+
+\begin{displaymath}
+\overline{V} = \frac{\sum_{W_k \ne 0} V_k}{\left| V \right|} = 0.23
+\end{displaymath}
+
+In our example, delegation slightly pushes decision in favor.
+
+We pass computed votes $V$ and number of abstentions $\left| A \right|$ into computation of dynamic quorum to determine
 a quorum and credibility, in the same manner as if members voted themselves.
+
+\todo[inline]{Do we want really to compute quorum using delegation, or should quorum be computed
+using direct votes only?}
 
 % In general, there are various ways to use this delegation scheme.
 To whom to delegate could be done for each vote separately, or decisions could be categorized into various
