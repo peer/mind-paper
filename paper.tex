@@ -120,7 +120,7 @@ fact add additional value by voting online.
 Specifically, we can compute results faster and more accurately, we can use sophisticated statistics to estimate
 quantities for the entire voting population, and we can promote clarity and full understanding of the voting items for all.
 
-\todo[inline]{Main questions and answers follows.}
+\todo[inline]{Main questions and answers follow.}
 
 What problem are we solving? Why is it important to solve? What is the story?
 
@@ -154,7 +154,7 @@ If I observe that I think I will know I solved the problem.
 \todo[inline]{This rest of the section is mostly notes. Organize and improve.}
 
 We can often hear that the issue of our democracy is low engagement.
-But this is a fallacy, because we should be instead trying to decrease it.
+But this is a fallacy, because we should be instead trying to decrease engagement.
 The best governance system is one where you do not have to be involved yourself, but it is still doing things
 like you would like to do them.
 % Or even, doing things you might not even know that you would like to be done, especially in a long term.
@@ -174,7 +174,7 @@ engagement is then increased only to assure that people like the results
 so if we try to minimize engagement, but still make sure that people like the results, then this is the perfect system
 
 and only in the case when they are on the loosing side, then we have to make sure that they understand the reasons why
-they lost (eg. the middle panel in our design) or at least to feel that they participated, in at least some way
+they lost (e.g.,\ the middle panel in our design) or at least to feel that they participated, in at least some way
 (voting, or just delegating)
 
 but the participation is the last on this list of important factors
@@ -211,7 +211,7 @@ A list of potential other points:
 \item legitimacy (quorum, involvement of more people through delegation)
 \item scaling (delegation helps, less attention helps)
 \item attention (at same or better decisions)
-\item bad assumptions for democracy - time, knowledge, it s rational to know that you do not know, common practice is to ask friends
+\item bad assumptions for democracy - time, knowledge, it is rational to know that you do not know, common practice is to ask friends
 \item better decisions (more people consulted, attention directed where it should be)
 \end{itemize}
 
@@ -238,11 +238,11 @@ learn how your vote is used?
 but also motivate you to do more thorough work voting because you know other depend on you.)
 \end{itemize}
 
-Performance/theory/scaling in terms in computational (how big could effectively community can be to be able to compute it).
+Performance/theory/scaling in computational terms (how big could effectively community can be to be able to compute it).
 Some other theoretical properties?
 Computing statistical quorum is an ``embarrassingly parallel'' problem, and so its
 use would not suffer in large populations.
-Sparsity of delegation matrix also lends to using recently developed
+Sparsity of delegation matrix also enables use of (recently developed?)
 efficient matrix computation algorithms.
 
 Out of scope of this work:
@@ -297,9 +297,9 @@ Each member $M$ can declare their delegates and ratios $r$ in which delegates' v
 
 \begin{itemize}
 \item Member $M_1$ decides not to delegate at all.
-\item Member $M_2$ delegates to $M_1$ and $M_4$ with ratios $0.75$ ($r_{1,0}$) and $0.25$ ($r_{1,3}$), respectively.
-\item Member $M_3$ delegates to $M_4$ with ratio $1.00$ ($r_{2,3}$).
-\item Member $M_4$ delegates to $M_2$, $M_3$, and $M_5$ with ratios $0.40$ ($r_{3,1}$), $0.40$ ($r_{3,2}$), and $0.20$ ($r_{3,4}$), respectively.
+\item Member $M_2$ delegates to $M_1$ and $M_4$ with ratios $0.75$ ($r_{2,1}$) and $0.25$ ($r_{2,4}$), respectively.
+\item Member $M_3$ delegates to $M_4$ with ratio $1.00$ ($r_{3,4}$).
+\item Member $M_4$ delegates to $M_2$, $M_3$, and $M_5$ with ratios $0.40$ ($r_{4,2}$), $0.40$ ($r_{4,3}$), and $0.20$ ($r_{4,5}$), respectively.
 \item Member $M_5$ decides not to delegate.
 \end{itemize}
 
@@ -339,8 +339,8 @@ $M_1$ and $M_4$ become $M_2$'s delegates.
 As a consequence, $M_2$'s vote $V_2$ is computed from $M_1$'s and $M_4$'s computed votes ($V_1$ and $V_4$)
 if $M_2$ does not vote themselves.
 
-With $v_i$ we represent a vote of a member $M_i$ if they voted, otherwise it is $0$.
-$V_i$ represents their vote, if they have voted, or a computed vote based on their delegations.
+With $v_i$ we denote a vote of a member $M_i$ if they voted, otherwise it is $0$.
+$V_i$ denotes their vote, if they have voted, or a computed vote based on their delegations, if they have not voted.
 
 A delegation network can be described as a system of equations.
 
@@ -355,15 +355,15 @@ V_1 & = & \begin{dcases*}
 \end{dcases*} \\
 V_2 & = & \begin{dcases*}
  v_2 & if $M_2$ votes \\
- r_{1,0} V_1 + r_{1,3} V_4 = 0.75 V_1 + 0.25 V_4 & otherwise \\
+ r_{2,1} V_1 + r_{2,4} V_4 = 0.75 V_1 + 0.25 V_4 & otherwise \\
 \end{dcases*} \\
 V_3 & = & \begin{dcases*}
  v_3 & if $M_3$ votes \\
- r_{2,3} V_4 = 1.00 V_4 & otherwise \\
+ r_{3,4} V_4 = 1.00 V_4 & otherwise \\
 \end{dcases*} \\
 V_4 & = & \begin{dcases*}
  v_4 & if $M_4$ votes \\
- r_{3,1} V_2+ r_{3,2} V_3 + r_{3,4} V_5 = & otherwise \\
+ r_{4,2} V_2+ r_{4,3} V_3 + r_{4,5} V_5 = & otherwise \\
  = 0.40 V_2 + 0.40 V_3 + 0.20 V_5 & \\
 \end{dcases*} \\
 V_5 & = & \begin{dcases*}
@@ -388,16 +388,16 @@ D = \left[d_{ij}\right] = \begin{dcases*}
 We solve the matrix equation for $\boldsymbol{V}$:
 
 \begin{displaymath}
-\mathrm{D} \boldsymbol{V} = \boldsymbol{v},\quad \boldsymbol{v} = \left[v_{i}\right],\quad \boldsymbol{V} = \left[V_{i}\right]
+D \boldsymbol{V} = \boldsymbol{v},\quad \boldsymbol{v} = \left[v_{i}\right],\quad \boldsymbol{V} = \left[V_{i}\right]
 \end{displaymath}
 
 To continue with our example, let's say that $M_1$ and $M_3$ voted for a decision with $0.7$ and against with $0.4$,
 respectively.
-We are using score voting on $[-1, 1]$ range, so those votes are represented with $v_1 = V_1 = 0.7$ and
+We are using score voting on $[-1, 1]$ range, so those votes are $v_1 = V_1 = 0.7$ and
 $v_3 = V_3 = -0.4$.
 
 \begin{displaymath}
-\mathrm{D} = \left[ \begin{array}{ccccc}
+D = \left[ \begin{array}{ccccc}
 1 & 0 & 0 & 0 & 0 \\
 -0.75 & 1 & -0.25 & 0 & 0 \\
 0 & 0 & 1 & 0 & 0 \\
@@ -454,17 +454,18 @@ To address all this, we define two vectors:
 \end{dcases*}
 \end{displaymath}
 
-We solve $D \boldsymbol{W} = \boldsymbol{w}$ and $\mathrm{D} \boldsymbol{A} = \boldsymbol{a}$ for
+We solve $D \boldsymbol{W} = \boldsymbol{w}$ and $D \boldsymbol{A} = \boldsymbol{a}$ for
 $\boldsymbol{W} = \left[W_{i}\right]$ and $\boldsymbol{A} = \left[A_{i}\right]$, respectively.
 
 Non-zero elements of $\boldsymbol{W}$ correspond to members who voted or for which we can compute
 a vote.
 
-\todo[inline]{If there is a clique in delegation, without any vote inside a clique, the matrix becomes singular.
+\todo[inline]{If there is a clique/cycle/closed subgroup in delegation, without any vote inside a clique/cycle/closed subgroup, the matrix becomes singular.
 We should find a way to detect such rows and set corresponding elements of $\boldsymbol{W}$ to $0$ (or the row
 to identity row before we try to compute $\boldsymbol{W}$).
-This is exactly what we want in fact, that those in such a clique are seen as non-computable.
-Then the rest works.}
+This is exactly what we want in fact, that those in such a clique/cycle/closed subgroup are seen as non-computable.
+Then the rest works.
+We should describe a problem, maybe with an example.}
 
 We define a normalized matrix:
 
@@ -485,7 +486,7 @@ r'_{i,j} = \frac{r_{i,j}}{R_i},\quad R_i = \sum_{W_k \ne 0} r_{i,k}
 
 We normalize ratios to only those delegates who voted or for which we can
 compute their votes recursively.
-So $r_{3,1}$ and $r_{3,2}$ are normalized from $0.40$ to $0.50$.
+So $r_{4,2}$ and $r_{4,3}$ are normalized from $0.40$ to $0.50$.
 
 To compute votes with normalized ratios for only those delegates who voted or for which we can compute votes recursively,
 we solve $D' \boldsymbol{V} = \boldsymbol{v}$ for $\boldsymbol{V}$:
@@ -507,27 +508,27 @@ For elements $\boldsymbol{W} = 0$ we check their corresponding elements of $\bol
 non-zero we count them as abstentions, otherwise as non-votes.
 
 \begin{itemize}
-\item Number of directly voting members: $\left| v \right|$
-\item Number of voting members: $\left| V \right| = \left| W_k \ne 0 \right|$
-\item Number of abstentions: $\left| A \right| = \left| W_k = 0 \land A_k \ne 0 \right|$
-\item Number of non-voting members: $\left| W_k = 0 \land A_k = 0 \right|$
+\item Number of directly voting members: $N_v = \left| \{ k: M_k~\mathrm{voted} \} \right|$
+\item Number of voting members: $N_V = \left| \{ k: W_k \ne 0 \} \right|$
+\item Number of abstentions: $N_A = \left| \{ k:  W_k = 0 \land A_k \ne 0 \} \right|$
+\item Number of non-voting members: $\left| \{ k: W_k = 0 \land A_k = 0 \} \right|$
 \end{itemize}
 
 The result (average of scores) without delegation is:
 
 \begin{displaymath}
-\overline{v} = \frac{\sum_{M_k voted} v_k}{\left| v \right|} = 0.15
+\overline{v} = \frac{\sum_{M_k~\mathrm{voted}} v_k}{N_v} = 0.15
 \end{displaymath}
 
 With delegation:
 
 \begin{displaymath}
-\overline{V} = \frac{\sum_{W_k \ne 0} V_k}{\left| V \right|} = 0.23
+\overline{V} = \frac{\sum_{W_k \ne 0} V_k}{N_V} = 0.23
 \end{displaymath}
 
 In our example, delegation slightly pushes decision in favor.
 
-We pass computed votes $V$ and number of abstentions $\left| A \right|$ into computation of dynamic quorum to determine
+We pass computed votes $V$ and number of abstentions $N_A$ into computation of dynamic quorum to determine
 a quorum and credibility, in the same manner as if members voted themselves.
 
 \todo[inline]{Do we want really to compute quorum using delegation, or should quorum be computed
