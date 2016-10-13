@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     76454,       1933]
-NotebookOptionsPosition[     72270,       1791]
-NotebookOutlinePosition[     72678,       1809]
-CellTagsIndexPosition[     72635,       1806]
+NotebookDataLength[    113459,       2845]
+NotebookOptionsPosition[    107604,       2653]
+NotebookOutlinePosition[    108012,       2671]
+CellTagsIndexPosition[    107969,       2668]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -35,6 +35,11 @@ Cell["Theoretical Framework:", "Subsection",
 
 Cell[CellGroupData[{
 
+Cell["Simple/Super Majority", "Subsubsection",
+ CellChangeTimes->{{3.682054169995047*^9, 3.682054176177744*^9}}],
+
+Cell[CellGroupData[{
+
 Cell[TextData[StyleBox["Background:",
  FontWeight->"Bold"]], "Item",
  CellChangeTimes->{{3.68003663548561*^9, 3.6800366616058702`*^9}}],
@@ -44,11 +49,11 @@ A population of voters needs to collectively decide whether or not to take \
 action on an item.  In order to democratically take action, the population \
 needs to have a {simple, super}-majority of \[OpenCurlyDoubleQuote]yes\
 \[CloseCurlyDoubleQuote] votes.  We do not want to poll the entire \
-population, but we do want to be certain (specifically, 95% certain) that the \
+population, but we do want to be certain (specifically, 99% certain) that the \
 population does not take undesired actions.\
 \>", "Subitem",
  CellChangeTimes->{{3.68003663548561*^9, 3.6800366933739233`*^9}, {
-  3.6800402212903*^9, 3.68004022192236*^9}}],
+   3.6800402212903*^9, 3.68004022192236*^9}, 3.683657353392294*^9}],
 
 Cell[TextData[StyleBox["Problem Statement:",
  FontWeight->"Bold"]], "Item",
@@ -167,16 +172,15 @@ Cell[TextData[{
    RowBox[{
     RowBox[{"N", "=", 
      RowBox[{"effective", " ", "population", " ", "size"}]}], ",", 
+    RowBox[{"i", ".", "e", "."}], ",", " ", 
     RowBox[{
-     RowBox[{
-      RowBox[{"i", ".", "e", ".", " ", "population"}], " ", "size"}], " ", 
-     "-", " ", 
+     RowBox[{"population", " ", "size"}], " ", "-", " ", 
      RowBox[{"number", " ", "of", " ", "abstentions"}]}], ",", 
     "\[IndentingNewLine]", 
     RowBox[{"T", "=", 
      RowBox[{"f", "\[Times]", "N"}]}], " ", ",", " ", 
     RowBox[{
-    "where", " ", "c", " ", "corresponds", " ", "to", " ", "the", " ", 
+    "where", " ", "f", " ", "corresponds", " ", "to", " ", "the", " ", 
      "fraction", " ", "of", " ", "the", " ", "population", " ", "that", " ", 
      "needs", " ", "to", " ", "vote", " ", "\"\<yes\>\""}], ",", " ", 
     RowBox[{
@@ -194,24 +198,23 @@ Cell[TextData[{
       FractionBox[
        RowBox[{"votes", "+", "1"}], "2"], "]"}], "*", 
      RowBox[{"(", 
-      RowBox[{"number", " ", "of", " ", "Votes"}], ")"}]}], ",", 
+      RowBox[{"number", " ", "of", " ", "votes"}], ")"}]}], ",", 
     "\[IndentingNewLine]", 
     RowBox[{"b", "=", 
      RowBox[{
      "number", " ", "of", " ", "effective", " ", "\"\<no\>\"", " ", "votes", 
       " ", "recorded"}]}], ",", " ", 
     RowBox[{"i", ".", "e", "."}], ",", " ", 
-    RowBox[{"(", 
-     RowBox[{
-      RowBox[{"number", " ", "of", " ", "Votes"}], " ", "-", " ", "a"}], 
-     ")"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"number", " ", "of", " ", "votes"}], ")"}], " ", "-", " ", 
+     "a"}], ",", "\[IndentingNewLine]", 
     RowBox[{"K", "=", 
      RowBox[{
      "number", " ", "of", " ", "remaining", " ", "votes", " ", "to", " ", 
       "be", " ", "cast"}]}], ",", 
-    RowBox[{
-     RowBox[{"i", ".", "e", ".", " ", "N"}], "-", "a", "-", "b"}], ",", 
-    "\[IndentingNewLine]", 
+    RowBox[{"i", ".", "e", "."}], ",", " ", 
+    RowBox[{"N", "-", "a", "-", "b"}], ",", "\[IndentingNewLine]", 
     RowBox[{"m", "=", 
      RowBox[{
      "the", " ", "minimum", " ", "number", " ", "of", " ", "future", " ", 
@@ -223,8 +226,7 @@ Cell[TextData[{
     "\[IndentingNewLine]", 
     RowBox[{"p", "=", 
      RowBox[{"true", " ", "underlying", " ", "population", " ", "bias"}]}]}], 
-   TraditionalForm]],
-  FormatType->"TraditionalForm"]
+   TraditionalForm]]]
 }], "Subsubitem",
  CellChangeTimes->{{3.68003663548561*^9, 3.6800367466511*^9}, {
   3.680036780704975*^9, 3.6800368176574173`*^9}, {3.680036982651609*^9, 
@@ -234,7 +236,10 @@ Cell[TextData[{
   3.680037645712503*^9, 3.680037877059918*^9}, {3.68003790940589*^9, 
   3.68003803643581*^9}, {3.6800382426798363`*^9, 3.6800382662573566`*^9}, {
   3.680038359079488*^9, 3.680038359079554*^9}, {3.68003855173352*^9, 
-  3.6800388024836683`*^9}}],
+  3.6800388024836683`*^9}, {3.680161103060576*^9, 3.680161103472273*^9}, {
+  3.6825458175140676`*^9, 3.682545817514269*^9}, {3.683654965624242*^9, 
+  3.68365496758366*^9}, {3.68365499775954*^9, 3.683654997759667*^9}, {
+  3.68367202158947*^9, 3.6836720233176737`*^9}}],
 
 Cell[TextData[Cell[BoxData[{
  FormBox[
@@ -249,13 +254,14 @@ Cell[TextData[Cell[BoxData[{
    RowBox[{
     SubscriptBox["\[Integral]", "p"], 
     RowBox[{
-     RowBox[{"\[DoubleStruckCapitalP]", "(", 
-      RowBox[{
+     RowBox[{
+      RowBox[{"\[DoubleStruckCapitalP]", "(", 
        RowBox[{
-        RowBox[{"\[Sum]", "\"\<yes\>\""}], " ", "\[GreaterEqual]", "T"}], 
-       "\[VerticalSeparator]", "p"}], ")"}], "\[Times]", 
-     RowBox[{"\[DoubleStruckCapitalP]", "(", 
-      RowBox[{"p", "\[VerticalSeparator]", "votes"}], ")"}], 
+        RowBox[{
+         RowBox[{"\[Sum]", "\"\<yes\>\""}], " ", "\[GreaterEqual]", "T"}], 
+        "\[VerticalSeparator]", "p"}], ")"}], "\[CenterDot]", 
+      RowBox[{"\[DoubleStruckCapitalP]", "(", 
+       RowBox[{"p", "\[VerticalSeparator]", "votes"}], ")"}]}], 
      RowBox[{"\[DifferentialD]", "p"}]}]}]}], 
   TraditionalForm], "\[IndentingNewLine]", 
  FormBox[
@@ -263,16 +269,17 @@ Cell[TextData[Cell[BoxData[{
    RowBox[{
     SubsuperscriptBox["\[Integral]", "0", "1"], 
     RowBox[{
-     RowBox[{"\[DoubleStruckCapitalP]", "(", 
-      RowBox[{
+     RowBox[{
+      RowBox[{"\[DoubleStruckCapitalP]", "(", 
        RowBox[{
-        RowBox[{"\[Sum]", "\"\<yes\>\""}], " ", "\[GreaterEqual]", "T"}], 
-       "\[VerticalSeparator]", "p"}], ")"}], "\[Times]", 
-     RowBox[{"Beta", "(", 
-      RowBox[{
-       RowBox[{"p", ";", 
-        RowBox[{"a", "+", "1"}]}], ",", 
-       RowBox[{"b", "+", "1"}]}], ")"}], 
+        RowBox[{
+         RowBox[{"\[Sum]", "\"\<yes\>\""}], " ", "\[GreaterEqual]", "T"}], 
+        "\[VerticalSeparator]", "p"}], ")"}], "\[CenterDot]", 
+      RowBox[{"Beta", "(", 
+       RowBox[{
+        RowBox[{"p", ";", 
+         RowBox[{"a", "+", "1"}]}], ",", 
+        RowBox[{"b", "+", "1"}]}], ")"}]}], 
      RowBox[{"\[DifferentialD]", "p"}]}]}]}], 
   TraditionalForm], "\[IndentingNewLine]", 
  FormBox[
@@ -280,11 +287,12 @@ Cell[TextData[Cell[BoxData[{
    RowBox[{
     SubsuperscriptBox["\[Integral]", "0", "1"], 
     RowBox[{
-     RowBox[{"(", 
-      RowBox[{
-       UnderoverscriptBox["\[Sum]", 
-        RowBox[{"i", "=", "m"}], "K"], 
+     RowBox[{
+      RowBox[{"(", 
        RowBox[{
+        UnderoverscriptBox[
+         RowBox[{"\[Sum]", " "}], 
+         RowBox[{"i", "=", "m"}], "K"], 
         RowBox[{"(", GridBox[{
            {"K"},
            {"i"}
@@ -293,40 +301,40 @@ Cell[TextData[Cell[BoxData[{
          RowBox[{
           SuperscriptBox["p", "i"], "(", 
           RowBox[{"1", "-", "p"}], ")"}], 
-         RowBox[{"K", "-", "i"}]]}]}], ")"}], "\[Times]", 
-     RowBox[{"Beta", "(", 
-      RowBox[{
-       RowBox[{"p", ";", 
-        RowBox[{"a", "+", "1"}]}], ",", 
-       RowBox[{"b", "+", "1"}]}], ")"}], 
+         RowBox[{"K", "-", "i"}]]}], ")"}], "\[CenterDot]", 
+      RowBox[{"Beta", "(", 
+       RowBox[{
+        RowBox[{"p", ";", 
+         RowBox[{"a", "+", "1"}]}], ",", 
+        RowBox[{"b", "+", "1"}]}], ")"}]}], 
      RowBox[{"\[DifferentialD]", "p"}]}]}]}], 
   TraditionalForm], "\[IndentingNewLine]", 
  FormBox[
   RowBox[{"=", 
    RowBox[{
-    UnderoverscriptBox["\[Sum]", 
+    UnderoverscriptBox[
+     RowBox[{"\[Sum]", " "}], 
      RowBox[{"i", "=", "m"}], "K"], 
+    RowBox[{"(", GridBox[{
+       {"K"},
+       {"i"}
+      }], ")"}], 
     RowBox[{
-     RowBox[{"(", GridBox[{
-        {"K"},
-        {"i"}
-       }], ")"}], 
+     SubsuperscriptBox["\[Integral]", "0", "1"], 
      RowBox[{
-      SubsuperscriptBox["\[Integral]", "0", "1"], 
       RowBox[{
-       RowBox[{
-        SuperscriptBox[
-         RowBox[{
-          SuperscriptBox["p", "i"], "(", 
-          RowBox[{"1", "-", "p"}], ")"}], 
-         RowBox[{"K", "-", "i"}]], "\[CenterDot]", 
-        RowBox[{"Beta", "(", 
-         RowBox[{
-          RowBox[{"p", ";", 
-           RowBox[{"a", "+", "1"}]}], ",", 
-          RowBox[{"b", "+", "1"}]}], ")"}]}], 
-       RowBox[{"\[DifferentialD]", "p"}]}]}]}]}]}], TraditionalForm]}],
- FormatType->"TraditionalForm"]], "Subsubitem",
+       SuperscriptBox[
+        RowBox[{
+         SuperscriptBox["p", "i"], "(", 
+         RowBox[{"1", "-", "p"}], ")"}], 
+        RowBox[{"K", "-", "i"}]], "\[CenterDot]", 
+       RowBox[{"Beta", "(", 
+        RowBox[{
+         RowBox[{"p", ";", 
+          RowBox[{"a", "+", "1"}]}], ",", 
+         RowBox[{"b", "+", "1"}]}], ")"}]}], 
+      RowBox[{"\[DifferentialD]", "p"}]}]}]}]}], 
+  TraditionalForm]}]]], "Subsubitem",
  CellChangeTimes->{{3.68003663548561*^9, 3.6800367466511*^9}, {
   3.680036780704975*^9, 3.6800368176574173`*^9}, {3.680036982651609*^9, 
   3.68003706256991*^9}, {3.680037098811862*^9, 3.680037197512886*^9}, {
@@ -336,17 +344,19 @@ Cell[TextData[Cell[BoxData[{
   3.680038000315084*^9}, {3.68003805923568*^9, 3.6800381421051188`*^9}, {
   3.6800381767178373`*^9, 3.680038228856957*^9}, {3.680038283218442*^9, 
   3.680038399999202*^9}, {3.680038431693041*^9, 3.680038538258505*^9}, {
-  3.680038822360723*^9, 3.680039084078197*^9}},
+  3.680038822360723*^9, 3.680039084078197*^9}, {3.680247364547543*^9, 
+  3.680247408487426*^9}},
  FontSize->18]
 }, Open  ]],
 
 Cell["\<\
-We can numerically computer the above expression.  In order to be certain \
+We can numerically compute the above expression.  In order to be certain \
 before taking actions, we would like for the computed value to be \
-\[GreaterEqual] 95%.\
+\[GreaterEqual] 99%.\
 \>", "Subitem",
  CellChangeTimes->{{3.680039144563555*^9, 3.6800392094122477`*^9}, {
-  3.680040216410392*^9, 3.6800402168343573`*^9}}]
+   3.680040216410392*^9, 3.6800402168343573`*^9}, 3.680493872148259*^9, 
+   3.6836573605266323`*^9}]
 }, Open  ]],
 
 Cell["Done.", "Item",
@@ -356,8 +366,519 @@ Cell["Done.", "Item",
 
 Cell[CellGroupData[{
 
+Cell["Competing Motions", "Subsubsection",
+ CellChangeTimes->{{3.68205418734674*^9, 3.682054189481695*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Background:",
+ FontWeight->"Bold"]], "Item",
+ CellChangeTimes->{{3.68003663548561*^9, 3.6800366616058702`*^9}}],
+
+Cell["\<\
+A population of voters needs to collectively decide which item (if any) to \
+take action on out of a set of competing items.  In order to democratically \
+take action, the population needs to have a {simple, super}-majority of \
+\[OpenCurlyDoubleQuote]yes\[CloseCurlyDoubleQuote] votes on a winning item, \
+while also demonstrating that the winning item is preferred over all other \
+competing items.  We do not want to poll the entire population, but we do \
+want to be certain (specifically, 99% certain) that the population does not \
+take undesired actions, which, in this case, encompasses taking action on an \
+item that is not supported by a majority of the population, as well as taking \
+action on an\.7f\.7f item that is not clearly preferred over all other \
+competing alternatives.\
+\>", "Subitem",
+ CellChangeTimes->{{3.68003663548561*^9, 3.6800366933739233`*^9}, {
+   3.6800402212903*^9, 3.68004022192236*^9}, {3.6820543107399197`*^9, 
+   3.6820543829035807`*^9}, {3.682055854303073*^9, 3.682055866765545*^9}, {
+   3.683632635660882*^9, 3.6836326814881563`*^9}, {3.683632711678844*^9, 
+   3.683632812420288*^9}, {3.683638627350263*^9, 3.683638686756034*^9}, {
+   3.683638717310486*^9, 3.683638718437663*^9}, {3.683638796674674*^9, 
+   3.683638797595356*^9}, 3.683657369968566*^9, {3.68366306335569*^9, 
+   3.6836630653866167`*^9}}],
+
+Cell[TextData[StyleBox["Problem Statement:",
+ FontWeight->"Bold"]], "Item",
+ CellChangeTimes->{{3.68003663548561*^9, 3.680036703701804*^9}}],
+
+Cell["\<\
+We wish to compute the probability that the bias in a population towards \
+voting \[OpenCurlyDoubleQuote]yes\[CloseCurlyDoubleQuote] is greater than \
+some fraction of the population (e.g., 50% for a simple majority, 67% for a \
+super majority, 90% for a consensus).  In addition, we wish to compute the \
+probability that the bias towards voting \[OpenCurlyDoubleQuote]yes\
+\[CloseCurlyDoubleQuote] on a specific item is greater than the bias towards \
+voting \[OpenCurlyDoubleQuote]yes\[CloseCurlyDoubleQuote] on all other \
+competing items.\
+\>", "Subitem",
+ CellChangeTimes->{{3.68003663548561*^9, 3.68003670850175*^9}, {
+  3.6836330069865837`*^9, 3.6836330678852243`*^9}}],
+
+Cell[TextData[StyleBox["Assumptions:",
+ FontWeight->"Bold"]], "Item",
+ CellChangeTimes->{{3.68003663548561*^9, 3.680036717293249*^9}}],
+
+Cell["Same as above.", "Subitem",
+ CellChangeTimes->{{3.68003663548561*^9, 3.680036720751598*^9}, {
+  3.6836366410839643`*^9, 3.6836366459316*^9}}],
+
+Cell[TextData[StyleBox["Voting:",
+ FontWeight->"Bold"]], "Item",
+ CellChangeTimes->{{3.68003663548561*^9, 3.6800367263165073`*^9}}],
+
+Cell["Same as above.", "Subitem",
+ CellChangeTimes->{{3.68003663548561*^9, 3.680036732784812*^9}, {
+  3.683636636813711*^9, 3.68363663831573*^9}}],
+
+Cell[TextData[StyleBox["Bayesian Theory:",
+ FontWeight->"Bold"]], "Item",
+ CellChangeTimes->{{3.68003663548561*^9, 3.6800367466626577`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Following as in the previous derivation, we will use the Beta distribution as \
+our prior on the population\[CloseCurlyQuote]s biases.  We already know how \
+to compute the probability that the bias towards voting \
+\[OpenCurlyDoubleQuote]yes\[CloseCurlyDoubleQuote] for any individual item is \
+greater than some threshold.\
+\>", "Subitem",
+ CellChangeTimes->{{3.68003663548561*^9, 3.6800367466511*^9}, {
+  3.680036780704975*^9, 3.6800368176574173`*^9}, {3.680036982651609*^9, 
+  3.68003706256991*^9}, {3.680037098811862*^9, 3.680037130315913*^9}, {
+  3.683633115395996*^9, 3.6836331573350267`*^9}, {3.683633194511654*^9, 
+  3.683633265974926*^9}, {3.683636613160591*^9, 3.683636613461094*^9}, {
+  3.6836389863565073`*^9, 3.68363899881068*^9}}],
+
+Cell["\<\
+Deriving our additional expression of interest \[LongDash] the probability \
+that an item\[CloseCurlyQuote]s \[OpenCurlyDoubleQuote]yes-bias\
+\[CloseCurlyDoubleQuote] is greater than all competing \
+items\[CloseCurlyQuote] \[OpenCurlyDoubleQuote]yes-biases\
+\[CloseCurlyDoubleQuote]\[NonBreakingSpace]\[LongDash] now immediately \
+follows:\
+\>", "Subitem",
+ CellChangeTimes->{{3.68003663548561*^9, 3.6800367466511*^9}, {
+  3.680036780704975*^9, 3.6800368176574173`*^9}, {3.680036982651609*^9, 
+  3.68003706256991*^9}, {3.680037098811862*^9, 3.680037197512886*^9}, {
+  3.6800372317897873`*^9, 3.680037303138914*^9}, {3.680037457066352*^9, 
+  3.680037466703197*^9}, {3.6800374981523314`*^9, 3.680037516120804*^9}, {
+  3.680038012660615*^9, 3.680038015491125*^9}, {3.683633275448559*^9, 
+  3.6836333500924063`*^9}, {3.683639019722539*^9, 3.68363903053767*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Let ",
+ Cell[BoxData[{
+  FormBox[
+   RowBox[{
+    RowBox[{"C", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       SubscriptBox["X", "1"], ",", "\[Ellipsis]", ",", " ", 
+       SubscriptBox["X", "n"]}], "}"}]}], ",", " ", 
+    RowBox[{"i", ".", "e", "."}], ",", " ", 
+    RowBox[{"the", " ", "set", " ", "of", " ", "competing", " ", "motions"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{
+     SubscriptBox["N", "i"], "=", 
+     RowBox[{"effective", " ", "population", " ", "size", " ", "for", " ", 
+      SubscriptBox["X", "i"]}]}], ",", 
+    RowBox[{"i", ".", "e", "."}], ",", " ", 
+    RowBox[{
+     RowBox[{"population", " ", "size"}], " ", "-", " ", 
+     RowBox[{"(", 
+      RowBox[{"number", " ", "of", " ", "abstentions", " ", "on", " ", 
+       SubscriptBox["X", "i"]}], ")"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     SubscriptBox["a", "i"], "=", 
+     RowBox[{
+     "number", " ", "of", " ", "effective", " ", "\"\<yes\>\"", " ", "votes", 
+      " ", "recorded", " ", "for", " ", 
+      SubscriptBox["X", "i"]}]}], ",", 
+    RowBox[{"i", ".", "e", "."}], ",", " ", 
+    RowBox[{
+     RowBox[{"Mean", "[", 
+      FractionBox[
+       RowBox[{"votes", "+", "1"}], "2"], "]"}], "*", 
+     RowBox[{"(", 
+      RowBox[{"number", " ", "of", " ", "votes", " ", "on", " ", 
+       SubscriptBox["X", "i"]}], ")"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     SubscriptBox["v", 
+      RowBox[{"i", ",", "j"}]], "=", 
+     RowBox[{
+     "number", " ", "of", " ", "effective", " ", "\"\<yes\>\"", " ", "votes", 
+      " ", 
+      SubscriptBox["X", "i"], " ", "is", " ", "leading", " ", 
+      SubscriptBox["X", "j"], " ", "by"}]}], ",", " ", 
+    RowBox[{"i", ".", "e", "."}], ",", " ", 
+    RowBox[{
+     SubscriptBox["a", "i"], "-", 
+     SubscriptBox["a", "j"]}]}], TraditionalForm], "\[IndentingNewLine]", 
+  FormBox[
+   RowBox[{
+    RowBox[{
+     SubscriptBox["b", "i"], "=", 
+     RowBox[{
+     "number", " ", "of", " ", "effective", " ", "\"\<no\>\"", " ", "votes", 
+      " ", "recorded", "  ", "for", " ", 
+      SubscriptBox["X", "i"]}]}], ",", " ", 
+    RowBox[{"i", ".", "e", "."}], ",", " ", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"number", " ", "of", " ", "votes", " ", "on", " ", 
+       SubscriptBox["X", "i"]}], ")"}], "  ", "-", " ", 
+     SubscriptBox["a", "i"]}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     SubscriptBox["K", "i"], "=", 
+     RowBox[{
+     "number", " ", "of", " ", "remaining", " ", "votes", " ", "to", " ", 
+      "be", " ", "cast", " ", "for", " ", 
+      SubscriptBox["X", "i"]}]}], ",", 
+    RowBox[{"i", ".", "e", "."}], ",", " ", 
+    RowBox[{
+     SubscriptBox["N", "i"], "-", 
+     SubscriptBox["a", "i"], "-", 
+     SubscriptBox["b", "i"]}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     SubscriptBox["p", "i"], "=", 
+     RowBox[{
+     "true", " ", "underlying", " ", "population", " ", "bias", " ", "for", 
+      " ", 
+      SubscriptBox["X", "i"]}]}]}], TraditionalForm]}]]
+}], "Subsubitem",
+ CellChangeTimes->{{3.68003663548561*^9, 3.6800367466511*^9}, {
+   3.680036780704975*^9, 3.6800368176574173`*^9}, {3.680036982651609*^9, 
+   3.68003706256991*^9}, {3.680037098811862*^9, 3.680037197512886*^9}, {
+   3.6800372317897873`*^9, 3.680037303138914*^9}, {3.680037457066352*^9, 
+   3.680037466703197*^9}, {3.6800374981523314`*^9, 3.6800375925305*^9}, {
+   3.680037645712503*^9, 3.680037877059918*^9}, {3.68003790940589*^9, 
+   3.68003803643581*^9}, {3.6800382426798363`*^9, 3.6800382662573566`*^9}, {
+   3.680038359079488*^9, 3.680038359079554*^9}, {3.68003855173352*^9, 
+   3.6800388024836683`*^9}, {3.680161103060576*^9, 3.680161103472273*^9}, 
+   3.683639055742388*^9, {3.683639283609065*^9, 3.683639312383381*^9}, {
+   3.683640010799485*^9, 3.683640087298689*^9}, {3.6836538305568943`*^9, 
+   3.683653831378521*^9}, {3.6836538682960463`*^9, 3.683653983656762*^9}, {
+   3.683654052773768*^9, 3.683654064306756*^9}, {3.683654859208969*^9, 
+   3.6836548953291616`*^9}, {3.683654931651328*^9, 3.683655016019237*^9}, {
+   3.683655136248692*^9, 3.683655140048588*^9}, {3.683655208782412*^9, 
+   3.683655217311152*^9}, {3.6836719728868637`*^9, 3.6836720156136217`*^9}}],
+
+Cell[TextData[Cell[BoxData[{
+ FormBox[
+  RowBox[{"\[DoubleStruckCapitalP]", "(", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       SubscriptBox["X", "1"], " ", ">", 
+       SubscriptBox["X", "2"]}], ")"}], " ", "\[And]", " ", "\[Ellipsis]", 
+     " ", "\[And]", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       SubscriptBox["X", "1"], " ", ">", 
+       SubscriptBox["X", "2"]}], ")"}]}], "\[VerticalSeparator]", "votes"}], 
+   ")"}], TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{"=", 
+   RowBox[{
+    UnderoverscriptBox[
+     RowBox[{"\[Product]", " "}], 
+     RowBox[{"i", "=", "2"}], "n"], 
+    RowBox[{"\[DoubleStruckCapitalP]", "(", 
+     RowBox[{
+      RowBox[{
+       SubscriptBox["X", "1"], " ", ">", 
+       SubscriptBox["X", "i"]}], "\[VerticalSeparator]", "votes"}], ")"}]}]}],
+   TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{"=", 
+   RowBox[{
+    UnderoverscriptBox[
+     RowBox[{"\[Product]", " "}], 
+     RowBox[{"i", "=", "2"}], "n"], 
+    RowBox[{
+     SubscriptBox["\[Integral]", 
+      SubscriptBox["p", "1"]], 
+     RowBox[{
+      SubscriptBox["\[Integral]", 
+       SubscriptBox["p", "i"]], 
+      RowBox[{
+       RowBox[{
+        RowBox[{"\[DoubleStruckCapitalP]", "(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            SubscriptBox["X", "1"], " ", ">", 
+            SubscriptBox["X", "i"]}], "\[VerticalSeparator]", 
+           SubscriptBox["p", "1"]}], ",", 
+          SubscriptBox["p", "i"]}], ")"}], "\[CenterDot]", 
+        RowBox[{"\[DoubleStruckCapitalP]", "(", 
+         RowBox[{
+          SubscriptBox["p", "1"], "\[VerticalSeparator]", "votes"}], ")"}], 
+        "\[CenterDot]", 
+        RowBox[{"\[DoubleStruckCapitalP]", "(", 
+         RowBox[{
+          SubscriptBox["p", "i"], "\[VerticalSeparator]", "votes"}], ")"}]}], 
+       
+       RowBox[{"\[DifferentialD]", 
+        SubscriptBox["p", "i"]}], 
+       RowBox[{"\[DifferentialD]", 
+        SubscriptBox["p", "1"]}]}]}]}]}]}], 
+  TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{"=", 
+   RowBox[{
+    UnderoverscriptBox[
+     RowBox[{"\[Product]", " "}], 
+     RowBox[{"i", "=", "2"}], "n"], 
+    RowBox[{
+     SubsuperscriptBox["\[Integral]", "0", "1"], 
+     RowBox[{
+      SubsuperscriptBox["\[Integral]", "0", "1"], 
+      RowBox[{
+       RowBox[{
+        RowBox[{"\[DoubleStruckCapitalP]", "(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            SubscriptBox["X", "1"], " ", ">", 
+            SubscriptBox["X", "i"]}], "\[VerticalSeparator]", 
+           SubscriptBox["p", "1"]}], ",", 
+          SubscriptBox["p", "i"]}], ")"}], "\[CenterDot]", 
+        RowBox[{"Beta", "(", 
+         RowBox[{
+          RowBox[{
+           SubscriptBox["p", "1"], ";", 
+           RowBox[{
+            SubscriptBox["a", "1"], "+", "1"}]}], ",", 
+          RowBox[{
+           SubscriptBox["b", "1"], "+", "1"}]}], ")"}], "\[CenterDot]", 
+        RowBox[{"Beta", "(", 
+         RowBox[{
+          RowBox[{
+           SubscriptBox["p", "i"], ";", 
+           RowBox[{
+            SubscriptBox["a", "i"], "+", "1"}]}], ",", 
+          RowBox[{
+           SubscriptBox["b", "i"], "+", "1"}]}], ")"}]}], 
+       RowBox[{"\[DifferentialD]", 
+        SubscriptBox["p", "i"]}], 
+       RowBox[{"\[DifferentialD]", 
+        SubscriptBox["p", "1"]}]}]}]}]}]}], 
+  TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{
+   RowBox[{"Deriving", " ", "an", " ", "expression", " ", "for", " ", 
+    RowBox[{"\[DoubleStruckCapitalP]", "(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        SubscriptBox["X", "1"], " ", ">", 
+        SubscriptBox["X", "i"]}], "\[VerticalSeparator]", 
+       SubscriptBox["p", "1"]}], ",", 
+      SubscriptBox["p", "i"]}], ")"}]}], ",", " ", 
+   RowBox[{"we", " ", "get"}]}], TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{
+   RowBox[{"\[DoubleStruckCapitalP]", "(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       SubscriptBox["X", "1"], " ", ">", 
+       SubscriptBox["X", "i"]}], "\[VerticalSeparator]", 
+      SubscriptBox["p", "1"]}], ",", 
+     SubscriptBox["p", "i"]}], ")"}], " "}], 
+  TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{"=", 
+   RowBox[{"1", "-", 
+    RowBox[{"\[DoubleStruckCapitalP]", "(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        SubscriptBox["X", "1"], " ", "\[LessEqual]", 
+        SubscriptBox["X", "i"]}], "\[VerticalSeparator]", 
+       SubscriptBox["p", "1"]}], ",", 
+      SubscriptBox["p", "i"]}], ")"}]}]}], 
+  TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{"=", 
+   RowBox[{"1", "-", 
+    RowBox[{
+     UnderoverscriptBox[
+      RowBox[{"\[Sum]", " "}], 
+      RowBox[{"m", "=", "0"}], 
+      SubscriptBox["K", "1"]], 
+     UnderoverscriptBox[
+      RowBox[{"\[Sum]", " "}], 
+      RowBox[{"n", "=", 
+       RowBox[{"\[LeftCeiling]", 
+        RowBox[{
+         SubscriptBox["v", 
+          RowBox[{"1", ",", "i"}]], "+", "m"}], "\[RightCeiling]"}]}], 
+      SubscriptBox["K", "i"]], 
+     RowBox[{"(", GridBox[{
+        {
+         SubscriptBox["K", "i"]},
+        {"n"}
+       }], ")"}], 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{
+        SubsuperscriptBox["p", "i", "n"], "(", 
+        RowBox[{"1", "-", 
+         SubscriptBox["p", "i"]}], ")"}], 
+       RowBox[{
+        SubscriptBox["K", "i"], "-", "n"}]], "\[CenterDot]", 
+      RowBox[{"(", GridBox[{
+         {
+          SubscriptBox["K", "1"]},
+         {"m"}
+        }], ")"}]}], 
+     SuperscriptBox[
+      RowBox[{
+       SubsuperscriptBox["p", "1", "m"], "(", 
+       RowBox[{"1", "-", 
+        SubscriptBox["p", "1"]}], ")"}], 
+      RowBox[{
+       SubscriptBox["K", "1"], "-", "m"}]]}]}]}], 
+  TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{
+   RowBox[{
+   "Substituting", " ", "the", " ", "above", " ", "expression", " ", "into", 
+    " ", "the", " ", "original", " ", "derivation"}], ",", " ", 
+   RowBox[{
+   "we", " ", "get", " ", "the", " ", "complete", " ", "desired", " ", 
+    "expression", " ", "for", " ", 
+    RowBox[{"\[DoubleStruckCapitalP]", "(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         SubscriptBox["X", "1"], " ", ">", 
+         SubscriptBox["X", "2"]}], ")"}], " ", "\[And]", " ", "\[Ellipsis]", 
+       " ", "\[And]", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         SubscriptBox["X", "1"], " ", ">", 
+         SubscriptBox["X", "2"]}], ")"}]}], "\[VerticalSeparator]", "votes"}],
+      ")"}]}]}], TraditionalForm], "\[IndentingNewLine]", 
+ FormBox[
+  RowBox[{"=", 
+   RowBox[{
+    UnderoverscriptBox[
+     RowBox[{"\[Product]", " "}], 
+     RowBox[{"i", "=", "2"}], "n"], 
+    RowBox[{
+     SubsuperscriptBox["\[Integral]", "0", "1"], 
+     RowBox[{
+      SubsuperscriptBox["\[Integral]", "0", "1"], 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "-", 
+          RowBox[{
+           UnderoverscriptBox[
+            RowBox[{"\[Sum]", " "}], 
+            RowBox[{"m", "=", "0"}], 
+            SubscriptBox["K", "1"]], 
+           UnderoverscriptBox[
+            RowBox[{"\[Sum]", " "}], 
+            RowBox[{"n", "=", 
+             RowBox[{"\[LeftCeiling]", 
+              RowBox[{
+               SubscriptBox["v", 
+                RowBox[{"1", ",", "i"}]], "+", "m"}], "\[RightCeiling]"}]}], 
+            SubscriptBox["K", "i"]], 
+           RowBox[{"(", GridBox[{
+              {
+               SubscriptBox["K", "i"]},
+              {"n"}
+             }], ")"}], 
+           RowBox[{
+            SuperscriptBox[
+             RowBox[{
+              SubsuperscriptBox["p", "i", "n"], "(", 
+              RowBox[{"1", "-", 
+               SubscriptBox["p", "i"]}], ")"}], 
+             RowBox[{
+              SubscriptBox["K", "i"], "-", "n"}]], "\[CenterDot]", 
+            RowBox[{"(", GridBox[{
+               {
+                SubscriptBox["K", "1"]},
+               {"m"}
+              }], ")"}]}], 
+           SuperscriptBox[
+            RowBox[{
+             SubsuperscriptBox["p", "1", "m"], "(", 
+             RowBox[{"1", "-", 
+              SubscriptBox["p", "1"]}], ")"}], 
+            RowBox[{
+             SubscriptBox["K", "1"], "-", "m"}]]}]}], ")"}], "\[CenterDot]", 
+        RowBox[{"Beta", "(", 
+         RowBox[{
+          RowBox[{
+           SubscriptBox["p", "1"], ";", 
+           RowBox[{
+            SubscriptBox["a", "1"], "+", "1"}]}], ",", 
+          RowBox[{
+           SubscriptBox["b", "1"], "+", "1"}]}], ")"}], "\[CenterDot]", 
+        RowBox[{"Beta", "(", 
+         RowBox[{
+          RowBox[{
+           SubscriptBox["p", "i"], ";", 
+           RowBox[{
+            SubscriptBox["a", "i"], "+", "1"}]}], ",", 
+          RowBox[{
+           SubscriptBox["b", "i"], "+", "1"}]}], ")"}]}], 
+       RowBox[{"\[DifferentialD]", 
+        SubscriptBox["p", "i"]}], 
+       RowBox[{"\[DifferentialD]", 
+        SubscriptBox["p", "1"]}]}]}]}]}]}], TraditionalForm]}]]], "Subsubitem",\
+
+ CellChangeTimes->CompressedData["
+1:eJwlzVsoQwEcBvA1kktDsrlkdObFJQ97QElph6F5cGmtSYrlTp2mtjLFmhBq
+rLm22lKktLRJXpWV3FruGZnW8LB5QGhjw/mOh3+/h6/v+xMKqqGdzWKxMulj
+nKS8Gb1+0cml9BXmTM9/wJmYwi/47bqI59NulZ6lwr2vRj6c6bblwhdxsACG
+lA9FUJ8lkMAFrawGPt1X1MLbYGITPD/eboUu3/IQ5IStOpjPjdVD+2TnHBQ0
+OyxwLMBbgcI+0zrUhDvsUB383YFtBZ8OaBVXn8K4qaP3//86bibtwKhhf4T2
+ZzHBCdVVuykhpV/UcpWdCw+S3oSwrp4thY2atHYYfeftg02kVgNnyZIJmMzb
+1EPS5mZM5w0aoXWbMEGBOGRm9nsMFhg494yz++ne6oYB+oiJeWjk3JjgnTuu
+OIKWkzpQBru4kRVQuEZJYXneoRxSOkkzkz+TjzC60syocA4fRNF6lzyMMhXh
+ilX5RddFcsY/7RHtUQ==
+  "],
+ FontSize->18]
+}, Open  ]],
+
+Cell["\<\
+We can numerically compute the above expression.  In order to be certain \
+before taking actions, we would like for the computed value to be \
+\[GreaterEqual] 99%.\
+\>", "Subitem",
+ CellChangeTimes->{{3.680039144563555*^9, 3.6800392094122477`*^9}, {
+   3.680040216410392*^9, 3.6800402168343573`*^9}, 3.680493872148259*^9, 
+   3.683657386887208*^9}]
+}, Open  ]],
+
+Cell["Done.", "Item",
+ CellChangeTimes->{{3.680039144563555*^9, 3.680039213657072*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
 Cell["Code:", "Subsection",
  CellChangeTimes->{{3.6800357996378613`*^9, 3.6800358015897913`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Simple/Super Majority", "Subsubsection",
+ CellChangeTimes->{{3.682054169995047*^9, 3.682054176177744*^9}}],
 
 Cell[BoxData[{
  RowBox[{
@@ -367,29 +888,16 @@ Cell[BoxData[{
      RowBox[{"majority_:", "\"\<simple\>\""}]}], "]"}], ":=", 
    RowBox[{"(", "\[IndentingNewLine]", 
     RowBox[{"(*", 
-     RowBox[{
-     "Computes", " ", "proper", " ", "threshold", " ", "to", " ", "satisfy", 
-      " ", "for", " ", "the", " ", "given", " ", "vote", " ", "majority", " ",
-       "type"}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"majority", " ", "\[Element]", " ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<simple\>\"", ",", "\"\<super\>\"", ",", "\"\<consensus\>\""}], 
+        "}"}], "."}]}], "*)"}], "\[IndentingNewLine]", 
     RowBox[{
      RowBox[{"populationSize", "=", "size"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"voteType", "=", "majority"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"Which", "[", "\[IndentingNewLine]", 
-      RowBox[{
-       RowBox[{"majority", "\[Equal]", "\"\<simple\>\""}], ",", 
-       RowBox[{"threshold", "=", 
-        RowBox[{"0.5", "*", "populationSize"}]}], ",", "\[IndentingNewLine]", 
-       
-       RowBox[{"majority", "\[Equal]", "\"\<super\>\""}], ",", 
-       RowBox[{"threshold", "=", 
-        RowBox[{
-         RowBox[{"2.", "/", "3"}], "*", "populationSize"}]}], ",", 
-       "\[IndentingNewLine]", 
-       RowBox[{"majority", "\[Equal]", "\"\<consensus\>\""}], ",", 
-       RowBox[{"threshold", "=", 
-        RowBox[{"0.9", "*", "populationSize"}]}]}], "\[IndentingNewLine]", 
-      "]"}], ";"}], "\[IndentingNewLine]", ")"}]}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+     RowBox[{"voteType", "=", "majority"}], ";"}], "\[IndentingNewLine]", 
+    ")"}]}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"createVotes", "[", "compressedVotes_", "]"}], ":=", 
@@ -401,31 +909,29 @@ Cell[BoxData[{
       "it", " ", "uncompresses", " ", "into", " ", "a", " ", "list", " ", 
       "of", " ", "actual", " ", 
       RowBox[{"votes", "."}]}], "*)"}], "\[IndentingNewLine]", 
-    RowBox[{"votes", "=", 
-     RowBox[{"Flatten", "[", 
-      RowBox[{"Table", "[", "\[IndentingNewLine]", 
+    RowBox[{"Flatten", "[", 
+     RowBox[{"Table", "[", "\[IndentingNewLine]", 
+      RowBox[{
        RowBox[{
         RowBox[{
+         RowBox[{"{", 
+          RowBox[{"score", ",", "freq"}], "}"}], "=", "item"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Table", "[", 
          RowBox[{
-          RowBox[{"{", 
-           RowBox[{"score", ",", "freq"}], "}"}], "=", "item"}], ";", 
-         "\[IndentingNewLine]", 
-         RowBox[{"Table", "[", 
-          RowBox[{
-           RowBox[{"If", "[", 
-            RowBox[{
-             RowBox[{"score", "\[Equal]", "\"\<abstain\>\""}], ",", 
-             "\"\<abstain\>\"", ",", 
-             RowBox[{"N", "[", "score", "]"}]}], "]"}], ",", 
-           RowBox[{"{", "freq", "}"}]}], "]"}]}], "\[IndentingNewLine]", ",", 
-        
-        RowBox[{"{", 
-         RowBox[{"item", ",", "compressedVotes"}], "}"}]}], "]"}], "]"}]}], 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"score", "\[Equal]", "\"\<abstain\>\""}], ",", 
+            "\"\<abstain\>\"", ",", 
+            RowBox[{"N", "[", "score", "]"}]}], "]"}], ",", 
+          RowBox[{"{", "freq", "}"}]}], "]"}]}], "\[IndentingNewLine]", ",", 
+       RowBox[{"{", 
+        RowBox[{"item", ",", "compressedVotes"}], "}"}]}], "]"}], "]"}], 
     "\[IndentingNewLine]", ")"}]}], 
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"computeVoteStatistics", "[", "]"}], ":=", 
+   RowBox[{"computeVoteStatistics", "[", "votes_", "]"}], ":=", 
    RowBox[{"(", "\[IndentingNewLine]", 
     RowBox[{"(*", 
      RowBox[{
@@ -437,10 +943,24 @@ Cell[BoxData[{
       RowBox[{"Count", "[", 
        RowBox[{"votes", ",", "\"\<abstain\>\""}], "]"}]}], ";", 
      "\[IndentingNewLine]", 
-     RowBox[{"initializePopulation", "[", 
+     RowBox[{"effectivePopulationSize", " ", "=", " ", 
+      RowBox[{"populationSize", "-", "abstentions"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Which", "[", "\[IndentingNewLine]", 
       RowBox[{
-       RowBox[{"populationSize", "-", "abstentions"}], ",", "voteType"}], 
-      "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"voteType", "\[Equal]", "\"\<simple\>\""}], ",", 
+       RowBox[{"threshold", "=", 
+        RowBox[{"0.5", "*", "effectivePopulationSize"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"voteType", "\[Equal]", "\"\<super\>\""}], ",", 
+       RowBox[{"threshold", "=", 
+        RowBox[{
+         RowBox[{"2.", "/", "3"}], "*", "effectivePopulationSize"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"voteType", "\[Equal]", "\"\<consensus\>\""}], ",", 
+       RowBox[{"threshold", "=", 
+        RowBox[{"0.9", "*", "effectivePopulationSize"}]}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
      RowBox[{"nonAbstentions", "=", 
       RowBox[{"DeleteCases", "[", 
        RowBox[{"votes", ",", "\"\<abstain\>\""}], "]"}]}], ";", 
@@ -449,23 +969,26 @@ Cell[BoxData[{
       RowBox[{"Length", "[", "nonAbstentions", "]"}]}], ";", 
      "\[IndentingNewLine]", 
      RowBox[{"yes", "=", 
-      RowBox[{
-       RowBox[{"Mean", "[", 
-        RowBox[{
-         RowBox[{"(", 
-          RowBox[{"nonAbstentions", "+", "1"}], ")"}], "/", "2"}], "]"}], "*",
-        "numVoters"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Total", "[", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"nonAbstentions", "+", "1"}], ")"}], "/", "2"}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
      RowBox[{"no", "=", 
       RowBox[{"numVoters", "-", "yes"}]}], ";", "\[IndentingNewLine]", 
      RowBox[{"yesVotesNeeded", "=", 
       RowBox[{"Ceiling", "[", 
        RowBox[{"threshold", "-", "yes"}], "]"}]}], ";", "\[IndentingNewLine]", 
      RowBox[{"remainingVoters", "=", 
-      RowBox[{"populationSize", "-", "numVoters"}]}], ";"}], 
-    "\[IndentingNewLine]", ")"}]}], 
+      RowBox[{"effectivePopulationSize", "-", "numVoters"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+      "yes", ",", "no", ",", "yesVotesNeeded", ",", "remainingVoters"}], 
+      "}"}]}], "\[IndentingNewLine]", ")"}]}], 
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"computeCredibility", "[", "]"}], ":=", 
+  RowBox[{"computeCredibility", "[", "voteStatistics_", "]"}], ":=", 
   RowBox[{"(", "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
@@ -475,6 +998,11 @@ Cell[BoxData[{
      " ", "necessary", " ", "threshold", " ", "to", " ", "take", " ", 
      RowBox[{"action", "."}]}], "*)"}], "\[IndentingNewLine]", 
    RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "yes", ",", "no", ",", "yesVotesNeeded", ",", "remainingVoters"}], 
+      "}"}], "=", "voteStatistics"}], ";", "\[IndentingNewLine]", 
     RowBox[{
      RowBox[{"{", 
       RowBox[{"a", ",", "b"}], "}"}], "=", 
@@ -500,7 +1028,7 @@ Cell[BoxData[{
        RowBox[{
         RowBox[{"Binomial", "[", 
          RowBox[{"remainingVoters", ",", "numYes"}], "]"}], "*", 
-        RowBox[{"Integrate", "[", 
+        RowBox[{"NIntegrate", "[", 
          RowBox[{
           RowBox[{
            RowBox[{"p", "^", 
@@ -517,55 +1045,219 @@ Cell[BoxData[{
         RowBox[{"numYes", ",", "yesVotesNeeded", ",", "remainingVoters"}], 
         "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", "credibility"}], 
    "\[IndentingNewLine]", ")"}]}]}], "Input",
- CellChangeTimes->CompressedData["
-1:eJwd0EsowwEAx/FlBwclhYnNY3JgU0s0pR2otVqYTGjLY/NY2crCTNiYYtkB
-bQlRWDYciHIwe5QWS5KsrZVHYi5rWiuK1YT/73/49bn++jJ71OL+FAqFUkgM
-sou3WNmq9zqbXMaGUaa5Ckb8g3y4aaoQwhtdE+mtoboNnvqbJLC7+TpEIxx+
-pN9Dh/Q5DF+T6W/QPrfAySP8cWm5kL4UrYErVL4Ijrk1LZDmcUmgQqGehVdr
-nDm47QidQMvxvAfeeQN8OuH+hFwIA1ZHIzzszBFBvpUnhsbco1b463ZIoG81
-Xwqd2RoZrDUvq6D3R6OGD5HSITjanjYObbGSCVh8a5qC2oESG2QVLR7AxA77
-GHYk9s6goTDphILpk3PY1xAkNY4wLiHDHvTDonj8CVrqX8LwQxn8JH8ZUr7h
-l8r3B3nWJKnygprKQK/GLFJheWcmnNTOkCoru8rgLktPqjcK3AWEvVwd6YYi
-dgfXExl++A8xBuoR
-  "]],
+ CellChangeTimes->{{3.680020820972921*^9, 3.680020827011919*^9}, {
+   3.68002090053539*^9, 3.6800210274631233`*^9}, {3.680021065548049*^9, 
+   3.680021066483984*^9}, {3.680021169734473*^9, 3.68002119449435*^9}, {
+   3.680024246322433*^9, 3.6800242648705378`*^9}, {3.680024342948574*^9, 
+   3.680024344468247*^9}, {3.680031100422564*^9, 3.6800311557104473`*^9}, {
+   3.680031191329969*^9, 3.6800313461254377`*^9}, {3.680031387648006*^9, 
+   3.680031437866832*^9}, {3.68003177948125*^9, 3.6800317854874*^9}, {
+   3.680032158710037*^9, 3.680032236271554*^9}, {3.680033318617531*^9, 
+   3.6800333550462227`*^9}, {3.680033389769754*^9, 3.680033392730185*^9}, {
+   3.6800334258946857`*^9, 3.6800334534718657`*^9}, {3.6800334857730703`*^9, 
+   3.680033488924777*^9}, {3.680033539627652*^9, 3.6800336286427307`*^9}, {
+   3.680033659655854*^9, 3.6800336732784243`*^9}, {3.680033736354426*^9, 
+   3.680033745154009*^9}, {3.6800337803064127`*^9, 3.6800340811378736`*^9}, {
+   3.6800341484414263`*^9, 3.6800341773637657`*^9}, {3.6800342532490673`*^9, 
+   3.680034263847595*^9}, {3.6800343096092863`*^9, 3.680034310634325*^9}, {
+   3.680034344889102*^9, 3.680034446645155*^9}, {3.68003453549794*^9, 
+   3.680034583009225*^9}, {3.680034718638055*^9, 3.6800347440782137`*^9}, {
+   3.680034814200679*^9, 3.680034815863432*^9}, {3.6800348721177263`*^9, 
+   3.680034872634471*^9}, {3.680034970911656*^9, 3.680034972045713*^9}, {
+   3.680035146943776*^9, 3.680035147911456*^9}, {3.680040418203917*^9, 
+   3.680040419881639*^9}, {3.680040583418775*^9, 3.680040584530347*^9}, {
+   3.683658438469919*^9, 3.6836585766962643`*^9}, {3.683658646135564*^9, 
+   3.683658686522357*^9}, {3.6836587389486227`*^9, 3.683658740771229*^9}, {
+   3.683660030521076*^9, 3.683660091276807*^9}, {3.683660182773686*^9, 
+   3.683660189100429*^9}, {3.683660228681776*^9, 3.6836602486418*^9}, {
+   3.6836602863593187`*^9, 3.683660291692952*^9}, {3.683660328580711*^9, 
+   3.6836603598686943`*^9}, {3.6836604709220943`*^9, 3.68366051056765*^9}, {
+   3.683660591476121*^9, 3.683660598171404*^9}, {3.6852331606554337`*^9, 
+   3.685233164008994*^9}, {3.685233195177973*^9, 3.6852331974656982`*^9}, {
+   3.685239685854663*^9, 3.685239695998331*^9}, {3.685240060775712*^9, 
+   3.68524006284743*^9}, 3.68524015221341*^9, 3.6852402646438217`*^9, 
+   3.685240374381754*^9, {3.68524051826224*^9, 3.685240537397048*^9}}]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Example: Simple Majority", "Subsubsection",
+Cell["Competing Motions", "Subsubsection",
+ CellChangeTimes->{{3.68205418734674*^9, 3.682054189481695*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"computeCompetingCredibility", "[", "voteStatistics_", "]"}], ":=", 
+  
+  RowBox[{"(", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Computes", " ", "the", " ", "probability", " ", "that", " ", "the", " ", 
+     "first", " ", 
+     RowBox[{"item", "'"}], "s", " ", "\"\<yes-bias\>\"", " ", "is", " ", 
+     "greater", " ", "than", " ", "that", " ", "of", " ", "all", " ", "other",
+      " ", 
+     RowBox[{"items", "."}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"credibility", "=", "1"}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b"}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}]}], ";", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"1", ",", "1"}], "}"}], " ", "corresponds", " ", "to", " ", 
+      "a", " ", "uniform", " ", "prior"}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"prior", "[", 
+      RowBox[{"p_", ",", "yes_", ",", "no_"}], "]"}], ":=", 
+     RowBox[{"PDF", "[", 
+      RowBox[{
+       RowBox[{"BetaDistribution", "[", 
+        RowBox[{
+         RowBox[{"yes", "+", "a"}], ",", 
+         RowBox[{"no", "+", "b"}]}], "]"}], ",", "p"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "yes1", ",", "no1", ",", "yesVotesNeeded1", ",", "remainingVoters1"}], 
+      "}"}], "=", 
+     RowBox[{"voteStatistics", "[", 
+      RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"Do", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+         "yesI", ",", "noI", ",", "yesVotesNeededI", ",", 
+          "remainingVotersI"}], "}"}], "=", 
+        RowBox[{"voteStatistics", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"diff", "=", 
+        RowBox[{"Ceiling", "[", 
+         RowBox[{"yes1", "-", "yesI"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"credibility", "*=", 
+        RowBox[{"1", "-", 
+         RowBox[{"Sum", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Binomial", "[", 
+             RowBox[{"remainingVoters1", ",", "numYes1"}], "]"}], "*", 
+            RowBox[{"Binomial", "[", 
+             RowBox[{"remainingVotersI", ",", "numYesI"}], "]"}], "*", 
+            "\[IndentingNewLine]", 
+            RowBox[{"NIntegrate", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"p1", "^", 
+                RowBox[{"(", "numYes1", ")"}]}], "*", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"1", "-", "p1"}], ")"}], "^", 
+                RowBox[{"(", 
+                 RowBox[{"remainingVoters1", "-", "numYes1"}], ")"}]}], "*", 
+               "\[IndentingNewLine]", 
+               RowBox[{"pI", "^", 
+                RowBox[{"(", "numYesI", ")"}]}], "*", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"1", "-", "pI"}], ")"}], "^", 
+                RowBox[{"(", 
+                 RowBox[{"remainingVotersI", "-", "numYesI"}], ")"}]}], "*", 
+               "\[IndentingNewLine]", 
+               RowBox[{"prior", "[", 
+                RowBox[{"p1", ",", "yes1", ",", "no1"}], "]"}], "*", 
+               RowBox[{"prior", "[", 
+                RowBox[{"pI", ",", "yesI", ",", "noI"}], "]"}]}], 
+              "\[IndentingNewLine]", ",", 
+              RowBox[{"{", 
+               RowBox[{"p1", ",", "0", ",", "1"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"pI", ",", "0", ",", "1"}], "}"}]}], "]"}]}], 
+           "\[IndentingNewLine]", ",", 
+           RowBox[{"{", 
+            RowBox[{"numYes1", ",", "0", ",", "remainingVoters1"}], "}"}], 
+           ",", 
+           RowBox[{"{", 
+            RowBox[{"numYesI", ",", 
+             RowBox[{"diff", "+", "numYes1"}], ",", "remainingVotersI"}], 
+            "}"}]}], "]"}]}]}], ";"}], "\[IndentingNewLine]", ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "2", ",", 
+        RowBox[{"Length", "[", "voteStatistics", "]"}]}], "}"}]}], "]"}], ";",
+     "\[IndentingNewLine]", "credibility"}], "\[IndentingNewLine]", 
+   ")"}]}]], "Input",
+ CellChangeTimes->{{3.683655615133965*^9, 3.6836556167115297`*^9}, {
+   3.6836594671233664`*^9, 3.6836596121125298`*^9}, {3.6836596641655397`*^9, 
+   3.683659729973835*^9}, {3.683659767760973*^9, 3.683659792212755*^9}, {
+   3.6836606910844927`*^9, 3.6836606952339087`*^9}, {3.683661028468852*^9, 
+   3.68366107692964*^9}, {3.68366116495236*^9, 3.683661194857181*^9}, {
+   3.68366127151791*^9, 3.6836612891498737`*^9}, {3.683661319467678*^9, 
+   3.683661358819542*^9}, {3.683661413323193*^9, 3.683661433905143*^9}, {
+   3.683661474878508*^9, 3.683661486475707*^9}, {3.6836615254314413`*^9, 
+   3.6836615999454*^9}, {3.6836616330503807`*^9, 3.683661711131653*^9}, {
+   3.683661757636751*^9, 3.6836618645473557`*^9}, {3.6852338192792273`*^9, 
+   3.6852338402003937`*^9}, {3.6852354761100683`*^9, 3.685235516938921*^9}, {
+   3.685235640473138*^9, 3.685235656247602*^9}, 3.6852395052015457`*^9, {
+   3.6852397088955193`*^9, 3.685239717180917*^9}, 3.685240117574767*^9, 
+   3.685240253603219*^9, 3.68524055426083*^9, {3.6852408868873568`*^9, 
+   3.685240888981134*^9}, {3.685240930793552*^9, 3.6852409546518*^9}, {
+   3.685241039178981*^9, 3.685241065944462*^9}, {3.685241098681386*^9, 
+   3.6852411326491127`*^9}, {3.6852430193492403`*^9, 
+   3.6852430223141003`*^9}, {3.6852430816891193`*^9, 3.6852430875741453`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Examples:", "Subsection",
+ CellChangeTimes->{{3.682054213346613*^9, 3.682054236394314*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Simple Majority", "Subsubsection",
  CellChangeTimes->{{3.68003932001936*^9, 3.680039323106409*^9}, {
-  3.680039378777121*^9, 3.680039381369104*^9}}],
+   3.680039378777121*^9, 3.680039381369104*^9}, 3.682054218313183*^9}],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{"c", "=", 
-   RowBox[{"Table", "[", "\[IndentingNewLine]", 
+   RowBox[{"ParallelTable", "[", "\[IndentingNewLine]", 
     RowBox[{
      RowBox[{
       RowBox[{"initializePopulation", "[", 
-       RowBox[{"140", ",", "\"\<simple\>\""}], "]"}], ";", 
+       RowBox[{"100", ",", "\"\<simple\>\""}], "]"}], ";", 
       "\[IndentingNewLine]", 
-      RowBox[{"createVotes", "[", 
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{"1", ",", "i"}], "}"}], ",", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"-", "1"}], ",", "10"}], "}"}], ",", 
-         RowBox[{"{", 
-          RowBox[{"\"\<abstain\>\"", ",", "5"}], "}"}]}], "}"}], "]"}], ";", 
+      RowBox[{"votes", "=", 
+       RowBox[{"createVotes", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"1", ",", "i"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "1"}], ",", "10"}], "}"}]}], "}"}], "]"}]}], ";", 
       "\[IndentingNewLine]", 
-      RowBox[{"computeVoteStatistics", "[", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"voteStatistics", "=", 
+       RowBox[{"computeVoteStatistics", "[", "votes", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
       RowBox[{"{", 
        RowBox[{"i", ",", 
-        RowBox[{"computeCredibility", "[", "]"}]}], "}"}]}], ",", 
+        RowBox[{"computeCredibility", "[", "voteStatistics", "]"}]}], "}"}]}],
+      ",", 
      RowBox[{"{", 
       RowBox[{"i", ",", "0", ",", "25"}], "}"}]}], "]"}]}], ";"}]], "Input",
  CellChangeTimes->{{3.680034622431615*^9, 3.680034734619084*^9}, 
    3.68003495066673*^9, {3.680034996980913*^9, 3.680035045936596*^9}, {
    3.680035078460267*^9, 3.680035157480934*^9}, {3.680035742592371*^9, 
    3.680035745719531*^9}, {3.680039350321898*^9, 3.6800393505287*^9}, {
-   3.680039390433343*^9, 3.680039420634234*^9}, 3.680039672205859*^9}],
+   3.680039390433343*^9, 3.680039420634234*^9}, 3.680039672205859*^9, {
+   3.681169049538865*^9, 3.681169050402732*^9}, {3.6836572425255632`*^9, 
+   3.68365724284305*^9}, {3.683658469123783*^9, 3.683658472664626*^9}, {
+   3.683658532531046*^9, 3.683658539489805*^9}, 3.685242529022346*^9}],
 
 Cell[CellGroupData[{
 
@@ -579,26 +1271,28 @@ Cell[BoxData[
        RowBox[{"{", 
         RowBox[{
          RowBox[{"i", "[", 
-          RowBox[{"[", "1", "]"}], "]"}], ",", "0.95"}], "}"}], ",", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", "0.99"}], "}"}], ",", 
        RowBox[{"{", 
         RowBox[{"i", ",", "c"}], "}"}]}], "]"}]}], "}"}], ",", 
    RowBox[{"Joined", "\[Rule]", "True"}], ",", 
    RowBox[{
    "PlotLabel", "\[Rule]", 
-    "\"\<Simple Majority: 'Yes' vs. 10 'No', 5 Abstentions\>\""}], ",", 
+    "\"\<Simple Majority: 'Yes' vs. 10 'No' for Population = 100\>\""}], ",", 
+   
    RowBox[{"AxesLabel", "\[Rule]", 
     RowBox[{"{", 
-     RowBox[{"\"\<Number of Yes Votes\>\"", ",", "\"\<Credibility\>\""}], 
+     RowBox[{"\"\<No. of 'Yes' Votes\>\"", ",", "\"\<Credibility\>\""}], 
      "}"}]}], ",", 
    RowBox[{"PlotLegends", "\[Rule]", 
     RowBox[{"{", 
-     RowBox[{"\"\<Credibility\>\"", ",", "\"\<95% Credibility\>\""}], "}"}]}],
+     RowBox[{"\"\<Credibility\>\"", ",", "\"\<99% Credibility\>\""}], "}"}]}],
     ",", 
    RowBox[{"ImageSize", "\[Rule]", "Large"}]}], "]"}]], "Input",
  CellChangeTimes->{{3.680039425399901*^9, 3.6800396655018587`*^9}, {
   3.680039736257237*^9, 3.680039747639574*^9}, {3.680039857281659*^9, 
   3.680039884767887*^9}, {3.680039922257209*^9, 3.680039994619297*^9}, {
-  3.680040192748311*^9, 3.680040196132057*^9}}],
+  3.680040192748311*^9, 3.680040196132057*^9}, {3.683657265999948*^9, 
+  3.683657342431654*^9}, {3.6852428244121323`*^9, 3.685242827827903*^9}}],
 
 Cell[BoxData[
  TemplateBox[{GraphicsBox[{{}, {{{}, {}, {
@@ -608,13 +1302,13 @@ Cell[BoxData[
          RGBColor[0.368417, 0.506779, 0.709798], 
          AbsoluteThickness[1.6]], 
         LineBox[CompressedData["
-1:eJxTTMoPSmViYGCQAmIQDQM391m0dy4ysYfwPthL7Z65djlzEpTP4HB+leup
-DOZGKJ/DIaddK+0dz3QoX8Dh8aKGFa9EV0L5Ig4+t2bf1PLdDuVLOGgw9G1o
-1zsM5cs4dJtrvPmx9QyUr+DwqfHBh/VPL0P5Sg6P/7PGznp6E8pXcWAE0w+g
-fDUHF6GEKp0Pj6B8DQdWZYupqxY+hfK1HHzifoSa/HsO5es4rD35tkzh90so
-X89BlHWB3ZHpr6F8A4cLFg5ON269gfINHba6GwQsPv8WyjdyaH0r3lrS/A7K
-N3aQ31ZwZwvzeyjfxOHgj73rFsXA+KYOhx607106A8Y3c8i2mdEhcQDGN3fw
-jLs3K/4mjG/hUG7sxabzEsa3dHjmFLHj3Kf39gCdHnbu
+1:eJxTTMoPSmViYGCQAmIQDQPTfy4pdVhsbA/hfbCvD7AVXl2SCOUzODzN+9oy
+70ADlM/hcC7FeGMyy3QoX8DBuu9d0OLIlVC+iMN+lZu5F45vh/IlHK7lfdXa
+teswlC/jsNrG+MO8zWehfAWHVtVlDdtXXoHylRzuKH4Mn/7pFpSv4jBr8yWm
+VcsfQPlqDg4nX/CzbHwM5Ws4SMkVN08seAblazk83mtz4ve5F1C+jsMX1k22
+LYdeQfl6Dnw9VfWPfN5A+QYOf1vymj6Vv4XyDR0uRTkv0At6B+UbOdSHrHy4
+5DWMb+zA6/zZZH/weyjfxIG3g8f77XQY39QhLW/+Gv7DML6ZwwqnHou8uzC+
+uYPfGdtUprcwvoXD4cDfls+/wviWDqKL3rw79+u9PQDd6nx8
          "]]}, {
         Hue[0.9060679774997897, 0.6, 0.6], 
         Directive[
@@ -622,19 +1316,19 @@ jLs3K/4mjG/hUG7sxabzEsa3dHjmFLHj3Kf39gCdHnbu
          RGBColor[0.880722, 0.611041, 0.142051], 
          AbsoluteThickness[1.6]], 
         LineBox[CompressedData["
-1:eJxdx0sKQGAYheEvI0MDA8kASZLkfhn91mAJiqmdyxLcorxvnU6PN63jrImI
-fe76t+VuU4929bcMf+uwAZuwBTuwC/twAIdwBMdwAqdwBudwAZdwBddwA7dw
-B/efD4NeaVY=
+1:eJxdx70KQGAAheEvk9FgkAxIkiT/PxOb3SUos91FfffkCrgEJMp76u30ONMy
+zooQwry6/50ctlWXe/fo6P4W/d8qrME6bMAWbMMu7ME+HMAhHMExnMApnME5
+XMAlXME13MDt5xPVRnsc
          "]]}}}, {}}, {
     DisplayFunction -> Identity, PlotRangePadding -> {{
         Scaled[0.02], 
         Scaled[0.02]}, {
         Scaled[0.02], 
         Scaled[0.05]}}, AxesOrigin -> {0, 0}, 
-     PlotRange -> {{0, 25.}, {0, 0.9983895874484829}}, DisplayFunction -> 
+     PlotRange -> {{0, 25.}, {0, 0.999366251610868}}, DisplayFunction -> 
      Identity, AspectRatio -> NCache[GoldenRatio^(-1), 0.6180339887498948], 
      Axes -> {True, True}, AxesLabel -> {
-       FormBox["\"Number of Yes Votes\"", TraditionalForm], 
+       FormBox["\"No. of 'Yes' Votes\"", TraditionalForm], 
        FormBox["\"Credibility\"", TraditionalForm]}, AxesOrigin -> {0, 0}, 
      DisplayFunction :> Identity, Frame -> {{False, False}, {False, False}}, 
      FrameLabel -> {{None, None}, {None, None}}, 
@@ -642,15 +1336,15 @@ B/efD4NeaVY=
      GridLines -> {None, None}, GridLinesStyle -> Directive[
        GrayLevel[0.5, 0.4]], ImageSize -> Large, Method -> {}, PlotLabel -> 
      FormBox[
-      "\"Simple Majority: 'Yes' vs. 10 'No', 5 Abstentions\"", 
-       TraditionalForm], PlotRange -> {{0, 25.}, {0, 0.9983895874484829}}, 
+      "\"Simple Majority: 'Yes' vs. 10 'No' for Population = 100\"", 
+       TraditionalForm], PlotRange -> {{0, 25.}, {0, 0.999366251610868}}, 
      PlotRangeClipping -> True, PlotRangePadding -> {{
         Scaled[0.02], 
         Scaled[0.02]}, {
         Scaled[0.02], 
         Scaled[0.05]}}, Ticks -> {Automatic, Automatic}}],FormBox[
     FormBox[
-     TemplateBox[{"\"Credibility\"", "\"95% Credibility\""}, "PointLegend", 
+     TemplateBox[{"\"Credibility\"", "\"99% Credibility\""}, "PointLegend", 
       DisplayFunction -> (FormBox[
         StyleBox[
          StyleBox[
@@ -849,49 +1543,56 @@ B/efD4NeaVY=
          RowBox[{#2, ",", "After"}], "]"}]}], "]"}]& )]], "Output",
  CellChangeTimes->{{3.680039600755849*^9, 3.680039666670474*^9}, 
    3.680039842283473*^9, 3.680039886380864*^9, 3.680039926656785*^9, 
-   3.6800399951911707`*^9, 3.68004019699159*^9, 3.680040368056223*^9}]
+   3.6800399951911707`*^9, 3.68004019699159*^9, 3.680040368056223*^9, {
+   3.683657296599936*^9, 3.683657342868413*^9}, 3.6836609043476152`*^9, 
+   3.68524277127809*^9, {3.685242828240439*^9, 3.685242837124889*^9}}]
 }, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Example: Super Majority", "Subsubsection",
+Cell["Super Majority", "Subsubsection",
  CellChangeTimes->{{3.68003932001936*^9, 3.680039323106409*^9}, {
-  3.680039378777121*^9, 3.680039381369104*^9}, {3.6800397570720367`*^9, 
-  3.680039757655031*^9}}],
+   3.680039378777121*^9, 3.680039381369104*^9}, {3.6800397570720367`*^9, 
+   3.680039757655031*^9}, 3.682054221625021*^9}],
 
 Cell[BoxData[
  RowBox[{
   RowBox[{"c", "=", 
-   RowBox[{"Table", "[", "\[IndentingNewLine]", 
+   RowBox[{"ParallelTable", "[", "\[IndentingNewLine]", 
     RowBox[{
      RowBox[{
       RowBox[{"initializePopulation", "[", 
-       RowBox[{"140", ",", "\"\<super\>\""}], "]"}], ";", 
+       RowBox[{"100", ",", "\"\<super\>\""}], "]"}], ";", 
       "\[IndentingNewLine]", 
-      RowBox[{"createVotes", "[", 
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"{", 
-          RowBox[{"1", ",", "i"}], "}"}], ",", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"-", "1"}], ",", "10"}], "}"}], ",", 
-         RowBox[{"{", 
-          RowBox[{"\"\<abstain\>\"", ",", "5"}], "}"}]}], "}"}], "]"}], ";", 
+      RowBox[{"votes", "=", 
+       RowBox[{"createVotes", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"1", ",", "i"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "1"}], ",", "10"}], "}"}]}], "}"}], "]"}]}], ";", 
       "\[IndentingNewLine]", 
-      RowBox[{"computeVoteStatistics", "[", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"voteStatistics", "=", 
+       RowBox[{"computeVoteStatistics", "[", "votes", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
       RowBox[{"{", 
        RowBox[{"i", ",", 
-        RowBox[{"computeCredibility", "[", "]"}]}], "}"}]}], ",", 
+        RowBox[{"computeCredibility", "[", "voteStatistics", "]"}]}], "}"}]}],
+      ",", 
      RowBox[{"{", 
-      RowBox[{"i", ",", "10", ",", "35"}], "}"}]}], "]"}]}], ";"}]], "Input",
+      RowBox[{"i", ",", "10", ",", "50"}], "}"}]}], "]"}]}], ";"}]], "Input",
  CellChangeTimes->{{3.680034622431615*^9, 3.680034734619084*^9}, 
    3.68003495066673*^9, {3.680034996980913*^9, 3.680035045936596*^9}, {
    3.680035078460267*^9, 3.680035157480934*^9}, {3.680035742592371*^9, 
    3.680035745719531*^9}, {3.680039350321898*^9, 3.6800393505287*^9}, {
    3.680039390433343*^9, 3.680039420634234*^9}, 3.680039672205859*^9, {
-   3.680039766936417*^9, 3.680039782086821*^9}}],
+   3.680039766936417*^9, 3.680039782086821*^9}, {3.681169044820574*^9, 
+   3.681169046818616*^9}, 3.683657316232027*^9, {3.683657423029936*^9, 
+   3.683657425893585*^9}, {3.683657472868861*^9, 3.683657474891522*^9}, {
+   3.683660913965007*^9, 3.6836609302516003`*^9}, 3.685242531781155*^9}],
 
 Cell[CellGroupData[{
 
@@ -905,27 +1606,28 @@ Cell[BoxData[
        RowBox[{"{", 
         RowBox[{
          RowBox[{"i", "[", 
-          RowBox[{"[", "1", "]"}], "]"}], ",", "0.95"}], "}"}], ",", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", "0.99"}], "}"}], ",", 
        RowBox[{"{", 
         RowBox[{"i", ",", "c"}], "}"}]}], "]"}]}], "}"}], ",", 
    RowBox[{"Joined", "\[Rule]", "True"}], ",", 
    RowBox[{
    "PlotLabel", "\[Rule]", 
-    "\"\<Super Majority: 'Yes' vs. 10 'No', 5 Abstentions\>\""}], ",", 
+    "\"\<Super Majority: 'Yes' vs. 10 'No' for Population = 100\>\""}], ",", 
    RowBox[{"AxesLabel", "\[Rule]", 
     RowBox[{"{", 
-     RowBox[{"\"\<Number of Yes Votes\>\"", ",", "\"\<Credibility\>\""}], 
+     RowBox[{"\"\<No. of 'Yes' Votes\>\"", ",", "\"\<Credibility\>\""}], 
      "}"}]}], ",", 
    RowBox[{"PlotLegends", "\[Rule]", 
     RowBox[{"{", 
-     RowBox[{"\"\<Credibility\>\"", ",", "\"\<95% Credibility\>\""}], "}"}]}],
+     RowBox[{"\"\<Credibility\>\"", ",", "\"\<99% Credibility\>\""}], "}"}]}],
     ",", 
    RowBox[{"ImageSize", "\[Rule]", "Large"}]}], "]"}]], "Input",
  CellChangeTimes->{{3.680039425399901*^9, 3.6800396655018587`*^9}, {
   3.680039736257237*^9, 3.680039747639574*^9}, {3.680039787622796*^9, 
   3.680039825698612*^9}, {3.680040031486287*^9, 3.680040034362413*^9}, {
   3.680040185444683*^9, 3.680040187771942*^9}, {3.680040544903857*^9, 
-  3.6800405501823263`*^9}}],
+  3.6800405501823263`*^9}, {3.68365739681675*^9, 3.6836574428054457`*^9}, {
+  3.68524281420576*^9, 3.685242818139778*^9}}],
 
 Cell[BoxData[
  TemplateBox[{GraphicsBox[{{}, {{{}, {}, {
@@ -935,13 +1637,17 @@ Cell[BoxData[
          RGBColor[0.368417, 0.506779, 0.709798], 
          AbsoluteThickness[1.6]], 
         LineBox[CompressedData["
-1:eJxTTMoPSmViYGCQAmIQDQEqDrKmi9ckxqy2h/DVHD5/ZHLdr7AFytdw8Po/
-2THVYQ+Ur+Wwc8qVgy4ch6F8HYcs49x5K/aegPL1HHha/h2r0TwP5Rs49M7R
-XpEgehnKN3TQsxWwaDpzDco3cngby210aPEtKN/Y4Vr2+XlGLfegfBOHYI3o
-qS+1H0L5pg7Hv9jKprE+hvLNHG585ZinfewJlG/uwPJm1cRl6c+gfAsHM9G9
-GvpPn0P5lg6H9kzO+2/9Esq3crDdGtXMnf0Kyrd2EOu8eu9I0Wso38bBNjm5
-7GLIGyjf1mGTxNIN+4TfQvl2Ds915szctgnGt3dIXtciamP6Dsp3cNBxb5H+
-OA/Kb3BwsOYwLM/4DJN3dBArnu/NbPYeKu/ooGJ5b/7NzPf2AFitdCI=
+1:eJw9yVtIk3EYx/EX0UAQlBQFU2woYhYe2jy0efj56k51Y6KIZjJku140VPIA
+ERgiK1QSFAfWyAvFaqQGnhA8zE1DoYkiXkzXklnOAyavoG4ZPn8f+PHw4Suq
+0ZfoAjiOu3O5///qEqCIMpWaZB/zr5yIzIr3Jz75Z3IShjpj5yQDo+RknNg5
+8cb3KfI9fDjcX/MuzpJTMFwZLFga7OQ08G5J74ZrhZyORaurPMLgIN+Hejs7
+uCl1nSyG/a2o4ShskyyB0/hc0HJOcgZWUuN+1Bu2yZnwiZw3TOU/yVk4xwvH
+o/hf5GzcsowFCcs75AeQbTmEkDIPWYqq4lNPyNddsgzrtkGN3v2bnANtcrj5
+2d4fci7eHEUPzy/tkfOQFRv6Td7iJedDpa1+3R6zTwa6w83+sS7yS6BaLdb6
+/7JegCC+9WFb3gH1AtjbzUa+jszx+BQ1Efmlj3UewkKP1D3FeiHKxidrmh2s
+F6LYaTX1uVgvQkVoji7Ay3oRnrTYHp8fsy7H9OrTdx2nrMthWBXPvjpjXYGb
+kcvWygvWFbjbb5M2+lhXQjOi9yT6WVci4UKjbGPmVLDoam/PXHcVkgJFxq3r
+rkbH9E7n4aX/AS24zZA=
          "]]}, {
         Hue[0.9060679774997897, 0.6, 0.6], 
         Directive[
@@ -949,36 +1655,35 @@ OA/Kb3BwsOYwLM/4DJN3dBArnu/NbPYeKu/ooGJ5b/7NzPf2AFitdCI=
          RGBColor[0.880722, 0.611041, 0.142051], 
          AbsoluteThickness[1.6]], 
         LineBox[CompressedData["
-1:eJxdyVsKQFAYxPEvy/CmJElyv3OOLViC4tUWrNgaXM6D/Kem6dc4yz6vlojY
-d581cfX25lTGHuzDARzCERzDCZzCGZzDBVzCFVzDDdzCHdzDAzzCCtZ/H7BM
-+D9fehRrcg==
-         "]]}}}, {}}, {
-    DisplayFunction -> Identity, PlotRangePadding -> {{
+1:eJxdyVsKAQEUx+GTNdiAkpDkfmfGdXi1BOXZuycrmj1ZgS2gKeU79e/09atc
+budrKSIan31/cdU0z573cv5KCtdwHTdxC7dxB3dxD/fxAA/xCI/xBE/xDM/x
+Ai/xCic4/fcDx5qOY0PHsaXj2NFx7Ok4DnQcGR3HkY7j9PMbw3LIVg==
+         
+         "]]}}}, {}}, {DisplayFunction -> Identity, PlotRangePadding -> {{
         Scaled[0.02], 
         Scaled[0.02]}, {
         Scaled[0.02], 
-        Scaled[0.05]}}, AxesOrigin -> {9.609375000000004, 0}, 
-     PlotRange -> {{10., 35.}, {0, 0.9816711542532954}}, DisplayFunction -> 
+        Scaled[0.05]}}, AxesOrigin -> {9.375000000000002, 0}, 
+     PlotRange -> {{10., 50.}, {0, 0.9999926442305754}}, DisplayFunction -> 
      Identity, AspectRatio -> NCache[GoldenRatio^(-1), 0.6180339887498948], 
      Axes -> {True, True}, AxesLabel -> {
-       FormBox["\"Number of Yes Votes\"", TraditionalForm], 
+       FormBox["\"No. of 'Yes' Votes\"", TraditionalForm], 
        FormBox["\"Credibility\"", TraditionalForm]}, 
-     AxesOrigin -> {9.609375000000004, 0}, DisplayFunction :> Identity, 
+     AxesOrigin -> {9.375000000000002, 0}, DisplayFunction :> Identity, 
      Frame -> {{False, False}, {False, False}}, 
      FrameLabel -> {{None, None}, {None, None}}, 
      FrameTicks -> {{Automatic, Automatic}, {Automatic, Automatic}}, 
      GridLines -> {None, None}, GridLinesStyle -> Directive[
        GrayLevel[0.5, 0.4]], ImageSize -> Large, Method -> {}, PlotLabel -> 
-     FormBox[
-      "\"Super Majority: 'Yes' vs. 10 'No', 5 Abstentions\"", 
-       TraditionalForm], PlotRange -> {{10., 35.}, {0, 0.9816711542532954}}, 
+     FormBox["\"Super Majority: 'Yes' vs. 10 'No' for Population = 100\"", 
+       TraditionalForm], PlotRange -> {{10., 50.}, {0, 0.9999926442305754}}, 
      PlotRangeClipping -> True, PlotRangePadding -> {{
         Scaled[0.02], 
         Scaled[0.02]}, {
         Scaled[0.02], 
         Scaled[0.05]}}, Ticks -> {Automatic, Automatic}}],FormBox[
     FormBox[
-     TemplateBox[{"\"Credibility\"", "\"95% Credibility\""}, "PointLegend", 
+     TemplateBox[{"\"Credibility\"", "\"99% Credibility\""}, "PointLegend", 
       DisplayFunction -> (FormBox[
         StyleBox[
          StyleBox[
@@ -1175,52 +1880,142 @@ d581cfX25lTGHuzDARzCERzDCZzCGZzDBVzCFVzDDdzCHdzDAzzCCtZ/H7BM
      RowBox[{#, ",", 
        RowBox[{"Placed", "[", 
          RowBox[{#2, ",", "After"}], "]"}]}], "]"}]& )]], "Output",
+ CellChangeTimes->{3.6836609532340307`*^9, 3.685242785041971*^9, 
+  3.6852428185097857`*^9, 3.685242853892585*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Competing Motions", "Subsubsection",
+ CellChangeTimes->{{3.68003932001936*^9, 3.680039323106409*^9}, {
+   3.680039378777121*^9, 3.680039381369104*^9}, 3.682054218313183*^9, {
+   3.683655650096201*^9, 3.68365565205443*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"initializePopulation", "[", 
+   RowBox[{"100", ",", "\"\<simple\>\""}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"votes", "=", 
+   RowBox[{"Join", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"createVotes", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"1", ",", "60"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "1"}], ",", "20"}], "}"}]}], "}"}], "]"}], "}"}], ",",
+      "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"createVotes", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"1", ",", "60"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "1"}], ",", "20"}], "}"}]}], "}"}], "]"}], "}"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"voteStatistics", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"computeVoteStatistics", "[", "v", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"v", ",", "votes"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"computeCompetingCredibility", "[", "voteStatistics", 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.683655644745016*^9, 3.6836556476708603`*^9}, {
+  3.68365827574407*^9, 3.683658360361261*^9}, {3.68365839687945*^9, 
+  3.683658405221952*^9}, {3.68365939393183*^9, 3.6836594500998774`*^9}, {
+  3.6836609798836937`*^9, 3.683660981269059*^9}, {3.683661852119833*^9, 
+  3.683661854573189*^9}, {3.683661890169218*^9, 3.683661918551445*^9}, {
+  3.68366205830558*^9, 3.683662085431546*^9}, {3.685235776166032*^9, 
+  3.68523578333285*^9}, {3.685235922127488*^9, 3.685235922253841*^9}, {
+  3.685239519446307*^9, 3.685239542777652*^9}, {3.685239642741242*^9, 
+  3.685239648477199*^9}, {3.685240164068871*^9, 3.6852401676752443`*^9}, {
+  3.685242265513335*^9, 3.685242341527272*^9}, {3.685242382716505*^9, 
+  3.685242386908552*^9}, {3.685242470845922*^9, 3.6852424710456*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Individual Test Cases", "Subsubsection",
+ CellChangeTimes->{{3.6811690718993587`*^9, 3.681169086689744*^9}, 
+   3.6820542247850237`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"initializePopulation", "[", 
+   RowBox[{"140", ",", "\"\<simple\>\""}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"votes", "=", 
+   RowBox[{"createVotes", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"1", ",", "50"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "1"}], ",", "40"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\"\<abstain\>\"", ",", "0"}], "}"}]}], "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"voteStatistics", "=", 
+   RowBox[{"computeVoteStatistics", "[", "votes", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"computeCredibility", "[", "voteStatistics", "]"}]}], "Input",
+ CellChangeTimes->{{3.6811643662675657`*^9, 3.681164503388302*^9}, {
+  3.6811648160609503`*^9, 3.681164870618162*^9}, {3.681232873000757*^9, 
+  3.681232901970448*^9}, {3.681233342093761*^9, 3.6812333484180727`*^9}, {
+  3.681234493413982*^9, 3.681234532380834*^9}, {3.6836593087880907`*^9, 
+  3.683659319576549*^9}, {3.685240380915496*^9, 3.685240395387142*^9}, {
+  3.6852404543889217`*^9, 3.685240507931182*^9}}],
+
+Cell[BoxData["0.96981854444675`"], "Output",
  CellChangeTimes->{
-  3.680040125424563*^9, 3.680040188561248*^9, 3.680040499076008*^9, {
-   3.6800405455641108`*^9, 3.680040555523068*^9}}]
+  3.6836608003957443`*^9, 3.685232900008749*^9, {3.685240019933774*^9, 
+   3.685240030629416*^9}, 3.685240080065207*^9, 3.6852401582358313`*^9, {
+   3.685240365987597*^9, 3.685240397993833*^9}, {3.685240473715029*^9, 
+   3.685240542475594*^9}}]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["To Do", "Subsection",
- CellChangeTimes->{{3.6800327597018347`*^9, 3.680032824956188*^9}}],
-
-Cell[CellGroupData[{
-
-Cell["Competing Motions", "ItemNumbered",
- CellChangeTimes->{{3.6800328328603153`*^9, 3.680032837327505*^9}}],
+Cell["To Do:", "Subsection",
+ CellChangeTimes->{{3.6800327597018347`*^9, 3.680032824956188*^9}, 
+   3.682054240089053*^9}],
 
 Cell["\<\
-We already have a method to compare two items (yes vs. no).  From this \
-method, we can get a credible interval on option 1 beating option 2.
-
-Now to extend this to multiple items:
-Probability (X_1 beats X_2, X_3, X_4, ..., X_M) = P(X_1 beats X_2) * P(X_1 \
-beats X_3) * ... * P(X_1 beats X_M), by independence (which is true since \
-every voter gets to allocate between [-1,1]  for each item).
-So that would be our new probability that we want to be greater than some \
-threshold.  These computations are a little more complicated because you need \
-to compare two items, so they will involve two for-loops per comparison.  \
-Also, these will credibilities will be smaller in magnitude, so we might need \
-to fine tune some parameters to make the 90% threshold still applicable.
-
-I do not think all agenda items should be allowed to have competing motions \
-like this because it\[CloseCurlyQuote]s more appropriate for when there is a \
-spectrum of options that cannot be refined down to a unified motion (e.g. \
-allocating a certain amount of money, voting amongst many candidates).  \
-Otherwise, consensus techniques are best.\
-\>", "SubitemNumbered",
- CellChangeTimes->{{3.6800328328603153`*^9, 3.680032838069495*^9}}]
-}, Open  ]]
+Incorporate higher-order statistics / perturbation theory to account for \
+small sample sizes: Small perturbations in the votes of small samples can \
+lead to drastically different levels of credibility, hence the overall \
+credibility should be lowered/smoothed.\
+\>", "ItemNumbered",
+ CellChangeTimes->{{3.6800328328603153`*^9, 3.680032837327505*^9}, {
+  3.6812353961401443`*^9, 3.68123549383534*^9}, {3.682053975238697*^9, 
+  3.6820539753423557`*^9}, {3.682604343193226*^9, 3.6826043458628817`*^9}, {
+  3.682605128562544*^9, 3.682605141839345*^9}}]
 }, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell["Delegation", "Section",
- CellChangeTimes->{{3.680032414141296*^9, 3.6800324160998793`*^9}}],
+Cell["Delegation [incomplete]", "Section",
+ CellChangeTimes->{{3.680032414141296*^9, 3.6800324160998793`*^9}, {
+  3.683658155540399*^9, 3.68365817754248*^9}}],
 
 Cell[CellGroupData[{
 
@@ -1728,25 +2523,50 @@ Cell[TextData[StyleBox["Refining the user homepage:", "ItemNumbered"]], \
 Cell[CellGroupData[{
 
 Cell["\<\
-Need to show simple statistic on how many motions they have voted on of the \
-total (I think this will be an important tool for eventually incentivizing \
-participation, e.g. if you don\[CloseCurlyQuote]t vote in 50% of motions by \
-end of semester, -2 hours workshift, or +2 hours if you do, idk.)\
+Need to show simple statistic on how many motions the user has voted on of \
+the total proposed over a specified duration.  This will be an important tool \
+for eventually incentivizing participation, e.g., if you \
+don\[CloseCurlyQuote]t vote in 25% of motions (including via delegation) by \
+the end of the semester, uncooperative fine; if you vote in 75%+ of motions, \
++1 hour bonus workshift.\
 \>", "SubitemNumbered",
- CellChangeTimes->{{3.6800326529995832`*^9, 3.6800326691865673`*^9}}],
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.6800326691865673`*^9}, {
+  3.6825729818828506`*^9, 3.68257304560109*^9}, {3.682573230334465*^9, 
+  3.682573245494156*^9}, {3.682603479307311*^9, 3.682603481751089*^9}, {
+  3.682603547694195*^9, 3.682603607405198*^9}}],
 
 Cell["\<\
-\[OpenCurlyDoubleQuote]RSS / News\[CloseCurlyDoubleQuote] feed: what new \
-comments/motions have been made since you last checked (like facebook \
-notifications basically).\
+\[OpenCurlyDoubleQuote]RSS / News\[CloseCurlyDoubleQuote] feed with \
+notifications: What new comments/motions have been made since you last \
+checked (like facebook notifications)?  (Issue #163)\
 \>", "SubitemNumbered",
- CellChangeTimes->{{3.6800326529995832`*^9, 3.6800326715867777`*^9}}],
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.6800326715867777`*^9}, {
+  3.682573705239949*^9, 3.68257371709544*^9}, {3.6826066679585657`*^9, 
+  3.68260666953331*^9}, {3.683138032488174*^9, 3.683138036032878*^9}, {
+  3.683138122623732*^9, 3.6831381454231987`*^9}}],
+
+Cell["\<\
+Allow members to suggest Pros/Cons to be vetted by moderators.  (Issue #164)\
+\>", "SubitemNumbered",
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.6800326715867777`*^9}, {
+  3.682573705239949*^9, 3.68257371709544*^9}, {3.6826066679585657`*^9, 
+  3.68260666953331*^9}, {3.683138032488174*^9, 3.683138036032878*^9}, {
+  3.683138122623732*^9, 3.68313814332725*^9}}],
 
 Cell["\<\
 Personalized Discussion dashboard showing # of unread comments, statistical \
 quorum confidence level, vote tally.\
 \>", "SubitemNumbered",
- CellChangeTimes->{{3.6800326529995832`*^9, 3.680032674497465*^9}}]
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.680032674497465*^9}, {
+  3.682573059912273*^9, 3.68257305992006*^9}}],
+
+Cell["\<\
+Sidebar to easily navigate through various discussions while viewing a single \
+item (like in Mail app).\
+\>", "SubitemNumbered",
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.680032674497465*^9}, {
+  3.682573059912273*^9, 3.6825731047837877`*^9}, {3.682603940534729*^9, 
+  3.682603943886629*^9}}]
 }, Open  ]],
 
 Cell["Admin organizational tools:", "ItemNumbered",
@@ -1755,23 +2575,35 @@ Cell["Admin organizational tools:", "ItemNumbered",
 Cell[CellGroupData[{
 
 Cell["\<\
-Label motions under categories (use of space, mural, etc.).  All users should \
-be able to label. Admin should be able to assign specific council label to \
-when that motion got finalized.\
+Label discussions under categories (e.g. use of space, mural, etc.).  All \
+users should be able to label.  Admin should be able to assign specific \
+council labels to when that discussion was finalized.\
 \>", "SubitemNumbered",
- CellChangeTimes->{{3.6800326529995832`*^9, 3.680032694297525*^9}}],
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.680032694297525*^9}, 
+   3.682573120383822*^9, {3.682603752946425*^9, 3.68260379576971*^9}}],
 
-Cell["Closing/archiving of motions.", "SubitemNumbered",
- CellChangeTimes->{{3.6800326529995832`*^9, 3.6800326971046877`*^9}}],
-
-Cell["Searching archived motions by date/label/council", "SubitemNumbered",
- CellChangeTimes->{{3.6800326529995832`*^9, 3.680032698578175*^9}}],
+Cell["Searching archived motions by date/label/council.", "SubitemNumbered",
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.680032698578175*^9}, 
+   3.68257313461666*^9}],
 
 Cell["\<\
-Finalizing result of motion (secretary will do this, but there needs to be a \
-specific feature/box dedicated to documenting the end outcome)\
+Allow the ability to distinguish withdrawing a motion prematurely (with a \
+note/comment explaining why) from simply closing it and casuing it to fail.\
 \>", "SubitemNumbered",
- CellChangeTimes->{{3.6800326529995832`*^9, 3.680032705098588*^9}}]
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.680032705098588*^9}, {
+  3.682603625884922*^9, 3.682603632380618*^9}, {3.682603713468417*^9, 
+  3.6826037470299253`*^9}, {3.682603964854335*^9, 3.682603964862299*^9}, {
+  3.682606720429578*^9, 3.682606774723267*^9}}],
+
+Cell["\<\
+Allow admins to setup an automated emailing service to users, which, at \
+specified times, compiles and links to results/open motions (like a smart \
+digest).\
+\>", "SubitemNumbered",
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.680032705098588*^9}, {
+  3.682603625884922*^9, 3.682603632380618*^9}, {3.682603713468417*^9, 
+  3.6826037470299253`*^9}, {3.682603964854335*^9, 3.6826040285649557`*^9}, {
+  3.682604238530534*^9, 3.682604275008498*^9}}]
 }, Open  ]],
 
 Cell["Other:", "ItemNumbered",
@@ -1779,18 +2611,48 @@ Cell["Other:", "ItemNumbered",
 
 Cell[CellGroupData[{
 
-Cell["Autolink URLs", "SubitemNumbered",
- CellChangeTimes->{{3.6800326529995832`*^9, 3.6800327172173033`*^9}}],
+Cell["Autolink URLs.", "SubitemNumbered",
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.6800327172173033`*^9}, {
+  3.682573738879142*^9, 3.682573739074997*^9}}],
+
+Cell["\<\
+Directly replying to comments; notifying individuals via \
+\[OpenCurlyDoubleQuote]@username\[CloseCurlyDoubleQuote].\
+\>", "SubitemNumbered",
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.6800327172173033`*^9}, {
+  3.682573738879142*^9, 3.682573770838832*^9}, {3.682603810218555*^9, 
+  3.682603817777184*^9}}],
 
 Cell["Live Voting section.", "SubitemNumbered",
- CellChangeTimes->{{3.6800326529995832`*^9, 3.6800327172051992`*^9}}]
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.6800327172051992`*^9}, {
+  3.680497810791078*^9, 3.6804978108131866`*^9}}],
+
+Cell["\<\
+Active motions/discussions summary page to display on TV @ main entrance \
+(integrated with calendar of events + general announcements).\
+\>", "SubitemNumbered",
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.6800327172051992`*^9}, {
+  3.680497810791078*^9, 3.680497819444241*^9}, {3.680497853671279*^9, 
+  3.680497853692519*^9}, {3.682572880251376*^9, 3.682572885563236*^9}, {
+  3.682603858976076*^9, 3.682603866719849*^9}}],
+
+Cell["\<\
+Carefully check numerical precision when computing binomial sums: (n choose \
+k) explodes and 0.5^k goes to 0 exponentially fast.  Might need to use fancy \
+bounds/approximations for larger binomial sums (e.g. stirling, or see p. 51 \
+of turquoise notebook).\
+\>", "SubitemNumbered",
+ CellChangeTimes->{{3.6800326529995832`*^9, 3.6800327172051992`*^9}, {
+   3.680497810791078*^9, 3.680497819444241*^9}, {3.680497853671279*^9, 
+   3.680497858662437*^9}, {3.6804979282808857`*^9, 3.680497938779037*^9}, 
+   3.6825731561830587`*^9}]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{910, 811},
-WindowMargins->{{Automatic, 235}, {Automatic, 0}},
+WindowSize->{910, 851},
+WindowMargins->{{156, Automatic}, {Automatic, 0}},
 PrintingCopies->1,
 PrintingPageRange->{1, Automatic},
 FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 29, \
@@ -1815,122 +2677,172 @@ Cell[696, 27, 104, 1, 64, "Section"],
 Cell[CellGroupData[{
 Cell[825, 32, 109, 1, 44, "Subsection"],
 Cell[CellGroupData[{
-Cell[959, 37, 135, 2, 28, "Item"],
-Cell[1097, 41, 558, 9, 58, "Subitem"],
-Cell[1658, 52, 140, 2, 28, "Item"],
-Cell[1801, 56, 357, 6, 41, "Subitem"],
-Cell[2161, 64, 134, 2, 28, "Item"],
+Cell[959, 37, 112, 1, 35, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[2320, 70, 206, 4, 26, "Subitem"],
-Cell[2529, 76, 200, 4, 26, "Subitem"]
-}, Open  ]],
-Cell[2744, 83, 131, 2, 28, "Item"],
+Cell[1096, 42, 135, 2, 28, "Item"],
+Cell[1234, 46, 581, 9, 58, "Subitem"],
+Cell[1818, 57, 140, 2, 28, "Item"],
+Cell[1961, 61, 357, 6, 41, "Subitem"],
+Cell[2321, 69, 134, 2, 28, "Item"],
 Cell[CellGroupData[{
-Cell[2900, 89, 291, 5, 41, "Subitem"],
-Cell[3194, 96, 402, 7, 58, "Subitem"]
+Cell[2480, 75, 206, 4, 26, "Subitem"],
+Cell[2689, 81, 200, 4, 26, "Subitem"]
 }, Open  ]],
-Cell[3611, 106, 140, 2, 28, "Item"],
+Cell[2904, 88, 131, 2, 28, "Item"],
 Cell[CellGroupData[{
-Cell[3776, 112, 668, 15, 41, "Subitem"],
-Cell[4447, 129, 542, 8, 58, "Subitem"],
-Cell[4992, 139, 715, 11, 58, "Subitem"],
-Cell[5710, 152, 484, 6, 26, "Subitem"],
+Cell[3060, 94, 291, 5, 41, "Subitem"],
+Cell[3354, 101, 402, 7, 58, "Subitem"]
+}, Open  ]],
+Cell[3771, 111, 140, 2, 28, "Item"],
 Cell[CellGroupData[{
-Cell[6219, 162, 3078, 74, 157, "Subsubitem"],
-Cell[9300, 238, 3532, 101, 207, "Subsubitem"]
+Cell[3936, 117, 668, 15, 41, "Subitem"],
+Cell[4607, 134, 542, 8, 58, "Subitem"],
+Cell[5152, 144, 715, 11, 58, "Subitem"],
+Cell[5870, 157, 484, 6, 26, "Subitem"],
+Cell[CellGroupData[{
+Cell[6379, 167, 3281, 74, 157, "Subsubitem"],
+Cell[9663, 243, 3632, 105, 216, "Subsubitem"]
 }, Open  ]],
-Cell[12847, 342, 310, 6, 41, "Subitem"]
+Cell[13310, 351, 360, 7, 41, "Subitem"]
 }, Open  ]],
-Cell[13172, 351, 87, 1, 28, "Item"]
+Cell[13685, 361, 87, 1, 28, "Item"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[13308, 358, 97, 1, 44, "Subsection"],
-Cell[13408, 361, 6960, 168, 726, "Input"],
+Cell[13821, 368, 107, 1, 35, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[20393, 533, 163, 2, 35, "Subsubsection"],
-Cell[20559, 537, 1270, 30, 97, "Input"],
+Cell[13953, 373, 135, 2, 28, "Item"],
+Cell[14091, 377, 1355, 20, 109, "Subitem"],
+Cell[15449, 399, 140, 2, 28, "Item"],
+Cell[15592, 403, 687, 11, 75, "Subitem"],
+Cell[16282, 416, 134, 2, 28, "Item"],
+Cell[16419, 420, 147, 2, 26, "Subitem"],
+Cell[16569, 424, 131, 2, 28, "Item"],
+Cell[16703, 428, 146, 2, 26, "Subitem"],
+Cell[16852, 432, 140, 2, 28, "Item"],
 Cell[CellGroupData[{
-Cell[21854, 571, 1136, 29, 80, "Input"],
-Cell[22993, 602, 12037, 249, 346, "Output"]
-}, Open  ]]
+Cell[17017, 438, 755, 12, 58, "Subitem"],
+Cell[17775, 452, 867, 14, 41, "Subitem"],
+Cell[CellGroupData[{
+Cell[18667, 470, 4154, 96, 150, "Subsubitem"],
+Cell[22824, 568, 9455, 285, 497, "Subsubitem"]
 }, Open  ]],
-Cell[CellGroupData[{
-Cell[35079, 857, 213, 3, 35, "Subsubsection"],
-Cell[35295, 862, 1320, 31, 97, "Input"],
-Cell[CellGroupData[{
-Cell[36640, 897, 1186, 30, 80, "Input"],
-Cell[37829, 929, 12024, 250, 342, "Output"]
-}, Open  ]]
-}, Open  ]]
+Cell[32294, 856, 358, 7, 41, "Subitem"]
 }, Open  ]],
-Cell[CellGroupData[{
-Cell[49914, 1186, 95, 1, 44, "Subsection"],
-Cell[CellGroupData[{
-Cell[50034, 1191, 109, 1, 30, "ItemNumbered"],
-Cell[50146, 1194, 1232, 20, 245, "SubitemNumbered"]
+Cell[32667, 866, 87, 1, 28, "Item"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[51439, 1221, 97, 1, 64, "Section"],
+Cell[32815, 874, 97, 1, 44, "Subsection"],
 Cell[CellGroupData[{
-Cell[51561, 1226, 1164, 31, 46, "Input"],
-Cell[52728, 1259, 4986, 122, 374, "Output"]
+Cell[32937, 879, 112, 1, 35, "Subsubsection"],
+Cell[33052, 882, 9072, 196, 760, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[57751, 1386, 591, 15, 28, "Input"],
-Cell[58345, 1403, 798, 21, 92, "Output"]
+Cell[42161, 1083, 107, 1, 35, "Subsubsection"],
+Cell[42271, 1086, 5571, 123, 369, "Input"]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[59180, 1429, 541, 16, 46, "Input"],
-Cell[59724, 1447, 823, 22, 92, "Output"]
+Cell[47891, 1215, 97, 1, 44, "Subsection"],
+Cell[CellGroupData[{
+Cell[48013, 1220, 177, 2, 35, "Subsubsection"],
+Cell[48193, 1224, 1532, 35, 97, "Input"],
+Cell[CellGroupData[{
+Cell[49750, 1263, 1242, 31, 80, "Input"],
+Cell[50995, 1296, 12197, 251, 356, "Output"]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[60584, 1474, 344, 10, 28, "Input"],
-Cell[60931, 1486, 855, 23, 108, "Output"]
+Cell[63241, 1553, 228, 3, 35, "Subsubsection"],
+Cell[63472, 1558, 1605, 36, 97, "Input"],
+Cell[CellGroupData[{
+Cell[65102, 1598, 1286, 31, 80, "Input"],
+Cell[66391, 1631, 12253, 252, 351, "Output"]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[61823, 1514, 207, 5, 28, "Input"],
-Cell[62033, 1521, 192, 5, 28, "Output"]
+Cell[78693, 1889, 228, 3, 35, "Subsubsection"],
+Cell[78924, 1894, 2030, 49, 131, "Input"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[62262, 1531, 181, 4, 28, "Input"],
-Cell[62446, 1537, 514, 13, 28, "Output"]
+Cell[80991, 1948, 142, 2, 35, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[81158, 1954, 1150, 28, 80, "Input"],
+Cell[82311, 1984, 309, 5, 28, "Output"]
+}, Open  ]]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[62997, 1555, 177, 4, 28, "Input"],
-Cell[63177, 1561, 806, 20, 39, "Output"]
+Cell[82681, 1996, 122, 2, 44, "Subsection"],
+Cell[82806, 2000, 561, 9, 68, "ItemNumbered"]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[64020, 1586, 209, 4, 30, "Input"],
-Cell[64232, 1592, 151, 3, 28, "Output"]
-}, Open  ]],
-Cell[64398, 1598, 3836, 75, 980, "Text"],
-Cell[68237, 1675, 882, 25, 46, "Input"],
-Cell[69122, 1702, 221, 4, 41, "WolframAlphaLong"],
-Cell[69346, 1708, 217, 4, 41, "WolframAlphaLong"]
+Cell[83416, 2015, 158, 2, 64, "Section"],
+Cell[CellGroupData[{
+Cell[83599, 2021, 1164, 31, 46, "Input"],
+Cell[84766, 2054, 4986, 122, 374, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[69600, 1717, 166, 2, 64, "Section"],
-Cell[CellGroupData[{
-Cell[69791, 1723, 159, 2, 30, "ItemNumbered"],
-Cell[CellGroupData[{
-Cell[69975, 1729, 403, 6, 58, "SubitemNumbered"],
-Cell[70381, 1737, 277, 5, 41, "SubitemNumbered"],
-Cell[70661, 1744, 217, 4, 24, "SubitemNumbered"]
+Cell[89789, 2181, 591, 15, 28, "Input"],
+Cell[90383, 2198, 798, 21, 81, "Output"]
 }, Open  ]],
-Cell[70893, 1751, 119, 1, 30, "ItemNumbered"],
 Cell[CellGroupData[{
-Cell[71037, 1756, 291, 5, 41, "SubitemNumbered"],
-Cell[71331, 1763, 126, 1, 24, "SubitemNumbered"],
-Cell[71460, 1766, 143, 1, 24, "SubitemNumbered"],
-Cell[71606, 1769, 244, 4, 41, "SubitemNumbered"]
+Cell[91218, 2224, 541, 16, 46, "Input"],
+Cell[91762, 2242, 823, 22, 81, "Output"]
 }, Open  ]],
-Cell[71865, 1776, 98, 1, 30, "ItemNumbered"],
 Cell[CellGroupData[{
-Cell[71988, 1781, 110, 1, 24, "SubitemNumbered"],
-Cell[72101, 1784, 117, 1, 24, "SubitemNumbered"]
+Cell[92622, 2269, 344, 10, 28, "Input"],
+Cell[92969, 2281, 855, 23, 97, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[93861, 2309, 207, 5, 28, "Input"],
+Cell[94071, 2316, 192, 5, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[94300, 2326, 181, 4, 28, "Input"],
+Cell[94484, 2332, 514, 13, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[95035, 2350, 177, 4, 28, "Input"],
+Cell[95215, 2356, 806, 20, 28, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[96058, 2381, 209, 4, 30, "Input"],
+Cell[96270, 2387, 151, 3, 28, "Output"]
+}, Open  ]],
+Cell[96436, 2393, 3836, 75, 980, "Text"],
+Cell[100275, 2470, 882, 25, 46, "Input"],
+Cell[101160, 2497, 221, 4, 41, "WolframAlphaLong"],
+Cell[101384, 2503, 217, 4, 41, "WolframAlphaLong"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[101638, 2512, 166, 2, 64, "Section"],
+Cell[CellGroupData[{
+Cell[101829, 2518, 159, 2, 30, "ItemNumbered"],
+Cell[CellGroupData[{
+Cell[102013, 2524, 696, 11, 58, "SubitemNumbered"],
+Cell[102712, 2537, 495, 8, 41, "SubitemNumbered"],
+Cell[103210, 2547, 373, 6, 24, "SubitemNumbered"],
+Cell[103586, 2555, 265, 5, 24, "SubitemNumbered"],
+Cell[103854, 2562, 307, 6, 24, "SubitemNumbered"]
+}, Open  ]],
+Cell[104176, 2571, 119, 1, 30, "ItemNumbered"],
+Cell[CellGroupData[{
+Cell[104320, 2576, 377, 6, 41, "SubitemNumbered"],
+Cell[104700, 2584, 169, 2, 24, "SubitemNumbered"],
+Cell[104872, 2588, 449, 7, 41, "SubitemNumbered"],
+Cell[105324, 2597, 458, 8, 41, "SubitemNumbered"]
+}, Open  ]],
+Cell[105797, 2608, 98, 1, 30, "ItemNumbered"],
+Cell[CellGroupData[{
+Cell[105920, 2613, 160, 2, 24, "SubitemNumbered"],
+Cell[106083, 2617, 319, 6, 24, "SubitemNumbered"],
+Cell[106405, 2625, 168, 2, 24, "SubitemNumbered"],
+Cell[106576, 2629, 434, 7, 41, "SubitemNumbered"],
+Cell[107013, 2638, 539, 9, 58, "SubitemNumbered"]
 }, Open  ]]
 }, Open  ]]
 }, Open  ]]

@@ -259,21 +259,140 @@ Out of scope of this work:
 
 \section{Features}
 
-\subsection{Dynamic quorum}
+\subsection{Statistical Quorum}
 
-Using statistics to compute dynamic quorum based on how people vote using hypothesis testing.
-If population all votes for one position, then quorum can be much lower than if population is completely split on an
-issue, then in fact the whole population should vote because this is the only way we know what the population stands for.
-So we can base quorum on the credibility.
-The goal is to always minimize the amount of information needed from
-the population in order to confidently determine what actions the population as a whole wants to take.
-This allows faster decision making for non-contentious issues and prevents strategizing with quorum in
-referendums, where if there is a quorum a possible best action for you is not to attend.
+\subsubsection*{Background}
+A population of voters needs to collectively decide which item (if any) to take action on out of a set of competing items.  In order to democratically take action, the population needs to have a \{simple, super\}-majority of ``yes'' votes on a winning item, while also demonstrating that the winning item is preferred over all other competing items.  We do not want to poll the entire population, but we do want to be certain (specifically, $99\%$ certain) that the population does not take undesired actions, which in this case encompasses taking action on an item that is not supported by a majority of the population and/or taking action on an item that is not clearly preferred over all other competing alternatives.
 
-\todo[inline]{When we have multiple options?}
-\todo[inline]{Generalization so that majority and super-majority and consensus is just a parameter.}
+\subsubsection*{Problem Statement}
+We wish to compute the probability that the bias in a population towards voting ``yes'' is greater than some fraction of the population (e.g., $50\%$ for a simple majority, $67\%$ for a super majority, $90\%$ for a consensus).  In addition, we wish to compute the probability that the bias towards voting ``yes'' on a specific item is greater than the bias towards voting ``yes'' on all other competing items.
 
-\subsection{Score voting}
+\subsubsection*{Assumptions}
+We assume that there is a fixed underlying bias in the population that is to be estimated given raw voting data.
+
+Without any votes, we assume that this bias may be any value between $0\%$ and $100\%$ with equal probability.
+
+\subsubsection*{Voting}
+We allow for score voting where each member of the population may choose any real number in the range $[-1,+1]$ to represent their vote, with $-1$ representing opposition and $+1$ representing support.  In the theory subsection below, we rescale votes to be in the range $[0,1]$ via the notation $\frac{votes + 1}{2}$.
+
+We allow voters to ``abstain'' from voting.  We treat abstentions as indicating that a voter is removing themselves from the population of voters for an item.  It is important to distinguish an ``abstention'' (removing yourself from the voting population) from voting $0$ (indicating indifference).
+
+\subsubsection*{Bayesian Theory}
+To properly understand the Bayesian approach to parameter estimation, read the following instructive tutorial: \url{http://www.behind-the-enemy-lines.com/2008/01/are-you-bayesian-or-frequentist-or.html}
+
+The above tutorial is very similar to the problem we have at hand.  The commonplace and convenient choice of using the Beta distribution as our prior on the population bias is a consequence of the Beta distribution's conjugacy with the binomial distribution, a distribution that arises naturally when considering samples from a finite population.
+
+After extracting the sufficient statistics from raw votes --- namely the average score and the number of abstentions --- we can adjust the effective population size and corresponding threshold.  In addition, we can calculate the effective number of ``yes'' and ``no'' votes, which one can think of as the number of Heads and Tails in the aforementioned tutorial.
+
+Deriving our expression of interest now immediately follows:
+
+Let
+\begin{description}
+\begin{itemize}
+\item[$C = $] $\{X_1,\ldots, X_n\}$, the set of competing motions,
+\item[$N = $] population size,
+\item[$X_i = $] $\{v_1, \ldots, v_{m_i}\}$, the raw votes for motion $X_i$, excluding ``abstentions'',
+\item[$N_i = $] $(N - $ number of abstentions on $X_i)$, the effective population voting on motion $X_i$,
+\item[$\alpha_i = $] $\sum\limits_{v \in X_i} (\frac{v+1}{2})$, the effective number of ``yes'' votes on motion $X_i$,
+\item[$\beta_i = $] $m_i - \alpha_i$, the effective number of ``no'' votes on motion $X_i$,
+\item[$K_i = $] $N_i - m_i$, the number of remaining votes yet to be cast on $X_i$,
+\item[$p_i = $] true latent population bias towards voting ``yes'' on $X_i$.
+\end{itemize}
+\end{description}
+
+Often, we have a single motion open for voting.  In this scenario, $C=\{X_1\}$ and we simply wish to compute:
+\begin{align}\label{eq1}
+\Pr(\alpha^*_1 > T_1 \mid X_1),
+\end{align}
+where
+\begin{description}
+\begin{itemize}
+\item[$\alpha^*_i = $] the total number of ``yes'' votes for $X_i$ if we were to sample the entire population,
+\item[$T_i = $] $f \cdot N_i$, for some fraction $f$ corresponding to the type of majority needed for the vote (e.g. $f=\frac{1}{2}$ for a simple majority).
+\end{itemize}
+\end{description}
+Using the prior $p_1 \mid X_1 \sim \operatorname{Beta}(1+\alpha_1,1+\beta_1)$, corresponding to a uniform prior when no votes have been cast ($\alpha_1 = \beta_1 = 0$), we can express \eqref{eq1} as:
+\begin{align*}
+\Pr(\alpha^*_1 > T_1 \mid X_1) &= 1 - \Pr(\alpha^*_1 \leq T_1 \mid X_1),\\
+\Pr(\alpha^*_1 \leq T_1 \mid X_1) &= \int_0^1 \Pr(\alpha^*_1 \leq T_1 \mid p_1)\cdot \Pr(p_1 \mid X_1) \mathrm{d}p_1\\
+&= \int_0^1 \sum\limits_{i=0}^{V_1} {K_1 \choose i} p_1^{K-i} {(1-p_1)}^{i} \\
+& \qquad\qquad\quad \times \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \mathrm{d}p_1,
+\end{align*}
+where
+\begin{description}
+\begin{itemize}
+\item[$V_i = $] $\lfloor{T_i - \alpha_i}\rfloor$, the maximum number of additional ``yes'' votes allowed such that $X_i$ would remain below threshold.
+\end{itemize}
+\end{description}
+
+Hence, we have
+\begin{align}\label{eq2}
+& \Pr(\alpha^*_1 > T_1 \mid X_1) = \nonumber\\
+& 1 - \int_0^1 \sum\limits_{i=0}^{V_1} {K_1 \choose i} p_1^{K_1-i} {(1-p_1)}^{i} \times \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \mathrm{d}p_1
+\end{align}
+
+In the scenario where $\mathbf{card}(C) = n > 1$, i.e., there are competing motions, there is additional complexity to consider.  Without loss of generality, assume that $X_1$ is the most popular motion within $C$.  We now wish to not only compute \eqref{eq1}, but also the probability that $X_1$ is superior to all other $X_i  \in C, i \neq 1$:
+
+\begin{align}\label{eq3}
+\Pr\bigg(\bigwedge_{i=2}^n (\alpha^*_1 > \alpha^*_i) \mid C\bigg)
+\end{align}
+
+Using a safe assumption that votes on motions are independent across motions, we can decompose \eqref{eq3} as follows:
+\begin{align*}
+& \Pr\bigg(\bigwedge_{i=2}^n (\alpha^*_1 > \alpha^*_i) \mid C\bigg)\\
+=& \prod_{i=2}^n \Pr(\alpha^*_1 > \alpha^*_i \mid C)\\
+=& \prod_{i=2}^n \iint\limits_{p_1, p_i} \Pr(\alpha^*_1 > \alpha^*_i \mid p_1, p_i) \cdot \Pr(p_1 \mid X_1) \cdot \Pr(p_i \mid X_i) \mathrm{d}p_i \mathrm{d}p_1\\
+=& \prod_{i=2}^n \int_0^1 \int_0^1 \Pr(\alpha^*_1 > \alpha^*_i \mid p_1, p_i) \cdot \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \\
+& \qquad\qquad\qquad \times \operatorname{Beta}(p_i; 1+\alpha_i,1+\beta_i) \mathrm{d}p_i \mathrm{d}p_1\\
+\end{align*}
+Deriving an expression for $\Pr(\alpha^*_1 > \alpha^*_i \mid p_1, p_i)$, we get:
+\begin{align*}
+& \Pr(\alpha^*_1 > \alpha^*_i \mid p_1, p_i)\\
+=& 1 - \Pr(\alpha^*_1 \leq \alpha^*_i \mid p_1, p_i)\\
+=& 1 - \sum\limits_{m=0}^{K_1} \sum\limits_{n=\lceil{v_{1,i}+m}\rceil}^{K_i} {K_1 \choose m} p_1^{m} {(1-p_1)}^{K_1 - m} \cdot {K_i \choose n} p_i^{n} {(1-p_i)}^{K_i-n},
+\end{align*}
+where
+\begin{description}
+\begin{itemize}
+\item[$v_{i,j} = $] $\alpha_i - \alpha_j$, the number of effective ``yes'' votes $X_i$ leads $X_j$ by.
+\end{itemize}
+\end{description}
+
+Denoting
+\begin{align}\label{eq4}
+& \Phi_i(p_1,p_i) {\overset {\underset {\mathrm {def} }{}}{=}} \nonumber\\
+& 1 - \sum\limits_{m=0}^{K_1} \sum\limits_{n=\lceil{v_{1,i}+m}\rceil}^{K_i} {K_1 \choose m} p_1^{m} {(1-p_1)}^{K_1 - m} \cdot {K_i \choose n} p_i^{n} {(1-p_i)}^{K_i-n},
+\end{align}
+we can simplify \eqref{eq3} to:
+\begin{align}\label{eq5}
+& \Pr\bigg(\bigwedge_{i=2}^n (\alpha^*_1 > \alpha^*_i) \mid C\bigg)\nonumber\\
+&= \prod_{i=2}^n \int_0^1 \int_0^1 \Phi_i(p_1,p_i) \cdot \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \nonumber\\
+& \qquad\qquad\qquad \times \operatorname{Beta}(p_i; 1+\alpha_i,1+\beta_i) \mathrm{d}p_i \mathrm{d}p_1
+\end{align}
+
+We can numerically compute \eqref{eq2} and \eqref{eq5} given raw voting data.  In order to be certain before taking any actions, we would like for the computed credibilities to be $\geq 99\%$.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/simple_majority}
+\caption{Simple Majority: $\alpha$ vs. $\Pr(\alpha > \frac{1}{2}N)$ for $N=100$, $\beta = 10$.}
+\label{simple_majority}
+\end{figure}
+%Data:
+%Curve 1: {{0,0.000299648},{1,0.00213083},{2,0.00817989},{3,0.0224777},{4,0.049512},{5,0.0928927},{6,0.154136},{7,0.232044},{8,0.322859},{9,0.421057},{10,0.520467},{11,0.615358},{12,0.701241},{13,0.775267},{14,0.836245},{15,0.884385},{16,0.920892},{17,0.947532},{18,0.966265},{19,0.978973},{20,0.987296},{21,0.992561},{22,0.99578},{23,0.997682},{24,0.998767},{25,0.999366}}
+%Curve 2: {x, 0.99} for all x
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/super_majority}
+\caption{Super Majority: $\alpha$ vs. $\Pr(\alpha > \frac{2}{3}N)$ for $N=100$, $\beta = 10$.}
+\label{super_majority}
+\end{figure}
+%Data:
+%Curve 1: {{10,0.0395173},{11,0.0591278},{12,0.0846131},{13,0.116407},{14,0.15463},{15,0.199057},{16,0.24911},{17,0.303899},{18,0.362273},{19,0.422909},{20,0.484399},{21,0.545345},{22,0.604445},{23,0.660559},{24,0.712764},{25,0.760382},{26,0.802985},{27,0.840385},{28,0.872612},{29,0.899875},{30,0.922519},{31,0.940987},{32,0.955777},{33,0.967407},{34,0.976384},{35,0.983186},{36,0.988243},{37,0.99193},{38,0.994567},{39,0.996414},{40,0.997682},{41,0.998533},{42,0.999093},{43,0.999452},{44,0.999677},{45,0.999815},{46,0.999896},{47,0.999944},{48,0.99997},{49,0.999985},{50,0.999993}}
+%Curve 2: {x, 0.99} for all x
+
+\subsection{Score Voting}
 
 \todo[inline]{Do we take into the account the distribution of votes? So if you have a very large standard deviation
 we might want to prefer a decision less than some other decision with smaller standard deviation, but maybe
