@@ -6,7 +6,7 @@ all: $(DOCUMENT)
 
 $(DOCUMENT): $(TEXFILE) $(BIBFILE) sigchi.cls sigchi.bst
 	pdflatex -interaction=nonstopmode "$<"
-	bibtex "$(<:%.tex=%.aux)"
+	#bibtex "$(<:%.tex=%.aux)"
 	pdflatex -interaction=nonstopmode "$<"
 	pdflatex -interaction=nonstopmode "$<"
 

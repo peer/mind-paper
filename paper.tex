@@ -79,7 +79,7 @@
 
 \begin{document}
 
-\title{PeerMind}
+\title{PeerMind: Towards Collective Decision-Making}
 
 %\numberofauthors{3}
 %\author{%
@@ -115,147 +115,172 @@
 
 \section{Introduction}
 
-The broad idea is that instead of just trying to move the voting process online -- something many others do -- we in
-fact add additional value by voting online.
-Specifically, we can compute results faster and more accurately, we can use sophisticated statistics to estimate
-quantities for the entire voting population, and we can promote clarity and full understanding of the voting items for all.
+Two of the most shocking democratic votes in recent history occurred in 2016:
+The referendum vote for Britain to leave the European Union (``Brexit'') and the election of Donald Trump as
+President of the United States.
+Both votes were decided by the slimmest of margins, but more significantly, both votes had poor turnout.
+We often hear that the Achilles heel of a democracy is low engagement, but this is a fallacy~---~in fact, our goal
+should be to decrease engagement.
+The ideal governance system is one where citizens do not have to be constantly involved, but the system is still
+acting as the citizens would like it to. Can we increase legitimacy within a democracy while also decreasing the
+attention required at the same time?
 
-\todo[inline]{Main questions and answers follow.}
+In this paper we present our work on improving the collective decision-making through use of a web application
+to facilitate the process.
+In contrast with existing similar solutions, our web application integrates new ideas in how to improve this process:
+use of range voting, dynamic quorum, and vote delegation.
+The broad idea is that instead of just trying to move the voting process online~---~something many others have done
+previously~---~we in fact wish to add value by voting online.
+Specifically, we can compute results faster, more accurately,
+%and securely,
+we can use sophisticated statistics to
+estimate important quantities for the entire voting population, we can allow for members to entrust others who have
+more expertise on topics than they do themselves, and we can promote clarity and full understanding of the voting
+items for all.
 
-What problem are we solving? Why is it important to solve? What is the story?
 
-Finding a way to lower attention required but increase legitimacy of democratic decisions.
-Traditionally legitimacy is increased by increasing participation/attention required.
-It is an everlasting problem.
-How to outsource governance and at the same time assure it does not get corrupt
-or tyrannic.
 
-Has anyone else tried to solve it or related problems? How did they try
-and what were the results (subjective or objective)?
-
-Described here: \url{http://mitar.tnode.com/post/73983101095/peer-to-peer-voting-scheme}.
-Some tried delegations, but mostly only to one person.
-Getting issues that you have tree-structure with possible cycles you cannot resolve.
-Often there were reported UI problems as well.
-So just technically improving is not enough, you also have to have UI for the technical solution so that people can trust.
-
-How are you solving the problem? What technologies are you using?
-
-Using dynamic quorum, score voting, delegation, and nice integration with UI/UX.
-
-How will you know how well you solved the problem? How will those technologies address the issues?
-
-If it improves decision making, participation, inclusivity, activity of people engaged in decision making in my house.
-So currently we have issues with reaching the quorum and many people do not participate.
-I would like for them to have easier time participating (less time required) and as a consequence more people to
-participate collectively.
-If I observe that I think I will know I solved the problem.
-
-\todo[inline]{This rest of the section is mostly notes. Organize and improve.}
-
-We can often hear that the issue of our democracy is low engagement.
-But this is a fallacy, because we should be instead trying to decrease engagement.
-The best governance system is one where you do not have to be involved yourself, but it is still doing things
-like you would like to do them.
-% Or even, doing things you might not even know that you would like to be done, especially in a long term.
-We want to outsource the job of coordination between people.
-Sometimes you want to coordinate people yourself (in your company, team), you might enjoy it, but in most cases
-you cannot or do not want to, so you outsource this service, especially at a large scale.
-
-One reason why increasing engagement sounds like a good idea is because current democratic systems have two
-questionable assumptions: participants have time to participate, and knowledge to participate.
-If you do not participate it is your fault.
-Moreover, the legitimacy of decisions is based on participation as well.
-This is why those participating in the these democratic systems have motivation to try to increase participation
-of others (especially if they believe they will still be in majority), or claim they are at fault to not participate.
-
-engagement is then increased only to assure that people like the results
-
-so if we try to minimize engagement, but still make sure that people like the results, then this is the perfect system
-
-and only in the case when they are on the loosing side, then we have to make sure that they understand the reasons why
-they lost (e.g.,\ the middle panel in our design) or at least to feel that they participated, in at least some way
-(voting, or just delegating)
-
-but the participation is the last on this list of important factors
-
-the more important thing is that they understand why others were thinking differently
-or that they do not even have to be engaged
-
-we want that people do not have to pay attention to what government is doing
-
-currently, we are in a loop where we have a useless feedback loop, where government in fact would like for people
-to pay some type of attention because they need to be elected, so they have to show like they are doing something,
-but on the other hand they do not want too much engagement, because they do not have things in place to really
-engage with everyone
-
-government should be like infrastructure, you should not have to care about it while it works, and be there to fix
-things if it starts failing, but not even you personally, but have mechanisms and processes in place to find this
-
-Terminology:
-\begin{itemize}
-\item community -- group which is making a decision using PeerMind
-\item member -- user of the app who is participating in decision making
-\end{itemize}
-
-\todo[inline]{Terminology: decision vs. vote vs. voting (how to name the step in decision making where you vote, and what is what you cast?)}
-\todo[inline]{Terminology: motion? Tally? What is the sum of all votes?}
-\todo[inline]{Terminology: discarding a vote if you didn't vote and didn't delegate. Some other term?}
-
-The main question is: can we increase legitimacy and decrease attention required at the same time.
-Many others are trying to increase attention (participation) because they want to increase legitimacy,
-assuming that this is the only way.
-
-A list of potential other points:
-\begin{itemize}
-\item legitimacy (quorum, involvement of more people through delegation)
-\item scaling (delegation helps, less attention helps)
-\item attention (at same or better decisions)
-\item bad assumptions for democracy - time, knowledge, it is rational to know that you do not know, common practice is to ask friends
-\item better decisions (more people consulted, attention directed where it should be)
-\end{itemize}
-
-Another question: should feedback be visible (to see how others voted before you voted)?
-People go with majority.
-Better for wisdom of crowds is an independent sample.
-Maybe we should only allow how other voted to be seen after you voted (but you can still change the vote),
-but we could then observe that and learn from this and see if this is good or bad.
-Or we could just store information if you observed existing votes before you voted (you have to click a button to see them).
-Maybe going with majority is also good when you want more social cohesion in the community and not so much ``optimal''
-wisdom of crowds result -  you would want that people relax their positions based on how other people care.
-Cohesion of the group vs. accuracy.
-Maybe display only number of votes and credibility, maybe credibility direction or graph, but not average votes.
-
-A list of potential questions:
-\begin{itemize}
-\item Delegation works?
-\item Statistical quorum works?
-\item Real-time feedback influences?
-\item Private vs. public delegation (do you know how member to whom you delegated is voting)?
-\item When delegating, how to assure that you cannot learn how somebody else voted, but that you can still somehow
-learn how your vote is used?
-\item Knowing how much power you have vs. not knowing -- does it change how people behave? (Knowing might corrupt you,
-but also motivate you to do more thorough work voting because you know other depend on you.)
-\end{itemize}
-
-Performance/theory/scaling in computational terms (how big could effectively community can be to be able to compute it).
-Some other theoretical properties?
-Computing statistical quorum is an ``embarrassingly parallel'' problem, and so its
-use would not suffer in large populations.
-Sparsity of delegation matrix also enables use of (recently developed?)
-efficient matrix computation algorithms.
-
-Out of scope of this work:
-
-\begin{itemize}
-\item How to assure privacy of the delegation network (it is highly sensitive data, probably even more than votes)?
-\item How to compute delegation results in a way that it does not require access to the whole network of delegation at once?
-\item How can we make this system distributed (and still assure privacy)?
-\end{itemize}
-
-\section{Related work}
-
-\cite{andersen2008trust, dirnstorfer2010voting, ford2002delegative, rodriguez2007smartocracy, yamakawa2007toward}
+%The broad idea is that instead of just trying to move the voting process online -- something many others do -- we in
+%fact add additional value by voting online.
+%Specifically, we can compute results faster and more accurately, we can use sophisticated statistics to estimate
+%quantities for the entire voting population, and we can promote clarity and full understanding of the voting items for all.
+%
+%\todo[inline]{Main questions and answers follow.}
+%
+%What problem are we solving? Why is it important to solve? What is the story?
+%
+%Finding a way to lower attention required but increase legitimacy of democratic decisions.
+%Traditionally legitimacy is increased by increasing participation/attention required.
+%It is an everlasting problem.
+%How to outsource governance and at the same time assure it does not get corrupt
+%or tyrannic.
+%
+%Has anyone else tried to solve it or related problems? How did they try
+%and what were the results (subjective or objective)?
+%
+%Described here: \url{http://mitar.tnode.com/post/73983101095/peer-to-peer-voting-scheme}.
+%Some tried delegations, but mostly only to one person.
+%Getting issues that you have tree-structure with possible cycles you cannot resolve.
+%Often there were reported UI problems as well.
+%So just technically improving is not enough, you also have to have UI for the technical solution so that people can trust.
+%
+%How are you solving the problem? What technologies are you using?
+%
+%Using dynamic quorum, score voting, delegation, and nice integration with UI/UX.
+%
+%How will you know how well you solved the problem? How will those technologies address the issues?
+%
+%If it improves decision making, participation, inclusivity, activity of people engaged in decision making in my house.
+%So currently we have issues with reaching the quorum and many people do not participate.
+%I would like for them to have easier time participating (less time required) and as a consequence more people to
+%participate collectively.
+%If I observe that I think I will know I solved the problem.
+%
+%\todo[inline]{This rest of the section is mostly notes. Organize and improve.}
+%
+%We can often hear that the issue of our democracy is low engagement.
+%But this is a fallacy, because we should be instead trying to decrease engagement.
+%The best governance system is one where you do not have to be involved yourself, but it is still doing things
+%like you would like to do them.
+%% Or even, doing things you might not even know that you would like to be done, especially in a long term.
+%We want to outsource the job of coordination between people.
+%Sometimes you want to coordinate people yourself (in your company, team), you might enjoy it, but in most cases
+%you cannot or do not want to, so you outsource this service, especially at a large scale.
+%
+%One reason why increasing engagement sounds like a good idea is because current democratic systems have two
+%questionable assumptions: participants have time to participate, and knowledge to participate.
+%If you do not participate it is your fault.
+%Moreover, the legitimacy of decisions is based on participation as well.
+%This is why those participating in the these democratic systems have motivation to try to increase participation
+%of others (especially if they believe they will still be in majority), or claim they are at fault to not participate.
+%
+%engagement is then increased only to assure that people like the results
+%
+%so if we try to minimize engagement, but still make sure that people like the results, then this is the perfect system
+%
+%and only in the case when they are on the loosing side, then we have to make sure that they understand the reasons why
+%they lost (e.g.,\ the middle panel in our design) or at least to feel that they participated, in at least some way
+%(voting, or just delegating)
+%
+%but the participation is the last on this list of important factors
+%
+%the more important thing is that they understand why others were thinking differently
+%or that they do not even have to be engaged
+%
+%we want that people do not have to pay attention to what government is doing
+%
+%currently, we are in a loop where we have a useless feedback loop, where government in fact would like for people
+%to pay some type of attention because they need to be elected, so they have to show like they are doing something,
+%but on the other hand they do not want too much engagement, because they do not have things in place to really
+%engage with everyone
+%
+%government should be like infrastructure, you should not have to care about it while it works, and be there to fix
+%things if it starts failing, but not even you personally, but have mechanisms and processes in place to find this
+%
+%Terminology:
+%\begin{itemize}
+%\item community -- group which is making a decision using PeerMind
+%\item member -- user of the app who is participating in decision making
+%\end{itemize}
+%
+%\todo[inline]{Terminology: decision vs. vote vs. voting (how to name the step in decision making where you vote, and what is what you cast?)}
+%\todo[inline]{Terminology: motion? Tally? What is the sum of all votes?}
+%\todo[inline]{Terminology: discarding a vote if you didn't vote and didn't delegate. Some other term?}
+%
+%The main question is: can we increase legitimacy and decrease attention required at the same time.
+%Many others are trying to increase attention (participation) because they want to increase legitimacy,
+%assuming that this is the only way.
+%
+%A list of potential other points:
+%\begin{itemize}
+%\item legitimacy (quorum, involvement of more people through delegation)
+%\item scaling (delegation helps, less attention helps)
+%\item attention (at same or better decisions)
+%\item bad assumptions for democracy - time, knowledge, it is rational to know that you do not know, common practice is to ask friends
+%\item better decisions (more people consulted, attention directed where it should be)
+%\end{itemize}
+%
+%Another question: should feedback be visible (to see how others voted before you voted)?
+%People go with majority.
+%Better for wisdom of crowds is an independent sample.
+%Maybe we should only allow how other voted to be seen after you voted (but you can still change the vote),
+%but we could then observe that and learn from this and see if this is good or bad.
+%Or we could just store information if you observed existing votes before you voted (you have to click a button to see them).
+%Maybe going with majority is also good when you want more social cohesion in the community and not so much ``optimal''
+%wisdom of crowds result -  you would want that people relax their positions based on how other people care.
+%Cohesion of the group vs. accuracy.
+%Maybe display only number of votes and credibility, maybe credibility direction or graph, but not average votes.
+%
+%A list of potential questions:
+%\begin{itemize}
+%\item Delegation works?
+%\item Statistical quorum works?
+%\item Real-time feedback influences?
+%\item Private vs. public delegation (do you know how member to whom you delegated is voting)?
+%\item When delegating, how to assure that you cannot learn how somebody else voted, but that you can still somehow
+%learn how your vote is used?
+%\item Knowing how much power you have vs. not knowing -- does it change how people behave? (Knowing might corrupt you,
+%but also motivate you to do more thorough work voting because you know other depend on you.)
+%\end{itemize}
+%
+%Performance/theory/scaling in computational terms (how big could effectively community can be to be able to compute it).
+%Some other theoretical properties?
+%Computing statistical quorum is an ``embarrassingly parallel'' problem, and so its
+%use would not suffer in large populations.
+%Sparsity of delegation matrix also enables use of (recently developed?)
+%efficient matrix computation algorithms.
+%
+%Out of scope of this work:
+%
+%\begin{itemize}
+%\item How to assure privacy of the delegation network (it is highly sensitive data, probably even more than votes)?
+%\item How to compute delegation results in a way that it does not require access to the whole network of delegation at once?
+%\item How can we make this system distributed (and still assure privacy)?
+%\end{itemize}
+%
+%\section{Related work}
+%
+%\cite{andersen2008trust, dirnstorfer2010voting, ford2002delegative, rodriguez2007smartocracy, yamakawa2007toward}
 
 \section{Features}
 
@@ -690,79 +715,79 @@ and those delegates are then in effect for all votes where a member does not vot
 A member is invited to define initial delegations at a registration time, and can change them later on at will,
 but independently from a particular decision being made.
 
-\subsection{Three step process}
-
-\subsection{Real-time feedback}
-
-
-% Real-time communication in general.
-
-\subsection{Integration with offline meetings}
-
-Decoupling the information presentation and voting processes from the debating process in the full decision-making
-pipeline (with the idea being that debating is best done in person, and presenting information/voting is best done online).
-
-\section{Evaluation}
-
-\subsection{Design}
-
-User study/evaluation design.
-To create a controlled evaluation of our solutions, to not depend on general usage of our system among communities,
-we can evaluate the design with the following user study:
-\begin{enumerate}
-\item we find a tight community of around 100 people willing to participate in the user study
-\item they should know each other well (to know how to delegate)
-\item we offer them to pay some Amazon credits or something for participation
-\item every member of the community should define delegations
-\item we ask them to split into two groups, group A and group B
-\item group A (target size is around 20% of the community) will meet together or online and discuss various topics through our system
-\item discussed topics some can be completely random, to get people to be familiar with they system, and also have some
-easy topics to decide on, like, what ``should be the color of the sky if we could change it'', and some topics which are relevant to the community
-\item those discussions would be just for evaluation, but community can use the results in any way they find useful
-\item after this discussions and decisions were done we ask everyone from group B to evaluate the results, we present them with two results (blinded, them not knowing which was made in which way)
-\begin{itemize}
-\item results which would be obtained using traditional methods (majority voting without any our improvements)
-\item our results using our system
-\end{itemize}
-\item we ask them to evaluate which one (or both, or none) of decisions they agree with
-\item prediction is that members who have not participated in the decision making process will
-find decisions made through our system more often agreeable
-\item hypothesis here is that what a decision making system is trying to achieve is to find a decision most of the
-whole community can agree with, or like it, even when not everyone participates and not all information is available
-on their positions on a topic
-\end{enumerate}
-
-One additional part of the experimental delegation study:
-
-Compute statistical quorum with and without delegations.
-This semester, do not actually allow delegation to be used for passing statistical quorum, but collect data so that
-we can see how much earlier delegation reached quorum before official statistical quorum.
-(Only count how much earlier at the point where delegation passed quorum and never went below thereafter, thus
-showing the point where the decision truly was clear.)
-
-Evaluation of statistical quorum (given that we don't officially decide by including delegation this semester):
-From email: ``Do an internal Cloyne comparison that is more mathematical, showing how many agenda items were decided
-using fewer actual votes than old 33\% quorum, as a result of statistical quorum.
-This could be measured by average \# votes needed to pass statistical quorum vs. \% of those items that get
-formally passed at council via consent agenda.
-(If it's 100\%, then you can say that we saved X\% of votes on
-average by using our online voting).
-Then you could also show that some items needed more than 33\% of votes, implying that a hard-line 33\% is also bad.'' 
-
-Subjective evaluation of entire platform: Council Surveys comparing past two semesters to this semester for other
-houses vs. Cloyne.
-``use the previous 2 semesters' worth of council surveys as control, and a council survey for
-Cloyne at the end of this semester as results.
-These results would speak to those specific subjective questions
-and would be one useful thing to look at.''
-
-\bibliographystyle{sigchi}
-\bibliography{refs}
-
-More:
-\begin{itemize}
-\item https://mason.gmu.edu/~rhanson/futarchy.html
-\item http://merkle.com/papers/DAOdemocracyDraft.pdf
-\end{itemize}
+%\subsection{Three step process}
+%
+%\subsection{Real-time feedback}
+%
+%
+%% Real-time communication in general.
+%
+%\subsection{Integration with offline meetings}
+%
+%Decoupling the information presentation and voting processes from the debating process in the full decision-making
+%pipeline (with the idea being that debating is best done in person, and presenting information/voting is best done online).
+%
+%\section{Evaluation}
+%
+%\subsection{Design}
+%
+%User study/evaluation design.
+%To create a controlled evaluation of our solutions, to not depend on general usage of our system among communities,
+%we can evaluate the design with the following user study:
+%\begin{enumerate}
+%\item we find a tight community of around 100 people willing to participate in the user study
+%\item they should know each other well (to know how to delegate)
+%\item we offer them to pay some Amazon credits or something for participation
+%\item every member of the community should define delegations
+%\item we ask them to split into two groups, group A and group B
+%\item group A (target size is around 20% of the community) will meet together or online and discuss various topics through our system
+%\item discussed topics some can be completely random, to get people to be familiar with they system, and also have some
+%easy topics to decide on, like, what ``should be the color of the sky if we could change it'', and some topics which are relevant to the community
+%\item those discussions would be just for evaluation, but community can use the results in any way they find useful
+%\item after this discussions and decisions were done we ask everyone from group B to evaluate the results, we present them with two results (blinded, them not knowing which was made in which way)
+%\begin{itemize}
+%\item results which would be obtained using traditional methods (majority voting without any our improvements)
+%\item our results using our system
+%\end{itemize}
+%\item we ask them to evaluate which one (or both, or none) of decisions they agree with
+%\item prediction is that members who have not participated in the decision making process will
+%find decisions made through our system more often agreeable
+%\item hypothesis here is that what a decision making system is trying to achieve is to find a decision most of the
+%whole community can agree with, or like it, even when not everyone participates and not all information is available
+%on their positions on a topic
+%\end{enumerate}
+%
+%One additional part of the experimental delegation study:
+%
+%Compute statistical quorum with and without delegations.
+%This semester, do not actually allow delegation to be used for passing statistical quorum, but collect data so that
+%we can see how much earlier delegation reached quorum before official statistical quorum.
+%(Only count how much earlier at the point where delegation passed quorum and never went below thereafter, thus
+%showing the point where the decision truly was clear.)
+%
+%Evaluation of statistical quorum (given that we don't officially decide by including delegation this semester):
+%From email: ``Do an internal Cloyne comparison that is more mathematical, showing how many agenda items were decided
+%using fewer actual votes than old 33\% quorum, as a result of statistical quorum.
+%This could be measured by average \# votes needed to pass statistical quorum vs. \% of those items that get
+%formally passed at council via consent agenda.
+%(If it's 100\%, then you can say that we saved X\% of votes on
+%average by using our online voting).
+%Then you could also show that some items needed more than 33\% of votes, implying that a hard-line 33\% is also bad.'' 
+%
+%Subjective evaluation of entire platform: Council Surveys comparing past two semesters to this semester for other
+%houses vs. Cloyne.
+%``use the previous 2 semesters' worth of council surveys as control, and a council survey for
+%Cloyne at the end of this semester as results.
+%These results would speak to those specific subjective questions
+%and would be one useful thing to look at.''
+%
+%\bibliographystyle{sigchi}
+%\bibliography{refs}
+%
+%More:
+%\begin{itemize}
+%\item https://mason.gmu.edu/~rhanson/futarchy.html
+%\item http://merkle.com/papers/DAOdemocracyDraft.pdf
+%\end{itemize}
 
 \end{document}
