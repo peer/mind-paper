@@ -138,8 +138,6 @@ estimate important quantities for the entire voting population, we can allow for
 more expertise on topics than they do themselves, and we can promote clarity and full understanding of the voting
 items for all.
 
-
-
 %The broad idea is that instead of just trying to move the voting process online -- something many others do -- we in
 %fact add additional value by voting online.
 %Specifically, we can compute results faster and more accurately, we can use sophisticated statistics to estimate
@@ -284,10 +282,22 @@ items for all.
 
 \section{Features}
 
-\subsection{Statistical Quorum}
+\subsection{Range Voting}
+
+Range voting (score voting) is voting where members of a community express their positions on open proposals by assigning
+each a score on a fixed scale, in the context of this paper, between $-1$ and $+1$.
+Prior work has shown that this approach generalizes many previous approaches to voting and allows members to express their
+positions in a highly informative and precise manner.
+We find it especially suitable for a web application because many web users are used to use it when ranking products
+and giving other ``five-star'' feedback.
+Moreover, if later on a new proposal is added to a set of existing proposals on which voting was already open, only the
+new proposal needs to be evaluated by members, as opposed to alternative voting systems where the relative rankings of
+each proposal would need reassessing (assuming members use a consistent personal scale when voting).
+
+\subsection{Dynamic Quorum}
 
 \subsubsection{Background}
-A population of voters needs to collectively decide which item (if any) to take action on out of a set of competing items.
+A population of voters (a community) needs to collectively decide which item (if any) to take action on out of a set of competing items.
 In order to democratically take action, the population needs to have a \{simple, super\}-majority of ``yes'' votes on a
 winning item, while also demonstrating that the winning item is preferred over all other competing items.
 We do not want to poll the entire population, but we do want to be certain (specifically, $99\%$ certain) that
@@ -446,11 +456,9 @@ In order to be certain before taking any actions, we would like for the computed
 %Curve 1: {{10,0.0395173},{11,0.0591278},{12,0.0846131},{13,0.116407},{14,0.15463},{15,0.199057},{16,0.24911},{17,0.303899},{18,0.362273},{19,0.422909},{20,0.484399},{21,0.545345},{22,0.604445},{23,0.660559},{24,0.712764},{25,0.760382},{26,0.802985},{27,0.840385},{28,0.872612},{29,0.899875},{30,0.922519},{31,0.940987},{32,0.955777},{33,0.967407},{34,0.976384},{35,0.983186},{36,0.988243},{37,0.99193},{38,0.994567},{39,0.996414},{40,0.997682},{41,0.998533},{42,0.999093},{43,0.999452},{44,0.999677},{45,0.999815},{46,0.999896},{47,0.999944},{48,0.99997},{49,0.999985},{50,0.999993}}
 %Curve 2: {x, 0.99} for all x
 
-\subsection{Score Voting}
-
-\todo[inline]{Do we take into the account the distribution of votes? So if you have a very large standard deviation
-we might want to prefer a decision less than some other decision with smaller standard deviation, but maybe
-also smaller (but still positive) average. Is distribution of votes influencing dynamic quorum?}
+%\todo[inline]{Do we take into the account the distribution of votes? So if you have a very large standard deviation
+%we might want to prefer a decision less than some other decision with smaller standard deviation, but maybe
+%also smaller (but still positive) average. Is distribution of votes influencing dynamic quorum?}
 
 \subsection{Delegation}
 \todo[inline]{Max: I think delegation graph edges should point in the direction towards the person that the vote is
