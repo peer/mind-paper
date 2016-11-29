@@ -32,6 +32,8 @@
 \usepackage{tkz-graph}
 \usepackage{mathtools}
 \usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 % llt: Define a global style for URLs, rather that the default one
 \makeatletter
@@ -299,7 +301,19 @@ each proposal would need reassessing (assuming members use a consistent personal
 
 \subsection{Dynamic Quorum}
 
-%\todo[inline]{Unify terminology: population -> community, voters -> members, item -> proposal}
+%\todo[inline]{Unify terminology: population -> community, voters -> members, item -> proposal, motion -> proposal}
+
+Dynamic quorum uses statistical hypothesis testing to compute the minimum number of required votes needed
+to achieve a desired level of confidence before a community adopts an outcome as being truly representative of
+its members' positions.
+For example, in a community of 100 members, if 20 members vote in full support of a proposal, then we can conclude
+with very high confidence that, had all 100 members actually voted, a majority them would support the proposal,
+despite in actuality 80 members not having voted.
+On the other hand, if 80 members vote but 41 vote in support of the proposal and 39 vote in opposition,
+the community cannot yet conclude anything with high confidence.
+Hence, the suggested action would be for the community to gather more votes and continue discussion around the proposal.
+By utilizing a dynamic quorum, we can direct attention and participation of the community towards contentious proposals,
+while reducing attention towards proposals which already have overwhelming support.
 
 \subsubsection{Background}
 A population of voters (a community) needs to collectively decide which item (if any) to take action on out of a set of competing items.
@@ -345,23 +359,21 @@ abstentions~---~we can adjust the effective population size and corresponding th
 In addition, we can calculate the effective number of ``yes'' and ``no'' votes.\footnote{Which one can think
 of as the number of Heads and Tails in the aforementioned tutorial.}
 
-Deriving our expression of interest now immediately follows:
-
 Let
 \begin{description}
 \begin{itemize}
 \item[$C = $] $\{X_1,\ldots, X_n\}$, the set of competing motions,
 \item[$N = $] population size,
 \item[$X_i = $] $\{v_1, \ldots, v_{m_i}\}$, the raw votes for motion $X_i$, excluding ``abstentions'',
-\item[$N_i = $] $(N - $ number of abstentions on $X_i)$, the effective population voting on motion $X_i$,
-\item[$\alpha_i = $] $\sum\limits_{v \in X_i} (\frac{v+1}{2})$, the effective number of ``yes'' votes on motion $X_i$,
+\item[$N_i = $] $(N - \textrm{number of abstentions on } X_i)$, the effective population voting on motion $X_i$,
+\item[$\alpha_i = $] $\sum\limits_{v \in X_i} \left(\frac{v+1}{2}\right)$, the effective number of ``yes'' votes on motion $X_i$,
 \item[$\beta_i = $] $m_i - \alpha_i$, the effective number of ``no'' votes on motion $X_i$,
 \item[$K_i = $] $N_i - m_i$, the number of remaining votes yet to be cast on $X_i$,
 \item[$p_i = $] true latent population bias towards voting ``yes'' on $X_i$.
 \end{itemize}
 \end{description}
 
-Often, we have a single motion open for voting.  In this scenario, $C=\{X_1\}$ and we simply wish to compute:
+When we have a single motion open for voting, $C=\{X_1\}$, we simply wish to compute:
 \begin{align}\label{eq1}
 \Pr(\alpha^*_1 > T_1 \mid X_1),
 \end{align}
@@ -402,12 +414,15 @@ We now wish to not only compute \eqref{eq1}, but also the probability that $X_1$
 $X_i  \in C, i \neq 1$:
 
 \begin{align}\label{eq3}
-\Pr\bigg(\bigwedge_{i=2}^n (\alpha^*_1 > \alpha^*_i) \mid C\bigg)
+\Pr\left(\bigwedge_{i=2}^n (\alpha^*_1 > \alpha^*_i) \mid C\right)
 \end{align}
 
-Using a safe assumption that votes on motions are independent across motions, we can decompose \eqref{eq3} as follows:
+Using the assumption
+that votes on motions are independent across motions, which, in the common
+scenario where there is a negative covariance between votes on competing
+motions, will provide a lower bound on the probability, we can decompose \eqref{eq3} as follows:
 \begin{align*}
-& \Pr\bigg(\bigwedge_{i=2}^n (\alpha^*_1 > \alpha^*_i) \mid C\bigg)\\
+& \Pr\left(\bigwedge_{i=2}^n (\alpha^*_1 > \alpha^*_i) \mid C\right)\\
 =& \prod_{i=2}^n \Pr(\alpha^*_1 > \alpha^*_i \mid C)\\
 =& \prod_{i=2}^n \iint\limits_{p_1, p_i} \Pr(\alpha^*_1 > \alpha^*_i \mid p_1, p_i) \cdot \Pr(p_1 \mid X_1) \cdot \Pr(p_i \mid X_i) \mathrm{d}p_i \mathrm{d}p_1\\
 =& \prod_{i=2}^n \int_0^1 \int_0^1 \Pr(\alpha^*_1 > \alpha^*_i \mid p_1, p_i) \cdot \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \\
@@ -433,7 +448,7 @@ Denoting
 \end{align}
 we can simplify \eqref{eq3} to:
 \begin{align}\label{eq5}
-& \Pr\bigg(\bigwedge_{i=2}^n (\alpha^*_1 > \alpha^*_i) \mid C\bigg)\nonumber\\
+& \Pr\left(\bigwedge_{i=2}^n (\alpha^*_1 > \alpha^*_i) \mid C\right)\nonumber\\
 &= \prod_{i=2}^n \int_0^1 \int_0^1 \Phi_i(p_1,p_i) \cdot \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \nonumber\\
 & \qquad\qquad\qquad \times \operatorname{Beta}(p_i; 1+\alpha_i,1+\beta_i) \mathrm{d}p_i \mathrm{d}p_1
 \end{align}
@@ -441,7 +456,7 @@ we can simplify \eqref{eq3} to:
 We can numerically compute \eqref{eq2} and \eqref{eq5} given raw voting data.
 In order to be certain before taking any actions, we would like for the computed credibilities to be $\geq 99\%$.
 
-\begin{figure}[!ht]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.5\textwidth]{figures/simple_majority}
 \caption{Simple Majority: $\alpha$ vs. $\Pr(\alpha > \frac{1}{2}N)$ for $N=100$, $\beta = 10$.}
@@ -451,7 +466,7 @@ In order to be certain before taking any actions, we would like for the computed
 %Curve 1: {{0,0.000299648},{1,0.00213083},{2,0.00817989},{3,0.0224777},{4,0.049512},{5,0.0928927},{6,0.154136},{7,0.232044},{8,0.322859},{9,0.421057},{10,0.520467},{11,0.615358},{12,0.701241},{13,0.775267},{14,0.836245},{15,0.884385},{16,0.920892},{17,0.947532},{18,0.966265},{19,0.978973},{20,0.987296},{21,0.992561},{22,0.99578},{23,0.997682},{24,0.998767},{25,0.999366}}
 %Curve 2: {x, 0.99} for all x
 
-\begin{figure}[!ht]
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.5\textwidth]{figures/super_majority}
 \caption{Super Majority: $\alpha$ vs. $\Pr(\alpha > \frac{2}{3}N)$ for $N=100$, $\beta = 10$.}
@@ -466,13 +481,13 @@ In order to be certain before taking any actions, we would like for the computed
 %also smaller (but still positive) average. Is distribution of votes influencing dynamic quorum?}
 
 \subsection{Delegation}
-\todo[inline]{Max: I think delegation graph edges should point in the direction towards the person that the vote is
-being given to (more intuitive).
-\\
-Mitar: We are not giving votes to people, we are delegating a decision to people, but votes are computed for each person
-separately based on how delegates voted themselves. The idea is that you ask a delegate how the voted and then compute
-your vote. The do not get your vote to do anything with it. This is why arrows are like that. Maybe the word
-"delegation" is confusing and we should maybe use surrogate or some other word.}
+%\todo[inline]{Max: I think delegation graph edges should point in the direction towards the person that the vote is
+%being given to (more intuitive).
+%\\
+%Mitar: We are not giving votes to people, we are delegating a decision to people, but votes are computed for each person
+%separately based on how delegates voted themselves. The idea is that you ask a delegate how the voted and then compute
+%your vote. The do not get your vote to do anything with it. This is why arrows are like that. Maybe the word
+%"delegation" is confusing and we should maybe use surrogate or some other word.}
 Because not every member of the community has time or knowledge to vote all the time, each member can delegate
 decisions to one or more other members of the community.
 When a member does not vote themselves, information how those delegates voted is combined into a vote of
@@ -514,7 +529,7 @@ counted towards non-voting population.
     \Edge[label=$0.40$](M3)(M4)
   \end{tikzpicture}
   \caption{Example delegation network. Edges are directed towards a member who is delegating, representing how their
-  vote is computed from delegates' votes. E.g., $V_2 = 0.75 V_1 + 0.25 V_4$}~\label{fig:delegation-network}
+  vote is computed from delegates' votes. E.g., $V_2 = 0.75 V_1 + 0.25 V_4$}\label{fig:delegation-network}
 \end{figure}
 
 We can represent these delegations as a graph we call \emph{delegation network} as seen in
@@ -530,8 +545,8 @@ $V_i$ denotes their vote, if they have voted, or a computed vote based on their 
 
 A delegation network can be described as a system of equations.
 
-\todo[inline]{Max: Double check accuracy of this method, Improve explanation here and perhaps use nicer numbers so
-readers can follow along certain parts in their heads easily.}
+%\todo[inline]{Max: Double check accuracy of this method, Improve explanation here and perhaps use nicer numbers so
+%readers can follow along certain parts in their heads easily.}
 
 \begin{displaymath}
 \begin{array}{rcl}
@@ -608,17 +623,75 @@ D = \left[ \begin{array}{ccccc}
 \end{array} \right]
 \end{displaymath}
 
-\todo[inline]{Max: FYI, computing who to discard from the population as ``non-voting'' is a separate computation in itself.
-You need to figure out what votes can be calculated partially as a consequence of delegation, and which cannot.
-Use indicator vectors denoting 1 if member has voted, else 0.
-\\
-Mitar: This is exactly what $\boldsymbol{w}$ is later on.}
-
 There are few details we have to look into.
-Despite delegation some votes or parts of votes can still happen to be discarded.
+
+It happen that matrix $D$ is singular which prevents $\boldsymbol{V}$ to be directly computed.
+For example, for the following system:
+
+\begin{displaymath}
+\left[ \begin{array}{ccccc}
+1 & 0 & -1 & 0 \\
+0 & 1 & -0.3 & -0.7 \\
+-1 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1\\
+\end{array} \right] \boldsymbol{V} = \left[ \begin{array}{c}
+0 \\
+0 \\
+0 \\
+1 \\
+\end{array} \right]
+\end{displaymath}
+
+we would like that for $\boldsymbol{V}$ the result is:
+
+\begin{displaymath}
+\left[ \begin{array}{c}
+0 \\
+0.7 \\
+0 \\
+1 \\
+\end{array} \right]
+\end{displaymath}
+
+Such matrix $D$ can happen when there is a cycle of delegations and nobody in a cycle
+voted.
+We can use the algorithm from Algorithm~\ref{alg:decycle} to modify matrix $D$ into
+matrix $D'$ without such cycles.
+It is worth noting that matrix $D$ has some useful properties:
+there is always a diagonal with elements $1$, other elements are from interval $[−1,0]$,
+sum of each row is always or $1$ or $0$.
+
+\begin{algorithm}[h]
+  \caption{Removing cycles in delegation matrix $D$}
+  \begin{algorithmic}[1]
+    \State Define a set of restricted indexes $Z$.
+    \State Populate $Z$ with indexes of all rows which have $1$ only on a diagonal.\footnotemark
+    \State Remove all rows and columns corresponding to those indexes.
+    \State Add to $Z$ (original) index of every row for which the sum (of its elements in this reduced matrix) is $\neq 0$.
+    \State If added any such index, go to step 3.
+    \State Otherwise rows which are making the matrix ill-defined are left. Set them to having only $1$ on a diagonal in the original matrix $D$.
+  \end{algorithmic}
+  \label{alg:decycle}
+\end{algorithm}
+\footnotetext{Equal to: all rows for which the sum of its elements is $1$; or, for which all non-diagonal elements are $0$.}
+
+For the last example above, the resulting $D'$ matrix would be:
+
+\begin{displaymath}
+\left[ \begin{array}{cccc}
+1 & 0 & 0 & 0 \\
+0 & 1 & -0.3 & -0.7 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1\\
+\end{array} \right]
+\end{displaymath}
+
+For our initial example, no change is necessary, so $D' = D$.
+
+Despite delegation some votes or parts of votes can still happen to stay missing.
 Members who did not vote might have not declared their delegates.
 Other members could delegate to them as well, potentially propagating lack of a vote further.
-In our example, member $M_5$ has not voted so their vote is discarded.
+In our example, member $M_5$ has not voted so their vote will stay missing.
 As a consequence $M_4$'s vote cannot be computed fully, which influences $M_2$'s vote as well.
 
 Another issue is a question of abstentions.
@@ -640,23 +713,16 @@ To address all this, we define two vectors:
 \end{dcases*}
 \end{displaymath}
 
-We solve $D \boldsymbol{W} = \boldsymbol{w}$ and $D \boldsymbol{A} = \boldsymbol{a}$ for
+We solve $D' \boldsymbol{W} = \boldsymbol{w}$ and $D' \boldsymbol{A} = \boldsymbol{a}$ for
 $\boldsymbol{W} = \left[W_{i}\right]$ and $\boldsymbol{A} = \left[A_{i}\right]$, respectively.
 
 Non-zero elements of $\boldsymbol{W}$ correspond to members who voted or for which we can compute
 a vote.
 
-\todo[inline]{If there is a clique/cycle/closed subgroup in delegation, without any vote inside a clique/cycle/closed subgroup, the matrix becomes singular.
-We should find a way to detect such rows and set corresponding elements of $\boldsymbol{W}$ to $0$ (or the row
-to identity row before we try to compute $\boldsymbol{W}$).
-This is exactly what we want in fact, that those in such a clique/cycle/closed subgroup are seen as non-computable.
-Then the rest works.
-We should describe a problem, maybe with an example.}
-
 We define a normalized matrix:
 
 \begin{displaymath}
-D' = \left[d'_{ij}\right] = \begin{dcases*}
+D'' = \left[D''_{ij}\right] = \begin{dcases*}
  1 & if $i = j$ \\
  0 & if $W_j = 0$ ($V_j$ cannot be computed) \\
  -r'_{i,j} & if $M_i$ did not vote \\
@@ -675,7 +741,7 @@ compute their votes recursively.
 So $r_{4,2}$ and $r_{4,3}$ are normalized from $0.40$ to $0.50$.
 
 To compute votes with normalized ratios for only those delegates who voted or for which we can compute votes recursively,
-we solve $D' \boldsymbol{V} = \boldsymbol{v}$ for $\boldsymbol{V}$:
+we solve $D'' \boldsymbol{V} = \boldsymbol{v}$ for $\boldsymbol{V}$:
 
 \begin{displaymath}
 \mathbf{V} = \left[ \begin{array}{c}
@@ -717,8 +783,8 @@ In our example, delegation slightly pushes decision in favor.
 We pass computed votes $V$ and number of abstentions $N_A$ into computation of dynamic quorum to determine
 a quorum and credibility, in the same manner as if members voted themselves.
 
-\todo[inline]{Do we want really to compute quorum using delegation, or should quorum be computed
-using direct votes only?}
+%\todo[inline]{Do we want really to compute quorum using delegation, or should quorum be computed
+%using direct votes only?}
 
 % In general, there are various ways to use this delegation scheme.
 To whom to delegate could be done for each vote separately, or decisions could be categorized into various
