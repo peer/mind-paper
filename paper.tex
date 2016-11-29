@@ -164,7 +164,7 @@ items for all.
 %
 %How are you solving the problem? What technologies are you using?
 %
-%Using dynamic quorum, score voting, delegation, and nice integration with UI/UX.
+%Using dynamic quorum, range voting, delegation, and nice integration with UI/UX.
 %
 %How will you know how well you solved the problem? How will those technologies address the issues?
 %
@@ -284,8 +284,11 @@ items for all.
 
 \subsection{Range Voting}
 
-Range voting (score voting) is voting where members of a community express their positions on open proposals by assigning
+Range voting (also known as score voting) is voting where members of a community express their positions on open proposals by assigning
 each a score on a fixed scale, in the context of this paper, between $-1$ and $+1$.
+A proposal passes if the average score of all votes on a position is positive.
+When multiple competing proposals are being voted on, the one with highest average score wins.
+
 Prior work has shown that this approach generalizes many previous approaches to voting and allows members to express their
 positions in a highly informative and precise manner.
 We find it especially suitable for a web application because many web users are used to use it when ranking products
@@ -295,6 +298,8 @@ new proposal needs to be evaluated by members, as opposed to alternative voting 
 each proposal would need reassessing (assuming members use a consistent personal scale when voting).
 
 \subsection{Dynamic Quorum}
+
+%\todo[inline]{Unify terminology: population -> community, voters -> members, item -> proposal}
 
 \subsubsection{Background}
 A population of voters (a community) needs to collectively decide which item (if any) to take action on out of a set of competing items.
@@ -307,7 +312,7 @@ other competing alternatives.
 
 \subsubsection{Problem Statement}
 We wish to compute the probability that the bias in a population towards voting ``yes'' is greater than some
-fraction of the population (e.g., $50\%$ for a simple majority, $67\%$ for a super majority, $90\%$ for a consensus).
+fraction of the population (e.g., $50\%$ for a simple majority, $67\%$ for a super majority).
 In addition, we wish to compute the probability that the bias towards voting ``yes'' on a specific item is greater
 than the bias towards voting ``yes'' on all other competing items.
 
@@ -317,7 +322,7 @@ We assume that there is a fixed underlying bias in the population that is to be 
 Without any votes, we assume that this bias may be any value between $0\%$ and $100\%$ with equal probability.
 
 \subsubsection{Voting}
-We allow for score voting where each member of the population may choose any real number in the range $[-1,+1]$ to
+We allow for range voting where each member of the population may choose any real number in the range $[-1,+1]$ to
 represent their vote, with $-1$ representing opposition and $+1$ representing support.
 In the theory subsection below, we rescale votes to be in the range $[0,1]$ via the notation $\frac{votes + 1}{2}$.
 
@@ -327,18 +332,18 @@ It is important to distinguish an ``abstention'' (removing yourself from the vot
 (indicating indifference).
 
 \subsubsection{Bayesian Theory}
-To properly understand the Bayesian approach to parameter estimation, read the following instructive tutorial:
-\url{http://www.behind-the-enemy-lines.com/2008/01/are-you-bayesian-or-frequentist-or.html}
 
-The above tutorial is very similar to the problem we have at hand.
 The commonplace and convenient choice of using the Beta distribution as our prior on the population bias is a
 consequence of the Beta distribution's conjugacy with the binomial distribution, a distribution that arises
-naturally when considering samples from a finite population.
+naturally when considering samples from a finite population.\footnote{To
+properly understand the Bayesian approach to parameter estimation, read the following instructive tutorial:
+\url{http://www.behind-the-enemy-lines.com/2008/01/are-you-bayesian-or-frequentist-or.html}
+The tutorial is very similar to the problem we have at hand.}
 
-After extracting the sufficient statistics from raw votes --- namely the average score and the number of
-abstentions --- we can adjust the effective population size and corresponding threshold.
-In addition, we can calculate the effective number of ``yes'' and ``no'' votes, which one can think of as the number
-of Heads and Tails in the aforementioned tutorial.
+After extracting the sufficient statistics from raw votes~---~namely the average score and the number of
+abstentions~---~we can adjust the effective population size and corresponding threshold.
+In addition, we can calculate the effective number of ``yes'' and ``no'' votes.\footnote{Which one can think
+of as the number of Heads and Tails in the aforementioned tutorial.}
 
 Deriving our expression of interest now immediately follows:
 
@@ -574,7 +579,7 @@ D \boldsymbol{V} = \boldsymbol{v},\quad \boldsymbol{v} = \left[v_{i}\right],\qua
 
 To continue with our example, let's say that $M_1$ and $M_3$ voted for a decision with $0.7$ and against with $0.4$,
 respectively.
-We are using score voting on $[-1, 1]$ range, so those votes are $v_1 = V_1 = 0.7$ and
+We are using range voting on $[-1, 1]$ range, so those votes are $v_1 = V_1 = 0.7$ and
 $v_3 = V_3 = -0.4$.
 
 \begin{displaymath}
