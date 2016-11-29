@@ -261,28 +261,49 @@ Out of scope of this work:
 
 \subsection{Statistical Quorum}
 
-\subsubsection*{Background}
-A population of voters needs to collectively decide which item (if any) to take action on out of a set of competing items.  In order to democratically take action, the population needs to have a \{simple, super\}-majority of ``yes'' votes on a winning item, while also demonstrating that the winning item is preferred over all other competing items.  We do not want to poll the entire population, but we do want to be certain (specifically, $99\%$ certain) that the population does not take undesired actions, which in this case encompasses taking action on an item that is not supported by a majority of the population and/or taking action on an item that is not clearly preferred over all other competing alternatives.
+\subsubsection{Background}
+A population of voters needs to collectively decide which item (if any) to take action on out of a set of competing items.
+In order to democratically take action, the population needs to have a \{simple, super\}-majority of ``yes'' votes on a
+winning item, while also demonstrating that the winning item is preferred over all other competing items.
+We do not want to poll the entire population, but we do want to be certain (specifically, $99\%$ certain) that
+the population does not take undesired actions, which in this case encompasses taking action on an item that is not
+supported by a majority of the population and/or taking action on an item that is not clearly preferred over all
+other competing alternatives.
 
-\subsubsection*{Problem Statement}
-We wish to compute the probability that the bias in a population towards voting ``yes'' is greater than some fraction of the population (e.g., $50\%$ for a simple majority, $67\%$ for a super majority, $90\%$ for a consensus).  In addition, we wish to compute the probability that the bias towards voting ``yes'' on a specific item is greater than the bias towards voting ``yes'' on all other competing items.
+\subsubsection{Problem Statement}
+We wish to compute the probability that the bias in a population towards voting ``yes'' is greater than some
+fraction of the population (e.g., $50\%$ for a simple majority, $67\%$ for a super majority, $90\%$ for a consensus).
+In addition, we wish to compute the probability that the bias towards voting ``yes'' on a specific item is greater
+than the bias towards voting ``yes'' on all other competing items.
 
-\subsubsection*{Assumptions}
+\subsubsection{Assumptions}
 We assume that there is a fixed underlying bias in the population that is to be estimated given raw voting data.
 
 Without any votes, we assume that this bias may be any value between $0\%$ and $100\%$ with equal probability.
 
-\subsubsection*{Voting}
-We allow for score voting where each member of the population may choose any real number in the range $[-1,+1]$ to represent their vote, with $-1$ representing opposition and $+1$ representing support.  In the theory subsection below, we rescale votes to be in the range $[0,1]$ via the notation $\frac{votes + 1}{2}$.
+\subsubsection{Voting}
+We allow for score voting where each member of the population may choose any real number in the range $[-1,+1]$ to
+represent their vote, with $-1$ representing opposition and $+1$ representing support.
+In the theory subsection below, we rescale votes to be in the range $[0,1]$ via the notation $\frac{votes + 1}{2}$.
 
-We allow voters to ``abstain'' from voting.  We treat abstentions as indicating that a voter is removing themselves from the population of voters for an item.  It is important to distinguish an ``abstention'' (removing yourself from the voting population) from voting $0$ (indicating indifference).
+We allow voters to ``abstain'' from voting.
+We treat abstentions as indicating that a voter is removing themselves from the population of voters for an item.
+It is important to distinguish an ``abstention'' (removing yourself from the voting population) from voting $0$
+(indicating indifference).
 
-\subsubsection*{Bayesian Theory}
-To properly understand the Bayesian approach to parameter estimation, read the following instructive tutorial: \url{http://www.behind-the-enemy-lines.com/2008/01/are-you-bayesian-or-frequentist-or.html}
+\subsubsection{Bayesian Theory}
+To properly understand the Bayesian approach to parameter estimation, read the following instructive tutorial:
+\url{http://www.behind-the-enemy-lines.com/2008/01/are-you-bayesian-or-frequentist-or.html}
 
-The above tutorial is very similar to the problem we have at hand.  The commonplace and convenient choice of using the Beta distribution as our prior on the population bias is a consequence of the Beta distribution's conjugacy with the binomial distribution, a distribution that arises naturally when considering samples from a finite population.
+The above tutorial is very similar to the problem we have at hand.
+The commonplace and convenient choice of using the Beta distribution as our prior on the population bias is a
+consequence of the Beta distribution's conjugacy with the binomial distribution, a distribution that arises
+naturally when considering samples from a finite population.
 
-After extracting the sufficient statistics from raw votes --- namely the average score and the number of abstentions --- we can adjust the effective population size and corresponding threshold.  In addition, we can calculate the effective number of ``yes'' and ``no'' votes, which one can think of as the number of Heads and Tails in the aforementioned tutorial.
+After extracting the sufficient statistics from raw votes --- namely the average score and the number of
+abstentions --- we can adjust the effective population size and corresponding threshold.
+In addition, we can calculate the effective number of ``yes'' and ``no'' votes, which one can think of as the number
+of Heads and Tails in the aforementioned tutorial.
 
 Deriving our expression of interest now immediately follows:
 
@@ -308,10 +329,12 @@ where
 \begin{description}
 \begin{itemize}
 \item[$\alpha^*_i = $] the total number of ``yes'' votes for $X_i$ if we were to sample the entire population,
-\item[$T_i = $] $f \cdot N_i$, for some fraction $f$ corresponding to the type of majority needed for the vote (e.g. $f=\frac{1}{2}$ for a simple majority).
+\item[$T_i = $] $f \cdot N_i$, for some fraction $f$ corresponding to the type of majority needed for the vote
+(e.g. $f=\frac{1}{2}$ for a simple majority).
 \end{itemize}
 \end{description}
-Using the prior $p_1 \mid X_1 \sim \operatorname{Beta}(1+\alpha_1,1+\beta_1)$, corresponding to a uniform prior when no votes have been cast ($\alpha_1 = \beta_1 = 0$), we can express \eqref{eq1} as:
+Using the prior $p_1 \mid X_1 \sim \operatorname{Beta}(1+\alpha_1,1+\beta_1)$, corresponding to a uniform prior when
+no votes have been cast ($\alpha_1 = \beta_1 = 0$), we can express \eqref{eq1} as:
 \begin{align*}
 \Pr(\alpha^*_1 > T_1 \mid X_1) &= 1 - \Pr(\alpha^*_1 \leq T_1 \mid X_1),\\
 \Pr(\alpha^*_1 \leq T_1 \mid X_1) &= \int_0^1 \Pr(\alpha^*_1 \leq T_1 \mid p_1)\cdot \Pr(p_1 \mid X_1) \mathrm{d}p_1\\
@@ -321,7 +344,8 @@ Using the prior $p_1 \mid X_1 \sim \operatorname{Beta}(1+\alpha_1,1+\beta_1)$, c
 where
 \begin{description}
 \begin{itemize}
-\item[$V_i = $] $\lfloor{T_i - \alpha_i}\rfloor$, the maximum number of additional ``yes'' votes allowed such that $X_i$ would remain below threshold.
+\item[$V_i = $] $\lfloor{T_i - \alpha_i}\rfloor$, the maximum number of additional ``yes'' votes allowed such that
+$X_i$ would remain below threshold.
 \end{itemize}
 \end{description}
 
@@ -331,7 +355,11 @@ Hence, we have
 & 1 - \int_0^1 \sum\limits_{i=0}^{V_1} {K_1 \choose i} p_1^{K_1-i} {(1-p_1)}^{i} \times \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \mathrm{d}p_1
 \end{align}
 
-In the scenario where $\mathbf{card}(C) = n > 1$, i.e., there are competing motions, there is additional complexity to consider.  Without loss of generality, assume that $X_1$ is the most popular motion within $C$.  We now wish to not only compute \eqref{eq1}, but also the probability that $X_1$ is superior to all other $X_i  \in C, i \neq 1$:
+In the scenario where $\mathbf{card}(C) = n > 1$, i.e., there are competing motions, there is additional complexity to
+consider.
+Without loss of generality, assume that $X_1$ is the most popular motion within $C$.
+We now wish to not only compute \eqref{eq1}, but also the probability that $X_1$ is superior to all other
+$X_i  \in C, i \neq 1$:
 
 \begin{align}\label{eq3}
 \Pr\bigg(\bigwedge_{i=2}^n (\alpha^*_1 > \alpha^*_i) \mid C\bigg)
@@ -370,7 +398,8 @@ we can simplify \eqref{eq3} to:
 & \qquad\qquad\qquad \times \operatorname{Beta}(p_i; 1+\alpha_i,1+\beta_i) \mathrm{d}p_i \mathrm{d}p_1
 \end{align}
 
-We can numerically compute \eqref{eq2} and \eqref{eq5} given raw voting data.  In order to be certain before taking any actions, we would like for the computed credibilities to be $\geq 99\%$.
+We can numerically compute \eqref{eq2} and \eqref{eq5} given raw voting data.
+In order to be certain before taking any actions, we would like for the computed credibilities to be $\geq 99\%$.
 
 \begin{figure}[!ht]
 \centering
