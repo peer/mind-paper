@@ -328,7 +328,7 @@ where
 Hence, we have
 \begin{align}\label{eq2}
 & \Pr(\alpha^*_1 > T_1 \mid X_1) = \nonumber\\
-& 1 - \int_0^1 \sum\limits_{i=0}^{V_1} {K_1 \choose i} p_1^{K_1-i} {(1-p_1)}^{i} \times \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \mathrm{d}p_1
+& 1 - \int_0^1 \sum\limits_{i=0}^{V_1} {K_1 \choose i} p_1^{K_1-i} {(1-p_1)}^{i} \cdot \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \mathrm{d}p_1
 \end{align}
 
 In the scenario where $\mathbf{card}(C) = n > 1$, i.e., there are competing motions, there is additional complexity to consider.  Without loss of generality, assume that $X_1$ is the most popular motion within $C$.  We now wish to not only compute \eqref{eq1}, but also the probability that $X_1$ is superior to all other $X_i  \in C, i \neq 1$:
