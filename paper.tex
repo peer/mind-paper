@@ -390,7 +390,7 @@ no votes have been cast ($\alpha_1 = \beta_1 = 0$), we can express \eqref{eq1} a
 \begin{align*}
 \Pr(\alpha^*_1 > T_1 \mid X_1) &= 1 - \Pr(\alpha^*_1 \leq T_1 \mid X_1),\\
 \Pr(\alpha^*_1 \leq T_1 \mid X_1) &= \int_0^1 \Pr(\alpha^*_1 \leq T_1 \mid p_1)\cdot \Pr(p_1 \mid X_1) \mathrm{d}p_1\\
-&= \int_0^1 \sum\limits_{i=0}^{V_1} {K_1 \choose i} p_1^{K-i} {(1-p_1)}^{i} \\
+&= \int_0^1 \sum\limits_{i=0}^{V_1} {K_1 \choose i} p_1^{i} {(1-p_1)}^{K_1-i} \\
 & \qquad\qquad\quad \times \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \mathrm{d}p_1,
 \end{align*}
 where
@@ -404,7 +404,7 @@ $X_i$ would remain below threshold.
 Hence, we have
 \begin{align}\label{eq2}
 & \Pr(\alpha^*_1 > T_1 \mid X_1) = \nonumber\\
-& 1 - \int_0^1 \sum\limits_{i=0}^{V_1} {K_1 \choose i} p_1^{K_1-i} {(1-p_1)}^{i} \cdot \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \mathrm{d}p_1
+& 1 - \int_0^1 \sum\limits_{i=0}^{V_1} {K_1 \choose i} p_1^{i} {(1-p_1)}^{K_1-i} \cdot \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \mathrm{d}p_1
 \end{align}
 
 In the scenario where $\mathbf{card}(C) = n > 1$, i.e., there are competing motions, there is additional complexity to
