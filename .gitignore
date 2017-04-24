@@ -15,6 +15,6 @@
 *.out
 mpxerr.tex
 *.gz
-dynamic-quorum*.pdf
+statistical-quorum*.pdf
 delegation*.pdf
 *.DS_Store
