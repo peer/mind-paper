@@ -1,32 +1,67 @@
 \documentclass{sigchi}
 
-%% EXAMPLE BEGIN -- HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP -- (July 22, 2013 - Paul Baumann)
-% \toappear{Permission to make digital or hard copies of all or part of this work for personal or classroom use is      granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page. Copyrights for components of this work owned by others than ACM must be honored. Abstracting with credit is permitted. To copy otherwise, or republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee. Request permissions from permissions@acm.org. \\
-% {\emph{CHI'14}}, April 26--May 1, 2014, Toronto, Canada. \\
-% Copyright \copyright~2014 ACM ISBN/14/04...\$15.00. \\
-% DOI string from ACM form confirmation}
-%% EXAMPLE END -- HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP -- (July 22, 2013 - Paul Baumann)
+% Use this section to set the ACM copyright statement (e.g. for
+% preprints).  Consult the conference website for the camera-ready
+% copyright statement.
+
+% Copyright
+%\CopyrightYear{2016}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+% DOI
+%\doi{http://dx.doi.org/10.475/123_4}
+% ISBN
+%\isbn{123-4567-24-567/08/06}
+%Conference
+%\conferenceinfo{CHI'16,}{May 07--12, 2016, San Jose, CA, USA}
+%Price
+%\acmPrice{\$15.00}
+
+% Use this command to override the default ACM copyright statement
+% (e.g. for preprints).  Consult the conference website for the
+% camera-ready copyright statement.
+
+%% HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP --
+%% Please note you need to make sure the copy for your specific
+%% license is used here!
+% \toappear{
+% Permission to make digital or hard copies of all or part of this work
+% for personal or classroom use is granted without fee provided that
+% copies are not made or distributed for profit or commercial advantage
+% and that copies bear this notice and the full citation on the first
+% page. Copyrights for components of this work owned by others than ACM
+% must be honored. Abstracting with credit is permitted. To copy
+% otherwise, or republish, to post on servers or to redistribute to
+% lists, requires prior specific permission and/or a fee. Request
+% permissions from \href{mailto:Permissions@acm.org}{Permissions@acm.org}. \\
+% \emph{CHI '16},  May 07--12, 2016, San Jose, CA, USA \\
+% ACM xxx-x-xxxx-xxxx-x/xx/xx\ldots \$15.00 \\
+% DOI: \url{http://dx.doi.org/xx.xxxx/xxxxxxx.xxxxxxx}
+% }
 
 \toappear{}
 
 % Arabic page numbers for submission.  Remove this line to eliminate
-% page numbers for the camera ready copy 
-
+% page numbers for the camera ready copy
 \pagenumbering{arabic}
 
 % Load basic packages
-\usepackage{balance}  % to better equalize the last page
-\usepackage{graphics} % for EPS, load graphicx instead 
-\usepackage[T1]{fontenc}
+\usepackage{balance}       % to better equalize the last page
+\usepackage{graphics}      % for EPS, load graphicx instead
+\usepackage[T1]{fontenc}   % for umlauts and other diaeresis
 \usepackage{txfonts}
-\usepackage{times}    % comment if you want LaTeX's default font
-\usepackage[pdftex]{hyperref}
-\usepackage{url}      % llt: nicely formatted URLs
+\usepackage{mathptmx}
+\usepackage[pdflang={en-US},pdftex]{hyperref}
 \usepackage{color}
+\usepackage{booktabs}
 \usepackage{textcomp}
 \usepackage{booktabs}
 \usepackage{ccicons}
-\usepackage{todonotes}
 \usepackage{pgf}
 \usepackage{tikz}
 \usepackage{tkz-graph}
@@ -35,10 +70,39 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
+% Some optional stuff you might like/need.
+\usepackage{microtype}        % Improved Tracking and Kerning
+% \usepackage[all]{hypcap}    % Fixes bug in hyperref caption linking
+\usepackage{ccicons}          % Cite your images correctly!
+% \usepackage[utf8]{inputenc} % for a UTF8 editor only
+
+% If you want to use todo notes, marginpars etc. during creation of
+% your draft document, you have to enable the "chi_draft" option for
+% the document class. To do this, change the very first line to:
+% "\documentclass[chi_draft]{sigchi}". You can then place todo notes
+% by using the "\todo{...}"  command. Make sure to disable the draft
+% option again before submitting your final document.
+\usepackage{todonotes}
+
+% Paper metadata (use plain text, for PDF inclusion and later
+% re-using, if desired).  Use \emtpyauthor when submitting for review
+% so you remain anonymous.
+\def\plaintitle{PeerMind: Delegation}
+%\def\plainauthor{First Author, Second Author, Third Author,
+%  Fourth Author, Fifth Author, Sixth Author}
+%\def\emptyauthor{}
+%\def\plainkeywords{Authors' choice; of terms; separated; by
+%  semicolons; include commas, within terms only; required.}
+%\def\plaingeneralterms{Documentation, Standardization}
+
 % llt: Define a global style for URLs, rather that the default one
 \makeatletter
 \def\url@leostyle{%
-  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\bf\ttfamily}}}
+  \@ifundefined{selectfont}{
+    \def\UrlFont{\sf}
+  }{
+    \def\UrlFont{\small\bf\ttfamily}
+  }}
 \makeatother
 \urlstyle{leo}
 
@@ -56,9 +120,12 @@
 % redefine many LaTeX commands.
 \definecolor{linkColor}{RGB}{6,125,233}
 %\hypersetup{%
-%  pdftitle={SIGCHI Conference Proceedings Format},
-%  pdfauthor={LaTeX},
-%  pdfkeywords={SIGCHI, proceedings, archival format},
+%  pdftitle={\plaintitle},
+%% Use \plainauthor for final version.
+%%  pdfauthor={\plainauthor},
+%  pdfauthor={\emptyauthor},
+%  pdfkeywords={\plainkeywords},
+%  pdfdisplaydoctitle=true, % For Accessibility
 %  bookmarksnumbered,
 %  pdfstartview={FitH},
 %  colorlinks,
@@ -67,6 +134,7 @@
 %  linkcolor=black,
 %  urlcolor=linkColor,
 %  breaklinks=true,
+%  hypertexnames=false
 %}
 
 % create a shortcut to typeset table headings
@@ -79,22 +147,23 @@
 
 \hyphenation{PeerMind}
 
+% End of preamble. Here it comes the document.
 \begin{document}
 
-\title{PeerMind: Towards Collective Decision-Making}
+\title{\plaintitle}
 
 %\numberofauthors{3}
 %\author{%
-%  \alignauthor{1st Author Name\\
-%    \affaddr{Affiliation}\\
+%  \alignauthor{Leave Authors Anonymous\\
+%    \affaddr{for Submission}\\
 %    \affaddr{City, Country}\\
 %    \email{e-mail address}}\\
-%  \alignauthor{2nd Author Name\\
-%    \affaddr{Affiliation}\\
+%  \alignauthor{Leave Authors Anonymous\\
+%    \affaddr{for Submission}\\
 %    \affaddr{City, Country}\\
 %    \email{e-mail address}}\\
-%  \alignauthor{3rd Author Name\\
-%    \affaddr{Affiliation}\\
+%  \alignauthor{Leave Authors Anonymous\\
+%    \affaddr{for Submission}\\
 %    \affaddr{City, Country}\\
 %    \email{e-mail address}}\\
 %}
@@ -107,13 +176,12 @@
 
 \end{abstract}
 
-%\keywords{Authors' choice; of terms; separated; by semi\-colons;
-%  commas, within terms only; this section is required.}
-
 %\category{H.5.m.}{Information Interfaces and Presentation
 %  (e.g. HCI)}{Miscellaneous} \category{See
 %  \url{http://acm.org/about/class/1998/} for the full list of ACM
 %  classifiers. This section is required.}{}{}
+%
+%\keywords{\plainkeywords
 
 \section{Introduction}
 
@@ -862,6 +930,8 @@ but independently from a particular decision being made.
 %These results would speak to those specific subjective questions
 %and would be one useful thing to look at.''
 %
+% REFERENCES FORMAT
+% References must be the same font size as other body text.
 %\bibliographystyle{sigchi}
 %\bibliography{refs}
 %
@@ -872,3 +942,8 @@ but independently from a particular decision being made.
 %\end{itemize}
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
