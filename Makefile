@@ -1,5 +1,5 @@
 BIBFILE = refs.bib
-PAPERS = delegation.pdf dynamic-quorum.pdf
+PAPERS = delegation.pdf statistical-quorum.pdf
 
 all: $(PAPERS)
 
