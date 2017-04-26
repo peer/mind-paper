@@ -216,28 +216,29 @@ how can we reason about legitimacy of results?
   \end{tabular}
   \caption{Votes cast in Brexit, a 2016 referendum for United Kingdom's withdrawal from the European Union~\protect\cite{brexitresults},
   and 2016 USA presidential elections, popular vote~\protect\cite{usaresults1,usaresults2}. Simplified to only two options and without
-  invalid votes. The last column shows computed decision credibility as described in Section~\ref{sec:statistical-quorum}. We see that
+  invalid votes. The last column shows computed decision credibility as described in Section \nameref{sec:statistical-quorum}. We see that
   credibility is low, which we can mostly attribute to the fact that there is small difference in votes between both options so
   with more votes any option could end up winning.}\label{tab:example}
 \end{table*}
 
 To answer this question we are proposing a novel metric, \emph{decision credibility}, which uses statistical
-hypothesis testing to evaluate the credibility of the result.
-It uses distribution of votes made to compute the probability of decision passing if everyone voted,
+hypothesis testing to evaluate the credibility of the voting result.
+It uses distribution of votes made to evaluate the probability of decision passing if everyone actually voted,
 and not just those who voted.
 Intuitively, if in a community of 100 members 40 members vote for a decision to pass and nobody against,
 we can see that if everyone voted, the probability of majority of population voting for a decision is high.
 On the other hand, if 41 members for in favor and 40 against, we cannot really say much about what would a decision
 be if everyone voted.
 Only two more votes against can completely change the outcome.
-We describe decision credibility in more detail in Section~\ref{sec:statistical-quorum}\todo{Hm, SIGCGI template seems to not display section numbers. So how useful is to reference a section number?}.
+Hence, the suggested action would be for the community to gather more votes and continue discussion around the decision.
+We describe decision credibility in more detail in Section \nameref{sec:statistical-quorum}.
 
 Based on decision credibility we can define a \emph{statistical quorum} as a threshold which a decision's credibility
 has to pass for a decision to be seen as legitimate.
 For example, if we adopt $90\%$ as a reasonable requirement for statistical quorum and we compute decision
 credibility for votes in Table~\ref{tab:example} we see that in both cases we do not reach statistical quorum
 which puts legitimacy of those decisions into a question.
-We discuss a way for a community to determine a reasonable statistical quorum in Section~\ref{sec:discussion}.
+We discuss a way for a community to determine a reasonable statistical quorum in Section \nameref{sec:discussion}.
 
 Traditionally it is argued that legitimacy comes from the fact that members had a chance to participate
 and they decided not to, giving legitimacy to make a decision to those who did participate.
@@ -255,19 +256,20 @@ We can compute decision credibility during ongoing voting process to give feedba
 on how contentious a proposed decision is how much more votes are necessary for a statistical quorum
 to be reached.
 This allows the community to focus its collective attention towards decisions which require more votes
-to determine a legitimate result.
+to determine a legitimate result, while reducing attention towards proposals which already have overwhelming support.
 Instead of trying to increase participation on all democratic decisions being made, a community can
 do that selectively through an automatic feedback loop, trying to reach statistical quorum for their decisions.
 
 We built an open source web application PeerMind integrating statistical quorum with online voting.
 The application exposes computed decision credibility to users in real-time and through that provides
 the feedback loop needed for improving utilization of collective attention.
-We present the app in Section~\ref{sec:peermind} and use it for evaluating statistical quorum in
-Section~\ref{sec:evaluation}.
+We present the app in Section \nameref{sec:peermind} and use it for evaluating statistical quorum in
+Section \nameref{sec:evaluation}.
 
 \todo[inline]{Should we explicitly list our contributions again?}
 
-\todo[inline]{Repeat the structure of the rest of the paper?}
+\todo[inline]{Repeat the structure of the rest of the paper? Is there a better way to reference sections than
+referencing it by name?}
 
 \section{Related Work}
 
@@ -333,18 +335,6 @@ each proposal would need reassessing (assuming members use a consistent personal
 \label{sec:derivation}
 
 %\todo[inline]{Unify terminology: population -> community, voters -> members, item -> proposal, motion -> proposal}
-
-Dynamic quorum uses statistical hypothesis testing to compute the minimum number of required votes needed
-to achieve a desired level of confidence before a community adopts an outcome as being truly representative of
-its members' positions.
-For example, in a community of 100 members, if 20 members vote in full support of a proposal, then we can conclude
-with very high confidence that, had all 100 members actually voted, a majority them would support the proposal,
-despite in actuality 80 members not having voted.
-On the other hand, if 80 members vote but 41 vote in support of the proposal and 39 vote in opposition,
-the community cannot yet conclude anything with high confidence.
-Hence, the suggested action would be for the community to gather more votes and continue discussion around the proposal.
-By utilizing a dynamic quorum, we can direct attention and participation of the community towards contentious proposals,
-while reducing attention towards proposals which already have overwhelming support.
 
 \subsection{Background}
 A population of voters (a community) needs to collectively decide which item (if any) to take action on out of a set of competing items.
