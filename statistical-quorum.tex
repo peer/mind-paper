@@ -199,22 +199,30 @@ to address the issue of too low turnout.
 Moreover, many democratic communities have issues achieving quorum which hinders their operation.
 \todo{Add references.}
 
-Even if voting turnout has reached legally required quorum, it is still a question how to evaluate if
-the turnout is high enough to find results legitimate.
+Even if voting turnout has reached legally required quorum, or when one is not defined,
+it is still a question how to evaluate if the turnout is high enough to find results legitimate.
 As an example we can look at two recent votes, Brexit, a 2016 referendum for United Kingdom's withdrawal
 from the European Union, and popular vote in 2016 USA presidential elections, as seen in Table~\ref{tab:example}.
+Ignoring particularities of USA presidential elections process and using a popular vote as an example,
+how can we reason about legitimacy of results?
 
 \begin{table*}
   \centering
   \begin{tabular}{l r r r r r r r}
     {\small\textit{Vote}} & \multicolumn{2}{r}{\small \textit{First option}} & \multicolumn{2}{r}{\small \textit{Second option}} & {\small \textit{Total eligible voters}} & {\small \textit{Turnout}} & {\small \textit{Statistical quorum}} \\
     \midrule
-    Brexit & 17,410,742 & $51.9\%$ & 16,141,241 & $48.1\%$ & 46,500,001 & $72.2\%$ & \\
-    Presidential elections & 62,984,825 & $48.9\%$ & 65,853,516 & $51.1\%$ & 250,055,734 & $51.5\%$ & \\
+    Brexit & 17,410,742 & $51.9\%$ & 16,141,241 & $48.1\%$ & 46,500,001 & $72.2\%$ & $59.8\%$ \\
+    Presidential elections & 62,984,825 & $48.9\%$ & 65,853,516 & $51.1\%$ & 230,585,915 & $55.9\%$ & $52.6\%$ \\
   \end{tabular}
-  \caption{Votes cast in Brexit, a 2016 referendum for United Kingdom's withdrawal from the European Union,
-  and 2016 USA presidential elections, popular vote. Simplified to only two options and without invalid votes.}\label{tab:example}
+  \caption{Votes cast in Brexit, a 2016 referendum for United Kingdom's withdrawal from the European Union~\protect\cite{brexitresults},
+  and 2016 USA presidential elections, popular vote~\protect\cite{usaresults1,usaresults2}. Simplified to only two options and without invalid votes.}\label{tab:example}
 \end{table*}
+
+
+%traditionally, we just claim that everyone had an option
+
+%we can use statistical quroum, defined in section X
+
 
 
 %for example: trump and brexit
@@ -239,6 +247,9 @@ from the European Union, and popular vote in 2016 USA presidential elections, as
 
 \section{Related Work}
 
+% threshold and quorum at https://www.publications.parliament.uk/pa/ld200910/ldselect/ldconst/99/99.pdf
+% how does some claim that quorum are in fact bad, and counter democratic, but do not offer a solution how to evaluate them
+
 \section{Features}
 
 \section{Range Voting}
@@ -256,7 +267,8 @@ Moreover, if later on a new proposal is added to a set of existing proposals on 
 new proposal needs to be evaluated by members, as opposed to alternative voting systems where the relative rankings of
 each proposal would need reassessing (assuming members use a consistent personal scale when voting).
 
-\subsection{Dynamic Quorum}
+\section{Statistical Quorum}
+\label{sec:statistical-quorum}
 
 %\todo[inline]{Unify terminology: population -> community, voters -> members, item -> proposal, motion -> proposal}
 
