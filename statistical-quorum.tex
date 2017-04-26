@@ -155,15 +155,15 @@
 \maketitle
 
 \begin{abstract}
-The Achilles heel of many major democracies is the eternal need for sufficient engagement and attention from the community.
-While there have been major efforts towards increasing these attributes within the community, we explore a fundamentally
-different approach: For a fixed level of community attention, how can we optimize the allocation of this attention to
-maximize productivity?
-We propose a novel "statistical quorum", derived using first principles, as one metric the community can use to focus
-attention, in turn making the entire decision-making process dynamic.
-We developed an online system centered around this metric and tested it in a 140-person community that holds weekly
-councils over the course of 28 weeks.  We found that the community was able to use the online system to simultaneously
-improve the legitimacy and efficiency of their decision-making process.
+%The Achilles heel of many major democracies is the eternal need for sufficient engagement and attention from the community.
+%While there have been major efforts towards increasing these attributes within the community, we explore a fundamentally
+%different approach: For a fixed level of community attention, how can we optimize the allocation of this attention to
+%maximize productivity?
+%We propose a novel "statistical quorum", derived using first principles, as one metric the community can use to focus
+%attention, in turn making the entire decision-making process dynamic.
+%We developed an online system centered around this metric and tested it in a 140-person community that holds weekly
+%councils over the course of 28 weeks.  We found that the community was able to use the online system to simultaneously
+%improve the legitimacy and efficiency of their decision-making process.
 \end{abstract}
 
 %\category{H.5.m.}{Information Interfaces and Presentation
@@ -209,39 +209,59 @@ how can we reason about legitimacy of results?
 \begin{table*}
   \centering
   \begin{tabular}{l r r r r r r r}
-    {\small\textit{Vote}} & \multicolumn{2}{r}{\small \textit{First option}} & \multicolumn{2}{r}{\small \textit{Second option}} & {\small \textit{Total eligible voters}} & {\small \textit{Turnout}} & {\small \textit{Statistical quorum}} \\
+    {\small\textit{Vote}} & \multicolumn{2}{r}{\small \textit{First option}} & \multicolumn{2}{r}{\small \textit{Second option}} & {\small \textit{Total eligible voters}} & {\small \textit{Turnout}} & {\small \textit{Decision credibility}} \\
     \midrule
     Brexit & 17,410,742 & $51.9\%$ & 16,141,241 & $48.1\%$ & 46,500,001 & $72.2\%$ & $59.8\%$ \\
     Presidential elections & 62,984,825 & $48.9\%$ & 65,853,516 & $51.1\%$ & 230,585,915 & $55.9\%$ & $52.6\%$ \\
   \end{tabular}
   \caption{Votes cast in Brexit, a 2016 referendum for United Kingdom's withdrawal from the European Union~\protect\cite{brexitresults},
-  and 2016 USA presidential elections, popular vote~\protect\cite{usaresults1,usaresults2}. Simplified to only two options and without invalid votes.}\label{tab:example}
+  and 2016 USA presidential elections, popular vote~\protect\cite{usaresults1,usaresults2}. Simplified to only two options and without
+  invalid votes. The last column shows computed decision credibility as described in Section~\ref{sec:statistical-quorum}. We see that
+  credibility is low, which we can mostly attribute to the fact that there is small difference in votes between both options so
+  with more votes any option could end up winning.}\label{tab:example}
 \end{table*}
 
+To answer this question we are proposing a novel metric, \emph{decision credibility}, which uses statistical
+hypothesis testing to evaluate the credibility of the result.
+It uses distribution of votes made to compute the probability of decision passing if everyone voted,
+and not just those who voted.
+Intuitively, if in a community of 100 members 40 members vote for a decision to pass and nobody against,
+we can see that if everyone voted, the probability of majority of population voting for a decision is high.
+On the other hand, if 41 members for in favor and 40 against, we cannot really say much about what would a decision
+be if everyone voted.
+Only two more votes against can completely change the outcome.
+We describe decision credibility in more detail in Section~\ref{sec:statistical-quorum}.
 
-%traditionally, we just claim that everyone had an option
+Based on decision credibility we can define a \emph{statistical quorum} as a threshold which a decision's credibility
+has to pass for a decision to be seen as legitimate.
+For example, if we adopt $90\%$ as a reasonable requirement for statistical quorum and we compute decision
+credibility for votes in Table~\ref{tab:example} we see that in both cases we do not reach statistical quorum
+which puts legitimacy of those decisions into a question.
+We discuss a way for a community to determine a reasonable statistical quorum in Section~\ref{sec:discussion}.
 
-%we can use statistical quroum, defined in section X
+Traditionally it is argued that legitimacy comes from the fact that members had a chance to participate
+and they decided not to, giving legitimacy to make a decision to those who did participate.
+We argue that this is a problematic view because there are many restrictions on why members could not
+participate and vote.
+For example, they might not had time to participate because of other commitments, or they might determined
+that they are not informed enough to participate.
+Instead of assuming that everyone could participate if they would want, or trying to increase participation,
+we can see amount of participation members are able to do as a limited resource, a \emph{collective attention}
+a community has available to utilize.
 
+We can compute decision credibility during ongoing voting process to give feedback to the community
+on how contentious a proposed decision is how much more votes are necessary for a statistical quorum
+to be reached.
+This allows the community to focus its collective attention towards decisions which require more votes
+to determine a legitimate result.
+Instead of trying to increase participation on all democratic decisions being made, a community can
+do that selectively through an automatic feedback loop.
 
-
-%for example: trump and brexit
-%
-%we define measure of creditibility, statistical quorm, to evaluate this
-%
-%the easiest is to claim that results are legitimate becaue people had an option to participate, and they decided not to
-%
-%but what if they didn't have time to participate? or determined that they are not informed enough to participate?
-%
-%instead of trying to increase participation, we can look at participation as it is, and try to utilize it better
-%
-%we can use the same statistical quorum to direct collective attention to decisions which require more participation
-%and away from those which do not
-%
-%instead of requiring same arbitirary high static quorum for all decisions, we can require same creditibility, which
-%depends on votes made define if enough members participated
-%
-%Example
+To evaluate the use of statistical quorum in decision making of democratic communities we have developed
+a web application PeerMind which integrates online discussion with online voting.
+The application exposes computed decision credibility to users in real-time and through that provides
+the feedback loop needed for improving utilization of collective attention.
+We present the app in Section~\ref{sec:peermind}.
 
 \todo[inline]{Structure of the rest of the paper.}
 
@@ -250,9 +270,8 @@ how can we reason about legitimacy of results?
 % threshold and quorum at https://www.publications.parliament.uk/pa/ld200910/ldselect/ldconst/99/99.pdf
 % how does some claim that quorum are in fact bad, and counter democratic, but do not offer a solution how to evaluate them
 
-\section{Features}
-
-\section{Range Voting}
+\section{PeerMind Web Application}
+\label{sec:peermind}
 
 Range voting (also known as score voting) is voting where members of a community express their positions on open proposals by assigning
 each a score on a fixed scale, in the context of this paper, between $-1$ and $+1$.
@@ -267,7 +286,7 @@ Moreover, if later on a new proposal is added to a set of existing proposals on 
 new proposal needs to be evaluated by members, as opposed to alternative voting systems where the relative rankings of
 each proposal would need reassessing (assuming members use a consistent personal scale when voting).
 
-\section{Statistical Quorum}
+\section{Decision Credibility and Statistical Quorum}
 \label{sec:statistical-quorum}
 
 %\todo[inline]{Unify terminology: population -> community, voters -> members, item -> proposal, motion -> proposal}
@@ -448,6 +467,15 @@ In order to be certain before taking any actions, we would like for the computed
 %\todo[inline]{Do we take into the account the distribution of votes? So if you have a very large standard deviation
 %we might want to prefer a decision less than some other decision with smaller standard deviation, but maybe
 %also smaller (but still positive) average. Is distribution of votes influencing dynamic quorum?}
+
+\section{Evaluation}
+\label{sec:evaluation}
+
+\section{Discussion}
+\label{sec:discussion}
+
+% describe why 0.90% is a reasnable statistical quorum and how to determine one for your community
+
 
 % REFERENCES FORMAT
 % References must be the same font size as other body text.
