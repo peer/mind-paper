@@ -131,6 +131,8 @@
 % create a shortcut to typeset table headings
 % \newcommand\tabhead[1]{\small\textbf{#1}}
 
+\newcommand\secref[1]{\textit{\nameref{#1}}}
+
 % End of preamble. Here it comes the document.
 \begin{document}
 
@@ -216,7 +218,7 @@ how can we reason about legitimacy of results?
   \end{tabular}
   \caption{Votes cast in Brexit, a 2016 referendum for United Kingdom's withdrawal from the European Union~\protect\cite{brexitresults},
   and 2016 USA presidential elections, popular vote~\protect\cite{usaresults1,usaresults2}. Simplified to only two options and without
-  invalid votes. The last column shows computed decision credibility as described in Section \nameref{sec:statistical-quorum}. We see that
+  invalid votes. The last column shows computed decision credibility as described in Section \secref{sec:statistical-quorum}. We see that
   credibility is low, which we can mostly attribute to the fact that there is small difference in votes between both options so
   with more votes any option could end up winning.}\label{tab:example}
 \end{table*}
@@ -231,14 +233,14 @@ On the other hand, if 41 members for in favor and 40 against, we cannot really s
 be if everyone voted.
 Only two more votes against can completely change the outcome.
 Hence, the suggested action would be for the community to gather more votes and continue discussion around the decision.
-We describe decision credibility in more detail in Section \nameref{sec:statistical-quorum}.
+We describe decision credibility in more detail in Section \secref{sec:statistical-quorum}.
 
 Based on decision credibility we can define a \emph{statistical quorum} as a threshold which a decision's credibility
 has to pass for a decision to be seen as legitimate.
 For example, if we adopt $90\%$ as a reasonable requirement for statistical quorum and we compute decision
 credibility for votes in Table~\ref{tab:example} we see that in both cases we do not reach statistical quorum
 which puts legitimacy of those decisions into a question.
-We discuss a way for a community to determine a reasonable statistical quorum in Section \nameref{sec:discussion}.
+We discuss a way for a community to determine a reasonable statistical quorum in Section \secref{sec:discussion}.
 
 Traditionally it is argued that legitimacy comes from the fact that members had a chance to participate
 and they decided not to, giving legitimacy to make a decision to those who did participate.
@@ -263,8 +265,8 @@ do that selectively through an automatic feedback loop, trying to reach statisti
 We built an open source web application PeerMind integrating statistical quorum with online voting.
 The application exposes computed decision credibility to users in real-time and through that provides
 the feedback loop needed for improving utilization of collective attention.
-We present the application in Section \nameref{sec:peermind} and use it for evaluating statistical quorum in
-Section \nameref{sec:evaluation}.
+We present the application in Section \secref{sec:peermind} and use it for evaluating statistical quorum in
+Section \secref{sec:evaluation}.
 
 \todo[inline]{Should we explicitly list our contributions again?}
 
@@ -323,9 +325,6 @@ Then we evaluate it through real-world use of the PeerMind application by a 140 
 \todo[inline]{Theoretical evaluation, diagrams. Get readers to understand some of its properties visually.}
 
 \subsection{Use in Existing Democratic Community}
-
-
-% theoretical: math, diagrams
 
 % imperial: running it for x weeks in student community which has traditionally weekly meeting
 % issues with quorum
