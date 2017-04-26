@@ -291,6 +291,27 @@ each proposal would need reassessing (assuming members use a consistent personal
 \section{Decision Credibility and Statistical Quorum}
 \label{sec:statistical-quorum}
 
+\section{Evaluation}
+\label{sec:evaluation}
+
+\section{Discussion}
+\label{sec:discussion}
+
+% describe why 0.90% is a reasnable statistical quorum and how to determine one for your community
+
+\section{Conclusion}
+
+%\section{Acknowledgments}
+
+% REFERENCES FORMAT
+% References must be the same font size as other body text.
+\bibliographystyle{sigchi}
+\bibliography{refs}
+
+\appendix
+\section{Derivation of Decision Credibility}
+\label{sec:derivation}
+
 %\todo[inline]{Unify terminology: population -> community, voters -> members, item -> proposal, motion -> proposal}
 
 Dynamic quorum uses statistical hypothesis testing to compute the minimum number of required votes needed
@@ -305,7 +326,7 @@ Hence, the suggested action would be for the community to gather more votes and 
 By utilizing a dynamic quorum, we can direct attention and participation of the community towards contentious proposals,
 while reducing attention towards proposals which already have overwhelming support.
 
-\subsubsection{Background}
+\subsection{Background}
 A population of voters (a community) needs to collectively decide which item (if any) to take action on out of a set of competing items.
 In order to democratically take action, the population needs to have a \{simple, super\}-majority of ``yes'' votes on a
 winning item, while also demonstrating that the winning item is preferred over all other competing items.
@@ -314,18 +335,18 @@ the population does not take undesired actions, which in this case encompasses t
 supported by a majority of the population and/or taking action on an item that is not clearly preferred over all
 other competing alternatives.
 
-\subsubsection{Problem Statement}
+\subsection{Problem Statement}
 We wish to compute the probability that the bias in a population towards voting ``yes'' is greater than some
 fraction of the population (e.g., $50\%$ for a simple majority, $67\%$ for a super majority).
 In addition, we wish to compute the probability that the bias towards voting ``yes'' on a specific item is greater
 than the bias towards voting ``yes'' on all other competing items.
 
-\subsubsection{Assumptions}
+\subsection{Assumptions}
 We assume that there is a fixed underlying bias in the population that is to be estimated given raw voting data.
 
 Without any votes, we assume that this bias may be any value between $0\%$ and $100\%$ with equal probability.
 
-\subsubsection{Voting}
+\subsection{Voting}
 We allow for range voting where each member of the population may choose any real number in the range $[-1,+1]$ to
 represent their vote, with $-1$ representing opposition and $+1$ representing support.
 In the theory subsection below, we rescale votes to be in the range $[0,1]$ via the notation $\frac{votes + 1}{2}$.
@@ -335,7 +356,7 @@ We treat abstentions as indicating that a voter is removing themselves from the 
 It is important to distinguish an ``abstention'' (removing yourself from the voting population) from voting $0$
 (indicating indifference).
 
-\subsubsection{Bayesian Theory}
+\subsection{Bayesian Theory}
 
 The commonplace and convenient choice of using the Beta distribution as our prior on the population bias is a
 consequence of the Beta distribution's conjugacy with the binomial distribution, a distribution that arises
@@ -469,28 +490,6 @@ In order to be certain before taking any actions, we would like for the computed
 %\todo[inline]{Do we take into the account the distribution of votes? So if you have a very large standard deviation
 %we might want to prefer a decision less than some other decision with smaller standard deviation, but maybe
 %also smaller (but still positive) average. Is distribution of votes influencing dynamic quorum?}
-
-\section{Evaluation}
-\label{sec:evaluation}
-
-\section{Discussion}
-\label{sec:discussion}
-
-% describe why 0.90% is a reasnable statistical quorum and how to determine one for your community
-
-\section{Conclusion}
-
-%\section{Acknowledgments}
-
-% REFERENCES FORMAT
-% References must be the same font size as other body text.
-\bibliographystyle{sigchi}
-\bibliography{refs}
-
-\appendix
-\section{Derivation of Decision Credibility}
-\label{sec:derivation}
-
 
 \end{document}
 
