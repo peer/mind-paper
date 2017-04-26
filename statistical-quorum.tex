@@ -162,7 +162,7 @@
 %We propose a novel "statistical quorum", derived using first principles, as one metric the community can use to focus
 %attention, in turn making the entire decision-making process dynamic.
 %We developed an online system centered around this metric and tested it in a 140-person community that holds weekly
-%councils over the course of 28 weeks.  We found that the community was able to use the online system to simultaneously
+%councils over the course of 16 weeks.  We found that the community was able to use the online system to simultaneously
 %improve the legitimacy and efficiency of their decision-making process.
 \end{abstract}
 
@@ -263,7 +263,7 @@ do that selectively through an automatic feedback loop, trying to reach statisti
 We built an open source web application PeerMind integrating statistical quorum with online voting.
 The application exposes computed decision credibility to users in real-time and through that provides
 the feedback loop needed for improving utilization of collective attention.
-We present the app in Section \nameref{sec:peermind} and use it for evaluating statistical quorum in
+We present the application in Section \nameref{sec:peermind} and use it for evaluating statistical quorum in
 Section \nameref{sec:evaluation}.
 
 \todo[inline]{Should we explicitly list our contributions again?}
@@ -285,24 +285,45 @@ How do some claim that quorum are in fact bad, and counter democratic, but do no
 \section{PeerMind Web Application}
 \label{sec:peermind}
 
-Range voting (also known as score voting) is voting where members of a community express their positions on open proposals by assigning
-each a score on a fixed scale, in the context of this paper, between $-1$ and $+1$.
-A proposal passes if the average score of all votes on a position is positive.
-When multiple competing proposals are being voted on, the one with highest average score wins.
+%Range voting (also known as score voting) is voting where members of a community express their positions on open proposals by assigning
+%each a score on a fixed scale, in the context of this paper, between $-1$ and $+1$.
+%A proposal passes if the average score of all votes on a position is positive.
+%When multiple competing proposals are being voted on, the one with highest average score wins.
+%
+%Prior work has shown that this approach generalizes many previous approaches to voting and allows members to express their
+%positions in a highly informative and precise manner.
+%We find it especially suitable for a web application because many web users are used to use it when ranking products
+%and giving other ``five-star'' feedback.
+%Moreover, if later on a new proposal is added to a set of existing proposals on which voting was already open, only the
+%new proposal needs to be evaluated by members, as opposed to alternative voting systems where the relative rankings of
+%each proposal would need reassessing (assuming members use a consistent personal scale when voting).
 
-Prior work has shown that this approach generalizes many previous approaches to voting and allows members to express their
-positions in a highly informative and precise manner.
-We find it especially suitable for a web application because many web users are used to use it when ranking products
-and giving other ``five-star'' feedback.
-Moreover, if later on a new proposal is added to a set of existing proposals on which voting was already open, only the
-new proposal needs to be evaluated by members, as opposed to alternative voting systems where the relative rankings of
-each proposal would need reassessing (assuming members use a consistent personal scale when voting).
+\todo[inline]{The app has features both for use in online and offline setting. This allows one to compute
+statistical quorum also for an in-person meeting because math is now more complicated than just counting hands.
+We focus on online experience in this paper.}
+
+\todo[inline]{Security is out of the scope of this work. We assume here that users and their identities are known and are managed
+by a community's admin. There are many communities where their decision making is public with public minutes and this is who
+the app is currently targeting.}
 
 \section{Decision Credibility and Statistical Quorum}
 \label{sec:statistical-quorum}
 
+\todo[inline]{Definition and formulas for three types of decision credibility: single option, multiple competing options,
+and dynamic credibility which is increasing through time. In this order.}
+
 \section{Evaluation}
 \label{sec:evaluation}
+
+We evaluate statistical quorum in two ways. First, we evaluate it theoretically and explore its mathematical properties.
+Then we evaluate it through real-world use of the PeerMind application by a 140 members community.
+
+\subsection{Properties of Statistical Quorum}
+
+\todo[inline]{Theoretical evaluation, diagrams. Get readers to understand some of its properties visually.}
+
+\subsection{Use in Existing Democratic Community}
+
 
 % theoretical: math, diagrams
 
@@ -314,13 +335,29 @@ each proposal would need reassessing (assuming members use a consistent personal
 
 % interviews and surveys
 
+\todo[inline]{Make sure that we are supporting both of our claims well: this statistical quorum is a good metric and
+collective attention can be utilized better.}
+
 PeerMind source code is available under open source licence at \url{http://redacted.for.blind.review} and
-anonymized dataset of interactions with the app is available at \url{http://redacted.for.blind.review}.
+anonymized dataset of interactions with the app, including votes, is available at \url{http://redacted.for.blind.review}.
 
 \section{Discussion}
 \label{sec:discussion}
 
-% describe why 0.90% is a reasnable statistical quorum and how to determine one for your community
+\todo[inline]{Describe why is $0.90\%$ a reasonable statistical quorum and how to determine one for your community.}
+
+\todo[inline]{Describe interesting example how we had a bug which were showing a very low statistical quorum for a failing
+vote and so the whole community very engaged for a whole month to decide and resolve it. So how they trusted the
+app and the metric and how it was really able to direct the attention of the community. It seems it works even if it is
+buggy or not perfect, because it has worked so well in the past that members got used to the fact that when it was saying
+that there is a consensus or not on an issue that that was also their own read of the community. So for the purpose of
+directing attention the metric does not have to mathematically perfect.}
+
+\todo[inline]{Security. How to prevent a group of people to vote and by trick reaching statistical quorum.
+We use dynamic statistical quorum to address this, but one other approach is also for voting to stay open and
+decisions can then be in the future revoked by people adding more votes, or changing them. But for some decisions
+this might not really be possible, because decisions might not be reversible. You can revoke a law, but if you built
+a building as a consequence of a decision?}
 
 \section{Future Work}
 
@@ -343,7 +380,10 @@ understand what exactly this is and how the math works?}
 \section{Derivation of Decision Credibility}
 \label{sec:derivation}
 
-%\todo[inline]{Unify terminology: population -> community, voters -> members, item -> proposal, motion -> proposal}
+\todo[inline]{Derivation in order of dynamic credibility which is increasing through time, multiple competing options,
+single option, because this is how they are easier to derive as each following is a special case of the previous one.}
+
+%\todo[inline]{Unify terminology: population -> community, voters -> members, item -> decision, motion -> decision}
 
 \subsection{Background}
 A population of voters (a community) needs to collectively decide which item (if any) to take action on out of a set of competing items.
