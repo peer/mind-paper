@@ -434,7 +434,7 @@ for some arrival rate process $\lambda (t)$.
 
 For our purposes, we make a natural choice,
 \begin{align}\label{eq6}
-\lambda (t) = \lambda_0 {(\gamma)}^{-\frac{t}{K_i/N_i}},
+\lambda (t) = \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}},
 \end{align}
 where
 \begin{description}
@@ -445,7 +445,7 @@ where
 \end{description}
 Now, for example, to upper bound with $95\%$ probability the remaining number of votes still pending, we solve for $\hat{K_i}$ to satisfy the following inequality:
 \begin{align}\label{eq7}
-\lim_{t\rightarrow \infty}\Pr\left(N(t)\leq \hat{K_i}\right) & = \sum_{n=0}^{\hat{K_i}} \frac{(\lambda_0 \cdot K_i/N_i)^n}{n!(\ln{\gamma})^n}e^{-\lambda_0 \frac{K_i/N_i}{\ln{\gamma}}}\\
+\lim_{t\rightarrow \infty}\Pr\left(N(t)\leq \hat{K_i}\right) & = \sum_{n=0}^{\hat{K_i}} \frac{(\lambda_0 \cdot K_i/N_i)^n}{n!(\ln{1/\gamma})^n}e^{-\lambda_0 \frac{K_i/N_i}{\ln{1/\gamma}}}\\
 & \geq 95\% \nonumber
 \end{align}
 Upon solving for $\hat{K_i}$, we set $N_i = \alpha_i + \beta_i + \hat{K_i}$, and can proceed to check for a statistical quorum.
@@ -582,21 +582,21 @@ The properties we desire for $\lambda(t)$ are:
 \item[$(2)$] as $t \rightarrow \infty$, the rate of incoming votes should drop exponentially.
 \end{itemize} 
 \end{description}
-Setting $\lambda (t) = \lambda_0 {(\gamma)}^{-\frac{t}{K_i/N_i}}$ satisfies these constraints while still allowing for the exact rate to be tunable.
+Setting $\lambda (t) = \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}}$ for $0 < \gamma < 1$ satisfies these constraints while still allowing for the exact rate to be tunable.
 
 \subsection{Derivation of Eq. \eqref{eq7}}
-Using $\lambda (t) = \lambda_0 {(\gamma)}^{-\frac{t}{K_i/N_i}}$, we have
+Using $\lambda (t) = \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}}$, we have
 \begin{align*}
 \lim_{t \rightarrow \infty} \Lambda (t) &=\int _{0}^{\infty}\lambda (t)\mathrm{d}t\\
-&= \int _{0}^{\infty} \lambda_0 {(\gamma)}^{-\frac{t}{K_i/N_i}} \mathrm{d}t\\
-&= \lambda_0 \frac{K_i/N_i}{\ln{\gamma}}.
+&= \int _{0}^{\infty} \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}} \mathrm{d}t\\
+&= \lambda_0 \frac{K_i/N_i}{\ln{1/\gamma}}.
 \end{align*}
 Thus, 
 \begin{align*}
-\lim_{t\rightarrow \infty}\Pr\left(N(t) = n\right) = \frac{(\lambda_0 \cdot K_i/N_i)^n}{n!(\ln{\gamma})^n}e^{-\lambda_0 \frac{K_i/N_i}{\ln{\gamma}}},
+\lim_{t\rightarrow \infty}\Pr\left(N(t) = n\right) = \frac{(\lambda_0 \cdot K_i/N_i)^n}{n!(\ln{1/\gamma})^n}e^{-\lambda_0 \frac{K_i/N_i}{\ln{1/\gamma}}},
 \end{align*}
 and
 \begin{align*}
-\lim_{t\rightarrow \infty}\Pr\left(N(t)\leq \hat{K_i}\right) & = \sum_{n=0}^{\hat{K_i}} \frac{(\lambda_0 \cdot K_i/N_i)^n}{n!(\ln{\gamma})^n}e^{-\lambda_0 \frac{K_i/N_i}{\ln{\gamma}}}.
+\lim_{t\rightarrow \infty}\Pr\left(N(t)\leq \hat{K_i}\right) & = \sum_{n=0}^{\hat{K_i}} \frac{(\lambda_0 \cdot K_i/N_i)^n}{n!(\ln{1/\gamma})^n}e^{-\lambda_0 \frac{K_i/N_i}{\ln{1/\gamma}}}.
 \end{align*}
 \end{document}
