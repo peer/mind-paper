@@ -287,6 +287,25 @@ How do some claim that quorum are in fact bad, and counter democratic, but do no
 \section{PeerMind Web Application}
 \label{sec:peermind}
 
+We built a full-fletched real-time web application for collective decision making and voting using Meteor
+framework~\cite{meteor}.
+Users can initiate new discussions which leads them to the main user interface for each discussion as seen
+in Figure~\ref{fig:peermind}.
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=1.75\columnwidth]{figures/peermind.png}
+  \caption{The main PeerMind interface of a discussion. There is initial discussion description on the top and under it there
+  are three columns. A commenting sections for users to discuss it and proposed decisions, a second column where moderators can
+  summarize arguments made during discussion, and a list of proposals to address the discussion.
+  Proposals can be in different states: a proposal being discussed, a proposal being voted on, and with voting concluded.}\label{fig:peermind}
+\end{figure*}
+
+%and discuss them with others online in real-time and with rich-text content.
+%They can attach images and files using drag\&drop. Moderators can summarize discussions into three groups
+
+\todo[inline]{Present how users can see ongoing results during voting. Show an image of active ballot, but with expanded view for current results.}
+
 %Range voting (also known as score voting) is voting where members of a community express their positions on open proposals by assigning
 %each a score on a fixed scale, in the context of this paper, between $-1$ and $+1$.
 %A proposal passes if the average score of all votes on a position is positive.
@@ -471,13 +490,25 @@ Then we evaluate it through real-world use of the PeerMind application by a 140 
 
 \subsection{Use in Existing Democratic Community}
 
-% imperial: running it for x weeks in student community which has traditionally weekly meeting
-% issues with quorum
-% participation of everyone
-% they used online app for x weeks
-% we compare their old minutes with performance of new system
+\todo[inline]{Explain how we were using this for 16 weeks in fall 2016 in a community where traditionally they have
+been meeting weekly and now they used it online. How X proposals have been made with Y votes.}
 
-% interviews and surveys
+\todo[inline]{Explain how we compare with history: using minutes from spring 2016 for the same community. Issues with
+quorum often not bein reached or being lost during the meeting. How many proposals were made then.}
+
+\todo[inline]{Using our metric compare legitimacy of decisions being made in the spring and fall.}
+
+\todo[inline]{We compare how much time collectively was spend on decision making based on minutes in spring 2016 and
+how much based on interactions with the platform in fall 2016. Claim is that we made more decisions with less time people
+having to be involved in decision making, and with better legitimacy.}
+
+\todo[inline]{We did satisfaction surveys with decision making both in spring and fall 2016. Pull out some interesting
+observation when comparing.}
+
+\todo[inline]{We made 6 unstructured interviews. Pull all quotes explaining how they like the idea and how it seems
+to work. But how there are other issues by moving decision making online: meetings also serve community building which
+does not happen online. No fun. So interesting insights about using online platforms for offline communities
+for making decisions which are not really answering our hypothesis, but are useful as insights we got.}
 
 \todo[inline]{Make sure that we are supporting both of our claims well: this statistical quorum is a good metric and
 collective attention can be utilized better.}
@@ -502,6 +533,10 @@ We use dynamic statistical quorum to address this, but one other approach is als
 decisions can then be in the future revoked by people adding more votes, or changing them. But for some decisions
 this might not really be possible, because decisions might not be reversible. You can revoke a law, but if you built
 a building as a consequence of a decision?}
+
+\todo[inline]{Discuss how this might or might not lead to a more inclusive decision making: some people prefer it because
+they have time to collect thoughts and can participate when they have time, some people do not because they feel
+they cannot communicate as effectively, especially with lack of emotions being conveyed.}
 
 \section{Future Work}
 
