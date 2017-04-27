@@ -346,7 +346,7 @@ We treat abstentions as indicating that a voter is removing themselves from the 
 It is important to distinguish an ``abstention'' (removing one's self from the voting population) from voting $0$ (indicating indifference).
 
 \subsection{Bayesian Theory}
-After collecting an initial set of votes from members, we want to use that data to construct a prior distribution to help estimate the posterior probability that the proposal is acceptable to the entire community.  Because the sum of  the collected votes follows a binomial distribution, a commonplace and convenient choice for the form of the prior on the community's bias is the Beta distribution (due to its conjugacy with the binomial distribution).
+After collecting an initial set of votes from members, we want to use that data to construct a prior distribution to help estimate the posterior probability that the proposal is acceptable to the entire community.  Because the sum of  the collected votes follows a binomial distribution, a commonplace and convenient choice for the form of the prior on the community's bias is the Beta distribution (due to its conjugacy with the binomial distribution).  Together, they form the Beta-binomial distribution (related to the P\'olya urn model).
 
 After extracting the sufficient statistics from raw votes --- namely, the average score and the number of abstentions --- we can adjust the effective community size and corresponding threshold.  In addition, we can calculate the effective number of ``yes'' ($+1$) and ``no'' ($-1$) votes:
 
@@ -449,7 +449,7 @@ Now, for example, to upper bound with $95\%$ probability the remaining number of
 & \geq 95\% \nonumber
 \end{align}
 where $\Lambda = \frac{\lambda_0 \cdot K_i/N_i)}{\ln{1/\gamma}}$.
-Upon solving for $\hat{K_i}$, we set $N_i = \alpha_i + \beta_i + \hat{K_i}$, and can proceed to check for a statistical quorum.
+Upon solving for $\hat{K_i}$, we update $N_i \leftarrow \min\{N_i,\alpha_i + \beta_i + \hat{K_i}\}$, and can proceed to check for a statistical quorum.
 
 
 %\begin{figure}[ht]
