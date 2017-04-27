@@ -290,8 +290,155 @@ Moreover, if later on a new proposal is added to a set of existing proposals on 
 new proposal needs to be evaluated by members, as opposed to alternative voting systems where the relative rankings of
 each proposal would need reassessing (assuming members use a consistent personal scale when voting).
 
-\section{Decision Credibility and Statistical Quorum}
+\section{Statistical Quorum}
 \label{sec:statistical-quorum}
+A statistical quorum uses statistical hypothesis testing to infer the credibility of the outcome of an open vote before the community adopts the outcome as being truly representative all members' positions.
+For example, in a community of 100 members, if 35 members support a specific proposal and 0 oppose, then we can conclude with high probability that, had all 100 members taken the time to vote, a majority of them would be in support of the proposal.  Hence, despite the reality of 65 members not having voted, the outcome of the 35-member vote was credible enough to be taken as representative of the entire community's desire.
+On the other hand, if 80 members vote, where 41 support the proposal and 39 oppose, then we cannot yet conclude that the decision to accept the proposal is credible enough for the entire community to officially adopt, despite the significant participation in the vote.
+Instead, the suggested course of action would be to continue gathering more votes and/or further discussing the proposal until a credible outcome is established.
+
+By utilizing a statistical quorum, a community can actively direct attention and participation within the community towards contentious proposals, while avoiding wasting attention on noncontroversial proposals.
+
+\subsection{Background}
+Consider a community that needs to collectively decide which proposal (if any) to accept out of a set of competing proposals.
+To act in democratic fashion, the community may wish to select a winning proposal that either has the support of a \{simple, super\}-majority of all members, or instead is demonstrably preferred over all other competing proposals.  (In some cases, the community may want a winning proposal to satisfy both criteria.)
+
+Ideally, we do not want to poll all members in order to officially accept a proposal, but we do want some level of certainty (e.g., $90\%$ certainty) that
+the population is not accidentally accepting an undesired proposal, which in this case encompasses accepting a proposal that is not supported by a majority of members and/or is not clearly preferred over all other competing alternatives.
+
+The primary motivation behind using a statistical quorum is to guarantee a level of credibility before letting a subset of members act on behalf of the entire community.
+
+\subsection{Problem Statement}
+We wish to compute the probability that the bias in a community towards supporting a proposal is greater than some
+fraction of the population (e.g., $50\%$ for a simple majority, $67\%$ for a super majority).
+
+In addition, we wish to compute the probability that the community bias towards supporting a specific proposal is greater than the community bias towards supporting any competing proposals.
+
+\subsection{Assumptions}
+We assume that there is a fixed latent bias for the support of a proposal within the community.  We take each individual vote to be independent and identically distributed (i.i.d.) according to a Bernoulli distribution around this bias.  It should be noted that the independence assumption may not hold in some settings, such as when votes are accumulated over time (one may observe surges of correlated votes).  We will partially address this when refining our original formulation of a statistical quorum into a \textit{dynamic} statistical quorum.
+
+Without having collected any votes, we assume that the community bias may be any value between $0\%$ and $100\%$ with equal probability (uniform prior).
+
+\subsection{Voting}
+We allow for range voting where each member of the community may choose any real-valued vote $v \in [-1,+1]$ to
+represent their vote, with $v = -1$ representing full opposition and $v=+1$ representing full support.  In most applications, it is sensible to quantize $v$ into a fixed number of bins spanning the full range, hence our treatment of $v$ as a discrete random variable.  Because we treat individual votes as a Bernoulli random variable, one can consider $v$ as an individual's average vote.  In the theory subsection below, we rescale $v$ to be in the range $[0,1]$ via the notation $\frac{v + 1}{2}$.
+
+We allow voters to ``abstain'' from voting.
+We treat abstentions as indicating that a voter is removing themselves from the community on a given vote.
+It is important to distinguish an ``abstention'' (removing one's self from the voting population) from voting $0$ (indicating indifference).
+
+\subsection{Bayesian Theory}
+After collecting an initial set of votes from members, we want to use that data to construct a prior distribution to help estimate the posterior probability that the proposal is acceptable to the entire community.  Because the sum of  the collected votes follows a binomial distribution, a commonplace and convenient choice for the form of the prior on the community's bias is the Beta distribution (due to its conjugacy with the binomial distribution).
+
+After extracting the sufficient statistics from raw votes --- namely, the average score and the number of abstentions --- we can adjust the effective community size and corresponding threshold.  In addition, we can calculate the effective number of ``yes'' ($+1$) and ``no'' ($-1$) votes:
+
+Let
+\begin{description}
+\begin{itemize}
+\item[$C = $] $\{X_1,\ldots, X_n\}$, the set of competing proposals,
+\item[$N = $] population size,
+\item[$X_i = $] $\{v_1, \ldots, v_{m_i}\}$, the $m_i$ raw votes for proposal $i$, after excluding abstentions,
+\item[$N_i = $] $(N - \textrm{number of abstentions on } X_i)$, the effective population voting on proposal $X_i$,
+\item[$\alpha_i = $] $\sum\limits_{v \in X_i}\left(\frac{v+1}{2}\right)$, the effective number of ``yes'' votes on motion $X_i$,
+\item[$\beta_i = $] $m_i - \alpha_i$, the effective number of ``no'' votes on motion $X_i$,
+\item[$K_i = $] $N_i - m_i$, the number of remaining votes yet to be cast on $X_i$,
+\item[$p_i = $] true latent community bias towards voting ``yes'' on $X_i$.
+\end{itemize}
+\end{description}
+
+In Eqs. \eqref{eq2}, \eqref{eq3}, \eqref{eq5}, \eqref{eq6}, \eqref{eq7} that follow, we refer the reader to the \hyperref[sec:derivation]{Appendix} for complete derivation details and justifications.
+
+When considering a single proposal $X_i$ in isolation, we wish to compute:
+\begin{align}\label{eq1}
+\Pr(\alpha^*_i > T_i \mid X_i),
+\end{align}
+where
+\begin{description}
+\begin{itemize}
+\item[$\alpha^*_i = $] the total number of ``yes'' votes for $X_i$ if we were to sample the entire population,
+\item[$T_i = $] $f \cdot N_i$, for some fraction $f$ corresponding to the type of majority needed for the vote
+(e.g., $f=\frac{1}{2}$ for a simple majority).
+\end{itemize}
+\end{description}
+Using a desirable prior 
+\begin{align}\label{eq2}
+p_i \mid X_i \sim \operatorname{Beta}(1+\frac{\alpha_i}{K_i},1+\frac{\beta_i}{K_i}),
+\end{align}
+corresponding to a uniform prior when no votes have been cast ($\alpha_i = \beta_i = 0$), we can express \eqref{eq1} as:
+\begin{align}\label{eq3}
+\Pr(\alpha^*_i > T_i \mid X_i) &= 1 - {CDF}_{\nu_i}(V_i)
+\end{align}
+for
+\begin{align*}
+\nu_i & \sim \operatorname{Beta-Binomial}(1+\frac{\alpha_i}{K_i},1+\frac{\beta_i}{K_i}, K_i),\\
+{CDF}_{\nu_i}(V_i) & = \Pr(\nu_i \leq V_i),
+\end{align*}
+where
+\begin{description}
+\begin{itemize}
+\item[$V_i = $] $\lfloor{T_i - \alpha_i}\rfloor$, the maximum number of additional ``yes'' votes $X_i$ could receive such that it would remain below threshold.
+\end{itemize}
+\end{description}
+
+When considering a proposal $X_i$ relative to other proposals in $C$, we wish to compute
+\begin{align}\label{eq4}
+\Pr\left(\bigwedge_{j \neq i} (\alpha^*_i > \alpha^*_j) \mid C\right)
+\end{align}
+
+Under the assumption that the community's votes on motions are independent across motions (which, in many instances, will actually give a lower bound on \eqref{eq3} when a community's support of one proposal is negatively correlated with its support on a competing proposal), we can decompose \eqref{eq3} as follows:
+\begin{align}\label{eq5}
+& \Pr\left(\bigwedge_{j \neq i} (\alpha^*_i > \alpha^*_j) \mid C\right) \nonumber \\
+= & \prod_{j \neq i}\left(1 - \sum_{k=\lceil\delta_{ij}\rceil}^{K_j} \Pr(\nu_j = k) \cdot {CDF}_{\nu_i}(\alpha_j + k) \right)
+\end{align}
+where
+\begin{description}
+\begin{itemize}
+\item[$\delta_{ij} = $] $\alpha_i - \alpha_j$, the number of effective ``yes'' votes $X_i$ leads $X_j$ by.
+\end{itemize}
+\end{description}
+
+Using Eqs. \eqref{eq2} and \eqref{eq4}, we can numerically compute the credibility of a vote's outcome in two key scenarios relevant for democratic communities.  For example, a community may only consider accepting a proposal when a vote's credibility is above $90\%$.
+
+\subsection{Dynamic Statistical Quorum}
+Oftentimes, not all proposals are relevant to the entire community.  Instead, a niche proposal may only affect a subset of the community, and hence to require much of the community to indicate their indifference and/or decide their opinion is a waste of the their fixed attentional budget.  While the underlying formulation for a statistical quorum was to establish credibility guarantees before taking action, a natural consequence in common scenarios of the kind just described leads to a reduction in decision-making efficiency.  How can we maintain credibility guarantees while simultaneously boosting efficiency?
+
+The solution is to infer the \textit{relevant} population size that cares about a given proposal so that we may establish credibility within only the subset population (naturally requiring less global attention).  By replacing the absolute upper bound on this relevant population size ($N_i$) with a high probability upper bound, we can continue to use the same formula presented in Eqs. \eqref{eq2} and \eqref{eq4}, but with more relevant parameters (namely, a smaller $N_i$, which in turn modifies $T_i$, $K_i$, and $V_i$).
+
+To infer $N_i$, we turn to a dynamic voting process whereby information embedded within the dynamics is exploited.  By modeling the arrival rate of new votes as a nonhomogeneous Poisson process, we can extrapolate into the future.  For a decaying arrival rate of new votes, a nonhomogeneous Poisson process $\{N(t),t\geq 0\}$ probabilistically models the number of future arrivals over a given time interval $[0,t)$ according to:
+\begin{align*}
+\Pr(N(t)=n)={\frac {[\Lambda (t)]^{n}}{n!}}e^{-\Lambda (t)},
+\end{align*}
+where
+\begin{align*}
+\Lambda (t)=\int _{0}^{t}\lambda (\tilde{t})\mathrm{d}\tilde{t},
+\end{align*}
+for some arrival rate process $\lambda (t)$.
+
+For our purposes, we make a natural choice,
+\begin{align}\label{eq6}
+\lambda (t) = \lambda_0 {(\gamma)}^{-\frac{t}{K_i/N_i}},
+\end{align}
+where
+\begin{description}
+\begin{itemize}
+\item[$\lambda_0 =$] a time-averaged rate of vote arrivals (preferably over a unit of time that sufficiently smooths the historical rate),
+\item[$\gamma =$] a decay factor ($0 < \gamma < 1$) ideally tuned to fit real historical data for the community via a regression analysis.
+\end{itemize}
+\end{description}
+Now, for example, to upper bound with $95\%$ probability the remaining number of votes still pending, we solve for $\hat{K_i}$ to satisfy the following inequality:
+\begin{align}\label{eq7}
+\lim_{t\rightarrow \infty}\Pr\left(N(t)\leq \hat{K_i}\right) & = \sum_{n=0}^{\hat{K_i}} \frac{(\lambda_0 \cdot K_i/N_i)^n}{n!(\ln{\gamma})^n}e^{-\lambda_0 \frac{K_i/N_i}{\ln{\gamma}}}\\
+& \geq 95\% \nonumber
+\end{align}
+Upon solving for $\hat{K_i}$, we set $N_i = \alpha_i + \beta_i + \hat{K_i}$, and can proceed to check for a statistical quorum.
+
+
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=0.5\textwidth]{figures/}
+%\caption{Simple Majority: $\alpha$ vs. $\Pr(\alpha > \frac{1}{2}N)$ for $N=100$, $\beta = 10$.}
+%\label{simple_majority}
+%\end{figure}
 
 \section{Evaluation}
 \label{sec:evaluation}
@@ -299,203 +446,93 @@ each proposal would need reassessing (assuming members use a consistent personal
 \section{Discussion}
 \label{sec:discussion}
 
-% describe why 0.90% is a reasnable statistical quorum and how to determine one for your community
+% describe why 0.90% is a reasonable statistical quorum and how to determine one for your community
 
 \section{Conclusion}
 
 %\section{Acknowledgments}
 
-% REFERENCES FORMAT
-% References must be the same font size as other body text.
 \bibliographystyle{sigchi}
 \bibliography{refs}
 
 \appendix
-\section{Derivation of Decision Credibility}
 \label{sec:derivation}
-
-%\todo[inline]{Unify terminology: population -> community, voters -> members, item -> proposal, motion -> proposal}
-
-Dynamic quorum uses statistical hypothesis testing to compute the minimum number of required votes needed
-to achieve a desired level of confidence before a community adopts an outcome as being truly representative of
-its members' positions.
-For example, in a community of 100 members, if 20 members vote in full support of a proposal, then we can conclude
-with very high confidence that, had all 100 members actually voted, a majority them would support the proposal,
-despite in actuality 80 members not having voted.
-On the other hand, if 80 members vote but 41 vote in support of the proposal and 39 vote in opposition,
-the community cannot yet conclude anything with high confidence.
-Hence, the suggested action would be for the community to gather more votes and continue discussion around the proposal.
-By utilizing a dynamic quorum, we can direct attention and participation of the community towards contentious proposals,
-while reducing attention towards proposals which already have overwhelming support.
-
-\subsection{Background}
-A population of voters (a community) needs to collectively decide which item (if any) to take action on out of a set of competing items.
-In order to democratically take action, the population needs to have a \{simple, super\}-majority of ``yes'' votes on a
-winning item, while also demonstrating that the winning item is preferred over all other competing items.
-We do not want to poll the entire population, but we do want to be certain (specifically, $99\%$ certain) that
-the population does not take undesired actions, which in this case encompasses taking action on an item that is not
-supported by a majority of the population and/or taking action on an item that is not clearly preferred over all
-other competing alternatives.
-
-\subsection{Problem Statement}
-We wish to compute the probability that the bias in a population towards voting ``yes'' is greater than some
-fraction of the population (e.g., $50\%$ for a simple majority, $67\%$ for a super majority).
-In addition, we wish to compute the probability that the bias towards voting ``yes'' on a specific item is greater
-than the bias towards voting ``yes'' on all other competing items.
-
-\subsection{Assumptions}
-We assume that there is a fixed underlying bias in the population that is to be estimated given raw voting data.
-
-Without any votes, we assume that this bias may be any value between $0\%$ and $100\%$ with equal probability.
-
-\subsection{Voting}
-We allow for range voting where each member of the population may choose any real number in the range $[-1,+1]$ to
-represent their vote, with $-1$ representing opposition and $+1$ representing support.
-In the theory subsection below, we rescale votes to be in the range $[0,1]$ via the notation $\frac{votes + 1}{2}$.
-
-We allow voters to ``abstain'' from voting.
-We treat abstentions as indicating that a voter is removing themselves from the population of voters for an item.
-It is important to distinguish an ``abstention'' (removing yourself from the voting population) from voting $0$
-(indicating indifference).
-
-\subsection{Bayesian Theory}
-
-The commonplace and convenient choice of using the Beta distribution as our prior on the population bias is a
-consequence of the Beta distribution's conjugacy with the binomial distribution, a distribution that arises
-naturally when considering samples from a finite population.\footnote{To
-properly understand the Bayesian approach to parameter estimation, read the following instructive tutorial:
-\url{http://www.behind-the-enemy-lines.com/2008/01/are-you-bayesian-or-frequentist-or.html}
-The tutorial is very similar to the problem we have at hand.}
-
-After extracting the sufficient statistics from raw votes~---~namely the average score and the number of
-abstentions~---~we can adjust the effective population size and corresponding threshold.
-In addition, we can calculate the effective number of ``yes'' and ``no'' votes.\footnote{Which one can think
-of as the number of Heads and Tails in the aforementioned tutorial.}
-
-Let
+\subsection{Derivation of Eq. \eqref{eq2}}
+In choosing a Beta prior, we start with $\operatorname{Beta}(1,1)$, as it represents the uniform distribution over all potential values of the community's bias.  To update the prior based on collected votes, standard theory suggests updating to $\operatorname{Beta}(1+\alpha_i,1+\beta_i)$; however, there are a few consistency issues with this update that we seek to fix:
 \begin{description}
 \begin{itemize}
-\item[$C = $] $\{X_1,\ldots, X_n\}$, the set of competing motions,
-\item[$N = $] population size,
-\item[$X_i = $] $\{v_1, \ldots, v_{m_i}\}$, the $m_i$ raw votes for motion $X_i$, excluding ``abstentions'',
-\item[$N_i = $] $(N - \textrm{number of abstentions on } X_i)$, the effective population voting on motion $X_i$,
-\item[$\alpha_i = $] $\sum\limits_{v \in X_i} \left(\frac{v+1}{2}\right)$, the effective number of ``yes'' votes on motion $X_i$,
-\item[$\beta_i = $] $m_i - \alpha_i$, the effective number of ``no'' votes on motion $X_i$,
-\item[$K_i = $] $N_i - m_i$, the number of remaining votes yet to be cast on $X_i$,
-\item[$p_i = $] true latent population bias towards voting ``yes'' on $X_i$.
+\item[$(1)$] The updated prior should not depend on the absolute number of votes $\alpha_i$, $\beta_i$, as this is not scale-invariant; rather, it should depend on the relative proportions (which are unitless instead of a number of votes),
+\item[$(2)$] as $\alpha_i + \beta_i \rightarrow N_i$, $\mathbb{E}[p_i] \rightarrow \frac{\alpha_i}{\alpha_i+\beta_i}$ (at a rate independent of $N_i$),
+\item[$(3)$] as $\alpha_i + \beta_i \rightarrow N_i$, $\operatorname{Var}[p_i] \rightarrow 0$ (at a rate independent of $N_i$).
 \end{itemize}
 \end{description}
+To satisfy these consistency properties, we seek to linearly update the prior's scale parameters in a more natural way: $\operatorname{Beta}(1+\eta\alpha_i,1+\eta\beta_i)$ for some renormalizing factor $\eta$.
 
-When we have a single motion open for voting, $C=\{X_1\}$, we simply wish to compute:
-\begin{align}\label{eq1}
-\Pr(\alpha^*_1 > T_1 \mid X_1),
-\end{align}
-where
-\begin{description}
-\begin{itemize}
-\item[$\alpha^*_i = $] the total number of ``yes'' votes for $X_i$ if we were to sample the entire population,
-\item[$T_i = $] $f \cdot N_i$, for some fraction $f$ corresponding to the type of majority needed for the vote
-(e.g. $f=\frac{1}{2}$ for a simple majority).
-\end{itemize}
-\end{description}
-Using the prior $p_1 \mid X_1 \sim \operatorname{Beta}(1+\alpha_1,1+\beta_1)$, corresponding to a uniform prior when
-no votes have been cast ($\alpha_1 = \beta_1 = 0$), we can express \eqref{eq1} as:
+We can now solve for $\eta$:
 \begin{align*}
-\Pr(\alpha^*_1 > T_1 \mid X_1) &= 1 - \Pr(\alpha^*_1 \leq T_1 \mid X_1),\\
-\Pr(\alpha^*_1 \leq T_1 \mid X_1) &= \int_0^1 \Pr(\alpha^*_1 \leq T_1 \mid p_1)\cdot \Pr(p_1 \mid X_1) \mathrm{d}p_1\\
-&= \int_0^1 \sum\limits_{i=0}^{V_1} {K_1 \choose i} p_1^{i} {(1-p_1)}^{K_1-i} \\
-& \qquad\qquad\quad \times \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \mathrm{d}p_1,
+\operatorname{Var}[p_i] &= \frac{(1+\eta\alpha_i)(1+\eta\beta_i)}{(2+\eta\alpha_i+\eta\beta_i)^2(3+\eta\alpha_i+\eta\beta_i)}
 \end{align*}
-where
-\begin{description}
-\begin{itemize}
-\item[$V_i = $] $\lfloor{T_i - \alpha_i}\rfloor$, the maximum number of additional ``yes'' votes allowed such that
-$X_i$ would remain below threshold.
-\end{itemize}
-\end{description}
+Clearly, to satisfy $(3)$, we need $\eta \rightarrow \infty$ as $\alpha_i + \beta_i \rightarrow N_i$.  Consequently, the dominant asymptotic term becomes $\frac{1}{\eta^3 (\alpha_i + \beta_i)^3} = \frac{1}{\eta^3 N_i^3}$.  Hence, for the variance to asymptotically approach $0$ at a rate independent of $N_i$, we need $\eta \propto \frac{1}{N_i}$.
+
+Combining these two constraints, we arrive at $\eta \propto \frac{1}{N_i}\cdot \frac{1}{K_i/N_i}$, where the latter factor leads to $\eta \rightarrow \infty$ as $\alpha_i + \beta_i \rightarrow N_i$ without changing the units of $\eta$ ($1/\text{votes}$).
+
+Hence we arrive at $\eta = \frac{c}{K_i}$, where $c$ is any constant that can be selected to tune the rate at which the variance approaches $0$.  For simplicity, we use $\eta = \frac{1}{K_i}$.
+
+As a sanity check, one can verify that this form for $\eta$ satisfies properties $(1)-(3)$.
+
+\subsection{Derivation of Eq. \eqref{eq3}}
+\begin{align*}
+\Pr(\alpha^*_i > T_i \mid X_i) &= 1 - \Pr(\alpha^*_i \leq T_i \mid X_i), \text{ where}\\
+\Pr(\alpha^*_i \leq T_i \mid X_i) &= \int_0^1 \Pr(\alpha^*_i \leq T_i \mid p_i)\cdot \Pr(p_i \mid X_i) \mathrm{d}p_i\\
+\end{align*}
+Using the binomial and Beta distributions, we get
+\begin{align*}
+&= \int_0^1 \sum\limits_{v=0}^{V_i} {K_i \choose v} p_i^{v} {(1-p_i)}^{K_i-v} \cdot \operatorname{Beta}(p_i; 1+\frac{\alpha_i}{K_i},1+\frac{\beta_i}{K_i}) \mathrm{d}p_i,\\
+&= \sum\limits_{v=0}^{V_i} \underbrace{\int_0^1 {K_i \choose v} p_i^{v} {(1-p_i)}^{K_i-v} \cdot \operatorname{Beta}(p_i; 1+\frac{\alpha_i}{K_i},1+\frac{\beta_i}{K_i}) \mathrm{d}p_i}_{= \Pr(\nu_i = v)\text{ for } \nu_i\ \sim\ \operatorname{Beta-Binomial}(1+\frac{\alpha_i}{K_i},1+\frac{\beta_i}{K_i}, K_i)}.
+\end{align*}
 
 Hence, we have
-\begin{align}\label{eq2}
-& \Pr(\alpha^*_1 > T_1 \mid X_1) = \nonumber\\
-& 1 - \int_0^1 \sum\limits_{i=0}^{V_1} {K_1 \choose i} p_1^{i} {(1-p_1)}^{K_1-i} \cdot \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \mathrm{d}p_1
-\end{align}
-
-In the scenario where $\mathbf{card}(C) = n > 1$, i.e., there are competing motions, there is additional complexity to
-consider.
-Without loss of generality, assume that $X_1$ is the most popular motion within $C$.
-We now wish to not only compute \eqref{eq1}, but also the probability that $X_1$ is superior to all other
-$X_i  \in C, i \neq 1$:
-
-\begin{align}\label{eq3}
-\Pr\left(\bigwedge_{i=2}^n (\alpha^*_1 > \alpha^*_i) \mid C\right)
-\end{align}
-
-Using the assumption
-that votes on motions are independent across motions, which, in the common
-scenario where there is a negative covariance between votes on competing
-motions, will provide a lower bound on the probability, we can decompose \eqref{eq3} as follows:
 \begin{align*}
-& \Pr\left(\bigwedge_{i=2}^n (\alpha^*_1 > \alpha^*_i) \mid C\right)\\
-=& \prod_{i=2}^n \Pr(\alpha^*_1 > \alpha^*_i \mid C)\\
-=& \prod_{i=2}^n \iint\limits_{p_1, p_i} \Pr(\alpha^*_1 > \alpha^*_i \mid p_1, p_i) \cdot \Pr(p_1 \mid X_1) \cdot \Pr(p_i \mid X_i) \mathrm{d}p_i \mathrm{d}p_1\\
-=& \prod_{i=2}^n \int_0^1 \int_0^1 \Pr(\alpha^*_1 > \alpha^*_i \mid p_1, p_i) \cdot \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \\
-& \qquad\qquad\qquad \times \operatorname{Beta}(p_i; 1+\alpha_i,1+\beta_i) \mathrm{d}p_i \mathrm{d}p_1\\
+\Pr(\alpha^*_1 > T_1 \mid X_1) &= 1 - \sum\limits_{v=0}^{V_i} \Pr(\nu_i = v)\\
+&= 1 - \Pr(\nu_i \leq V_i).
 \end{align*}
-Deriving an expression for $\Pr(\alpha^*_1 > \alpha^*_i \mid p_1, p_i)$, we get:
+
+\subsection{Derivation of Eq. \eqref{eq5}}
+Assuming independence of votes across proposals,
 \begin{align*}
-& \Pr(\alpha^*_1 > \alpha^*_i \mid p_1, p_i)\\
-=& 1 - \Pr(\alpha^*_1 \leq \alpha^*_i \mid p_1, p_i)\\
-=& 1 - \sum\limits_{m=0}^{K_1} \sum\limits_{n=\lceil{v_{1,i}+m}\rceil}^{K_i} {K_1 \choose m} p_1^{m} {(1-p_1)}^{K_1 - m} \cdot {K_i \choose n} p_i^{n} {(1-p_i)}^{K_i-n},
+\Pr\left(\bigwedge_{j \neq i} (\alpha^*_i > \alpha^*_j) \mid C\right) &=\prod_{j \neq i} \Pr(\alpha^*_i > \alpha^*_j \mid X_i, X_j).
 \end{align*}
-where
+(If, instead, votes in $X_i$ were negatively correlated with votes in $X_j$, and $X_i$ had more support, then the equality ($=$) above would be replaced by an inequality ($>$).)
+
+Further expanding the expression, we get
+\begin{align*}
+&= \prod_{j \neq i} \left( 1 - \Pr(\alpha^*_i \leq \alpha^*_j \mid X_i, X_j) \right)\\
+&= \prod_{j \neq i} \left( 1 - \sum_{k=\lceil\delta_{ij}\rceil}^{K_j} \underbrace{\Pr(\alpha^*_j = \alpha_j + k \mid X_j)}_{= \Pr(\nu_j = k)} \cdot \underbrace{\Pr(\alpha^*_i \leq \alpha_j + k \mid X_i)}_{={CDF}_{\nu_i}(\alpha_j + k)} \right).
+\end{align*}
+
+\subsection{Derivation of Eq. \eqref{eq6}}
+The properties we desire for $\lambda(t)$ are:
 \begin{description}
 \begin{itemize}
-\item[$v_{i,j} = $] $\alpha_i - \alpha_j$, the number of effective ``yes'' votes $X_i$ leads $X_j$ by.
-\end{itemize}
+\item[$(1)$] as $K_i \rightarrow 0$, the rate of incoming votes should drop exponentially and should be independent of $N_i$,
+\item[$(2)$] as $t \rightarrow \infty$, the rate of incoming votes should drop exponentially.
+\end{itemize} 
 \end{description}
+Setting $\lambda (t) = \lambda_0 {(\gamma)}^{-\frac{t}{K_i/N_i}}$ satisfies these constraints while still allowing for the exact rate to be tunable.
 
-Denoting
-\begin{align}\label{eq4}
-& \Phi_i(p_1,p_i) {\overset {\underset {\mathrm {def} }{}}{=}} \nonumber\\
-& 1 - \sum\limits_{m=0}^{K_1} \sum\limits_{n=\lceil{v_{1,i}+m}\rceil}^{K_i} {K_1 \choose m} p_1^{m} {(1-p_1)}^{K_1 - m} \cdot {K_i \choose n} p_i^{n} {(1-p_i)}^{K_i-n},
-\end{align}
-we can simplify \eqref{eq3} to:
-\begin{align}\label{eq5}
-& \Pr\left(\bigwedge_{i=2}^n (\alpha^*_1 > \alpha^*_i) \mid C\right)\nonumber\\
-&= \prod_{i=2}^n \int_0^1 \int_0^1 \Phi_i(p_1,p_i) \cdot \operatorname{Beta}(p_1; 1+\alpha_1,1+\beta_1) \nonumber\\
-& \qquad\qquad\qquad \times \operatorname{Beta}(p_i; 1+\alpha_i,1+\beta_i) \mathrm{d}p_i \mathrm{d}p_1
-\end{align}
-
-We can numerically compute \eqref{eq2} and \eqref{eq5} given raw voting data.
-In order to be certain before taking any actions, we would like for the computed credibilities to be $\geq 99\%$.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.5\textwidth]{figures/simple_majority}
-\caption{Simple Majority: $\alpha$ vs. $\Pr(\alpha > \frac{1}{2}N)$ for $N=100$, $\beta = 10$.}
-\label{simple_majority}
-\end{figure}
-%Data:
-%Curve 1: {{0,0.000299648},{1,0.00213083},{2,0.00817989},{3,0.0224777},{4,0.049512},{5,0.0928927},{6,0.154136},{7,0.232044},{8,0.322859},{9,0.421057},{10,0.520467},{11,0.615358},{12,0.701241},{13,0.775267},{14,0.836245},{15,0.884385},{16,0.920892},{17,0.947532},{18,0.966265},{19,0.978973},{20,0.987296},{21,0.992561},{22,0.99578},{23,0.997682},{24,0.998767},{25,0.999366}}
-%Curve 2: {x, 0.99} for all x
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.5\textwidth]{figures/super_majority}
-\caption{Super Majority: $\alpha$ vs. $\Pr(\alpha > \frac{2}{3}N)$ for $N=100$, $\beta = 10$.}
-\label{super_majority}
-\end{figure}
-%Data:
-%Curve 1: {{10,0.0395173},{11,0.0591278},{12,0.0846131},{13,0.116407},{14,0.15463},{15,0.199057},{16,0.24911},{17,0.303899},{18,0.362273},{19,0.422909},{20,0.484399},{21,0.545345},{22,0.604445},{23,0.660559},{24,0.712764},{25,0.760382},{26,0.802985},{27,0.840385},{28,0.872612},{29,0.899875},{30,0.922519},{31,0.940987},{32,0.955777},{33,0.967407},{34,0.976384},{35,0.983186},{36,0.988243},{37,0.99193},{38,0.994567},{39,0.996414},{40,0.997682},{41,0.998533},{42,0.999093},{43,0.999452},{44,0.999677},{45,0.999815},{46,0.999896},{47,0.999944},{48,0.99997},{49,0.999985},{50,0.999993}}
-%Curve 2: {x, 0.99} for all x
-
-%\todo[inline]{Do we take into the account the distribution of votes? So if you have a very large standard deviation
-%we might want to prefer a decision less than some other decision with smaller standard deviation, but maybe
-%also smaller (but still positive) average. Is distribution of votes influencing dynamic quorum?}
-
+\subsection{Derivation of Eq. \eqref{eq7}}
+Using $\lambda (t) = \lambda_0 {(\gamma)}^{-\frac{t}{K_i/N_i}}$, we have
+\begin{align*}
+\lim_{t \rightarrow \infty} \Lambda (t) &=\int _{0}^{\infty}\lambda (t)\mathrm{d}t\\
+&= \int _{0}^{\infty} \lambda_0 {(\gamma)}^{-\frac{t}{K_i/N_i}} \mathrm{d}t\\
+&= \lambda_0 \frac{K_i/N_i}{\ln{\gamma}}.
+\end{align*}
+Thus, 
+\begin{align*}
+\lim_{t\rightarrow \infty}\Pr\left(N(t) = n\right) = \frac{(\lambda_0 \cdot K_i/N_i)^n}{n!(\ln{\gamma})^n}e^{-\lambda_0 \frac{K_i/N_i}{\ln{\gamma}}},
+\end{align*}
+and
+\begin{align*}
+\lim_{t\rightarrow \infty}\Pr\left(N(t)\leq \hat{K_i}\right) & = \sum_{n=0}^{\hat{K_i}} \frac{(\lambda_0 \cdot K_i/N_i)^n}{n!(\ln{\gamma})^n}e^{-\lambda_0 \frac{K_i/N_i}{\ln{\gamma}}}.
+\end{align*}
 \end{document}
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:
