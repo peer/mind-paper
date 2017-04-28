@@ -78,7 +78,7 @@
 % Paper metadata (use plain text, for PDF inclusion and later
 % re-using, if desired).  Use \emtpyauthor when submitting for review
 % so you remain anonymous.
-\def\plaintitle{Using statistical quorum to improve legitimacy of decisions and utilization of collective attention in democratic communities}
+\def\plaintitle{Using decision credibility to improve legitimacy of decisions and utilization of collective attention in democratic communities}
 %\def\plainauthor{First Author, Second Author, Third Author,
 %  Fourth Author, Fifth Author, Sixth Author}
 %\def\emptyauthor{}
@@ -133,6 +133,14 @@
 
 \newcommand\secref[1]{section \textit{\nameref{#1}}}
 
+%%% GLOSSARY %%%
+%
+% community = group which votes
+% proposal = what you vote on
+% decision = result of a vote, accepted or rejected proposal
+%
+%%% END GLOSSARY %%%
+
 % End of preamble. Here it comes the document.
 \begin{document}
 
@@ -177,10 +185,10 @@
 
 \section{Introduction}
 
-Many democratic communities use voting to make collective decisions.
+Many communities use voting to make collective decisions.
 \todo{Should we support this statement with a reference?}
-In its basic form voting consist of members of a community casting a vote \emph{in favor} or \emph{against} a decision and if
-majority ($> 50\%$) of votes are in favor of the decision, the decision \emph{passes} and is adopted as a decision
+In its basic form, voting consists of members of a community casting a vote \emph{in favor} or \emph{against} a decision.
+If the majority ($> 50\%$) of votes are in favor of the decision, the decision \emph{passes} and is adopted as a decision
 of the whole community.
 
 There have been many improvements proposed to this basic form and various analysis made.
@@ -192,7 +200,7 @@ If quorum is too low, decisions adopted might not represent the community.
 If it is too high, the community might have issues achieving the quorum.
 Not enough members might decide to participate in voting, or members might on purpose boycott voting to
 prevent decision to be adopted, even if those opposing it are in minority.
-Communities often decide quorum arbitrary\footnote{Robert's Rules of Order states that the quorum
+Communities often decide quorum arbitrarily\footnote{Robert's Rules of Order states that the quorum
 ``should approximate the largest number that can be depended on to attend any meeting except in very bad weather
 or other extremely unfavorable conditions.''~\cite{roberts}}
 and try to increase participation of members in communities' democratic processes through various means
@@ -225,9 +233,9 @@ how can we reason about legitimacy of results?
 
 To answer this question we are proposing a novel metric, \emph{decision credibility}, which uses statistical
 hypothesis testing to evaluate the credibility of the voting result.
-It uses distribution of votes made to evaluate the probability of decision passing if everyone actually voted,
-and not just those who voted.
-Intuitively, if in a community of 100 members 40 members vote for a decision to pass and nobody against,
+It uses the distribution of votes made to evaluate the probability of a decision passing if everyone actually voted,
+and not just those who did vote.
+Intuitively, if, in a community of 100 members, 40 members vote for a decision to pass and nobody against,
 we can see that if everyone voted, the probability of majority of population voting for a decision is high.
 On the other hand, if 41 members for in favor and 40 against, we cannot really say much about what would a decision
 be if everyone voted.
