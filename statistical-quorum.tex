@@ -156,16 +156,19 @@
 
 \maketitle
 
+\todo[inline]{Alternative titles:\\
+A statistical quorum to (improve/guarantee) credibility and efficiency of decision-making within democratic communities}
+
 \begin{abstract}
-%The Achilles heel of many major democracies is the eternal need for sufficient engagement and attention from the community.
-%While there have been major efforts towards increasing these attributes within the community, we explore a fundamentally
-%different approach: For a fixed level of community attention, how can we optimize the allocation of this attention to
-%maximize productivity?
-%We propose a novel "statistical quorum", derived using first principles, as one metric the community can use to focus
-%attention, in turn making the entire decision-making process dynamic.
-%We developed an online system centered around this metric and tested it in a 140-person community that holds weekly
-%councils over the course of 16 weeks.  We found that the community was able to use the online system to simultaneously
-%improve the legitimacy and efficiency of their decision-making process.
+The Achilles heel of many major democracies is the eternal need for sufficient engagement and attention from the community.
+While there have been major efforts towards increasing these attributes within the community, we explore a fundamentally
+different approach: For a fixed level of community attention, how can we optimize the allocation of this attention to
+maximize productivity?
+We propose a novel "statistical quorum", derived using first principles, as one metric the community can use to focus
+attention, in turn making the entire decision-making process dynamic.
+We developed an online system centered around this metric and tested it in a 140-person community that holds weekly
+councils over the course of 16 weeks.  We found that the community was able to use the online system to simultaneously
+improve the legitimacy and efficiency of their decision-making process.
 \end{abstract}
 
 %\category{H.5.m.}{Information Interfaces and Presentation
@@ -484,9 +487,10 @@ Upon solving for $\hat{K_i}$, we update $N_i \leftarrow \min\{N_i,\alpha_i + \be
 We evaluate statistical quorum in two ways. First, we evaluate it theoretically and explore its mathematical properties.
 Then we evaluate it through real-world use of the PeerMind application by a 140 members community.
 
-\subsection{Properties of Statistical Quorum}
+\subsection{Theory}
 
-\todo[inline]{Theoretical evaluation, diagrams. Get readers to understand some of its properties visually.}
+\todo[inline]{Theoretical evaluation, diagrams. Get readers to understand some of its properties visually:\\
+4 Figures and 1 Table Pending}
 
 \subsection{Use in Existing Democratic Community}
 
@@ -557,6 +561,9 @@ understand what exactly this is and how the math works?}
 
 \appendix
 \label{sec:derivation}
+
+\todo[inline]{Focus on only including bare minimum math, (no ``decorative math'').  Emphasis on justifications and properties, minimal arithmetic.  Good heuristic: Every line of math should have something said about it, otherwise it is unnecessary.}
+
 \subsection{Derivation of Eq. \eqref{eq2}}
 In choosing a Beta prior, we start with $\operatorname{Beta}(1,1)$, as it represents the uniform distribution over all potential values of the community's bias.  To update the prior based on collected votes, standard theory suggests updating to $\operatorname{Beta}(1+\alpha_i,1+\beta_i)$; however, there are a few consistency issues with this update that we seek to fix:
 \begin{description}
