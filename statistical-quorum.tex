@@ -78,7 +78,7 @@
 % Paper metadata (use plain text, for PDF inclusion and later
 % re-using, if desired).  Use \emtpyauthor when submitting for review
 % so you remain anonymous.
-\def\plaintitle{Using statistical quorum to improve legitimacy of decisions and utilization of collective attention in democratic communities}
+\def\plaintitle{Using decision credibility to improve legitimacy of decisions and utilization of collective attention in democratic communities}
 %\def\plainauthor{First Author, Second Author, Third Author,
 %  Fourth Author, Fifth Author, Sixth Author}
 %\def\emptyauthor{}
@@ -131,7 +131,15 @@
 % create a shortcut to typeset table headings
 % \newcommand\tabhead[1]{\small\textbf{#1}}
 
-\newcommand\secref[1]{\textit{\nameref{#1}}}
+\newcommand\secref[1]{section \textit{\nameref{#1}}}
+
+%%% GLOSSARY %%%
+%
+% community = group which votes
+% proposal = what you vote on
+% decision = result of a vote, accepted or rejected proposal
+%
+%%% END GLOSSARY %%%
 
 % End of preamble. Here it comes the document.
 \begin{document}
@@ -180,10 +188,10 @@ improve the legitimacy and efficiency of their decision-making process.
 
 \section{Introduction}
 
-Many democratic communities use voting to make collective decisions.
+Many communities use voting to make collective decisions.
 \todo{Should we support this statement with a reference?}
-In its basic form voting consist of members of a community casting a vote \emph{in favor} or \emph{against} a decision and if
-majority ($> 50\%$) of votes are in favor of the decision, the decision \emph{passes} and is adopted as a decision
+In its basic form, voting consists of members of a community casting a vote \emph{in favor} or \emph{against} a decision.
+If the majority ($> 50\%$) of votes are in favor of the decision, the decision \emph{passes} and is adopted as a decision
 of the whole community.
 
 There have been many improvements proposed to this basic form and various analysis made.
@@ -195,7 +203,7 @@ If quorum is too low, decisions adopted might not represent the community.
 If it is too high, the community might have issues achieving the quorum.
 Not enough members might decide to participate in voting, or members might on purpose boycott voting to
 prevent decision to be adopted, even if those opposing it are in minority.
-Communities often decide quorum arbitrary\footnote{Robert's Rules of Order states that the quorum
+Communities often decide quorum arbitrarily\footnote{Robert's Rules of Order states that the quorum
 ``should approximate the largest number that can be depended on to attend any meeting except in very bad weather
 or other extremely unfavorable conditions.''~\cite{roberts}}
 and try to increase participation of members in communities' democratic processes through various means
@@ -221,29 +229,29 @@ how can we reason about legitimacy of results?
   \end{tabular}
   \caption{Votes cast in Brexit, a 2016 referendum for United Kingdom's withdrawal from the European Union~\protect\cite{brexitresults},
   and 2016 USA presidential elections, popular vote~\protect\cite{usaresults1,usaresults2}. Simplified to only two options and without
-  invalid votes. The last column shows computed decision credibility as described in Section \secref{sec:statistical-quorum}. We see that
+  invalid votes. The last column shows computed decision credibility as described in \secref{sec:statistical-quorum}. We see that
   credibility is low, which we can mostly attribute to the fact that there is small difference in votes between both options so
   with more votes any option could end up winning.}\label{tab:example}
 \end{table*}
 
 To answer this question we are proposing a novel metric, \emph{decision credibility}, which uses statistical
 hypothesis testing to evaluate the credibility of the voting result.
-It uses distribution of votes made to evaluate the probability of decision passing if everyone actually voted,
-and not just those who voted.
-Intuitively, if in a community of 100 members 40 members vote for a decision to pass and nobody against,
+It uses the distribution of votes made to evaluate the probability of a decision passing if everyone actually voted,
+and not just those who did vote.
+Intuitively, if, in a community of 100 members, 40 members vote for a decision to pass and nobody against,
 we can see that if everyone voted, the probability of majority of population voting for a decision is high.
 On the other hand, if 41 members for in favor and 40 against, we cannot really say much about what would a decision
 be if everyone voted.
 Only two more votes against can completely change the outcome.
 Hence, the suggested action would be for the community to gather more votes and continue discussion around the decision.
-We describe decision credibility in more detail in Section \secref{sec:statistical-quorum}.
+We describe decision credibility in more detail in \secref{sec:statistical-quorum}.
 
 Based on decision credibility we can define a \emph{statistical quorum} as a threshold which a decision's credibility
 has to pass for a decision to be seen as legitimate.
 For example, if we adopt $90\%$ as a reasonable requirement for statistical quorum and we compute decision
 credibility for votes in Table~\ref{tab:example} we see that in both cases we do not reach statistical quorum
 which puts legitimacy of those decisions into a question.
-We discuss a way for a community to determine a reasonable statistical quorum in Section \secref{sec:discussion}.
+We discuss a way for a community to determine a reasonable statistical quorum in \secref{sec:discussion}.
 
 Traditionally it is argued that legitimacy comes from the fact that members had a chance to participate
 and they decided not to, giving legitimacy to make a decision to those who did participate.
@@ -268,8 +276,8 @@ do that selectively through an automatic feedback loop, trying to reach statisti
 We built an open source web application PeerMind integrating statistical quorum with online voting.
 The application exposes computed decision credibility to users in real-time and through that provides
 the feedback loop needed for improving utilization of collective attention.
-We present the application in Section \secref{sec:peermind} and use it for evaluating statistical quorum in
-Section \secref{sec:evaluation}.
+We present the application in \secref{sec:peermind} and use it for evaluating statistical quorum in
+\secref{sec:evaluation}.
 
 \todo[inline]{Should we explicitly list our contributions again?}
 
