@@ -298,6 +298,11 @@ How do some claim that quorum are in fact bad, and counter democratic, but do no
 \section{PeerMind Web Application}
 \label{sec:peermind}
 
+\todo[inline]{Something we need to think about is the level of detail we want to go into regarding the implementation/features of PeerMind beyond statistical quorum and range voting.  I think we might want to focus on only those two features for this paper.\\
+I think PeerMind as a comprehensive platform should have its own paper where all of the data is analyzed across the board.  This would be a much more typical HCI paper.  (If I can become president of Ridge in a future semester, we'll have another chance to run a clean, well-designed experiment with a much more developed version of PeerMind.)\\
+The message in the current paper might be clearest if we keep the scope focused on the theory + evaluation/verification.  We should make sure we're not trying to pack too much into one paper.
+\\---Max}
+
 We built a full-fletched real-time web application for collective decision making and voting using Meteor
 framework~\cite{meteor}.
 Users can initiate new discussions which leads them to the main user interface for each discussion as seen
@@ -376,6 +381,9 @@ We treat abstentions as indicating that a voter is removing themselves from the 
 It is important to distinguish an ``abstention'' (removing one's self from the voting population) from voting $0$ (indicating indifference).
 
 \subsection{Bayesian Theory}
+
+\todo[inline]{Weave in a single concrete example to ground all the abstract theory so that the entire derivation and motivation has a clear and cohesive thread from start to finish.}
+
 After collecting an initial set of votes from members, we want to use that data to construct a prior distribution to help estimate the posterior probability that the proposal is acceptable to the entire community.  Because the sum of  the collected votes follows a binomial distribution, a commonplace and convenient choice for the form of the prior on the community's bias is the Beta distribution (due to its conjugacy with the binomial distribution).  Together, they form the Beta-binomial distribution (related to the P\'olya urn model).
 
 After extracting the sufficient statistics from raw votes --- namely, the average score and the number of abstentions --- we can adjust the effective community size and corresponding threshold.  In addition, we can calculate the effective number of ``yes'' ($+1$) and ``no'' ($-1$) votes:
@@ -497,10 +505,13 @@ Then we evaluate it through real-world use of the PeerMind application by a 140 
 
 \subsection{Theory}
 
-\todo[inline]{Theoretical evaluation, diagrams. Get readers to understand some of its properties visually:\\
+\todo[inline]{Visualize the credibility and dynamics of the voting process under this framework:\\
 4 Figures and 1 Table Pending}
 
 \subsection{Use in Existing Democratic Community}
+
+\todo[inline]{See my comment at the beginning of the PeerMind Web App section.  I think the evaluation you note below about the interviews is out of the scope of this paper, which should be focused on statistical quorum and less online vs. offline platforms.\\
+---Max}
 
 \todo[inline]{Explain how we were using this for 16 weeks in fall 2016 in a community where traditionally they have
 been meeting weekly and now they used it online. How X proposals have been made with Y votes.}
@@ -531,7 +542,8 @@ anonymized dataset of interactions with the app, including votes, is available a
 \section{Discussion}
 \label{sec:discussion}
 
-\todo[inline]{Describe why is $0.90\%$ a reasonable statistical quorum and how to determine one for your community.}
+\todo[inline]{Describe why is $0.90\%$ a reasonable statistical quorum and how to determine one for your community.\\
+Part of the answer here is honestly just that the admin should tune the threshold (and a few of the other hyperparameters we introduce) to their intuition.  Once you set the parameters, the real benefit is that you have consistency, rather than having to always use your intuition as an admin about evaluating credibility.}
 
 \todo[inline]{Describe interesting example how we had a bug which were showing a very low statistical quorum for a failing
 vote and so the whole community very engaged for a whole month to decide and resolve it. So how they trusted the
@@ -544,7 +556,8 @@ directing attention the metric does not have to mathematically perfect.}
 We use dynamic statistical quorum to address this, but one other approach is also for voting to stay open and
 decisions can then be in the future revoked by people adding more votes, or changing them. But for some decisions
 this might not really be possible, because decisions might not be reversible. You can revoke a law, but if you built
-a building as a consequence of a decision?}
+a building as a consequence of a decision?\\
+(See near/post-quorum validation phase idea in GitHub issues as one suggested solution.)}
 
 \todo[inline]{Discuss how this might or might not lead to a more inclusive decision making: some people prefer it because
 they have time to collect thoughts and can participate when they have time, some people do not because they feel
