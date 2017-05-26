@@ -426,9 +426,10 @@ corresponding to a uniform prior when no votes have been cast ($\alpha_i = \beta
 \end{align}
 for
 \begin{align*}
-\nu_i & \sim \operatorname{Beta-Binomial}(1+\frac{\alpha_i}{K_i},1+\frac{\beta_i}{K_i}, K_i),\\
-{CDF}_{\nu_i}(V_i) & = \Pr(\nu_i \leq V_i),
+&\nu_i \sim \operatorname{Beta-Binomial}(1 + \frac{\alpha_i}{K_i}c, 1 + \frac{\beta_i}{K_i}c, K_i),\\
+&{CDF}_{\nu_i}(V_i)  = \Pr(\nu_i \leq V_i),
 \end{align*}
+\todo[inline]{Note that we choose $c=10$ because it leads to intuitive results.}
 where
 \begin{description}
 \begin{itemize}
@@ -603,7 +604,7 @@ Clearly, to satisfy $(3)$, we need $\eta \rightarrow \infty$ as $\alpha_i + \bet
 
 Combining these two constraints, we arrive at $\eta \propto \frac{1}{N_i}\cdot \frac{1}{K_i/N_i}$, where the latter factor leads to $\eta \rightarrow \infty$ as $\alpha_i + \beta_i \rightarrow N_i$ without changing the units of $\eta$ ($1/\text{votes}$).
 
-Hence we arrive at $\eta = \frac{c}{K_i}$, where $c$ is any constant that can be selected to tune the rate at which the variance approaches $0$.  For simplicity, we use $\eta = \frac{1}{K_i}$.
+Hence we arrive at $\eta = \frac{c}{K_i}$, where $c$ is any constant that can be selected to tune the rate at which the variance approaches $0$.  In this study, we prefer $\eta = \frac{10}{K_i}$.
 
 As a sanity check, one can verify that this form for $\eta$ satisfies properties $(1)-(3)$.
 
