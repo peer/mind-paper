@@ -62,10 +62,10 @@
 \usepackage{textcomp}
 
 % Some optional stuff you might like/need.
-\usepackage{microtype}        % Improved Tracking and Kerning
-% \usepackage[all]{hypcap}    % Fixes bug in hyperref caption linking
-\usepackage{ccicons}          % Cite your images correctly!
-% \usepackage[utf8]{inputenc} % for a UTF8 editor only
+\usepackage{microtype}      % Improved Tracking and Kerning
+\usepackage[all]{hypcap}    % Fixes bug in hyperref caption linking
+\usepackage{ccicons}        % Cite your images correctly!
+\usepackage[utf8]{inputenc} % for a UTF8 editor only
 
 % If you want to use todo notes, marginpars etc. during creation of
 % your draft document, you have to enable the "chi_draft" option for
@@ -78,7 +78,7 @@
 % Paper metadata (use plain text, for PDF inclusion and later
 % re-using, if desired).  Use \emtpyauthor when submitting for review
 % so you remain anonymous.
-\def\plaintitle{Using decision credibility to improve legitimacy of decisions and utilization of collective attention in democratic communities}
+\def\plaintitle{Improving legitimacy and efficiency of decisions in democratic communities}
 %\def\plainauthor{First Author, Second Author, Third Author,
 %  Fourth Author, Fifth Author, Sixth Author}
 %\def\emptyauthor{}
@@ -144,7 +144,7 @@
 % End of preamble. Here it comes the document.
 \begin{document}
 
-\title{\plaintitle}
+\title{Improving legitimacy and efficiency \\ of decisions in democratic communities}
 
 %\numberofauthors{3}
 %\author{%
@@ -164,19 +164,17 @@
 
 \maketitle
 
-\todo[inline]{Alternative titles:\\
-A statistical quorum to (improve/guarantee) credibility and efficiency of decision-making within democratic communities}
-
 \begin{abstract}
-The Achilles heel of many major democracies is the eternal need for sufficient engagement and attention from the community.
-While there have been major efforts towards increasing these attributes within the community, we explore a fundamentally
-different approach: For a fixed level of community attention, how can we optimize the allocation of this attention to
-maximize productivity?
-We propose a novel "statistical quorum", derived using first principles, as one metric the community can use to focus
-attention, in turn making the entire decision-making process dynamic.
-We developed an online system centered around this metric and tested it in a 140-person community that holds weekly
-councils over the course of 16 weeks.  We found that the community was able to use the online system to simultaneously
-improve the legitimacy and efficiency of their decision-making process.
+%The Achilles heel of many major democracies is the eternal need for sufficient engagement and attention from the community.
+%While there have been major efforts towards increasing these attributes within the community, we explore a fundamentally
+%different approach: For a fixed level of community attention, how can we optimize the allocation of this attention to
+%maximize productivity?
+%We propose a novel "statistical quorum", derived using first principles, as one metric the community can use to focus
+%attention, in turn making the entire decision-making process dynamic.
+%We developed an online system centered around this metric and tested it in a 140-person community that holds weekly
+%councils over the course of 16 weeks.  We found that the community was able to use the online system to simultaneously
+%improve the legitimacy and efficiency of their decision-making process.
+\todo[inline]{TODO}
 \end{abstract}
 
 %\category{H.5.m.}{Information Interfaces and Presentation
@@ -188,163 +186,200 @@ improve the legitimacy and efficiency of their decision-making process.
 
 \section{Introduction}
 
-Many communities use voting to make collective decisions.
-\todo{Should we support this statement with a reference?}
-In its basic form, voting consists of members of a community casting a vote \emph{in favor} or \emph{against} a decision.
-If the majority ($> 50\%$) of votes are in favor of the decision, the decision \emph{passes} and is adopted as a decision
-of the whole community.
+In many historical and recent elections it is not infrequent that we get close results.
+Especially when this is combined with low voter turnout, how can we have confidence in results?
+What if elections would be a day longer? What if they would be on a different day? What if
+more people would participate? Would results still be the same?
 
-There have been many improvements proposed to this basic form and various analysis made.
-\todo{Add references.}
-In this paper we focus on the question of \emph{quorum} and how high the quorum should be.
-Quorum is the minimum number of members participating in voting for voting to be seen as representative of the whole
-community, i.e., legitimate.
-If quorum is too low, decisions adopted might not represent the community.
-If it is too high, the community might have issues achieving the quorum.
-Not enough members might decide to participate in voting, or members might on purpose boycott voting to
-prevent decision to be adopted, even if those opposing it are in minority.
-Communities often decide quorum arbitrarily\footnote{Robert's Rules of Order states that the quorum
-``should approximate the largest number that can be depended on to attend any meeting except in very bad weather
-or other extremely unfavorable conditions.''~\cite{roberts}}
-and try to increase participation of members in communities' democratic processes through various means
-to address the issue of too low turnout.
-\todo{Add references. Mention forced participation in some countries.}
-Moreover, many democratic communities have issues achieving quorum which hinders their operation.
-\todo{Add references.}
+An underlying question is what should we do when not everyone in the population votes.
 
-Even if voting turnout has reached legally required quorum, or when one is not defined,
-it is still a question how to evaluate if the turnout is high enough to find results legitimate.
-As an example we can look at two recent votes, Brexit, a 2016 referendum for United Kingdom's withdrawal
-from the European Union, and popular vote in 2016 USA presidential elections, as seen in Table~\ref{tab:example}.
-Ignoring particularities of USA presidential elections process and using a popular vote as an example,
-how can we reason about legitimacy of results?
+Traditionally, we can have a stance that everyone had an opportunity to vote and express
+their preference, so whatever are results based those who voted are legitimate results.
+Research shows, though, that there are many reasons why people do not vote and that there
+are many issues related to how elections are organized, i.e., are they held on working
+or work-free day.
 
-\begin{table*}
-  \centering
-  \begin{tabular}{l r r r r r r r}
-    {\small\textit{Vote}} & \multicolumn{2}{r}{\small \textit{First option}} & \multicolumn{2}{r}{\small \textit{Second option}} & {\small \textit{Total eligible voters}} & {\small \textit{Turnout}} & {\small \textit{Decision credibility}} \\
-    \midrule
-    Brexit & 17,410,742 & $51.9\%$ & 16,141,241 & $48.1\%$ & 46,500,001 & $72.2\%$ & $59.8\%$ \\
-    Presidential elections & 62,984,825 & $48.9\%$ & 65,853,516 & $51.1\%$ & 230,585,915 & $55.9\%$ & $52.6\%$ \\
-  \end{tabular}
-  \caption{Votes cast in Brexit, a 2016 referendum for United Kingdom's withdrawal from the European Union~\protect\cite{brexitresults},
-  and 2016 USA presidential elections, popular vote~\protect\cite{usaresults1,usaresults2}. Simplified to only two options and without
-  invalid votes. The last column shows computed decision credibility as described in \secref{sec:statistical-quorum}. We see that
-  credibility is low, which we can mostly attribute to the fact that there is small difference in votes between both options so
-  with more votes any option could end up winning.}\label{tab:example}
-\end{table*}
+Alternatively, we can see voting as a survey and cast votes as a sample, although imperfect
+and non-randomly selected, from a larger population, with a goal to infer the preference
+of the whole population. In this setting we can use statistical methods to evaluate the
+confidence we can have in the results.
 
-To answer this question we are proposing a novel metric, \emph{decision credibility}, which uses statistical
-hypothesis testing to evaluate the credibility of the voting result.
-It uses the distribution of votes made to evaluate the probability of a decision passing if everyone actually voted,
-and not just those who did vote.
-Intuitively, if, in a community of 100 members, 40 members vote for a decision to pass and nobody against,
-we can see that if everyone voted, the probability of majority of population voting for a decision is high.
-On the other hand, if 41 members for in favor and 40 against, we cannot really say much about what would a decision
-be if everyone voted.
-Only two more votes against can completely change the outcome.
-Hence, the suggested action would be for the community to gather more votes and continue discussion around the decision.
-We describe decision credibility in more detail in \secref{sec:statistical-quorum}.
+Our contributions are as follows:
 
-Based on decision credibility we can define a \emph{statistical quorum} as a threshold which a decision's credibility
-has to pass for a decision to be seen as legitimate.
-For example, if we adopt $90\%$ as a reasonable requirement for statistical quorum and we compute decision
-credibility for votes in Table~\ref{tab:example} we see that in both cases we do not reach statistical quorum
-which puts legitimacy of those decisions into a question.
-We discuss a way for a community to determine a reasonable statistical quorum in \secref{sec:discussion}.
+\begin{itemize}
+\item We developed a framework of computing statistical credibility of results
+based on sample size, votes cast, and voting duration.
+\item Based on this framework we developed a concept of \emph{statistical quorum}
+as a threshold of votes required to deem results legitimate.
+\item We implemented an online application \emph{PeerMind},
+integrating credibility of results and statistical quorum, and designed
+a workflow of its use in a decision making processes.
+\item We deployed the application in a democratically run community of 140
+members for 5 months.
+\item \todo[inline]{We did this analysis and found these results. Legitimacy. Efficiency. Attention.}
+\end{itemize}
 
-Traditionally it is argued that legitimacy comes from the fact that members had a chance to participate
-and they decided not to, giving legitimacy to make a decision to those who did participate.
-We argue that this is a problematic view because there are many restrictions on why members could not
-participate and vote.
-For example, they might not had time to participate because of other commitments, or motivation, or they might determined
-that they are not informed enough to participate.
-Moreover, members are from different reasons in their communities and potentially contribute in other ways
-than by participating in its democratic processes.
-Instead of assuming that everyone could participate if they would want, or trying to increase participation,
-we can see amount of participation members are able to do as a limited resource, a \emph{collective attention}
-a community has available to utilize for its decision making.
+\todo[inline]{Structure of the paper.}
 
-We can compute decision credibility during ongoing voting process to give feedback to the community
-on how contentious a proposed decision is how much more votes are necessary for a statistical quorum
-to be reached.
-This allows the community to focus its collective attention towards decisions which require more votes
-to determine a legitimate result, while reducing attention towards proposals which already have overwhelming support.
-Instead of trying to increase participation on all democratic decisions being made, a community can
-do that selectively through an automatic feedback loop, trying to reach statistical quorum for their decisions.
-
-We built an open source web application PeerMind integrating statistical quorum with online voting.
-The application exposes computed decision credibility to users in real-time and through that provides
-the feedback loop needed for improving utilization of collective attention.
-We present the application in \secref{sec:peermind} and use it for evaluating statistical quorum in
-\secref{sec:evaluation}.
-
-\todo[inline]{Should we explicitly list our contributions again?}
-
-\todo[inline]{Repeat the structure of the rest of the paper? Is there a better way to reference sections than
-referencing it by name?}
+%
+%
+%Many communities use voting to make collective decisions.
+%\todo{Should we support this statement with a reference?}
+%In its basic form, voting consists of members of a community casting a vote \emph{in favor} or \emph{against} a decision.
+%If the majority ($> 50\%$) of votes are in favor of the decision, the decision \emph{passes} and is adopted as a decision
+%of the whole community.
+%
+%There have been many improvements proposed to this basic form and various analysis made.
+%\todo{Add references.}
+%In this paper we focus on the question of \emph{quorum} and how high the quorum should be.
+%Quorum is the minimum number of members participating in voting for voting to be seen as representative of the whole
+%community, i.e., legitimate.
+%If quorum is too low, decisions adopted might not represent the community.
+%If it is too high, the community might have issues achieving the quorum.
+%Not enough members might decide to participate in voting, or members might on purpose boycott voting to
+%prevent decision to be adopted, even if those opposing it are in minority.
+%Communities often decide quorum arbitrarily\footnote{Robert's Rules of Order states that the quorum
+%``should approximate the largest number that can be depended on to attend any meeting except in very bad weather
+%or other extremely unfavorable conditions.''~\cite{roberts}}
+%and try to increase participation of members in communities' democratic processes through various means
+%to address the issue of too low turnout.
+%\todo{Add references. Mention forced participation in some countries.}
+%Moreover, many democratic communities have issues achieving quorum which hinders their operation.
+%\todo{Add references.}
+%
+%Even if voting turnout has reached legally required quorum, or when one is not defined,
+%it is still a question how to evaluate if the turnout is high enough to find results legitimate.
+%As an example we can look at two recent votes, Brexit, a 2016 referendum for United Kingdom's withdrawal
+%from the European Union, and popular vote in 2016 USA presidential elections, as seen in Table~\ref{tab:example}.
+%Ignoring particularities of USA presidential elections process and using a popular vote as an example,
+%how can we reason about legitimacy of results?
+%
+%\begin{table*}
+%  \centering
+%  \begin{tabular}{l r r r r r r r}
+%    {\small\textit{Vote}} & \multicolumn{2}{r}{\small \textit{First option}} & \multicolumn{2}{r}{\small \textit{Second option}} & {\small \textit{Total eligible voters}} & {\small \textit{Turnout}} & {\small \textit{Decision credibility}} \\
+%    \midrule
+%    Brexit & 17,410,742 & $51.9\%$ & 16,141,241 & $48.1\%$ & 46,500,001 & $72.2\%$ & $59.8\%$ \\
+%    Presidential elections & 62,984,825 & $48.9\%$ & 65,853,516 & $51.1\%$ & 230,585,915 & $55.9\%$ & $52.6\%$ \\
+%  \end{tabular}
+%  \caption{Votes cast in Brexit, a 2016 referendum for United Kingdom's withdrawal from the European Union~\protect\cite{brexitresults},
+%  and 2016 USA presidential elections, popular vote~\protect\cite{usaresults1,usaresults2}. Simplified to only two options and without
+%  invalid votes. The last column shows computed decision credibility as described in \secref{sec:decision-credibility}. We see that
+%  credibility is low, which we can mostly attribute to the fact that there is small difference in votes between both options so
+%  with more votes any option could end up winning.}\label{tab:example}
+%\end{table*}
+%
+%To answer this question we are proposing a novel metric, \emph{decision credibility}, which uses statistical
+%hypothesis testing to evaluate the credibility of the voting result.
+%It uses the distribution of votes made to evaluate the probability of a decision passing if everyone actually voted,
+%and not just those who did vote.
+%Intuitively, if, in a community of 100 members, 40 members vote for a decision to pass and nobody against,
+%we can see that if everyone voted, the probability of majority of population voting for a decision is high.
+%On the other hand, if 41 members for in favor and 40 against, we cannot really say much about what would a decision
+%be if everyone voted.
+%Only two more votes against can completely change the outcome.
+%Hence, the suggested action would be for the community to gather more votes and continue discussion around the decision.
+%We describe decision credibility in more detail in \secref{sec:decision-credibility}.
+%
+%Based on decision credibility we can define a \emph{statistical quorum} as a threshold which a decision's credibility
+%has to pass for a decision to be seen as legitimate.
+%For example, if we adopt $90\%$ as a reasonable requirement for statistical quorum and we compute decision
+%credibility for votes in Table~\ref{tab:example} we see that in both cases we do not reach statistical quorum
+%which puts legitimacy of those decisions into a question.
+%We discuss a way for a community to determine a reasonable statistical quorum in \secref{sec:discussion}.
+%
+%Traditionally it is argued that legitimacy comes from the fact that members had a chance to participate
+%and they decided not to, giving legitimacy to make a decision to those who did participate.
+%We argue that this is a problematic view because there are many restrictions on why members could not
+%participate and vote.
+%For example, they might not had time to participate because of other commitments, or motivation, or they might determined
+%that they are not informed enough to participate.
+%Moreover, members are from different reasons in their communities and potentially contribute in other ways
+%than by participating in its democratic processes.
+%Instead of assuming that everyone could participate if they would want, or trying to increase participation,
+%we can see amount of participation members are able to do as a limited resource, a \emph{collective attention}
+%a community has available to utilize for its decision making.
+%
+%We can compute decision credibility during ongoing voting process to give feedback to the community
+%on how contentious a proposed decision is how much more votes are necessary for a statistical quorum
+%to be reached.
+%This allows the community to focus its collective attention towards decisions which require more votes
+%to determine a legitimate result, while reducing attention towards proposals which already have overwhelming support.
+%Instead of trying to increase participation on all democratic decisions being made, a community can
+%do that selectively through an automatic feedback loop, trying to reach statistical quorum for their decisions.
+%
+%We built an open source web application PeerMind integrating statistical quorum with online voting.
+%The application exposes computed decision credibility to users in real-time and through that provides
+%the feedback loop needed for improving utilization of collective attention.
+%We present the application in \secref{sec:peermind} and use it for evaluating statistical quorum in
+%\secref{sec:evaluation}.
+%
+%\todo[inline]{Should we explicitly list our contributions again?}
+%
+%\todo[inline]{Repeat the structure of the rest of the paper? Is there a better way to reference sections than
+%referencing it by name?}
 
 \section{Related Work}
 
-\todo[inline]{Repeat references from "There have been many improvements proposed to this basic form and various analysis made."?}
-
-\todo[inline]{Threshold and quorum at \url{https://www.publications.parliament.uk/pa/ld200910/ldselect/ldconst/99/99.pdf}.
-How do some claim that quorum are in fact bad, and counter democratic, but do not offer a solution how to evaluate decisions.}
-
-\todo[inline]{Voting auditing work.}
-
-\todo[inline]{Delegation as way to increase legitimacy, Liquid Democracy, etc.}
-
-\section{PeerMind Web Application}
-\label{sec:peermind}
-
-\todo[inline]{Something we need to think about is the level of detail we want to go into regarding the implementation/features of PeerMind beyond statistical quorum and range voting.  I think we might want to focus on only those two features for this paper.\\
-I think PeerMind as a comprehensive platform should have its own paper where all of the data is analyzed across the board.  This would be a much more typical HCI paper.  (If I can become president of Ridge in a future semester, we'll have another chance to run a clean, well-designed experiment with a much more developed version of PeerMind.)\\
-The message in the current paper might be clearest if we keep the scope focused on the theory + evaluation/verification.  We should make sure we're not trying to pack too much into one paper.
-\\---Max}
-
-We built a full-fletched real-time web application for collective decision making and voting using Meteor
-framework~\cite{meteor}.
-Users can initiate new discussions which leads them to the main user interface for each discussion as seen
-in Figure~\ref{fig:peermind}.
-
-\begin{figure*}
-  \centering
-  \includegraphics[width=1.75\columnwidth]{figures/peermind.png}
-  \caption{The main PeerMind interface of a discussion. There is initial discussion description on the top and under it there
-  are three columns. A commenting sections for users to discuss it and proposed decisions, a second column where moderators can
-  summarize arguments made during discussion, and a list of proposals to address the discussion.
-  Proposals can be in different states: a proposal being discussed, a proposal being voted on, and with voting concluded.}\label{fig:peermind}
-\end{figure*}
-
-%and discuss them with others online in real-time and with rich-text content.
-%They can attach images and files using drag\&drop. Moderators can summarize discussions into three groups
-
-\todo[inline]{Present how users can see ongoing results during voting. Show an image of active ballot, but with expanded view for current results.}
-
-%Range voting (also known as score voting) is voting where members of a community express their positions on open proposals by assigning
-%each a score on a fixed scale, in the context of this paper, between $-1$ and $+1$.
-%A proposal passes if the average score of all votes on a position is positive.
-%When multiple competing proposals are being voted on, the one with highest average score wins.
+%\todo[inline]{Repeat references from "There have been many improvements proposed to this basic form and various analysis made."?}
 %
-%Prior work has shown that this approach generalizes many previous approaches to voting and allows members to express their
-%positions in a highly informative and precise manner.
-%We find it especially suitable for a web application because many web users are used to use it when ranking products
-%and giving other ``five-star'' feedback.
-%Moreover, if later on a new proposal is added to a set of existing proposals on which voting was already open, only the
-%new proposal needs to be evaluated by members, as opposed to alternative voting systems where the relative rankings of
-%each proposal would need reassessing (assuming members use a consistent personal scale when voting).
+%\todo[inline]{Threshold and quorum at \url{https://www.publications.parliament.uk/pa/ld200910/ldselect/ldconst/99/99.pdf}.
+%How do some claim that quorum are in fact bad, and counter democratic, but do not offer a solution how to evaluate decisions.}
+%
+%\todo[inline]{Voting auditing work.}
+%
+%\todo[inline]{Delegation as way to increase legitimacy, Liquid Democracy, etc.}
+%
+%\section{PeerMind Web Application}
+%\label{sec:peermind}
+%
+%\todo[inline]{Something we need to think about is the level of detail we want to go into regarding the implementation/features of PeerMind beyond statistical quorum and range voting.  I think we might want to focus on only those two features for this paper.\\
+%I think PeerMind as a comprehensive platform should have its own paper where all of the data is analyzed across the board.  This would be a much more typical HCI paper.  (If I can become president of Ridge in a future semester, we'll have another chance to run a clean, well-designed experiment with a much more developed version of PeerMind.)\\
+%The message in the current paper might be clearest if we keep the scope focused on the theory + evaluation/verification.  We should make sure we're not trying to pack too much into one paper.
+%\\---Max}
+%
+%We built a full-fletched real-time web application for collective decision making and voting using Meteor
+%framework~\cite{meteor}.
+%Users can initiate new discussions which leads them to the main user interface for each discussion as seen
+%in Figure~\ref{fig:peermind}.
+%
+%\begin{figure*}
+%  \centering
+%  \includegraphics[width=1.75\columnwidth]{figures/peermind.png}
+%  \caption{The main PeerMind interface of a discussion. There is initial discussion description on the top and under it there
+%  are three columns. A commenting sections for users to discuss it and proposed decisions, a second column where moderators can
+%  summarize arguments made during discussion, and a list of proposals to address the discussion.
+%  Proposals can be in different states: a proposal being discussed, a proposal being voted on, and with voting concluded.}\label{fig:peermind}
+%\end{figure*}
+%
+%%and discuss them with others online in real-time and with rich-text content.
+%%They can attach images and files using drag\&drop. Moderators can summarize discussions into three groups
+%
+%\todo[inline]{Present how users can see ongoing results during voting. Show an image of active ballot, but with expanded view for current results.}
+%
+%%Range voting (also known as score voting) is voting where members of a community express their positions on open proposals by assigning
+%%each a score on a fixed scale, in the context of this paper, between $-1$ and $+1$.
+%%A proposal passes if the average score of all votes on a position is positive.
+%%When multiple competing proposals are being voted on, the one with highest average score wins.
+%%
+%%Prior work has shown that this approach generalizes many previous approaches to voting and allows members to express their
+%%positions in a highly informative and precise manner.
+%%We find it especially suitable for a web application because many web users are used to use it when ranking products
+%%and giving other ``five-star'' feedback.
+%%Moreover, if later on a new proposal is added to a set of existing proposals on which voting was already open, only the
+%%new proposal needs to be evaluated by members, as opposed to alternative voting systems where the relative rankings of
+%%each proposal would need reassessing (assuming members use a consistent personal scale when voting).
+%
+%\todo[inline]{The app has features both for use in online and offline setting. This allows one to compute
+%statistical quorum also for an in-person meeting because math is now more complicated than just counting hands.
+%We focus on online experience in this paper.}
+%
+%\todo[inline]{Security is out of the scope of this work. We assume here that users and their identities are known and are managed
+%by a community's admin. There are many communities where their decision making is public with public minutes and this is who
+%the app is currently targeting.}
 
-\todo[inline]{The app has features both for use in online and offline setting. This allows one to compute
-statistical quorum also for an in-person meeting because math is now more complicated than just counting hands.
-We focus on online experience in this paper.}
-
-\todo[inline]{Security is out of the scope of this work. We assume here that users and their identities are known and are managed
-by a community's admin. There are many communities where their decision making is public with public minutes and this is who
-the app is currently targeting.}
-
-\section{Statistical Quorum}
-\label{sec:statistical-quorum}
+\section{Decision Credibility}
+\label{sec:decision-credibility}
 A statistical quorum uses statistical hypothesis testing to infer the credibility of the outcome of an open vote before the community adopts the outcome as being truly representative all members' positions.
 For example, in a community of 100 members, if 35 members support a specific proposal and 0 oppose, then we can conclude with high probability that, had all 100 members taken the time to vote, a majority of them would be in support of the proposal.  Hence, despite the reality of 65 members not having voted, the outcome of the 35-member vote was credible enough to be taken as representative of the entire community's desire.
 On the other hand, if 80 members vote, where 41 support the proposal and 39 oppose, then we cannot yet conclude that the decision to accept the proposal is credible enough for the entire community to officially adopt, despite the significant participation in the vote.
