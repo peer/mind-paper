@@ -170,8 +170,8 @@ different approach: For a fixed level of community attention, how can we optimiz
 maximize productivity?
 We propose a novel \emph{statistical quorum}, derived using first principles, as one metric the community can use to focus
 attention, in turn making the entire decision-making process dynamic.
-We developed an online system centered around this metric and tested it in a 140-person community that holds weekly
-councils over the course of 16 weeks.  We found that the community was able to use the online system to simultaneously
+We developed a web application centered around this metric and tested it in a 140-person community that holds weekly
+councils over the course of 16 weeks.  We found that the community was able to use the web application to simultaneously
 improve the legitimacy and efficiency of their decision-making process.
 \end{abstract}
 
@@ -217,7 +217,7 @@ Our contributions are as follows:
 based on sample size, votes cast, and voting duration.
 \item Based on this framework we developed a novel concept of \emph{statistical quorum}
 as a threshold of votes required to deem results legitimate.
-\item We implemented an online application \emph{PeerMind},
+\item We implemented a web application \emph{PeerMind},
 integrating credibility of results and statistical quorum, and designed
 a workflow of its use in a decision making processes.
 \item We deployed the application in a democratically run community of 140
@@ -552,7 +552,7 @@ Upon solving for $\hat{K_i}$, we update $N_i \leftarrow \min\{N_i,\alpha_i + \be
 \section{Methodology}
 \label{sec:methodology}
 
-To evaluate statistical quorum in practice, we developed an online web application PeerMind and
+To evaluate statistical quorum in practice, we developed a web application PeerMind and
 used it in a democratically run community of 140 members for 16 weeks, replacing the traditional
 decision making through in-person meetings. The community is a house of 140
 students living together and making collective decisions about the governance and operation of
@@ -568,9 +568,27 @@ We introduced the application in fall 2016 semester which lasted 16 weeks. We us
 a baseline for comparison, which lasted 16 weeks as well and traditional decision making was used.
 
 To evaluate general perception of members before and after the use of the application for decision making,
-we did a general survey at the end of each semester, asking members to answer general question about how
-they felt the decision making in the house was that semester.
+we did a general survey at the end of each semester, asking members to answer general questions about the
+decision making in the house that semester.
 
+We instrumented the application to collect information on how much time users spent using the application,
+measuring the time the application was focused. Other information we used for evaluation are available
+through regular features of the application: how many and who made discussion items, comments, motions
+(proposed decisions on discussion items), and vote tallies per motion.
+
+For the baseline, we extracted similar information from minutes: how long did the councils last, how many
+discussions were opened, how many comments by which members were made, how many motions were proposed,
+and vote tallies for them.
+
+Finally, we did semi-structured interviews at the end of the fall semester with 7 members who were participating
+both in spring and fall semesters and ask them to compare their experience between those two semesters and
+evaluate the application and the use of statistical quorum.
+
+\section{Evaluation}
+\label{sec:evaluation}
+
+We evaluate statistical quorum in two ways. First, we evaluate it theoretically and explore its mathematical properties.
+Then we evaluate it through real-world use of the PeerMind application by a 140 members community.
 
 
 
@@ -579,16 +597,10 @@ they felt the decision making in the house was that semester.
 \includegraphics[width=0.5\textwidth]{figures/survey-comparison.pdf}
 \caption{Results of a survey at the end of spring and fall semesters about general perception of the decision making (councils) in the community.
 For each question, a participant was asked to rank on a scale between 1 (completely disagree) and 7 (completely agree). All members
-of the community were invited to participate in the survey.}
+of the community were invited to participate in the survey each time.}
 \label{fig:survey-comparison}
 \end{figure}
 
-
-\section{Evaluation}
-\label{sec:evaluation}
-
-We evaluate statistical quorum in two ways. First, we evaluate it theoretically and explore its mathematical properties.
-Then we evaluate it through real-world use of the PeerMind application by a 140 members community.
 
 \subsection{Theory}
 
@@ -596,9 +608,6 @@ Then we evaluate it through real-world use of the PeerMind application by a 140 
 4 Figures and 1 Table Pending}
 
 \subsection{Use in Existing Democratic Community}
-
-\todo[inline]{See my comment at the beginning of the PeerMind Web App section.  I think the evaluation you note below about the interviews is out of the scope of this paper, which should be focused on statistical quorum and less online vs. offline platforms.\\
----Max}
 
 \todo[inline]{Explain how we were using this for 16 weeks in fall 2016 in a community where traditionally they have
 been meeting weekly and now they used it online. How X proposals have been made with Y votes.}
