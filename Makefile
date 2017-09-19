@@ -3,7 +3,7 @@ PAPERS = delegation.pdf statistical-quorum.pdf
 
 all: $(PAPERS)
 
-%.pdf: %.tex $(BIBFILE) sigchi.cls sigchi.bst
+%.pdf: %.tex $(BIBFILE) sigchi.cls sigchi.bst figures/*
 	pdflatex -interaction=nonstopmode "$<"
 	bibtex "$(<:%.tex=%.aux)"
 	pdflatex -interaction=nonstopmode "$<"
