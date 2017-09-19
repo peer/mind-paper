@@ -210,7 +210,7 @@ confidence we can have in the results.
 %optimize the allocation of the collective attention by directing participation towards
 %contentious issues.
 
-Our contributions are as follows:
+Our contributions are:
 
 \begin{itemize}
 \item We developed a framework of computing statistical credibility of results
@@ -576,13 +576,79 @@ measuring the time the application was focused. Other information we used for ev
 through regular features of the application: how many and who made discussion items, comments, motions
 (proposed decisions on discussion items), and vote tallies per motion.
 
-For the baseline, we extracted similar information from minutes: how long did the councils last, how many
+For the baseline, we extracted similar information from council minutes: how long did the councils last, how many
 discussions were opened, how many comments by which members were made, how many motions were proposed,
 and vote tallies for them.
 
-Finally, we did semi-structured interviews at the end of the fall semester with 7 members who were participating
+Finally, we did semi-structured interviews after the fall semester with 7 members who were participating
 both in spring and fall semesters and ask them to compare their experience between those two semesters and
 evaluate the application and the use of statistical quorum.
+
+\subsection{PeerMind}
+\label{sec:peermind}
+
+Web application was developed using Meteor web framework~\cite{meteor} as a mobile-friendly web application.
+Meteor framework supports reactivity which makes the application update user interface based on actions
+of other users in real time. This helps users see comments by other users as they happen, but can also see
+progress during voting in real time.
+
+Each user can open and propose new discussion items. Each discussion item has then three basic sections,
+as seen in Figure~\ref{fig:peer-mind}: commenting section on the left, summary points in the middle,
+and proposed motions with voting on the right. All content inputs fields accept rich text content in WYSWYG manner,
+so users can easily add links, images, and other files.
+
+A general workflow after creation of a discussion item is that users discuss it through comments,
+which moderators summarize into summary points. At some point an user proposes a motion which can be
+further discussed through comments. Once a moderator deems that motion is ready to be voted upon
+can open voting. Users vote through a ballot seen in Figure~\ref{fig:ballot}.
+
+An important design decision in the scope of this paper is that during voting, users can see the current
+results of the vote in real time. Results are shown on a chart depicting average score through time
+as seen in Figure~\ref{fig:results}. Users can see both the current average score of all votes (score
+larger than 0 means that a motion is passing) and the credibility of current result. A community can decide
+how high credibility it requires to deem the result passing statistical quorum. During our evaluation
+we used 0.90 as statistical quorum.
+
+The rationale for displaying the current results during voting is to give users feedback how the vote
+is progressing and allow them to engage more with the discussion. Moreover, displaying the results
+also serves as additional safeguard against potential manipulations of statistical quorum through malicious
+coordination.
+
+After the vote passes the statistical quorum, a moderator can close voting and a discussion item.
+
+Web application contains other features which makes it easier to use as a decision making and discusion
+platform, like notifications, and additional features which allow the application to be used also to
+help run in-person meetings to discuss discussion items made
+online. Facilitators of in-person meetings can use it to prepare agendas for meetings, take notes,
+and display summary points of current discussion and what motions are being voted on. Through that the
+application can also serve as way to integrate both online and in-person decision making. Having all of
+decision making in one platform serves as an important resource for institutional memory.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/peermind.png}
+\caption{User interface of PeerMind web application. One can see three column structure, with commenting
+section on the left, summary points in the middle, and proposed motions with voting on the right.}
+\label{fig:peer-mind}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/ballot.png}
+\caption{Ballot used for voting in PeerMind web application. Users can chose a value between -1 and 1 on a slider,
+where -1 means opposition, 1 means in favor, and 0 indifference. They can also chose abstention (they
+remove themselves from the population of the community for the vote in question), or to not vote (default), which
+means that their vote does not contribute to the quorum.}
+\label{fig:ballot}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/results.png}
+\caption{Results of a vote in PeerMind web application. Results are shown as an average score through time of the vote.
+A user can hover over the chart to see details at that time. Users can see these results in real time during voting.}
+\label{fig:results}
+\end{figure}
 
 \section{Evaluation}
 \label{sec:evaluation}
