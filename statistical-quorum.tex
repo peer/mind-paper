@@ -81,9 +81,8 @@
 \def\plaintitle{Improving legitimacy and efficiency of decisions in democratic communities}
 %\def\plainauthor{First Author, Second Author, Third Author,
 %  Fourth Author, Fifth Author, Sixth Author}
-%\def\emptyauthor{}
-%\def\plainkeywords{Authors' choice; of terms; separated; by
-%  semicolons; include commas, within terms only; required.}
+\def\emptyauthor{}
+\def\plainkeywords{Decision making; voting; democracy; quorum; legitimacy; statistical quorum.}
 %\def\plaingeneralterms{Documentation, Standardization}
 
 % llt: Define a global style for URLs, rather that the default one
@@ -165,24 +164,21 @@
 \maketitle
 
 \begin{abstract}
-%The Achilles heel of many major democracies is the eternal need for sufficient engagement and attention from the community.
-%While there have been major efforts towards increasing these attributes within the community, we explore a fundamentally
-%different approach: For a fixed level of community attention, how can we optimize the allocation of this attention to
-%maximize productivity?
-%We propose a novel "statistical quorum", derived using first principles, as one metric the community can use to focus
-%attention, in turn making the entire decision-making process dynamic.
-%We developed an online system centered around this metric and tested it in a 140-person community that holds weekly
-%councils over the course of 16 weeks.  We found that the community was able to use the online system to simultaneously
-%improve the legitimacy and efficiency of their decision-making process.
-\todo[inline]{TODO}
+The Achilles heel of many major democracies is the eternal need for sufficient engagement and attention from the community.
+While there have been major efforts towards increasing these attributes within the community, we explore a fundamentally
+different approach: For a fixed level of community attention, how can we optimize the allocation of this attention to
+maximize productivity?
+We propose a novel \emph{statistical quorum}, derived using first principles, as one metric the community can use to focus
+attention, in turn making the entire decision-making process dynamic.
+We developed an online system centered around this metric and tested it in a 140-person community that holds weekly
+councils over the course of 16 weeks.  We found that the community was able to use the online system to simultaneously
+improve the legitimacy and efficiency of their decision-making process.
 \end{abstract}
 
-%\category{H.5.m.}{Information Interfaces and Presentation
-%  (e.g. HCI)}{Miscellaneous} \category{See
-%  \url{http://acm.org/about/class/1998/} for the full list of ACM
-%  classifiers. This section is required.}{}{}
-%
-%\keywords{\plainkeywords}
+\category{H.5.3.}{Information Interfaces and Presentation
+ (e.g. HCI)}{Computer-supported cooperative work}
+
+\keywords{\plainkeywords}
 
 \section{Introduction}
 
@@ -194,36 +190,52 @@ more people would participate? Would results still be the same?
 An underlying question is what should we do when not everyone in the population votes.
 
 Traditionally, we can have a stance that everyone had an opportunity to vote and express
-their preference, so whatever are results based those who voted are legitimate results.
+their preference, so whatever are results based on those who voted are legitimate results.
 Research shows, though, that there are many reasons why people do not vote and that there
-are many issues related to how elections are organized, i.e., are they held on working
-or work-free day.
-
-\todo[inline]{Add references to this research.}
+are many issues related to how elections are organized~\cite{CANCELA2016264, GIMPEL2003471}.
 
 Alternatively, we can see voting as a survey and cast votes as a sample, although imperfect
 and non-randomly selected, from a larger population, with a goal to infer the preference
 of the whole population. In this setting we can use statistical methods to evaluate the
 confidence we can have in the results.
 
+%Moreover, we can see overall participation by everyone in the population as a
+%limited resource, a collective attention, we have at our disposal to make collective decisions.
+%Traditionally, a common solution to the low voter turnout is to focus on
+%increasing the turnout and through that increasing the collective attention available
+%for decision making.
+%But increasing collective attention for decision making is at odds with other
+%demands for the collective and individual attention.
+%But once we have a statistical measure of results, we can utilize it to
+%optimize the allocation of the collective attention by directing participation towards
+%contentious issues.
+
 Our contributions are as follows:
 
 \begin{itemize}
 \item We developed a framework of computing statistical credibility of results
 based on sample size, votes cast, and voting duration.
-\item Based on this framework we developed a concept of \emph{statistical quorum}
+\item Based on this framework we developed a novel concept of \emph{statistical quorum}
 as a threshold of votes required to deem results legitimate.
 \item We implemented an online application \emph{PeerMind},
 integrating credibility of results and statistical quorum, and designed
 a workflow of its use in a decision making processes.
 \item We deployed the application in a democratically run community of 140
-members for 5 months.
-\item We show how use of statistical quorum increases legitimacy of decisions,
-improves utilization of collective attention, increases overall participation,
+members for 16 weeks.
+\item Using the analysis of decision making process before and after introduction
+of the application, using surveys, and using semi-structured interviews, we show
+how use of statistical quorum increases legitimacy of decisions,
+improves utilization of collective attention,
 and increases number of decisions made while not sacrificing their legitimacy.
 \end{itemize}
 
-\todo[inline]{Structure of the paper.}
+The rest of the paper is structured as follows. In Section~\ref{sec:related-work} we
+present related work. We continue by describing a framework of computing statistical
+credibility of results and statistical quorum in Section~\ref{sec:decision-credibility}.
+We present our methodology in Section~\ref{sec:methodology} after which we do evaluation in
+Section~\ref{sec:evaluation}. We discuss results in Section~\ref{sec:discussion} and conclude
+in Section~\ref{sec:conclusion}. At the end we have Appendix where we
+derive formulas presented in Section~\ref{sec:decision-credibility}.
 
 %
 %
@@ -324,6 +336,7 @@ and increases number of decisions made while not sacrificing their legitimacy.
 %referencing it by name?}
 
 \section{Related Work}
+\label{sec:related-work}
 
 %\todo[inline]{Repeat references from "There have been many improvements proposed to this basic form and various analysis made."?}
 %
@@ -382,7 +395,7 @@ and increases number of decisions made while not sacrificing their legitimacy.
 %by a community's admin. There are many communities where their decision making is public with public minutes and this is who
 %the app is currently targeting.}
 
-\section{Decision Credibility}
+\section{Decision Credibility and Statistical Quorum}
 \label{sec:decision-credibility}
 A statistical quorum uses statistical hypothesis testing to infer the credibility of the outcome of an open vote before the community adopts the outcome as being truly representative all members' positions.
 For example, in a community of 100 members, if 35 members support a specific proposal and 0 oppose, then we can conclude with high probability that, had all 100 members taken the time to vote, a majority of them would be in support of the proposal.  Hence, despite the reality of 65 members not having voted, the outcome of the 35-member vote was credible enough to be taken as representative of the entire community's desire.
@@ -536,6 +549,9 @@ Upon solving for $\hat{K_i}$, we update $N_i \leftarrow \min\{N_i,\alpha_i + \be
 %\label{simple_majority}
 %\end{figure}
 
+\section{Methodology}
+\label{sec:methodology}
+
 \section{Evaluation}
 \label{sec:evaluation}
 
@@ -602,15 +618,16 @@ a building as a consequence of a decision?\\
 they have time to collect thoughts and can participate when they have time, some people do not because they feel
 they cannot communicate as effectively, especially with lack of emotions being conveyed.}
 
-\section{Future Work}
-
-\todo[inline]{More work on security evaluation of potential attacks when a community is using statistical quorum to force a decision.
-Is there a game theoretical approach to it?}
-
-\todo[inline]{How to surface information about credibility to users better than just a number? Visualizations? How can we help them
-understand what exactly this is and how the math works?}
+%\section{Future Work}
+%
+%\todo[inline]{More work on security evaluation of potential attacks when a community is using statistical quorum to force a decision.
+%Is there a game theoretical approach to it?}
+%
+%\todo[inline]{How to surface information about credibility to users better than just a number? Visualizations? How can we help them
+%understand what exactly this is and how the math works?}
 
 \section{Conclusion}
+\label{sec:conclusion}
 
 %\section{Acknowledgments}
 
