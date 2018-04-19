@@ -319,7 +319,6 @@ After extracting the sufficient statistics from raw votes --- namely, the averag
 
 Let
 \begin{description}
-\begin{itemize}
 \item[$C = $] $\{X_1,\ldots, X_n\}$, the set of competing proposals,
 \item[$N = $] population size,
 \item[$X_i = $] $\{v_1, \ldots, v_{m_i}\}$, the $m_i$ raw votes for proposal $i$, after excluding abstentions,
@@ -328,7 +327,6 @@ Let
 \item[$\beta_i = $] $m_i - \alpha_i$, the effective number of ``no'' votes on motion $X_i$,
 \item[$K_i = $] $N_i - m_i$, the number of remaining votes yet to be cast on $X_i$,
 \item[$p_i = $] true latent community bias towards voting ``yes'' on $X_i$.
-\end{itemize}
 \end{description}
 
 In Eqs. \eqref{eq2}, \eqref{eq3}, \eqref{eq5}, \eqref{eq6}, \eqref{eq7} that follow, we refer the reader to the \hyperref[sec:derivation]{Appendix} for complete derivation details and justifications.
@@ -339,11 +337,9 @@ When considering a single proposal $X_i$ in isolation, we wish to compute:
 \end{align}
 where
 \begin{description}
-\begin{itemize}
 \item[$\alpha^*_i = $] the total number of ``yes'' votes for $X_i$ if we were to sample the entire population,
 \item[$T_i = $] $f \cdot N_i$, for some fraction $f$ corresponding to the type of majority needed for the vote
 (e.g., $f=\frac{1}{2}$ for a simple majority).
-\end{itemize}
 \end{description}
 Using a desirable prior
 \begin{align}\label{eq2}
@@ -361,9 +357,7 @@ for
 \todo[inline]{Note that we choose $c=10$ because it leads to intuitive results.}
 where
 \begin{description}
-\begin{itemize}
 \item[$V_i = $] $\lfloor{T_i - \alpha_i}\rfloor$, the maximum number of additional ``yes'' votes $X_i$ could receive such that it would remain below threshold.
-\end{itemize}
 \end{description}
 
 When considering a proposal $X_i$ relative to other proposals in $C$, we wish to compute
@@ -378,9 +372,7 @@ Under the assumption that the community's votes on motions are independent acros
 \end{align}
 where
 \begin{description}
-\begin{itemize}
 \item[$\delta_{ij} = $] $\alpha_i - \alpha_j$, the number of effective ``yes'' votes $X_i$ leads $X_j$ by.
-\end{itemize}
 \end{description}
 
 Using Eqs. \eqref{eq2} and \eqref{eq4}, we can numerically compute the credibility of a vote's outcome in two key scenarios relevant for democratic communities.  For example, a community may only consider accepting a proposal when a vote's credibility is above $90\%$.
@@ -406,10 +398,8 @@ For our purposes, we make a natural choice,
 \end{align}
 where
 \begin{description}
-\begin{itemize}
 \item[$\lambda_0 =$] a time-averaged rate of vote arrivals (preferably over a unit of time that sufficiently smooths the historical rate),
 \item[$\gamma =$] a decay factor ($0 < \gamma < 1$) ideally tuned to fit real historical data for the community via a regression analysis.
-\end{itemize}
 \end{description}
 Now, for example, to upper bound with $95\%$ probability the remaining number of votes still pending, we wish to solve for $\hat{K_i}$ such that the following inequality is satisfied:
 \begin{align}\label{eq7}
@@ -648,11 +638,9 @@ they cannot communicate as effectively, especially with lack of emotions being c
 \section{Derivation of Eq. \eqref{eq2}}
 In choosing a Beta prior, we start with $\operatorname{Beta}(1,1)$, as it represents the uniform distribution over all potential values of the community's bias.  To update the prior based on collected votes, standard theory suggests updating to $\operatorname{Beta}(1+\alpha_i,1+\beta_i)$; however, there are a few consistency issues with this update that we seek to fix:
 \begin{description}
-\begin{itemize}
 \item[$(1)$] The updated prior should not depend on the absolute number of votes $\alpha_i$, $\beta_i$, as this is not scale-invariant; rather, it should depend on the relative proportions (which are unitless instead of a number of votes),
 \item[$(2)$] as $\alpha_i + \beta_i \rightarrow N_i$, $\mathbb{E}[p_i] \rightarrow \frac{\alpha_i}{\alpha_i+\beta_i}$ (at a rate independent of $N_i$),
 \item[$(3)$] as $\alpha_i + \beta_i \rightarrow N_i$, $\operatorname{Var}[p_i] \rightarrow 0$ (at a rate independent of $N_i$).
-\end{itemize}
 \end{description}
 To satisfy these consistency properties, we seek to linearly update the prior's scale parameters in a more natural way: $\operatorname{Beta}(1+\eta\alpha_i,1+\eta\beta_i)$ for some renormalizing factor $\eta$.
 
@@ -701,10 +689,8 @@ Further expanding the expression, we get
 \section{Derivation of Eq. \eqref{eq6}}
 The properties we desire for $\lambda(t)$ are:
 \begin{description}
-\begin{itemize}
 \item[$(1)$] as $K_i \rightarrow 0$, the rate of incoming votes should drop exponentially and should be independent of $N_i$,
 \item[$(2)$] as $t \rightarrow \infty$, the rate of incoming votes should drop exponentially.
-\end{itemize}
 \end{description}
 Setting $\lambda (t) = \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}}$ for $0 < \gamma < 1$ satisfies these constraints while still allowing for the exact rate to be tunable.
 
@@ -723,7 +709,6 @@ and
 \begin{align*}
 \lim_{t\rightarrow \infty}\Pr\left(N(t)\leq \hat{K_i}\right) & = \sum_{n=0}^{\hat{K_i}} \frac{(\lambda_0 \cdot K_i/N_i)^n}{n!(\ln{1/\gamma})^n}e^{-\lambda_0 \frac{K_i/N_i}{\ln{1/\gamma}}}.
 \end{align*}
-\end{document}
 
 %\begin{acks}
 %\end{acks}
@@ -731,3 +716,5 @@ and
 % Bibliography
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{refs}
+
+\end{document}
