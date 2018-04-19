@@ -332,7 +332,7 @@ Let
 \end{itemize}
 
 
-In Eqs. \eqref{eq2}, \eqref{eq3}, \eqref{eq5}, \eqref{eq6}, \eqref{eq7} that follow, we urge the reader to refer to the \hyperref[sec:derivation]{Appendix} for complete derivation details, including motivations and justifications.
+In Eqs.~\eqref{eq2}, \eqref{eq3}, \eqref{eq5}, \eqref{eq6}, \eqref{eq7} that follow, we urge the reader to refer to the \hyperref[sec:derivation]{Appendix} for complete derivation details, including motivations and justifications.
 
 When considering a single proposal $X_i$ in isolation, we wish to compute:
 \begin{align}\label{eq1}
@@ -377,12 +377,12 @@ where
 \item[$\delta_{ij} = $] $\alpha_i - \alpha_j$, the number of effective ``yes'' votes $X_i$ leads $X_j$ by.
 \end{itemize}
 
-Using Eqs. \eqref{eq2} and \eqref{eq4}, we can numerically compute the credibility of a vote's outcome in two key scenarios relevant for democratic communities.  For example, a community may only consider accepting a proposal when a vote's credibility is above $90\%$.
+Using Eqs.~\eqref{eq2} and \eqref{eq4}, we can numerically compute the credibility of a vote's outcome in two key scenarios relevant for democratic communities.  For example, a community may only consider accepting a proposal when a vote's credibility is above $90\%$.
 
 \subsection{Dynamic Statistical Quorum}
 Oftentimes, not all proposals are relevant to the entire community.  Instead, a niche proposal may only affect a subset of the community, and hence to require much of the community to indicate their indifference and/or decide their opinion is a waste of the their fixed attentional budget.  While the underlying formulation for a statistical quorum was to establish credibility guarantees before taking action, a natural consequence in common scenarios of the kind just described leads to a reduction in decision-making efficiency.  How can we maintain credibility guarantees while simultaneously boosting efficiency?
 
-Our proposed solution is to infer the \textit{relevant} population size that cares about a given proposal so that we may establish credibility within only the subset population (naturally requiring less global attention).  By replacing the absolute upper bound on this relevant population size ($N_i$) with a high probability upper bound, we can continue to use the same formula presented in Eqs. \eqref{eq2} and \eqref{eq4}, but with more relevant parameters (namely, a smaller $N_i$, which in turn modifies $T_i$, $K_i$, and $V_i$).
+Our proposed solution is to infer the \textit{relevant} population size that cares about a given proposal so that we may establish credibility within only the subset population (naturally requiring less global attention).  By replacing the absolute upper bound on this relevant population size ($N_i$) with a high probability upper bound, we can continue to use the same formula presented in Eqs.~\eqref{eq2} and \eqref{eq4}, but with more relevant parameters (namely, a smaller $N_i$, which in turn modifies $T_i$, $K_i$, and $V_i$).
 
 To infer $N_i$, we turn to a dynamic voting process whereby information embedded within the dynamics is exploited.  By modeling the arrival rate of new votes as a nonhomogeneous Poisson process, we can extrapolate into the future.  For a decaying arrival rate of new votes, a nonhomogeneous Poisson process $\{N(t),t\geq 0\}$ probabilistically models the number of future arrivals over a given time interval $[0,t)$ according to:
 \begin{align*}
@@ -715,7 +715,7 @@ they cannot communicate as effectively, especially with lack of emotions being c
 
 \todo[inline]{Focus on only including bare minimum math, (no ``decorative math'').  Emphasis on justifications and properties, minimal arithmetic.  Good heuristic: Every line of math should have something said about it, otherwise it is unnecessary.}
 
-\subsection*{Derivation of Eq. \eqref{eq2}}
+\subsection*{Derivation of Eq.~\eqref{eq2}}
 In choosing a Beta prior, we start with $\operatorname{Beta}(1,1)$, as it represents the uniform distribution over all potential values of the community's bias.  To update the prior based on collected votes, standard theory suggests updating to $\operatorname{Beta}(1+\alpha_i,1+\beta_i)$; however, there are a few consistency issues with this update that we seek to fix:
 \begin{itemize}
 \item[$(1)$] The updated prior should not depend on the absolute number of votes $\alpha_i$, $\beta_i$, as this is not scale-invariant; rather, it should depend on the relative proportions (which are unitless instead of a number of votes),
@@ -736,7 +736,7 @@ Hence we arrive at $\eta = \frac{c}{K_i}$, where $c$ is any constant that can be
 
 As a sanity check, one can verify that this form for $\eta$ satisfies properties $(1)-(3)$.
 
-\subsection*{Derivation of Eq. \eqref{eq3}}
+\subsection*{Derivation of Eq.~\eqref{eq3}}
 \begin{align*}
 \Pr(\alpha^*_i > T_i \mid X_i) &= 1 - \Pr(\alpha^*_i \leq T_i \mid X_i), \text{ where}\\
 \Pr(\alpha^*_i \leq T_i \mid X_i) &= \int_0^1 \Pr(\alpha^*_i \leq T_i \mid p_i)\cdot \Pr(p_i \mid X_i) \mathrm{d}p_i\\
@@ -753,7 +753,7 @@ Hence, we have
 &= 1 - \Pr(\nu_i \leq V_i).
 \end{align*}
 
-\subsection*{Derivation of Eq. \eqref{eq5}}
+\subsection*{Derivation of Eq.~\eqref{eq5}}
 Assuming independence of votes across proposals,
 \begin{align*}
 \Pr\left(\bigwedge_{j \neq i} (\alpha^*_i > \alpha^*_j) \mid C\right) &=\prod_{j \neq i} \Pr(\alpha^*_i > \alpha^*_j \mid X_i, X_j).
@@ -766,7 +766,7 @@ Further expanding the expression, we get
 &= \prod_{j \neq i} \left( 1 - \sum_{k=\lceil\delta_{ij}\rceil}^{K_j} \underbrace{\Pr(\alpha^*_j = \alpha_j + k \mid X_j)}_{= \Pr(\nu_j = k)} \cdot \underbrace{\Pr(\alpha^*_i \leq \alpha_j + k \mid X_i)}_{={CDF}_{\nu_i}(k - \delta_{ij})} \right).
 \end{align*}
 
-\subsection*{Derivation of Eq. \eqref{eq6}}
+\subsection*{Derivation of Eq.~\eqref{eq6}}
 The properties we desire for $\lambda(t)$ are:
 \begin{itemize}
 \item[$(1)$] as $K_i \rightarrow 0$, the rate of incoming votes should drop exponentially and should be independent of $N_i$,
@@ -774,7 +774,7 @@ The properties we desire for $\lambda(t)$ are:
 \end{itemize}
 Setting $\lambda (t) = \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}}$ for $0 < \gamma < 1$ satisfies these constraints while still allowing for the exact rate to be tunable.
 
-\subsection*{Derivation of Eq. \eqref{eq7}}
+\subsection*{Derivation of Eq.~\eqref{eq7}}
 Using $\lambda (t) = \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}}$, we have
 \begin{align*}
 \lim_{t \rightarrow \infty} \Lambda (t) &=\int _{0}^{\infty}\lambda (t)\mathrm{d}t\\
