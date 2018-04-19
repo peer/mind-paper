@@ -201,8 +201,6 @@ have Appendix where we derive formulas presented in Section~\ref{sec:decision-cr
 %\todo[inline]{Voting auditing work.}
 %
 %\todo[inline]{Delegation as way to increase legitimacy, Liquid Democracy, etc.}
-\section{Related Work}
-\label{sec:related-work}
 
 %\todo[inline]{Repeat references from "There have been many improvements proposed to this basic form and various analysis made."?}
 %
@@ -337,7 +335,7 @@ where
 \item[$T_i = $] $f \cdot N_i$, for some fraction $f$ corresponding to the type of majority needed for the vote
 (e.g., $f=\frac{1}{2}$ for a simple majority).
 \end{itemize}
-Using a desirable prior 
+Using a desirable prior
 \begin{align}\label{eq2}
 p_i \mid X_i \sim \operatorname{Beta}(1+\frac{\alpha_i}{K_i},1+\frac{\beta_i}{K_i}),
 \end{align}
@@ -526,11 +524,11 @@ community.
 \todo[inline]{Visualize the credibility and dynamics of the voting process under this framework:\\
 4 Figures and 1 Table Pending}
 
-To gain an intuitive grasp of the decision credibility used in a statistical quorum, we can examine two toy scenarios.  
+To gain an intuitive grasp of the decision credibility used in a statistical quorum, we can examine two toy scenarios.
 
 In Figure \ref{fig:credible_interval}, we examine how the $90\%$ credible interval converges as more votes are collected out of a population of $100$.  A statistical quorum is achieved when the credible interval is contained entirely above the x-axis.  In this example, the latent bias of the community is that $75\%$ of the community supports the proposal while $25\%$ opposes it.
 
-In 
+In
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.45\textwidth]{figures/credible_interval.pdf}
@@ -771,7 +769,7 @@ Using $\lambda (t) = \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}}$, we have
 &= \int _{0}^{\infty} \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}} \mathrm{d}t\\
 &= \lambda_0 \frac{K_i/N_i}{\ln{(1/\gamma)}}.
 \end{align*}
-Thus, 
+Thus,
 \begin{align*}
 \lim_{t\rightarrow \infty}\Pr\left(N(t) = n\right) = \frac{(\lambda_0 \cdot K_i/N_i)^n}{n!(\ln{(1/\gamma)})^n}e^{-\lambda_0 \frac{K_i/N_i}{\ln{(1/\gamma)}}},
 \end{align*}
