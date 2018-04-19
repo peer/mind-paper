@@ -353,7 +353,7 @@ where
 (e.g., $f=\frac{1}{2}$ for a simple majority).
 \end{itemize}
 \end{description}
-Using a desirable prior 
+Using a desirable prior
 \begin{align}\label{eq2}
 p_i \mid X_i \sim \operatorname{Beta}(1+\frac{\alpha_i}{K_i},1+\frac{\beta_i}{K_i}),
 \end{align}
@@ -565,13 +565,10 @@ having to be involved in decision making, and with better legitimacy.}
 \todo[inline]{We did satisfaction surveys with decision making both in spring and fall 2016. Pull out some interesting
 observation when comparing.}
 
-\todo[inline]{We made 6 unstructured interviews. Pull all quotes explaining how they like the idea and how it seems
-to work. But how there are other issues by moving decision making online: meetings also serve community building which
-does not happen online. No fun. So interesting insights about using online platforms for offline communities
-for making decisions which are not really answering our hypothesis, but are useful as insights we got.}
-
 \todo[inline]{Make sure that we are supporting both of our claims well: this statistical quorum is a good metric and
 collective attention can be utilized better.}
+
+
 
 \subsection{Survey}
 
@@ -594,6 +591,11 @@ of the community were invited to participate in the survey each time.}
 
 \subsection{Interviews}
 
+\todo[inline]{We made 7 unstructured interviews. Pull all quotes explaining how they like the idea and how it seems
+to work. But how there are other issues by moving decision making online: meetings also serve community building which
+does not happen online. No fun. So interesting insights about using online platforms for offline communities
+for making decisions which are not really answering our hypothesis, but are useful as insights we got. How some
+people prefer online and offline meetings.}
 
 \section{Discussion}
 \label{sec:discussion}
@@ -701,7 +703,7 @@ The properties we desire for $\lambda(t)$ are:
 \begin{itemize}
 \item[$(1)$] as $K_i \rightarrow 0$, the rate of incoming votes should drop exponentially and should be independent of $N_i$,
 \item[$(2)$] as $t \rightarrow \infty$, the rate of incoming votes should drop exponentially.
-\end{itemize} 
+\end{itemize}
 \end{description}
 Setting $\lambda (t) = \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}}$ for $0 < \gamma < 1$ satisfies these constraints while still allowing for the exact rate to be tunable.
 
@@ -712,7 +714,7 @@ Using $\lambda (t) = \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}}$, we have
 &= \int _{0}^{\infty} \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}} \mathrm{d}t\\
 &= \lambda_0 \frac{K_i/N_i}{\ln{1/\gamma}}.
 \end{align*}
-Thus, 
+Thus,
 \begin{align*}
 \lim_{t\rightarrow \infty}\Pr\left(N(t) = n\right) = \frac{(\lambda_0 \cdot K_i/N_i)^n}{n!(\ln{1/\gamma})^n}e^{-\lambda_0 \frac{K_i/N_i}{\ln{1/\gamma}}},
 \end{align*}
