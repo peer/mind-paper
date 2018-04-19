@@ -17,6 +17,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
 \usepackage[utf8]{inputenc}
+\usepackage{subcaption}
 
 % Metadata Information
 %\acmJournal{TWEB}
@@ -512,6 +513,8 @@ A user can hover over the chart to see details at that time. Users can see these
 \label{fig:results}
 \end{figure}
 
+\newpage
+
 \section{Evaluation}
 \label{sec:evaluation}
 
@@ -531,23 +534,25 @@ In Figure \ref{fig:credible_interval}, we examine how the $90\%$ credible interv
 In
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.45\textwidth]{figures/credible_interval.pdf}
+\includegraphics[width=0.6\textwidth]{figures/credible_interval.pdf}
 \caption{.}
 \label{fig:credible_interval}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=.45\textwidth]{figures/simple_majority.pdf}
-\caption{.}
-\label{fig:simple_majority}
-\end{figure}
-
-\begin{figure}[ht]
+\begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=.45\textwidth]{figures/competing_proposals.pdf}
+\includegraphics[width=\textwidth]{figures/simple_majority.pdf}
 \caption{.}
 \label{fig:simple_majority}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\textwidth]{figures/competing_proposals.pdf}
+\caption{.}
+\label{fig:simple_majority}
+\end{subfigure}
 \end{figure}
 
 
