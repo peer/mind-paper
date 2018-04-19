@@ -14,6 +14,9 @@
 
 \usepackage{todonotes}
 \usepackage{bookmark}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage[utf8]{inputenc}
 
 % Metadata Information
 %\acmJournal{TWEB}
@@ -68,9 +71,9 @@ different approach: For a fixed level of community attention, how can we optimiz
 maximize productivity?
 We propose a novel \emph{statistical quorum}, derived using first principles, as one metric the community can use to
 focus attention, in turn making the entire decision-making process dynamic.
-We developed an online system centered around this metric and tested it in a 140-person community that holds weekly
+We developed a web application centered around this metric and tested it in a 140-person community that holds weekly
 councils over the course of 16 weeks.
-We found that the community was able to use the online system to simultaneously improve the credibility and efficiency
+We found that the community was able to use the web application to simultaneously improve the credibility and efficiency
 of their decision-making process.
 \end{abstract}
 
@@ -117,10 +120,29 @@ of their decision-making process.
 
 \section{Introduction}
 
-In many historical and recent elections it is not infrequent that we get close results.
+In many historical and recent elections it is not infrequent that we get close results (see Table~\ref{tab:example}).
 Especially when this is combined with low voter turnout, how can we have confidence in results?
 What if elections would be a day longer? What if they would be on a different day? What if
 more people would participate? Would results still be the same?
+
+\begin{table}
+  \centering
+  \begin{small}
+  \begin{tabular}{l r r r r r r r}
+    {\small\textit{Vote}} & \multicolumn{2}{r}{\small \textit{First option}} & \multicolumn{2}{r}{\small \textit{Second option}} & {\small \textit{Total eligible}} & {\small \textit{Turnout}} & {\small \textit{Decision}} \\
+    & & & & & {\small \textit{voters}} & & {\small \textit{credibility}} \\
+    \midrule
+    Brexit & 17,410,742 & $51.9\%$ & 16,141,241 & $48.1\%$ & 46,500,001 & $72.2\%$ & $59.8\%$ \\
+    Presidential elections & 62,984,825 & $48.9\%$ & 65,853,516 & $51.1\%$ & 230,585,915 & $55.9\%$ & $52.6\%$ \\
+  \end{tabular}
+  \end{small}
+  \bigskip\caption{Votes cast in Brexit, a 2016 referendum for United Kingdom's withdrawal from the European Union~\protect\cite{brexitresults},
+  and 2016 USA presidential elections, popular vote~\protect\cite{usaresults1,usaresults2}. Simplified to only two options and without
+  invalid votes. The last column shows computed decision credibility as described in Section~\ref{sec:decision-credibility}. We see that
+  credibility is low, which we can mostly attribute to the fact that there is small difference in votes between both options so
+  with more votes any option could end up winning.}\label{tab:example}
+  \vspace{-0.3cm}
+\end{table}
 
 An underlying question is what should we do when not everyone in the population votes.
 
@@ -151,45 +173,26 @@ Our contributions are:
 \item We developed a framework of computing statistical credibility of results
 based on sample size, votes cast, and voting duration.
 \item Based on this framework we developed a novel concept of \emph{statistical quorum}
-as a threshold of votes required to deem results legitimate.
-\item We implemented a web application \emph{PeerMind},
+as a threshold of votes required to deem results credible and legitimate.
+\item We implemented web application \emph{PeerMind},
 integrating credibility of results and statistical quorum, and designed
 a workflow of its use in a decision making processes.
 \item We deployed the application in a democratically run community of 140
 members for 16 weeks.
 \item Using the analysis of decision making process before and after introduction
 of the application, using surveys, and using semi-structured interviews, we show
-how use of statistical quorum increases legitimacy of decisions,
-improves utilization of collective attention, increases overall participation,
-and increases number of decisions made while not sacrificing their legitimacy.
+how use of statistical quorum increases credibility of decisions,
+improves utilization of collective attention, increases and diversifies overall participation,
+and increases number of decisions made.
 \end{itemize}
 
 The rest of the paper is structured as follows. In Section~\ref{sec:related-work} we
 present related work. We continue by describing a framework of computing statistical
 credibility of results and statistical quorum in Section~\ref{sec:decision-credibility}.
-We present our methodology in Section~\ref{sec:methodology} after which we do evaluation in
-Section~\ref{sec:evaluation}. We discuss results in Section~\ref{sec:discussion} and conclude
-in Section~\ref{sec:conclusion}. At the end we have Appendix where we
-derive formulas presented in Section~\ref{sec:decision-credibility}.
-
-% Security is out of the scope of this work. We assume here that users and their identities are known and are managed
-% by a community's admin. There are many communities where their decision making is public with public minutes and this
-% is who the app is currently targeting.
-
-%\begin{table*}
-%  \centering
-%  \begin{tabular}{l r r r r r r r}
-%    {\small\textit{Vote}} & \multicolumn{2}{r}{\small \textit{First option}} & \multicolumn{2}{r}{\small \textit{Second option}} & {\small \textit{Total eligible voters}} & {\small \textit{Turnout}} & {\small \textit{Decision credibility}} \\
-%    \midrule
-%    Brexit & 17,410,742 & $51.9\%$ & 16,141,241 & $48.1\%$ & 46,500,001 & $72.2\%$ & $59.8\%$ \\
-%    Presidential elections & 62,984,825 & $48.9\%$ & 65,853,516 & $51.1\%$ & 230,585,915 & $55.9\%$ & $52.6\%$ \\
-%  \end{tabular}
-%  \caption{Votes cast in Brexit, a 2016 referendum for United Kingdom's withdrawal from the European Union~\protect\cite{brexitresults},
-%  and 2016 USA presidential elections, popular vote~\protect\cite{usaresults1,usaresults2}. Simplified to only two options and without
-%  invalid votes. The last column shows computed decision credibility as described in \secref{sec:decision-credibility}. We see that
-%  credibility is low, which we can mostly attribute to the fact that there is small difference in votes between both options so
-%  with more votes any option could end up winning.}\label{tab:example}
-%\end{table*}
+We present our methodology in Section~\ref{sec:methodology} after which we do qualitative and
+quantitative evaluation in Section~\ref{sec:evaluation}. We discuss results in
+Section~\ref{sec:discussion} and conclude in Section~\ref{sec:conclusion}. At the end we
+have Appendix where we derive formulas presented in Section~\ref{sec:decision-credibility}.
 
 \section{Related Work}
 \label{sec:related-work}
