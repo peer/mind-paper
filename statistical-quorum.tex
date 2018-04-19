@@ -688,12 +688,17 @@ learn from them, instead of being alone using the application.
 %\todo[inline]{Describe why is $0.90\%$ a reasonable statistical quorum and how to determine one for your community.\\
 %Part of the answer here is honestly just that the admin should tune the threshold (and a few of the other hyperparameters we introduce) to their intuition.  Once you set the parameters, the real benefit is that you have consistency, rather than having to always use your intuition as an admin about evaluating credibility.}
 
-\todo[inline]{Describe interesting example how we had a bug which were showing a very low statistical quorum for a failing
-vote and so the whole community very engaged for a whole month to decide and resolve it. So how they trusted the
-app and the metric and how it was really able to direct the attention of the community. It seems it works even if it is
-buggy or not perfect, because it has worked so well in the past that members got used to the fact that when it was saying
-that there is a consensus or not on an issue that that was also their own read of the community. So for the purpose of
-directing attention the metric does not have to mathematically perfect.}
+A case for how well can use of statistical quorum influence how community directs their
+attention has been also shown through a bug we had at one point in PeerMind web application
+in the fall semester.
+The web application was for a particular decision showing a very low credibility and inviting
+more votes for decision to reach statistical quorum.
+Community engaged and started discussing proposal more, which lasted more than three weeks.
+Almost whole community got involved and many votes were made.
+At that time we realized that a bug is showing that more votes are needed to pass the proposal
+when in fact enough votes to reject the proposal were already made, long ago.
+This example showed us how powerful can such tool at direction attention be and how trusting
+a community has became in it after weeks of successful use.
 
 %\todo[inline]{Security. How to prevent a group of people to vote and by trick reaching statistical quorum.
 %We use dynamic statistical quorum to address this, but one other approach is also for voting to stay open and
