@@ -230,7 +230,7 @@ Hence, despite the reality of 65 members not having voted, the outcome of the 35
 credible enough to be taken as representative of the entire community's desire.
 On the other hand, if 80 members vote, where 41 support the proposal and 39 oppose, then we
 cannot yet conclude that the decision to accept the proposal is credible enough for the entire
-community to officially adopt, despite the significant participation in the vote.
+community to officially adopt, despite the significant participation in voting.
 Instead, the suggested course of action would be to continue gathering more votes and/or further
 discussing the proposal until a credible outcome is established.
 
@@ -337,7 +337,6 @@ where
 \item[$\alpha^*_i = $] the total number of ``yes'' votes for $X_i$ if we were to sample the entire
 population,
 \item[$T_i = $] $f \cdot N_i$, for some fraction $f$ corresponding to the type of majority needed
-for the vote
 (e.g., $f=\frac{1}{2}$ for a simple majority).
 \end{description}
 Using a desirable prior
@@ -499,18 +498,18 @@ further discussed through comments. Once a moderator deems that proposal is read
 can open it for voting. Users vote through a ballot seen in Figure~\ref{fig:ballot}.
 
 An important design decision in the scope of this paper is that during voting, users can see the current
-results of the vote in real time. Results are shown on a chart depicting average score through time
+results of voting in real time. Results are shown on a chart depicting average score through time
 as seen in Figure~\ref{fig:results}. Users can see both the current average score of all votes (score
 larger than 0 means that a proposal is passing) and the credibility of current result. A community can decide
 how high credibility it requires to deem the result passing statistical quorum. During our evaluation
 we used 0.90 as statistical quorum.
 
-The rationale for displaying the current results during voting is to give users feedback how the vote
+The rationale for displaying the current results during voting is to give users feedback how voting
 is progressing and allow them to engage more with the discussion. Moreover, displaying the results
 also serves as additional safeguard against potential manipulations of statistical quorum through malicious
 coordination.
 
-After the vote passes the statistical quorum, a moderator can close voting and a discussion item.
+After voting passes the statistical quorum, a moderator can close voting and a discussion item.
 
 Web application contains other features which makes it easier to use as a decision making and discusion
 platform, like notifications, and additional features which allow the application to be used also to
@@ -536,7 +535,7 @@ section on the left, summary points in the middle, and proposed proposals with v
 \includegraphics[width=0.5\textwidth]{figures/ballot.png}
 \caption{Ballot used for voting in PeerMind web application. Users can chose a value between -1 and 1 on a slider,
 where -1 means opposition, 1 means in favor, and 0 indifference. They can also chose abstention (they
-remove themselves from the population of the community for the vote in question), or to not vote (default), which
+remove themselves from the population of the community for voting in question), or to not vote (default), which
 means that their vote does not contribute to the quorum.}
 \label{fig:ballot}
 \end{figure}
@@ -544,7 +543,7 @@ means that their vote does not contribute to the quorum.}
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/results.png}
-\caption{Results of a vote in PeerMind web application. Results are shown as an average score through time of the vote.
+\caption{Results of a vote in PeerMind web application. Results are shown as an average score through time of voting.
 A user can hover over the chart to see details at that time. Users can see these results in real time during voting.}
 \label{fig:results}
 \end{figure}
@@ -572,7 +571,7 @@ workflow we created -> over one in-person meetings, but because of all decision 
 didn't happen
 
 issues with quorum
-unclear how much time spend on each discussion item: how contentious the discussion really is can be seen only after the vote
+unclear how much time spend on each discussion item: how contentious the discussion really is can be seen only after voting
 
 
 X people choose not to participate
