@@ -208,7 +208,11 @@ have Appendix where we derive formulas presented in Section~\ref{sec:decision-cr
 \section{Related Work}
 \label{sec:related-work}
 
-Past approaches exist in using Bayesian statistics in the context of voting theory.  In particular, Bayesian methods have been proposed for auditing election outcomes \citep{rivest2012bayesian}.  Many further methods have been developed for efficient ballot auditing \cite{lindeman2012bravo}, \citep{rivest2017clipaudit}.  The problem of verifying an election's outcome is mathematically similar in structure to the notion of a statistical quorum defined in this work; however, a critical difference lies in the role the metric plays in the decision-making process itself.  Post hoc verification of results does not influence voting.  A statistical quorum, on the other hand, directly influences the allocation of a community's attention by essentially performing voting audits in real-time. To our knowledge, no methods have been formalized for coupling the verification of vote outcomes with the voting process itself. Furthermore, the dynamic statistical quorum presented here takes the previous ideas one step further.  Statistical method for auditing vote outcomes have no way to infer what we call the ``effective population size'', i.e., the portion of the population that actually cares about a vote's outcome.  We believe this information is crucial and have developed new statistical methods to infer this population and subsequently couple it to the statistical quorum, further influencing the influence on the decision-making process itself.  Additional work exists for selectively sampling a subset of the voting population to estimate the population's bias \cite{chaum2016random}. In random-sample voting, the emphasis is on security and efficiency of voting.  The approach taken to optimally allocate a community's attention is fundamentally different, however, in that the goal is to selectively distribute votes to random subsets of the population with the intent of reducing the amount of attention required by each individual.  This does indeed reduce the amount of attention required of individual voters, but at the same time is restricts the freedom of voters to participate only in the votes they have been delegated to participate in.
+Past approaches exist in using Bayesian statistics in the context of voting theory.  In particular, Bayesian methods have been proposed for auditing election outcomes \citep{rivest2012bayesian}.  Many further methods have been developed for efficient ballot auditing \cite{lindeman2012bravo}, \citep{rivest2017clipaudit}.  The problem of verifying an election's outcome is mathematically similar in structure to the notion of a statistical quorum defined in this work; however, a critical difference lies in the role the metric plays in the decision-making process itself.  Post hoc verification of results does not influence voting.  A statistical quorum, on the other hand, directly influences the allocation of a community's attention by essentially performing voting audits in real-time. To our knowledge, no methods have been formalized for coupling the verification of vote outcomes with the voting process itself. 
+
+Furthermore, the dynamic statistical quorum presented here takes the previous ideas one step further.  Statistical method for auditing vote outcomes have no way to infer what we call the ``effective population size'', i.e., the portion of the population that actually cares about a vote's outcome.  We believe this information is crucial and have developed new statistical methods to infer this population and subsequently couple it to the statistical quorum, further influencing the influence on the decision-making process itself.  
+
+Additional work exists for selectively sampling a subset of the voting population to estimate the population's bias \cite{chaum2016random}. In random-sample voting, the emphasis is on security and efficiency of voting.  The approach taken to optimally allocate a community's attention is fundamentally different, however, in that the goal is to selectively distribute votes to random subsets of the population with the intent of reducing the amount of attention required by each individual.  This does indeed reduce the amount of attention required of individual voters, but at the same time is restricts the freedom of voters to participate only in the votes they have been delegated to participate in.
 
 %\todo[inline]{Threshold and quorum at \url{https://www.publications.parliament.uk/pa/ld200910/ldselect/ldconst/99/99.pdf}.
 %How do some claim that quorum are in fact bad, and counter democratic, but do not offer a solution how to evaluate decisions.}
@@ -717,15 +721,15 @@ directing attention the metric does not have to mathematically perfect.}
 \section{Conclusion}
 \label{sec:conclusion}
 
-In this work we have developed a theorethical framework of computing statistical credibility
+In this work we have developed a theoretical framework of computing statistical credibility
 of decisions being made through a voting process.
-We applied this framework to design a statistical quroum which we integrated with a web application
+We applied this framework to design a statistical quorum which we integrated with a web application
 PeerMind.
 We deployed the application in a democratic community to compare its effect in comparison with
 prior time before the introduction of the web application.
 Analyzing the effects of this introduction, we conclude that our hypothesis that using
-crediblity as a feedback mechanism and statistical quorum as a threshold really improves
-the partication of members in decision making, making it more inclusive, more engaging, and
+credibility as a feedback mechanism and statistical quorum as a threshold really improves
+the participation of members in decision making, making it more inclusive, more engaging, and
 better spend collective attention available for decision making.
 
 % Appendix
