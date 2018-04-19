@@ -189,8 +189,8 @@ and increases number of decisions made.
 The rest of the paper is structured as follows. In Section~\ref{sec:related-work} we
 present related work. We continue by describing a framework of computing statistical
 credibility of results and statistical quorum in Section~\ref{sec:decision-credibility}.
-We present our methodology in Section~\ref{sec:methodology} after which we do qualitative and
-quantitative evaluation in Section~\ref{sec:evaluation}. We discuss results in
+We present our methodology in Section~\ref{sec:methodology} after which we do
+quantitative and qualitative evaluation in Section~\ref{sec:evaluation}. We discuss results in
 Section~\ref{sec:discussion} and conclude in Section~\ref{sec:conclusion}. At the end we
 have Appendix where we derive formulas presented in Section~\ref{sec:decision-credibility}.
 
@@ -520,6 +520,8 @@ decision making in one platform serves as an important resource for institutiona
 
 PeerMind source code is available under open source licence at \url{https://redacted.for.blind.review} and
 anonymized dataset of interactions with the app, including votes, is available at \url{https://redacted.for.blind.review}.
+The research protocol with human subjects was approved by \emph{redacted for blind review} under
+ID \emph{redacted for blind review}.
 
 \begin{figure}[ht]
 \centering
@@ -551,7 +553,7 @@ A user can hover over the chart to see details at that time. Users can see these
 \label{sec:evaluation}
 
 We evaluate statistical quorum in two ways. First, we analyze it theoretically and explore its mathematical properties.
-Then we do qualitative and quantitative evaluation through real-world use of the PeerMind application by a 140 members
+Then we do quantitative and qualitative evaluation through real-world use of the PeerMind application by a 140 members
 community.
 
 \subsection{Analysis}
@@ -560,6 +562,40 @@ community.
 4 Figures and 1 Table Pending}
 
 \subsection{Use in Practice}
+
+We tracked web application activity of 132 PeerMind users who consented to the experiment.
+We looked at time they had the web application focused in their browsers to determine the
+time they used the web application.
+In total, they spent 924.886 seconds using the web application (which translates to roughly 2 hours
+per member on average) during the fall 2016 semester.
+
+In comparison, we analyzed spring 2016 council minutes when community was meeting in-person and
+estimated that members spent approximately 2.600.000 seconds total doing decision making
+(around 5 hours per member on average).
+We estimated this based on information about beginning and end of councils multiplied
+with an estimation of the number of people attending each council.
+We estimated the number of people attending based on number of votes made for different proposals
+and the quorum size, taking the maximum of both.
+We find this a good and conservative proxy because councils have a rule that they have to adjurn
+if the number of members present fall under the quorum (42 members) for more than 10 minutes
+which in practice members discover soon through the number of votes being made or when count
+is explictly requested.
+
+Users on PeerMind made 139 proposals over the span of a semester (this figure
+excludes proposals that were withdrawn before voting began).
+Out of those 139 proposals, 98 proposals passed. In comparison, 70 out of 73 proposals passed
+in the semester prior.
+
+PeerMind users made 3958 votes, whereas 1396 votes were made during spring semester.
+Even after adjusting for the larger number of proposals made in the fall, participation
+increased significantly.
+From around 19 votes per proposal to 28 votes per proposal, on average.
+
+
+
+Plotting time spent per user on PeerMind gives further insights into the democratization of decision-making. While the average person spent 7002 seconds on the application, the distribution of users is fairly long-tailed with many people only spending 30 minutes and some people spending upwards of 20 hours. We believe many people who only spent 30 minutes would not participate in the offline council at all (which is confirmed by much lower attendance and fewer votes). Furthermore, people who need more time to discuss are given the freedom to do so without wasting time of those who are not interested in the pertinent discussion.
+
+
 
 designed integration with system
 
@@ -601,14 +637,8 @@ collective attention can be utilized better.}
 
 In Figure~\ref{fig:survey-comparison} we see questions and results of the survey we made at the end of both semesters.
 
-We can see that in fall members were more satisfied with the decision making in the community and only how understandable
+We can see that in fall (using PeerMind) members were more satisfied with the decision making in the community and only how understandable
 is the whole process decreased.
-We attribute this to the fact that the use of the web application is
-a novelty, including using a novel concept like statistical quroum, and requires more effort
-in educating members than a traditional decision making.
-Moreover, decision making in person allows one to observe others how they are participating and
-learn from them, instead of being alone using the application.
-We explore this question also through interviews in Section~\ref{sec:interviews}.
 
 \begin{figure}[ht]
 \centering
@@ -630,6 +660,19 @@ people prefer online and offline meetings.}
 
 \section{Discussion}
 \label{sec:discussion}
+
+decline in understanding of the process:
+
+We attribute this to the fact that the use of the web application is
+a novelty, including using a novel concept like statistical quorum, and requires more effort
+in educating members than a traditional decision making.
+Moreover, decision making in person allows one to observe others how they are participating and
+learn from them, instead of being alone using the application.
+We explore this question also through interviews in Section~\ref{sec:interviews}.
+
+
+This not only means that PeerMind users were more productive in terms of decisions made, they also spent significantly less time per motion than the control group.
+
 
 \todo[inline]{Describe why is $0.90\%$ a reasonable statistical quorum and how to determine one for your community.\\
 Part of the answer here is honestly just that the admin should tune the threshold (and a few of the other hyperparameters we introduce) to their intuition.  Once you set the parameters, the real benefit is that you have consistency, rather than having to always use your intuition as an admin about evaluating credibility.}
