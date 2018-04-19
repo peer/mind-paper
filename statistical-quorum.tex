@@ -344,7 +344,7 @@ where
 \item[$T_i = $] $f \cdot N_i$, for some fraction $f$ corresponding to the type of majority needed for the vote
 (e.g., $f=\frac{1}{2}$ for a simple majority).
 \end{itemize}
-Using a desirable prior
+Using the desirable prior
 \begin{align}\label{eq2}
 p_i \mid X_i \sim \operatorname{Beta}(1+\frac{\alpha_i}{K_i},1+\frac{\beta_i}{K_i}),
 \end{align}
@@ -377,7 +377,7 @@ where
 \item[$\delta_{ij} = $] $\alpha_i - \alpha_j$, the number of effective ``yes'' votes $X_i$ leads $X_j$ by.
 \end{itemize}
 
-Using Eqs.~\eqref{eq2} and \eqref{eq4}, we can numerically compute the credibility of a vote's outcome in two key scenarios relevant for democratic communities.  For example, a community may only consider accepting a proposal when a vote's credibility is above $90\%$.
+Using Eqs.~\eqref{eq3} and \eqref{eq5}, we can numerically compute the credibility of a vote's outcome in two key scenarios relevant for democratic communities.  For example, a community may only consider accepting a proposal when a vote's credibility is above $90\%$.
 
 \subsection{Dynamic Statistical Quorum}
 Oftentimes, not all proposals are relevant to the entire community.  Instead, a niche proposal may only affect a subset of the community, and hence to require much of the community to indicate their indifference and/or decide their opinion is a waste of the their fixed attentional budget.  While the underlying formulation for a statistical quorum was to establish credibility guarantees before taking action, a natural consequence in common scenarios of the kind just described leads to a reduction in decision-making efficiency.  How can we maintain credibility guarantees while simultaneously boosting efficiency?
@@ -535,34 +535,39 @@ community.
 \todo[inline]{Visualize the credibility and dynamics of the voting process under this framework:\\
 4 Figures and 1 Table Pending}
 
-To gain an intuitive grasp of the decision credibility used in a statistical quorum, we can examine two toy scenarios.
+To gain an intuitive grasp of the decision credibility used in a statistical quorum, we can examine a few toy scenarios:
 
-In Figure \ref{fig:credible_interval}, we examine how the $90\%$ credible interval converges as more votes are collected out of a population of $100$.  A statistical quorum is achieved when the credible interval is contained entirely above the x-axis.  In this example, the latent bias of the community is that $75\%$ of the community supports the proposal while $25\%$ opposes it.
+In Figure \ref{fig:credible_interval}, we examine how the $90\%$ credible interval converges as more votes are collected out of a population of $100$.  A statistical quorum is achieved when the credible interval is contained entirely above zero, corresponding to a positive bias toward the proposal.  In this example, the latent bias of the community is that $75\%$ of the community supports the proposal while $25\%$ opposes it.  After approximately $35$ members have voted, a statistical quorum is achieved.
 
-In
+In Figure \ref{fig:simple_majority}, we examine how many affirmative votes are required from a community of size $100$ to reach a statistical quorum \textit{after} the proposal starts off with $10$ votes against it.  Initially, the $0-10$ vote tally in favor of rejecting the proposal gives the outcome over an $80\%$ credibility; however, as affirmative votes begin arriving, the credibility decreases until the `yes' votes outnumber the `no' votes.  After $21$ `yes' votes have been cast against the $10$ `no' votes, a statistical quorum of $90\%$ credibility is achieved.
+
+In Figure \ref{fig:competing_proposals}, we examine how a set of three competing proposals gets resolved.  We simulate three proposals competing against each other in a community of size $100$, where the community has a latent bias of $75\%$, $50\%$, $25\%$ toward each of the proposals.  This scenario models what happens when a community slightly prefers the first proposal, is relatively indifferent or equivalently split on the second proposal, and slightly disproves of the third proposal.  Each member of the community casts a vote of $+0.5$, $0$, $-0.5$ for proposal 1, 2, 3, respectively.  (We have removed the stochasticity of the votes cast according to the community's latent biases in order to simplify the simulation.)  After approximately $35$ votes, we see that a statistical quorum of $90\%$ is achieved, signifying that the community's preference for proposal 1 over proposals 2, 3 is clear.
+
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/credible_interval.pdf}
-\caption{.}
+\caption{Convergence of the $90\%$ credible interval as more votes are cast in the population of size $100$.  A statistical quorum is achieved when the credible interval is strictly above $0$.}
 \label{fig:credible_interval}
 \end{figure}
 
 \begin{figure}[ht]
 \centering
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}[t]{.5\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/simple_majority.pdf}
-\caption{.}
+\caption{Credibility of a proposal requiring a simple majority to pass: After $10$ `No' votes are initially cast, `Yes' votes arrive until a statistical quorum is achieved.}
 \label{fig:simple_majority}
 \end{subfigure}%
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}[t]{.5\textwidth}
 \centering
 \includegraphics[width=\textwidth]{figures/competing_proposals.pdf}
-\caption{.}
-\label{fig:simple_majority}
+\caption{Credibility of a proposal competing against two other proposals: As more votes are cast according to the population's bias towards the three proposals ($75\%$, $50\%$, $25\%$), the first proposal eventually achieves a statistical quorum.}
+\label{fig:competing_proposals}
 \end{subfigure}
+\caption{}
 \end{figure}
 
+\newpage
 
 \subsection{Use in Practice}
 
