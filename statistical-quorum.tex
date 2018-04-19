@@ -1,11 +1,29 @@
-\documentclass[chi_draft]{sigchi}
+\documentclass[format=acmsmall, review=false, screen=true, anonymous=false]{acmart}
 
-% Use this section to set the ACM copyright statement (e.g. for
-% preprints).  Consult the conference website for the camera-ready
-% copyright statement.
+\usepackage{booktabs} % For formal tables
+
+\usepackage[ruled]{algorithm2e} % For algorithms
+\renewcommand{\algorithmcfname}{ALGORITHM}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+
+\usepackage{todonotes}
+\usepackage{bookmark}
+
+% Metadata Information
+%\acmJournal{TWEB}
+%\acmVolume{9}
+%\acmNumber{4}
+%\acmArticle{39}
+%\acmYear{2010}
+%\acmMonth{3}
+%\copyrightyear{2009}
+%\acmArticleSeq{9}
 
 % Copyright
-%\CopyrightYear{2016}
 %\setcopyright{acmcopyright}
 %\setcopyright{acmlicensed}
 %\setcopyright{rightsretained}
@@ -13,155 +31,86 @@
 %\setcopyright{usgovmixed}
 %\setcopyright{cagov}
 %\setcopyright{cagovmixed}
+
 % DOI
-%\doi{http://dx.doi.org/10.475/123_4}
-% ISBN
-%\isbn{123-4567-24-567/08/06}
-%Conference
-%\conferenceinfo{CHI'16,}{May 07--12, 2016, San Jose, CA, USA}
-%Price
-%\acmPrice{\$15.00}
+%\acmDOI{0000001.0000001}
 
-% Use this command to override the default ACM copyright statement
-% (e.g. for preprints).  Consult the conference website for the
-% camera-ready copyright statement.
+% Paper history
+%\received{February 2007}
+%\received[revised]{March 2009}
+%\received[accepted]{June 2009}
 
-%% HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP --
-%% Please note you need to make sure the copy for your specific
-%% license is used here!
-% \toappear{
-% Permission to make digital or hard copies of all or part of this work
-% for personal or classroom use is granted without fee provided that
-% copies are not made or distributed for profit or commercial advantage
-% and that copies bear this notice and the full citation on the first
-% page. Copyrights for components of this work owned by others than ACM
-% must be honored. Abstracting with credit is permitted. To copy
-% otherwise, or republish, to post on servers or to redistribute to
-% lists, requires prior specific permission and/or a fee. Request
-% permissions from \href{mailto:Permissions@acm.org}{Permissions@acm.org}. \\
-% \emph{CHI '16},  May 07--12, 2016, San Jose, CA, USA \\
-% ACM xxx-x-xxxx-xxxx-x/xx/xx\ldots \$15.00 \\
-% DOI: \url{http://dx.doi.org/xx.xxxx/xxxxxxx.xxxxxxx}
-% }
 
-\toappear{}
-
-% Arabic page numbers for submission.  Remove this line to eliminate
-% page numbers for the camera ready copy
-\pagenumbering{arabic}
-
-% Load basic packages
-\usepackage{balance}       % to better equalize the last page
-\usepackage{graphics}      % for EPS, load graphicx instead
-\usepackage[T1]{fontenc}   % for umlauts and other diaeresis
-\usepackage{txfonts}
-\usepackage{mathptmx}
-\usepackage[pdflang={en-US},pdftex]{hyperref}
-\usepackage{color}
-\usepackage{booktabs}
-\usepackage{textcomp}
-
-% Some optional stuff you might like/need.
-\usepackage{microtype}      % Improved Tracking and Kerning
-\usepackage[all]{hypcap}    % Fixes bug in hyperref caption linking
-%\usepackage{ccicons}        % Cite your images correctly!
-\usepackage[utf8]{inputenc} % for a UTF8 editor only
-
-% If you want to use todo notes, marginpars etc. during creation of
-% your draft document, you have to enable the "chi_draft" option for
-% the document class. To do this, change the very first line to:
-% "\documentclass[chi_draft]{sigchi}". You can then place todo notes
-% by using the "\todo{...}"  command. Make sure to disable the draft
-% option again before submitting your final document.
-\usepackage{todonotes}
-
-% Paper metadata (use plain text, for PDF inclusion and later
-% re-using, if desired).  Use \emtpyauthor when submitting for review
-% so you remain anonymous.
-\def\plaintitle{Improving credibility and efficiency of decision-making within democratic communities via statistical quorum}
-%\def\plainauthor{First Author, Second Author, Third Author,
-%  Fourth Author, Fifth Author, Sixth Author}
-\def\emptyauthor{}
-\def\plainkeywords{Decision making; voting; democracy; quorum; credibility; statistical quorum.}
-%\def\plaingeneralterms{Documentation, Standardization}
-
-% llt: Define a global style for URLs, rather that the default one
-\makeatletter
-\def\url@leostyle{%
-  \@ifundefined{selectfont}{
-    \def\UrlFont{\sf}
-  }{
-    \def\UrlFont{\small\bf\ttfamily}
-  }}
-\makeatother
-\urlstyle{leo}
-
-% To make various LaTeX processors do the right thing with page size.
-\def\pprw{8.5in}
-\def\pprh{11in}
-\special{papersize=\pprw,\pprh}
-\setlength{\paperwidth}{\pprw}
-\setlength{\paperheight}{\pprh}
-\setlength{\pdfpagewidth}{\pprw}
-\setlength{\pdfpageheight}{\pprh}
-
-% Make sure hyperref comes last of your loaded packages, to give it a
-% fighting chance of not being over-written, since its job is to
-% redefine many LaTeX commands.
-\definecolor{linkColor}{RGB}{6,125,233}
-%\hypersetup{%
-%  pdftitle={\plaintitle},
-%% Use \plainauthor for final version.
-%%  pdfauthor={\plainauthor},
-%  pdfauthor={\emptyauthor},
-%  pdfkeywords={\plainkeywords},
-%  pdfdisplaydoctitle=true, % For Accessibility
-%  bookmarksnumbered,
-%  pdfstartview={FitH},
-%  colorlinks,
-%  citecolor=black,
-%  filecolor=black,
-%  linkcolor=black,
-%  urlcolor=linkColor,
-%  breaklinks=true,
-%  hypertexnames=false
-%}
-
-% create a shortcut to typeset table headings
-% \newcommand\tabhead[1]{\small\textbf{#1}}
-
-\newcommand\secref[1]{section \textit{\nameref{#1}}}
-
-%%% GLOSSARY %%%
-%
-% community = group which votes
-% proposal = what you vote on
-% decision = result of a vote, accepted or rejected proposal
-%
-%%% END GLOSSARY %%%
-
-% End of preamble. Here it comes the document.
+% Document starts
 \begin{document}
+% Title portion. Note the short title for running heads
+\title[Improving credibility and efficiency of decision-making]{Improving credibility and efficiency of decision-making \\ within democratic communities via statistical quorum}
 
-\title{Improving credibility and efficiency of decision-making \\ within democratic communities via statistical quorum}
+\author{Gang Zhou}
+\orcid{1234-5678-9012-3456}
+\affiliation{%
+  \institution{College of William and Mary}
+  \streetaddress{104 Jamestown Rd}
+  \city{Williamsburg}
+  \state{VA}
+  \postcode{23185}
+  \country{USA}}
+\email{gang_zhou@wm.edu}
+\author{Valerie B\'eranger}
+\affiliation{%
+  \institution{Inria Paris-Rocquencourt}
+  \city{Rocquencourt}
+  \country{France}
+}
+\email{beranger@inria.fr}
+\author{Aparna Patel}
+\affiliation{%
+ \institution{Rajiv Gandhi University}
+ \streetaddress{Rono-Hills}
+ \city{Doimukh}
+ \state{Arunachal Pradesh}
+ \country{India}}
+\email{aprna_patel@rguhs.ac.in}
+\author{Huifen Chan}
+\affiliation{%
+  \institution{Tsinghua University}
+  \streetaddress{30 Shuangqing Rd}
+  \city{Haidian Qu}
+  \state{Beijing Shi}
+  \country{China}
+}
+\email{chan0345@tsinghua.edu.cn}
+\author{Ting Yan}
+\affiliation{%
+  \institution{Eaton Innovation Center}
+  \city{Prague}
+  \country{Czech Republic}}
+\email{yanting02@gmail.com}
+\author{Tian He}
+\affiliation{%
+  \institution{University of Virginia}
+  \department{School of Engineering}
+  \city{Charlottesville}
+  \state{VA}
+  \postcode{22903}
+  \country{USA}
+}
+\affiliation{%
+  \institution{University of Minnesota}
+  \country{USA}}
+\email{tinghe@uva.edu}
+\author{Chengdu Huang}
+\author{John A. Stankovic}
+\author{Tarek F. Abdelzaher}
+\affiliation{%
+  \institution{University of Virginia}
+  \department{School of Engineering}
+  \city{Charlottesville}
+  \state{VA}
+  \postcode{22903}
+  \country{USA}
+}
 
-%\numberofauthors{3}
-%\author{%
-%  \alignauthor{Leave Authors Anonymous\\
-%    \affaddr{for Submission}\\
-%    \affaddr{City, Country}\\
-%    \email{e-mail address}}\\
-%  \alignauthor{Leave Authors Anonymous\\
-%    \affaddr{for Submission}\\
-%    \affaddr{City, Country}\\
-%    \email{e-mail address}}\\
-%  \alignauthor{Leave Authors Anonymous\\
-%    \affaddr{for Submission}\\
-%    \affaddr{City, Country}\\
-%    \email{e-mail address}}\\
-%}
-
-\maketitle
 
 \begin{abstract}
 The Achilles heel of many major democracies is the eternal need for sufficient engagement and attention from the community.
@@ -176,9 +125,52 @@ We found that the community was able to use the online system to simultaneously 
 of their decision-making process.
 \end{abstract}
 
-\category{H.5.3.}{Information Interfaces and Presentation (e.g. HCI)}{Computer-supported cooperative work}
 
-\keywords{\plainkeywords}
+%
+% The code below should be generated by the tool at
+% http://dl.acm.org/ccs.cfm
+% Please copy and paste the code instead of the example below.
+%
+\begin{CCSXML}
+<ccs2012>
+ <concept>
+  <concept_id>10010520.10010553.10010562</concept_id>
+  <concept_desc>Computer systems organization~Embedded systems</concept_desc>
+  <concept_significance>500</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10010520.10010575.10010755</concept_id>
+  <concept_desc>Computer systems organization~Redundancy</concept_desc>
+  <concept_significance>300</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10010520.10010553.10010554</concept_id>
+  <concept_desc>Computer systems organization~Robotics</concept_desc>
+  <concept_significance>100</concept_significance>
+ </concept>
+ <concept>
+  <concept_id>10003033.10003083.10003095</concept_id>
+  <concept_desc>Networks~Network reliability</concept_desc>
+  <concept_significance>100</concept_significance>
+ </concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Computer systems organization~Embedded systems}
+\ccsdesc[300]{Computer systems organization~Redundancy}
+\ccsdesc{Computer systems organization~Robotics}
+\ccsdesc[100]{Networks~Network reliability}
+
+%
+% End generated code
+%
+
+\keywords{Decision making; voting; democracy; quorum; credibility; statistical quorum}
+
+\maketitle
+
+% The default list of authors is too long for headers.
+\renewcommand{\shortauthors}{M. Milutinovic et al.}
 
 \section{Introduction}
 
@@ -549,6 +541,21 @@ Then we evaluate it through real-world use of the PeerMind application by a 140 
 
 \subsection{Use in Practice}
 
+designed integration with system
+
+minutes and issues with how to get data out
+
+
+
+workflow we created -> over one in-person meetings, but because of all decision making happining online, this
+didn't happen
+
+issues with quorum
+unclear how much time spend on each discussion item: how contentious the discussion really is can be seen only after the vote
+
+
+X people choose not to participate
+
 
 \todo[inline]{Explain how we were using this for 16 weeks in fall 2016 in a community where traditionally they have
 been meeting weekly and now they used it online. How X proposals have been made with Y votes.}
@@ -632,19 +639,13 @@ they cannot communicate as effectively, especially with lack of emotions being c
 \section{Conclusion}
 \label{sec:conclusion}
 
-%\section{Acknowledgments}
-
-% REFERENCES FORMAT
-% References must be the same font size as other body text.
-\bibliographystyle{sigchi}
-\bibliography{refs}
-
+% Appendix
 \appendix
 \label{sec:derivation}
 
 \todo[inline]{Focus on only including bare minimum math, (no ``decorative math'').  Emphasis on justifications and properties, minimal arithmetic.  Good heuristic: Every line of math should have something said about it, otherwise it is unnecessary.}
 
-\subsection{Derivation of Eq. \eqref{eq2}}
+\section{Derivation of Eq. \eqref{eq2}}
 In choosing a Beta prior, we start with $\operatorname{Beta}(1,1)$, as it represents the uniform distribution over all potential values of the community's bias.  To update the prior based on collected votes, standard theory suggests updating to $\operatorname{Beta}(1+\alpha_i,1+\beta_i)$; however, there are a few consistency issues with this update that we seek to fix:
 \begin{description}
 \begin{itemize}
@@ -667,7 +668,7 @@ Hence we arrive at $\eta = \frac{c}{K_i}$, where $c$ is any constant that can be
 
 As a sanity check, one can verify that this form for $\eta$ satisfies properties $(1)-(3)$.
 
-\subsection{Derivation of Eq. \eqref{eq3}}
+\section{Derivation of Eq. \eqref{eq3}}
 \begin{align*}
 \Pr(\alpha^*_i > T_i \mid X_i) &= 1 - \Pr(\alpha^*_i \leq T_i \mid X_i), \text{ where}\\
 \Pr(\alpha^*_i \leq T_i \mid X_i) &= \int_0^1 \Pr(\alpha^*_i \leq T_i \mid p_i)\cdot \Pr(p_i \mid X_i) \mathrm{d}p_i\\
@@ -684,7 +685,7 @@ Hence, we have
 &= 1 - \Pr(\nu_i \leq V_i).
 \end{align*}
 
-\subsection{Derivation of Eq. \eqref{eq5}}
+\section{Derivation of Eq. \eqref{eq5}}
 Assuming independence of votes across proposals,
 \begin{align*}
 \Pr\left(\bigwedge_{j \neq i} (\alpha^*_i > \alpha^*_j) \mid C\right) &=\prod_{j \neq i} \Pr(\alpha^*_i > \alpha^*_j \mid X_i, X_j).
@@ -697,7 +698,7 @@ Further expanding the expression, we get
 &= \prod_{j \neq i} \left( 1 - \sum_{k=\lceil\delta_{ij}\rceil}^{K_j} \underbrace{\Pr(\alpha^*_j = \alpha_j + k \mid X_j)}_{= \Pr(\nu_j = k)} \cdot \underbrace{\Pr(\alpha^*_i \leq \alpha_j + k \mid X_i)}_{={CDF}_{\nu_i}(\alpha_j + k)} \right).
 \end{align*}
 
-\subsection{Derivation of Eq. \eqref{eq6}}
+\section{Derivation of Eq. \eqref{eq6}}
 The properties we desire for $\lambda(t)$ are:
 \begin{description}
 \begin{itemize}
@@ -707,7 +708,7 @@ The properties we desire for $\lambda(t)$ are:
 \end{description}
 Setting $\lambda (t) = \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}}$ for $0 < \gamma < 1$ satisfies these constraints while still allowing for the exact rate to be tunable.
 
-\subsection{Derivation of Eq. \eqref{eq7}}
+\section{Derivation of Eq. \eqref{eq7}}
 Using $\lambda (t) = \lambda_0 {(\gamma)}^{\frac{t}{K_i/N_i}}$, we have
 \begin{align*}
 \lim_{t \rightarrow \infty} \Lambda (t) &=\int _{0}^{\infty}\lambda (t)\mathrm{d}t\\
@@ -723,3 +724,10 @@ and
 \lim_{t\rightarrow \infty}\Pr\left(N(t)\leq \hat{K_i}\right) & = \sum_{n=0}^{\hat{K_i}} \frac{(\lambda_0 \cdot K_i/N_i)^n}{n!(\ln{1/\gamma})^n}e^{-\lambda_0 \frac{K_i/N_i}{\ln{1/\gamma}}}.
 \end{align*}
 \end{document}
+
+%\begin{acks}
+%\end{acks}
+
+% Bibliography
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}

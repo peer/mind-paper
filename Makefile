@@ -1,9 +1,9 @@
 BIBFILE = refs.bib
-PAPERS = delegation.pdf statistical-quorum.pdf
+PAPERS = statistical-quorum.pdf
 
 all: $(PAPERS)
 
-%.pdf: %.tex $(BIBFILE) sigchi.cls sigchi.bst figures/*
+%.pdf: %.tex $(BIBFILE) acmart.* ACM-Reference-Format.* figures/*
 	pdflatex -interaction=nonstopmode "$<"
 	bibtex "$(<:%.tex=%.aux)"
 	pdflatex -interaction=nonstopmode "$<"
