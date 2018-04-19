@@ -187,7 +187,9 @@ a workflow of its use in decision making processes.
 \item We deployed the application in a democratically run community of 140
 members for 16 weeks.
 \item Using the analysis of decision making process before and after introduction
-of the application, using surveys, and using semi-structured interviews, we show
+of the application, and using surveys,
+%and using semi-structured interviews,
+we show
 how use of statistical quorum increases credibility of decisions,
 improves utilization of collective attention, increases and diversifies overall participation,
 and increases number of decisions made.
@@ -197,7 +199,9 @@ The rest of the paper is structured as follows. In Section~\ref{sec:related-work
 present related work. We continue by describing a framework of computing statistical
 credibility of results and statistical quorum in Section~\ref{sec:decision-credibility}.
 We present our methodology in Section~\ref{sec:methodology} after which we do
-quantitative and qualitative evaluation in Section~\ref{sec:evaluation}. We discuss results in
+quantitative
+%and qualitative
+evaluation in Section~\ref{sec:evaluation}. We discuss results in
 Section~\ref{sec:discussion} and conclude in Section~\ref{sec:conclusion}. At the end we
 have Appendix where we derive formulas presented in Section~\ref{sec:decision-credibility}.
 
@@ -449,9 +453,9 @@ through regular features of the application: how many and who made discussion it
 For the baseline, we extracted similar information from council minutes: how long did the councils last,
 how many members participated, how many proposals were proposed and how many passed, and vote tallies for them.
 
-Finally, we did semi-structured interviews after the fall semester with 7 members who were participating
-both in spring and fall semesters and ask them to compare their experience between those two semesters and
-evaluate the application and the use of statistical quorum.
+%Finally, we did semi-structured interviews after the fall semester with 7 members who were participating
+%both in spring and fall semesters and ask them to compare their experience between those two semesters and
+%evaluate the application and the use of statistical quorum.
 
 \subsection{PeerMind}
 \label{sec:peermind}
@@ -527,7 +531,9 @@ ID \emph{redacted for blind review}.
 \label{sec:evaluation}
 
 We evaluate statistical quorum in two ways. First, we analyze it theoretically and explore its mathematical properties.
-Then we do quantitative and qualitative evaluation through real-world use of the PeerMind application by a 140 members
+Then we do quantitative
+%and qualitative
+evaluation through real-world use of the PeerMind application by a 140 members
 community.
 
 \subsection{Analysis}
@@ -566,8 +572,6 @@ In Figure \ref{fig:competing_proposals}, we examine how a set of three competing
 \end{subfigure}
 \caption{}
 \end{figure}
-
-\newpage
 
 \subsection{Use in Practice}
 
@@ -610,8 +614,10 @@ From around 19 votes per proposal in the spring to 28 votes per proposal in the 
 Figure~\ref{fig:time} shows time spent per member on PeerMind, sorted by time. While on average, members
 spent 7002 seconds (around 2 hours) using the application, the distribution of users is fairly
 long-tailed with many members only spending 30 minutes and some members spending upwards of 20 hours.
+On the other hand, based on minutes from spring semester we can observe that around 5 same members
+regularly dominated conversation.
 
-\todo[inline]{Using our metric compare legitimacy of decisions being made in the spring and fall.}
+%\todo[inline]{Using our metric compare legitimacy of decisions being made in the spring and fall.}
 
 \subsection{Survey}
 
@@ -629,42 +635,58 @@ of the community were invited to participate in the survey each time.}
 \label{fig:survey-comparison}
 \end{figure}
 
-\subsection{Interviews}
-\label{sec:interviews}
+%\subsection{Interviews}
+%\label{sec:interviews}
 
-\todo[inline]{We made 7 unstructured interviews. Pull all quotes explaining how they like the idea and how it seems
-to work. But how there are other issues by moving decision making online: meetings also serve community building which
-does not happen online. No fun. So interesting insights about using online platforms for offline communities
-for making decisions which are not really answering our hypothesis, but are useful as insights we got. How some
-people prefer online and offline meetings.}
+%\todo[inline]{We made 7 unstructured interviews. Pull all quotes explaining how they like the idea and how it seems
+%to work. But how there are other issues by moving decision making online: meetings also serve community building which
+%does not happen online. No fun. So interesting insights about using online platforms for offline communities
+%for making decisions which are not really answering our hypothesis, but are useful as insights we got. How some
+%people prefer online and offline meetings.}
 
 \section{Discussion}
 \label{sec:discussion}
 
-issues with quorum
-unclear how much time spend on each discussion item: how contentious the discussion really is can be seen only after voting
-Loosing a quorum often during meetings in spring
+Based on quantitative data we can observe that members using PeerMind were more productive in
+terms of decisions made.
+On the other hand, they also rejected more proposals which shows more involvement in decisions
+than just rubber stamping proposals.
+They also spent significantly less time per proposal than members in spring semester.
+While at the same time they made significantly more votes.
+Combined with data from the survey where members observed that in the fall their time
+is better spend making decisions, we can find support for our hypothesis that directing
+attention of members towards contentious issues using a statistical quorum increases the
+participation where it is needed (which can lead to a proposal being rejected) and
+increases participation overall while keeping the time (or attention) needed low.
 
+Moreover, Figure~\ref{fig:time} shows that participation is diversified and more different
+members participate over what we observed through analysis of minutes from the semester prior.
+We believe many members who had spent only 30 minutes using PeerMind would not participate
+in the in-person council at all (which is confirmed by much lower attendance and fewer votes).
+Furthermore, people who need more time to discuss are given the freedom to do so without wasting
+time of those who are not interested in the pertinent discussion.
+We have observed that councils in the spring had often issues retaining or even achieving a
+quorum which we attribute to this mismatch in how people want to spend their time during
+decision making and their time availability.
 
-Plotting time spent per community member on PeerMind gives insights into the
-democratization of decision-making. While the average person spent 7002 seconds on the application, the distribution of users is fairly long-tailed with many people only spending 30 minutes and some people spending upwards of 20 hours. We believe many people who only spent 30 minutes would not participate in the offline council at all (which is confirmed by much lower attendance and fewer votes). Furthermore, people who need more time to discuss are given the freedom to do so without wasting time of those who are not interested in the pertinent discussion.
+In the case of the in-person decision making it is also unclear how much time to spend on each
+dicussion item: how contentious the discussion really is can be seen only after voting.
+Using PeerMind members can observe the voting process in real-time and continue discussing
+and even changing their votes if they get convinced to change their poisition.
+At the same time using feedback provided by credibility value they can also gauge how
+much discussion is needed.
 
+% People changed vote online X times after discussion.
 
-decline in understanding of the process:
-
+The decline in understanding of the process we see in the survey is expected and understandable.
 We attribute this to the fact that the use of the web application is
 a novelty, including using a novel concept like statistical quorum, and requires more effort
 in educating members than a traditional decision making.
 Moreover, decision making in person allows one to observe others how they are participating and
 learn from them, instead of being alone using the application.
-We explore this question also through interviews in Section~\ref{sec:interviews}.
 
-
-This not only means that PeerMind users were more productive in terms of decisions made, they also spent significantly less time per motion than the control group.
-
-
-\todo[inline]{Describe why is $0.90\%$ a reasonable statistical quorum and how to determine one for your community.\\
-Part of the answer here is honestly just that the admin should tune the threshold (and a few of the other hyperparameters we introduce) to their intuition.  Once you set the parameters, the real benefit is that you have consistency, rather than having to always use your intuition as an admin about evaluating credibility.}
+%\todo[inline]{Describe why is $0.90\%$ a reasonable statistical quorum and how to determine one for your community.\\
+%Part of the answer here is honestly just that the admin should tune the threshold (and a few of the other hyperparameters we introduce) to their intuition.  Once you set the parameters, the real benefit is that you have consistency, rather than having to always use your intuition as an admin about evaluating credibility.}
 
 \todo[inline]{Describe interesting example how we had a bug which were showing a very low statistical quorum for a failing
 vote and so the whole community very engaged for a whole month to decide and resolve it. So how they trusted the
@@ -673,16 +695,16 @@ buggy or not perfect, because it has worked so well in the past that members got
 that there is a consensus or not on an issue that that was also their own read of the community. So for the purpose of
 directing attention the metric does not have to mathematically perfect.}
 
-\todo[inline]{Security. How to prevent a group of people to vote and by trick reaching statistical quorum.
-We use dynamic statistical quorum to address this, but one other approach is also for voting to stay open and
-decisions can then be in the future revoked by people adding more votes, or changing them. But for some decisions
-this might not really be possible, because decisions might not be reversible. You can revoke a law, but if you built
-a building as a consequence of a decision?\\
-(See near/post-quorum validation phase idea in GitHub issues as one suggested solution.)}
+%\todo[inline]{Security. How to prevent a group of people to vote and by trick reaching statistical quorum.
+%We use dynamic statistical quorum to address this, but one other approach is also for voting to stay open and
+%decisions can then be in the future revoked by people adding more votes, or changing them. But for some decisions
+%this might not really be possible, because decisions might not be reversible. You can revoke a law, but if you built
+%a building as a consequence of a decision?\\
+%(See near/post-quorum validation phase idea in GitHub issues as one suggested solution.)}
 
-\todo[inline]{Discuss how this might or might not lead to a more inclusive decision making: some people prefer it because
-they have time to collect thoughts and can participate when they have time, some people do not because they feel
-they cannot communicate as effectively, especially with lack of emotions being conveyed.}
+%\todo[inline]{From interviews: Discuss how this might or might not lead to a more inclusive decision making: some people prefer it because
+%they have time to collect thoughts and can participate when they have time, some people do not because they feel
+%they cannot communicate as effectively, especially with lack of emotions being conveyed.}
 
 %\section{Future Work}
 %
